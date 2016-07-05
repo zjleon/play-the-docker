@@ -1,0 +1,9 @@
+FROM ubuntu:15.10
+# install basic software
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -y nodejs
+#RUN apt-get install -y nodejs
+
+# mount the project
+# VOLUME [""]
