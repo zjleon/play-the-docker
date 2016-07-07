@@ -6,13 +6,13 @@ const webpackConfig = require('./configs/web.static.js')
 // eslint
 
 // copy: static
-gulp.task('watch:static', () => {
-  // place code for your default task here
-  return gulp.src('src')
-          .pipe(watch(static_files))
-})
+// gulp.task('watch:static', () => {
+//   // place code for your default task here
+//   return gulp.src('src')
+//           .pipe(watch(static_files))
+// })
 gulp.task('webpack:static', () => {
-  return gulp.src('./entry/web.static.js')
+  return gulp.src('./src/entry/web.static.js')
           .pipe(webpackConfig)
           .pipe(gulp.dest('dist/'))
 })
