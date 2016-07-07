@@ -9,10 +9,12 @@ const static_files = [
 // copy: static
 gulp.task('watch:static', () => {
   // place code for your default task here
-  return gulp.src('/src')
+  return gulp.src('src')
           .pipe(watch(static_files))
-          .pipe()
 });
+gulp.task('webpack:static', () => {
+  return gulp.src('src/web.js')
+})
 gulp.task('default', () => {
   // place code for your default task here
 });
