@@ -1,6 +1,5 @@
 autoclose-html@0.23.0
 autocomplete-html-entities@0.1.0
-autoprefixer@3.2.0
 git-control@0.8.2
 git-plus@5.16.2
 git-status@0.3.4
