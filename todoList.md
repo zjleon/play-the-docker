@@ -26,5 +26,7 @@
 # source map
 
 # docker compose
+  * build base images -- without the source code, but with global package like gulp
+  * run the base image -- mount the source code, install dependencies, then run the webpack task
 
 # webhook for github

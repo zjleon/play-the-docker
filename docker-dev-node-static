@@ -6,4 +6,3 @@ RUN npm install --global gulp-cli
 # set up gulp copy task
 # set up gulp to watch app folder
 CMD gulp
-

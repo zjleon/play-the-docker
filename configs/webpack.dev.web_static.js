@@ -1,7 +1,8 @@
 module.exports = {
   // webpack-dev-server options
 
-  contentBase: "",
+  // contentBase: "./dist",
+  contentBase: "./dist",
   // or: contentBase: "http://localhost/",
 
   hot: true,
@@ -21,9 +22,9 @@ module.exports = {
   // Use "*" to proxy all paths to the specified server.
   // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
   // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
-  proxy: {
-    "*": "http://localhost:9090"
-  },
+  // proxy: {
+  //   "*": "http://localhost:9090"
+  // },
 
   // pass [static options](http://expressjs.com/en/4x/api.html#express.static) to inner express server
   staticOptions: {
@@ -33,12 +34,12 @@ module.exports = {
   quiet: false,
   noInfo: false,
   lazy: true,
+  publicPath: "/assets/",
   filename: "bundle.js",
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000
   },
-  publicPath: "/assets/",
   headers: { "X-Custom-Header": "yes" },
   stats: { colors: true }
 }
