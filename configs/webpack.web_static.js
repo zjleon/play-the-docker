@@ -1,13 +1,9 @@
 module.exports = {
-  // entry: './src/app.js',
-  // output: {
-  //     path: './bin',
-  //     filename: 'app.bundle.js'
-  // }
-  // presets: [
-  //   'es2015',
-  //   'react'
-  // ],
+  entry: './src/web_static/index.js',
+  output: {
+    path: './dist',
+    filename: 'web_static.app[hash].js'
+  },
   resolve: {
     extensions: [
       '',
@@ -18,7 +14,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js|jsx$/,
-      loader: 'babel',
+      loaders: ['babel'],
       exclude: /node_modules/,
     }]
   },
