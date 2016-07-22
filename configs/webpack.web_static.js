@@ -1,13 +1,12 @@
+const babel = require('babel-loader')
+
 module.exports = {
-  // entry: './src/app.js',
-  // output: {
-  //     path: './bin',
-  //     filename: 'app.bundle.js'
-  // }
-  // presets: [
-  //   'es2015',
-  //   'react'
-  // ],
+  entry: './src/web_static/index.js',
+  output: {
+    path: './dist/web_static',
+    publicPath: "/assets/",
+    filename: 'app.js'
+  },
   resolve: {
     extensions: [
       '',
@@ -17,9 +16,13 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.js|jsx$/,
-      loader: 'babel',
+      test: /\.js/,
+      // loaders: ['babel-loader'],
       exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        presets: ['es2015', 'react']
+      }
     }]
   },
   // plugins: [

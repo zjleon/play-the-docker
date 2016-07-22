@@ -4,26 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build_web_static": "gulp build:web_static",
+    "dev:web_static": "better-npm-run dev:web_static",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "betterScripts": {
+    "dev:web_static": {
+      "command": "node ./scripts/webpack_dev_server.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development",
+        "PORT": 3000,
+        "APIPORT": 3030
+      }
+    }
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ayo-refry": "0.0.2",
-    "babel-core": "^6.10.4",
+    "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
-    "babel-plugin-transform-react-display-name": "^6.8.0",
-    "babel-plugin-transform-react-jsx": "^6.8.0",
-    "babel-plugin-transform-react-jsx-source": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
-    "eslint": "^3.0.1",
-    "gulp": "^3.9.1",
-    "gulp-contrib-copy": "^0.1.2",
-    "gulp-webpack": "^1.5.0",
+    "better-npm-run": "0.0.9",
     "nodejs-fs-utils": "^1.0.26",
-    "rimraf": "^2.5.3"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {}
 }

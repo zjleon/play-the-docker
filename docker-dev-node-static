@@ -1,9 +1,0 @@
-FROM ubuntu:15.10
-FROM node:6.2.2-wheezy
-
-# set up gulp
-RUN npm install --global gulp-cli
-# set up gulp copy task
-# set up gulp to watch app folder
-CMD gulp
-
