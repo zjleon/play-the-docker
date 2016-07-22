@@ -1,30 +1,32 @@
-# eslint and autofix
-  set on atom, export the package list
+# gulp task:
 
-# webpack and babel
-## prod:
+## webpack and babel
+### prod:
   * just use the webpack and setup an express server to serve all static files
   * hash
   * test tool
-## dev:
+### dev:
   * ~~use dev server~~
   * set script
   * test tool
   issue: support traditional non-js-render web
 https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch
 
+## eslint and autofix
+  set on atom, export the package list
+
+## unit test
+
+## css or sass
+
+## source map
+
 # react and redux
 
 # node environment configuration
   prod:
 
-# unit test
-
 # tree tool
-
-# css
-
-# source map
 
 # docker compose
   * ~~build base images -- without the source code, but with global package like gulp~~
