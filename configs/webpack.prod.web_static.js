@@ -1,27 +1,39 @@
-const babel = require('babel-loader')
+const path = require('path')
+const enviromentPrefix = 'prod'
+const projectName = 'web_static'
+const srcPath = path.resolve('./src/' + projectName)
 
 module.exports = {
-  entry: './src/web_static/index.js',
+  entry: srcPath + '/index.js',
   output: {
-    path: './dist/web_static',
+    path: './dist/' + projectName,
     publicPath: "/assets/",
     filename: 'app.js'
   },
   resolve: {
-    extensions: [
-      '',
-      '.js',
-      '.jsx'
+    // root: [
+    //   srcPath
+    // ]
+    modulesDirectories: [
+      srcPath + '/node_modules'
     ]
   },
   module: {
     loaders: [{
+      resolveLoader: {
+        root: [
+          path.resolve('./node_modules')
+        ]
+      },
       test: /\.js/,
       // loaders: ['babel-loader'],
       exclude: /node_modules/,
       loader: 'babel',
       query: {
-        presets: ['es2015', 'react']
+        presets: [
+          'es2015',
+          'react',
+        ]
       }
     }]
   },
