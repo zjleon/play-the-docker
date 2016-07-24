@@ -2,7 +2,7 @@
 ## webpack and babel
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
-* hash
+* **hash for js files and change it in html**
 * test tool
 ### dev:
 * ~~use dev server~~
