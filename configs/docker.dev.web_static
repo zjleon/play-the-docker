@@ -1,0 +1,18 @@
+FROM ubuntu:15.10
+FROM node:6.2.2-wheezy
+
+# set up gulp
+#RUN npm install --global gulp-cli
+
+#ENTRYPOINT ["cd", "/123"]
+
+COPY ./package.json /web_static/package.json
+
+WORKDIR /web_static
+
+RUN npm install
+
+# set up gulp copy task
+# set up gulp to watch app folder
+
+CMD ["ping", "localhost", "-c", "100"]
