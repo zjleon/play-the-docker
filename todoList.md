@@ -1,7 +1,7 @@
 # gulp task:
 ## webpack and babel
 ### prod:
-* just use the webpack and setup an express server to serve all static files
+* just ~~use the webpack~~ and setup an express server to serve all static files
 * hash
 * test tool
 ### dev:

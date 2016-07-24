@@ -11,9 +11,6 @@ module.exports = {
     filename: 'app.js'
   },
   resolve: {
-    // root: [
-    //   srcPath
-    // ]
     modulesDirectories: [
       srcPath + '/node_modules'
     ]
@@ -26,7 +23,6 @@ module.exports = {
         ]
       },
       test: /\.js/,
-      // loaders: ['babel-loader'],
       exclude: /node_modules/,
       loader: 'babel',
       query: {
@@ -37,9 +33,4 @@ module.exports = {
       }
     }]
   },
-  // plugins: [
-  //   'transform-react-jsx-source',
-  //   'transform-react-display-name',
-  //   'transform-react-jsx',
-  // ]
 }

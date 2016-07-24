@@ -5,6 +5,6 @@ import { render } from 'react-dom'
 // import Header from '../components/header/header'
 
 render(
-  <div></div>,
+  <div>123</div>,
   document.getElementById('appContainer')
 )
