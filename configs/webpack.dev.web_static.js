@@ -35,7 +35,7 @@ module.exports = {
   noInfo: false,
   lazy: true,
   publicPath: "/assets/",
-  filename: "bundle.js",
+  filename: "app.js",
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000
