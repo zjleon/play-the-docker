@@ -1,7 +1,0 @@
-FROM ubuntu:15.10
-FROM mongo:3.3.9
-#RUN apt-get update && apt-get install -y curl && \
-    #git-all
-
-# mount the project
-# VOLUME [""]

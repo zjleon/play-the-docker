@@ -1,4 +1,0 @@
-FROM ubuntu:14.04
-RUN apt-get update && apt-get install -y vim \
-                                          curl
-CMD ["ping", "-c", "1000", "127.0.0.1"]
