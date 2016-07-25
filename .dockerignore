@@ -1,6 +1,3 @@
 # ignore unnecessary files
 node_modules
 docs
-configs
-scripts
-src
