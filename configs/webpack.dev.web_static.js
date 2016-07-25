@@ -1,8 +1,10 @@
+const webpackConfig = require('./webpack.prod.web_static')
+
 module.exports = {
   // webpack-dev-server options
 
   // contentBase: "./dist",
-  contentBase: "./dist",
+  contentBase: webpackConfig.output.path,
   // or: contentBase: "http://localhost/",
 
   hot: true,
@@ -34,8 +36,8 @@ module.exports = {
   quiet: false,
   noInfo: false,
   lazy: true,
-  publicPath: "/assets/",
-  filename: "app.js",
+  publicPath: webpackConfig.output.publicPath,
+  filename: webpackConfig.output.filename,
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000
