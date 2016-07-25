@@ -8,4 +8,6 @@ services:
     ports:
      - "3000:8080"
     volumes:
-     - ../:/web_static
+     - ../src:/web_static/src
+     - ../configs:/web_static/configs
+     - ../scripts:/web_static/scripts
