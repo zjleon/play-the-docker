@@ -9,6 +9,3 @@ VOLUME ["/web_static/node_modules"]
 
 ADD ./scripts/dev.web_static.initial.sh ./initial.sh
 CMD ["bash", "./initial.sh"]
-
-# set up gulp copy task
-# set up gulp to watch app folder
