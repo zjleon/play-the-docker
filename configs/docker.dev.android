@@ -11,6 +11,7 @@ RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-
 
 ENV GRADLE_HOME="/usr/bin/gradle"
 ENV PATH $PATH:$GRADLE_HOME/bin
+# enable gradle deamon
 ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 #RUN export GRADLE_OPTS="-Dorg.gradle.daemon=true" >> ~/.bash_profile && source ~/.bash_profile
