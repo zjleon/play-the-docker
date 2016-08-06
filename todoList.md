@@ -1,14 +1,18 @@
+# fill readme
+
 # gulp task:
 ## webpack and babel
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
+
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
 issue: support traditional non-js-render web
 https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch
 * compile the nodejs code
+
 ## eslint and autofix and unit test
 set on atom, export the package list.
 how to write unit test quickly
@@ -32,7 +36,7 @@ static the unit test coverage by tool
 * build docker image then push it to private registry.
 * generate documentation about:
 1. 'file hash -> build version' map
-2.
+2. resource map(js, css map)
 
 # node environment
 ## prod:
@@ -41,7 +45,7 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 ## dev:
-* install project dependencies via node script, *handle the error and show message*
+* install project dependencies via node script, ~~handle the error and show message~~log errors in static file
 ``https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options``
 * *a script to install package to particular project
 ``npm install --prefix ./src/web_static package name``*
