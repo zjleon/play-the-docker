@@ -29,6 +29,10 @@ static the unit test coverage by tool
 # CI server
 ## prod:
 * unit test, and do search about how to write unit test efficiently then doc it
+* build docker image then push it to private registry.
+* generate documentation about:
+1. 'file hash -> build version' map
+2.
 
 # node environment
 ## prod:

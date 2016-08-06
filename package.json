@@ -10,7 +10,7 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "node ./scripts/dev.web_static.js",
+      "command": "node ./scripts/webpack.dev.web_static.js",
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
@@ -19,7 +19,7 @@
       }
     },
     "prod:web_static": {
-      "command": "node ./scripts/prod.web_static.js",
+      "command": "node ./scripts/webpack.prod.web_static.js",
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "production",
