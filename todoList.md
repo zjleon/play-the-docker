@@ -3,7 +3,6 @@
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
-* test tool
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
@@ -27,7 +26,11 @@ static the unit test coverage by tool
 * tap event support on web
 * record non-style component in document
 
-# node environment configuration
+# CI server
+## prod:
+* unit test, and do search about how to write unit test efficiently then doc it
+
+# node environment
 ## prod:
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
@@ -41,8 +44,6 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 * fix the npm install issue:
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 
-# tree tool
-
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
 * run the base image -- ~~mount the source code, install dependencies~~, then run the webpack task
@@ -55,3 +56,5 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * IOS development environment
 
 # webhook for github
+
+# tree tool
