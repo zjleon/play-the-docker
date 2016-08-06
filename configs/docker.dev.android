@@ -1,8 +1,21 @@
 FROM ubuntu:15.10
 FROM java:9
 
-#COPY . /usr/src/myapp
+ARG GRADLE_VERSION=2.14.1
 
-#WORKDIR /usr/src/myapp
-#RUN javac Main.java
-#CMD ["java", "Main"]
+WORKDIR /usr/bin
+RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
+  unzip gradle-${GRADLE_VERSION}-bin.zip && \
+  ln -s gradle-${GRADLE_VERSION} gradle && \
+  rm gradle-${GRADLE_VERSION}-bin.zip
+
+ENV GRADLE_HOME="/usr/bin/gradle"
+ENV PATH $PATH:$GRADLE_HOME/bin
+# enable gradle deamon
+ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
+
+#RUN export GRADLE_OPTS="-Dorg.gradle.daemon=true" >> ~/.bash_profile && source ~/.bash_profile
+WORKDIR /app
+
+#ENTRYPOINT ["gradle"]
+#CMD ["-version"]
