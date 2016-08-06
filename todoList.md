@@ -18,6 +18,9 @@ static the unit test coverage by tool
 ## css or sass
 ## source map
 ## **fix the gap between react and react-native**
+## android
+* adb response for apk install on device, buck and gradle response for compile the code to apk
+### **gradle setup in container**
 
 # react and redux
 * how server side rendering work
@@ -52,7 +55,3 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * IOS development environment
 
 # webhook for github
-
-# react-native app build
-## android
-* adb response for apk install on device, buck and gradle response for compile the code to apk
