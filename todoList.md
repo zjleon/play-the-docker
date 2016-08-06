@@ -22,8 +22,8 @@ static the unit test coverage by tool
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
-* how to build android app in container
-* install adb in container(in gradle one?)
+* how to build android app in container. specify sdk version for app
+* install adb in container(in gradle container?)
 * connect simulator via adb
 * connect phone via adb
 
