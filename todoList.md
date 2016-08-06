@@ -21,7 +21,11 @@ static the unit test coverage by tool
 ## **fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)**
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
-### **gradle setup in container**
+* ~~gradle setup in container~~
+* how to build android app in container
+* install adb in container(in gradle one?)
+* connect simulator via adb
+* connect phone via adb
 
 # react and redux
 * how server side rendering work
