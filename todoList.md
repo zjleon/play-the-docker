@@ -30,9 +30,7 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 * install project dependencies, *handle the error and show message*
 ``https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options``
 * *a script to install package to particular project
-``npm install --prefix ./src/web_static package name``
-
-*
+``npm install --prefix ./src/web_static package name``*
 
 # tree tool
 
