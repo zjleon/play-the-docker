@@ -8,10 +8,8 @@
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
-* doc how to use async module
-*
-issue: support traditional non-js-render web
-https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
+issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 
 ## eslint and autofix and unit test
 set on atom, export the package list.
