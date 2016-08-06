@@ -18,7 +18,7 @@ add lint to git pre-commit
 static the unit test coverage by tool
 ## css or sass
 ## source map
-## **fix the gap between react and react-native**
+## **fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)**
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 ### **gradle setup in container**
@@ -26,7 +26,7 @@ static the unit test coverage by tool
 # react and redux
 * how server side rendering work
 * tap event support on web
-* record non-style component in document
+* doc howt to use non-style component
 
 # CI server
 ## prod:
@@ -54,7 +54,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
-* run the base image -- ~~mount the source code, install dependencies~~, then run the webpack task
+* ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * re-think the package.json file management
 * avoid contaminate the origin file/folder
 ## prod:
@@ -64,6 +64,6 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * IOS development environment
 
 # webhook for github
+* decide which cloud to use
 
-# tree tool
-* task to generate tree
+# ~~tree tool~~
