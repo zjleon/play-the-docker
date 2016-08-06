@@ -1,7 +1,8 @@
 # fill readme
 
 # gulp task:
-## webpack and babel
+* integrate webpack and babel to gulp
+* run dirTree, generate atom package task
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
