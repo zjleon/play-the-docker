@@ -1,15 +1,16 @@
+# fill readme
+
 # gulp task:
 ## webpack and babel
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
-* test tool
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
-issue: support traditional non-js-render web
-https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch
-* compile the nodejs code
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
+issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
+
 ## eslint and autofix and unit test
 set on atom, export the package list.
 how to write unit test quickly
@@ -17,7 +18,7 @@ add lint to git pre-commit
 static the unit test coverage by tool
 ## css or sass
 ## source map
-## **fix the gap between react and react-native**
+## **fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)**
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 ### **gradle setup in container**
@@ -25,27 +26,35 @@ static the unit test coverage by tool
 # react and redux
 * how server side rendering work
 * tap event support on web
-* record non-style component in document
+* doc howt to use non-style component
 
-# node environment configuration
+# CI server
+## prod:
+* unit test, and do search about how to write unit test efficiently then doc it
+* build docker image then push it to private registry.
+* generate documentation about:
+1. 'file hash -> build version' map
+2. resource map(js, css map)
+3. release documentation(**what's that?**)
+
+# node environment
 ## prod:
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 ## dev:
-* install project dependencies via node script, *handle the error and show message*
+* install project dependencies via node script, ~~handle the error and show message~~ log errors in static file
 ``https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options``
 * *a script to install package to particular project
 ``npm install --prefix ./src/web_static package name``*
 * fix the npm install issue:
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
-
-# tree tool
+* compile the nodejs code with webpack
 
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
-* run the base image -- ~~mount the source code, install dependencies~~, then run the webpack task
+* ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * re-think the package.json file management
 * avoid contaminate the origin file/folder
 ## prod:
@@ -55,3 +64,6 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * IOS development environment
 
 # webhook for github
+* decide which cloud to use
+
+# ~~tree tool~~

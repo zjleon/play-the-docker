@@ -7,5 +7,5 @@ ADD ./package.json ./package.json
 RUN npm install
 VOLUME ["/web_static/node_modules"]
 
-ADD ./scripts/dev.web_static.initial.sh ./initial.sh
+ADD ./scripts/container.dev.web_static.initial.sh ./initial.sh
 CMD ["bash", "./initial.sh"]
