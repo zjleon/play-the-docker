@@ -5,13 +5,13 @@
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
-
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
+* doc how to use async module
+*
 issue: support traditional non-js-render web
 https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch
-* compile the nodejs code
 
 ## eslint and autofix and unit test
 set on atom, export the package list.
@@ -37,6 +37,7 @@ static the unit test coverage by tool
 * generate documentation about:
 1. 'file hash -> build version' map
 2. resource map(js, css map)
+3. release documentation(**what's that?**)
 
 # node environment
 ## prod:
@@ -45,12 +46,13 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 ## dev:
-* install project dependencies via node script, ~~handle the error and show message~~log errors in static file
+* install project dependencies via node script, ~~handle the error and show message~~ log errors in static file
 ``https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options``
 * *a script to install package to particular project
 ``npm install --prefix ./src/web_static package name``*
 * fix the npm install issue:
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
+* compile the nodejs code with webpack
 
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
@@ -66,3 +68,4 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 # webhook for github
 
 # tree tool
+* task to generate tree

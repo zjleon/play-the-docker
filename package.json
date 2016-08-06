@@ -18,6 +18,13 @@
         "APIPORT": 3030
       }
     },
+    "dev:dirTree": {
+      "command": "node ./scripts/dirTree.dev.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development",
+      }
+    },
     "prod:web_static": {
       "command": "node ./scripts/webpack.prod.web_static.js",
       "env": {
@@ -39,6 +46,7 @@
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
     "nodejs-fs-utils": "^1.0.26",
+    "tree-directory": "^0.1.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
