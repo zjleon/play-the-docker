@@ -6,7 +6,7 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build -t test_tag -f configs/docker.dev.android .``
+``docker build -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameteor must add before image tag**):
 ``docker run -it -v /home/zjleon/play-the-docker/src/ud867:/app test_gradle``
 
