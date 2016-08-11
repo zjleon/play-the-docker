@@ -25,6 +25,25 @@ still UP-TO-DATE.
 task is marked as UP-TO-DATE.
 */
 
+apply plugin: 'base'
+
+task generator() {
+  def fileCount = 10
+  inputs.property "fileCount", fileCount
+  def generatedFileDir = file("$buildDir/generated")
+  outputs.dir generatedFileDir
+  doLast {
+      generatedFileDir.mkdirs()
+      for (int i=0; i<fileCount; i++) {
+          new File(generatedFileDir, "${i}.txt").text = i
+      }
+  }
+}
+
+task zip(type: Zip) {
+  from generator
+}
+
 task copySources(type: Copy) {
     from 'src'
     into 'build/out'
