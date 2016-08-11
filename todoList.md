@@ -2,7 +2,8 @@
 
 # gulp task:
 * integrate webpack and babel to gulp
-* run dirTree, generate atom package task
+* ~~run dirTree~~, generate atom package task
+* code structure for real big code base project
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -28,6 +29,8 @@ static the unit test coverage by tool
 * install adb in container(in gradle container?)
 * connect simulator via adb
 * connect phone via adb
+* linter for android native code
+* a script that use adb to launch many apps in adroid background to simulate the real use scenario
 
 # react and redux
 * how server side rendering work
