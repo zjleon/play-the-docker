@@ -23,6 +23,8 @@ static the unit test coverage by tool
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * how to build android app in container. specify sdk version for app
+  * build android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html
+  * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
 * install adb in container(in gradle container?)
 * connect simulator via adb
 * connect phone via adb
