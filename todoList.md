@@ -1,7 +1,9 @@
 # fill readme
 
 # gulp task:
-## webpack and babel
+* integrate webpack and babel to gulp
+* ~~run dirTree~~, generate atom package task
+* code structure for real big code base project
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -9,6 +11,7 @@
 * ~~use dev server~~
 * ~~set script~~
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
+* unit test process, include UI test -- make sure app stable after small UI changes
 issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 
 ## eslint and autofix and unit test
@@ -28,11 +31,13 @@ static the unit test coverage by tool
 * install adb in container(in gradle container?)
 * connect simulator via adb
 * connect phone via adb
+* linter for android native code
+* a script that use adb to launch many apps in adroid background to simulate the real use scenario
 
 # react and redux
 * how server side rendering work
 * tap event support on web
-* doc howt to use non-style component
+* doc how to use non-style component
 
 # CI server
 ## prod:
@@ -69,7 +74,11 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * ~~create a volume for each service~~
 * IOS development environment
 
-# webhook for github
+# github
 * decide which cloud to use
+* webhook on github
+  * on client side, do all unit test before commit
+  * on server side, trigger CI server when commit into master
+
 
 # ~~tree tool~~
