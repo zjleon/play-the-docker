@@ -25,6 +25,15 @@ https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html
 
 apply plugin: 'java'
 
+configurations {
+  deps
+  compile.extendsfrom deps
+}
+
+dependencies {
+  deps 'com.google.guava:guava:latest.release'
+}
+
 repositories {
     mavenCentral()
 }
