@@ -21,13 +21,14 @@ add lint to git pre-commit
 static the unit test coverage by tool
 ## css or sass
 ## source map
-## **fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)**
+## fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * how to build android app in container. specify sdk version for app
   * build android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
+  * **figure out how exactly react-native run the native project by learning gradle course**
 * install adb in container(in gradle container?)
 * connect simulator via adb
 * connect phone via adb
