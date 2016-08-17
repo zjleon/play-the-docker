@@ -4,6 +4,8 @@
 * export packages
 ``apm list --installed --bare > ./configs/atom.packages.txt``
 
+# install docker-machine(only required on ubuntu)
+
 # docker helper:
 * installation
 **instruction to installation**
@@ -23,4 +25,4 @@ docker run -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test
 ## 2. start them all services
 ``docker-compose -f configs/compose.dev.web_static.yml up -d``
 ## 3. check the logs of web_static
-``docker-compose -f configs/compose.dev.web_static.yml logs web_static
+``docker-compose -f configs/compose.dev.web_static.yml logs web_static``
