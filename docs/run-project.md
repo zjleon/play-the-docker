@@ -8,11 +8,18 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build -t test_gradle -f configs/docker.dev.android .``
+``docker build --rm -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameteor must add before image tag**):
 ```
 docker run -it -v /home/zjleon/play-the-docker/src/ud867:/app test_gradle
 docker run -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
+```
+* clear non-used images and containers to free space
+```
+# Delete all stopped containers
+docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
+# Delete all dangling (unused) images
+docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 ```
 
 # docker-compose helper

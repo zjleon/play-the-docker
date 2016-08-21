@@ -28,7 +28,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * build react-native android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
-  * install adb in container(in gradle container?)
+  * install adb in container(in gradle container? -- use build container's volume)
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * create virtual phone via shell script(use local genymotion install file)
@@ -72,6 +72,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
+* create docker ignore for each build: put under config folder, then copy it in each docker file
 * re-think the package.json file management
 * avoid contaminate the origin file/folder
 ## prod:
@@ -79,7 +80,10 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 ## dev:
 * ~~create a volume for each service~~
 * IOS development environment
-* **handle build error and show message log errors in static file**
+
+# **handle build error and show message log errors in static file**
+* option 1: generate error report as html, and set a express server for it
+* option 2: output to console directly
 
 # github
 * decide which cloud to use
