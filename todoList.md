@@ -29,9 +29,14 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
   * install adb in container(in gradle container?)
-  * **connect simulator via adb**
-  * **connect phone via adb**
-  * *a script that use adb to launch many apps in adroid background to simulate the real use scenario*
+  * simulator
+    * setup genymotion in mac and ubuntu use shell script
+    * create virtual phone via shell script(use local genymotion install file)
+    * connect simulator via adb container
+  * **real device**
+    * download the android gradle resource in docker file
+    * connect device https://developer.android.com/studio/run/device.html
+  * ~~a script that use adb to launch many apps in adroid background to simulate the real use scenario~~ use bench mark instead
 * linter for android native code
 * how to add font resources into android
 

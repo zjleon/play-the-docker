@@ -1,9 +1,9 @@
 FROM ubuntu:15.10
 FROM java:8
 
-ARG GRADLE_VERSION=2.14.1
-
+# install gradle
 WORKDIR /usr/bin
+ARG GRADLE_VERSION=2.14.1
 RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
   unzip gradle-${GRADLE_VERSION}-bin.zip && \
   ln -s gradle-${GRADLE_VERSION} gradle && \
@@ -11,11 +11,29 @@ RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-
 
 ENV GRADLE_HOME="/usr/bin/gradle"
 ENV PATH $PATH:$GRADLE_HOME/bin
-# enable gradle deamon
+# enable gradle deamon for faster build
 ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
-#RUN export GRADLE_OPTS="-Dorg.gradle.daemon=true" >> ~/.bash_profile && source ~/.bash_profile
-WORKDIR /app
+# install android sdk
+WORKDIR /opt
+ARG ANDROID_SDK_VERSION=r24.4.1
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --force-yes --no-install-recommends \
+      expect \
+      libncurses5:i386 libstdc++6:i386 zlib1g:i386
+      #libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
+RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+    tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+    rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+ENV ANDROID_HOME /opt/android-sdk-linux
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+COPY ./scripts/container.dev.android.initial.sh ./initial.sh
+# make the shell script executable!
+RUN ["chmod", "+x", "initial.sh"]
+RUN ["./initial.sh", "android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.2,android-23,addon-google_apis_x86-google-21,extra-android-support,extra-android-m2repository,extra-google-m2repository"]
+VOLUME /root/.m2
+VOLUME /workspace
 
-#ENTRYPOINT ["gradle"]
-#CMD ["-version"]
+RUN apt-get clean
+WORKDIR /app
