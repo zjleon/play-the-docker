@@ -8,6 +8,7 @@ For this exercise we'll be working with the build script for the app module. Hea
 
 buildscript {
     repositories {
+      mavenLocal()
       maven { url 'http://repo1.maven.org/maven2' }
       jcenter {
         url "http://jcenter.bintray.com/"
@@ -23,6 +24,7 @@ buildscript {
 
 allprojects {
     repositories {
+      mavenLocal()
       maven { url 'http://repo1.maven.org/maven2' }
       jcenter {
         url "http://jcenter.bintray.com/"
