@@ -28,7 +28,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * build react-native android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
-  * **copy entry file then trigger gradle download android dependencies at build stage**
+  * ~~copy entry file then trigger gradle download android dependencies at build stage~~
   * install adb in container(in gradle container? -- use build container's volume)
   * simulator
     * setup genymotion in mac and ubuntu use shell script

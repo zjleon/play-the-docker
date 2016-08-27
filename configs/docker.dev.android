@@ -24,8 +24,7 @@ RUN dpkg --add-architecture i386 && \
       usbutils
 RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
-    rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
-    
+    rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 COPY ./scripts/container.dev.android.initial.sh ./initial.sh
@@ -42,9 +41,11 @@ RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" 
 # config adb connection
 COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
 EXPOSE 5037
-# reserve gradle download folder
-#RUN ["mkdir", "/root/.gradle"]
-#VOLUME ["/root/.gradle"]
+# trigger denpendencies installation
+COPY ./src/ud867/3.05-Exercise-ConfigureBuildTypes /app_tmp
+RUN cd /app_tmp && \
+    gradle tasks && \
+    rm -fdr /app_tmp
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
