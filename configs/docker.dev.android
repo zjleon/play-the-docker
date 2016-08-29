@@ -1,21 +1,52 @@
 FROM ubuntu:15.10
 FROM java:8
 
-ARG GRADLE_VERSION=2.14.1
-
+# install gradle
 WORKDIR /usr/bin
+ARG GRADLE_VERSION=2.14.1
 RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
   unzip gradle-${GRADLE_VERSION}-bin.zip && \
   ln -s gradle-${GRADLE_VERSION} gradle && \
   rm gradle-${GRADLE_VERSION}-bin.zip
-
 ENV GRADLE_HOME="/usr/bin/gradle"
 ENV PATH $PATH:$GRADLE_HOME/bin
-# enable gradle deamon
+# enable gradle deamon for faster build
 ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
-#RUN export GRADLE_OPTS="-Dorg.gradle.daemon=true" >> ~/.bash_profile && source ~/.bash_profile
-WORKDIR /app
+# install android sdk
+WORKDIR /opt
+ARG ANDROID_SDK_VERSION=r24.4.1
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --force-yes --no-install-recommends \
+      expect \
+      libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
+      usbutils
+RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+    tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+    rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+ENV ANDROID_HOME /opt/android-sdk-linux
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+COPY ./scripts/container.dev.android.initial.sh ./initial.sh
+# make the shell script executable!
+RUN ["chmod", "+x", "initial.sh"]
+# install android tools
+RUN ["./initial.sh", "android update sdk --filter tools --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter platform-tools --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter \"android-23\" --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a --no-https"]
+# config adb connection
+COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
+EXPOSE 5037
+# trigger denpendencies installation
+COPY ./src/ud867/3.05-Exercise-ConfigureBuildTypes /app_tmp
+RUN cd /app_tmp && \
+    gradle tasks && \
+    rm -fdr /app_tmp
 
-#ENTRYPOINT ["gradle"]
-#CMD ["-version"]
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /app
