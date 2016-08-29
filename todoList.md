@@ -2,8 +2,8 @@
 
 # gulp task:
 * integrate webpack and babel to gulp
-* ~~run dirTree~~, generate atom package task
-* code structure for real big code base project
+* generate atom package task
+* learn organize code structure for real big code base project
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
