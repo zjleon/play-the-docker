@@ -26,6 +26,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 #react-native
 * how to support animation, gesture
 * fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
+* *rich text editor*
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
