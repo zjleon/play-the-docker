@@ -35,13 +35,16 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
-  * install adb in container(in gradle container? -- use build container's volume)
+  * **mount the phone on mac(https://gist.github.com/cristobal/fcb0987871d7e1f7449e)**
+  * **mount phone on linux(by mount the usb file from host to container)**
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * create virtual phone via shell script(use local genymotion install file)
     * connect simulator via adb container
-  * **real device**
-    * download the android gradle resource in docker file
+  * real device
+    * **download the android gradle resource in docker file**
+    http://stackoverflow.com/questions/1776496/a-simple-command-line-to-download-a-remote-maven2-artifact-to-the-local-reposito
+    http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central.html
     * connect device https://developer.android.com/studio/run/device.html
   * ~~a script that use adb to launch many apps in adroid background to simulate the real use scenario~~ use bench mark instead
 * linter for android native code

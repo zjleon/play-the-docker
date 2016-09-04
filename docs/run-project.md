@@ -11,7 +11,7 @@ instruction to installation
 ``docker build --rm -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameteor must add before image tag**):
 ```
-docker run --privileged -it -v /home/zjleon/play-the-docker/src/ud867:/app test_gradle
+docker run --privileged -it -v /home/zjleon/play-the-docker/src/ud867:/app   -v /dev/bus/usb:/dev/bus/usb test_gradle
 docker run --privileged -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
 ```
 * clear non-used images and containers to free space
