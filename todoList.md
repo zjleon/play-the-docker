@@ -1,4 +1,4 @@
-# fill readme
+# fill in readme
 
 # gulp task:
 * integrate webpack and babel to gulp
@@ -46,11 +46,14 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * /tools/qemu
   * /tools/NOTICE
   * /tools/bin or bin64(depend on which one is not used)
+## react-native
+* how to support animation, gesture
 
 # react and redux
 * how server side rendering work
 * tap event support on web
 * doc how to use non-style component
+* doc how to use shouldComponentUpdate, control render inside child componenet
 
 # CI server
 ## prod:
