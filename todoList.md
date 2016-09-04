@@ -2,8 +2,8 @@
 
 # gulp task:
 * integrate webpack and babel to gulp
-* generate atom package task
-* learn organize code structure for real big code base project
+* ~~run dirTree~~, generate atom package task
+* code structure for real big code base project
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -18,9 +18,14 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * set on atom, export the package list.
 * how to write unit test quickly
 * static the unit test coverage by tool
-## css or sass
-## source map
-## fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
+# css or sass or html
+* doc down how to avoid reflow
+http://taligarsiel.com/Projects/howbrowserswork1.htm
+# source map
+
+#react-native
+* how to support animation, gesture
+* fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
@@ -46,8 +51,6 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * /tools/qemu
   * /tools/NOTICE
   * /tools/bin or bin64(depend on which one is not used)
-## react-native
-* how to support animation, gesture
 
 # react and redux
 * how server side rendering work
