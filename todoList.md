@@ -1,9 +1,9 @@
-# fill readme
+# fill in readme
 
 # gulp task:
 * integrate webpack and babel to gulp
-* generate atom package task
-* learn organize code structure for real big code base project
+* ~~run dirTree~~, generate atom package task
+* code structure for real big code base project
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -18,9 +18,15 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * set on atom, export the package list.
 * how to write unit test quickly
 * static the unit test coverage by tool
-## css or sass
-## source map
-## fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
+# css or sass or html
+* doc down how to avoid reflow
+http://taligarsiel.com/Projects/howbrowserswork1.htm
+# source map
+
+#react-native
+* how to support animation, gesture
+* fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
+* *rich text editor*
 ## android
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
@@ -29,13 +35,16 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
-  * install adb in container(in gradle container? -- use build container's volume)
+  * **mount the phone on mac(https://gist.github.com/cristobal/fcb0987871d7e1f7449e)**
+  * **mount phone on linux(by mount the usb file from host to container)**
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * create virtual phone via shell script(use local genymotion install file)
     * connect simulator via adb container
-  * **real device**
-    * download the android gradle resource in docker file
+  * real device
+    * **download the android gradle resource in docker file**
+    http://stackoverflow.com/questions/1776496/a-simple-command-line-to-download-a-remote-maven2-artifact-to-the-local-reposito
+    http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central.html
     * connect device https://developer.android.com/studio/run/device.html
   * ~~a script that use adb to launch many apps in adroid background to simulate the real use scenario~~ use bench mark instead
 * linter for android native code
@@ -51,6 +60,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * how server side rendering work
 * tap event support on web
 * doc how to use non-style component
+* doc how to use shouldComponentUpdate, control render inside child componenet
 
 # CI server
 ## prod:
