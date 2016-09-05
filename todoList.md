@@ -35,7 +35,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
-  * **mount the phone on mac(https://gist.github.com/cristobal/fcb0987871d7e1f7449e)**
+  * **mount the phone on mac(http://stackoverflow.com/questions/35854886/how-do-i-access-a-usb-drive-on-a-osx-host-from-inside-a-docker-container)**
   * **mount phone on linux(by mount the usb file from host to container)**
   * simulator
     * setup genymotion in mac and ubuntu use shell script
