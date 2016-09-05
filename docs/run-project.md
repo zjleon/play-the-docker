@@ -21,6 +21,9 @@ docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
 # Delete all dangling (unused) images
 docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 ```
+* Mac only - enable usb function in virtual box
+  1. download and install properer extend package: http://www.virtualbox.org/wiki/Download_Old_Builds
+  2. create a new docker machine, then enable the usb controller in USB tab
 
 # docker-compose helper
 ## 1. build docker images
