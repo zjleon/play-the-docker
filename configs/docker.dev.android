@@ -23,6 +23,7 @@ RUN dpkg --add-architecture i386 && \
       libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
       usbutils
 RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+#RUN curl -LO https://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
@@ -38,6 +39,13 @@ RUN ["./initial.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui
 RUN ["./initial.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a --no-https"]
 RUN ["./initial.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a --no-https"]
 RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a --no-https"]
+#RUN ["./initial.sh", "android update sdk --filter tools --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
+#RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 # config adb connection
 COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
 EXPOSE 5037
