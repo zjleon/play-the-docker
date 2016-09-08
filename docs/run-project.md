@@ -29,9 +29,20 @@ docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
   5. plugin the device, click 'add new usb filter' on the right side of the window, select the device name
   6. unplug the device, detachable start the vm, restart docker machine in command liine
   7. check docker-machine ls
+* Mac only - disable host machine's adb:
+``$ adb kill-server``
 * connect genymotion on Mac:
-use ``adb devices`` on mac terminal, check the ip address of genymotion simulator
-
+1. in host machine:
+```
+adb devices // mark the device ip
+adb tcpip 5559 // change device or simulator port
+```
+2. in container, connect to the host simulator:
+```
+adb connect ip:port //connect to remote devices
+```
+then use gradle task to build and install apk
+* to install the apk to device, uninstall it
 
 # docker-compose helper
 ## 1. build docker images
