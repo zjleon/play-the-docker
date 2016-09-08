@@ -38,13 +38,14 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * For faster builds, increase the maximum heap size for the Gradle daemon to more than 2048 MB.
 To do this set org.gradle.jvmargs=-Xmx2048M in the project gradle.properties.
 For more information see https://docs.gradle.org/current/userguide/build_environment.html
+  * **write down the process of adding gradle dependencies in docker file**
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
   * ~~mount the phone on mac(http://stackoverflow.com/questions/35854886/how-do-i-access-a-usb-drive-on-a-osx-host-from-inside-a-docker-container)~~
   * ~~mount phone on linux(by mount the usb file from host to container)~~
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * **create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)**
-    * **connect simulator via adb container(need a shell script, related command in 'run-project')**
+    * **use shell script to connect simulator in android container(related process in 'run-project')**
   * real device
     * ~~download the android gradle resource in docker file**
     use android studio or eclipse to view the description of android support library, figure out a way to download it via command line
