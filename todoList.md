@@ -44,7 +44,7 @@ For more information see https://docs.gradle.org/current/userguide/build_environ
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * **create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)**
-    * **connect simulator via adb container**
+    * **connect simulator via adb container(need a shell script, related command in 'run-project')**
   * real device
     * ~~download the android gradle resource in docker file**
     use android studio or eclipse to view the description of android support library, figure out a way to download it via command line
