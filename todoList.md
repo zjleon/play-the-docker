@@ -28,6 +28,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
 * *rich text editor*
 ## android
+* **many docker build process are similar to jenkins android build, search accordingly**
 * adb response for apk install on device, buck and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * how to build android app in container. specify sdk version for app
@@ -36,13 +37,14 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * **figure out how exactly react-native build the native project and send to device by learning gradle course, figure out wether should use gradle instead of watch man**
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
   * ~~mount the phone on mac(http://stackoverflow.com/questions/35854886/how-do-i-access-a-usb-drive-on-a-osx-host-from-inside-a-docker-container)~~
-  * **mount phone on linux(by mount the usb file from host to container)**
+  * ~~mount phone on linux(by mount the usb file from host to container)~~
   * simulator
     * setup genymotion in mac and ubuntu use shell script
     * **create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)**
     * **connect simulator via adb container**
   * real device
     * ~~download the android gradle resource in docker file**
+    use android studio or eclipse to view the description of android support library, figure out a way to download it via command line
     http://stackoverflow.com/questions/1776496/a-simple-command-line-to-download-a-remote-maven2-artifact-to-the-local-reposito
     http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central.html~~
     * connect device https://developer.android.com/studio/run/device.html
