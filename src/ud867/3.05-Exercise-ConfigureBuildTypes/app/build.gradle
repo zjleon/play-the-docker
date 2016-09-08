@@ -25,12 +25,15 @@ android {
 
     defaultConfig {
         applicationId "com.udacity.gradle.buildtypes"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
+      debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -45,7 +48,8 @@ To use our solution, uncomment the following line.
 */
 
 // apply from:"solution.gradle"
-
+// ./gradle 2161
+// .android/ 27
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

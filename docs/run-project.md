@@ -8,12 +8,30 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build -t test_gradle -f configs/docker.dev.android .``
+``docker build --rm -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameteor must add before image tag**):
 ```
-docker run -it -v /home/zjleon/play-the-docker/src/ud867:/app test_gradle
-docker run -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
+docker run --privileged -it -v /home/zjleon/play-the-docker/src/ud867:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
+docker run --privileged -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
 ```
+* clear non-used images and containers to free space
+```
+# Delete all stopped containers
+docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
+# Delete all dangling (unused) images
+docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+```
+* Mac only - enable usb function in virtual box
+  1. open virtualbox, check it's version: Help - Contents
+  2. download and install properer extend package: http://www.virtualbox.org/wiki/Download_Old_Builds
+  3. stop the 'default' vm
+  4. click 'settings' - ports - usb - enable USB controller - select usb 2.0
+  5. plugin the device, click 'add new usb filter' on the right side of the window, select the device name
+  6. unplug the device, detachable start the vm, restart docker machine in command liine
+  7. check docker-machine ls
+* connect genymotion on Mac:
+use ``adb devices`` on mac terminal, check the ip address of genymotion simulator
+
 
 # docker-compose helper
 ## 1. build docker images

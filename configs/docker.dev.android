@@ -8,7 +8,6 @@ RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-
   unzip gradle-${GRADLE_VERSION}-bin.zip && \
   ln -s gradle-${GRADLE_VERSION} gradle && \
   rm gradle-${GRADLE_VERSION}-bin.zip
-
 ENV GRADLE_HOME="/usr/bin/gradle"
 ENV PATH $PATH:$GRADLE_HOME/bin
 # enable gradle deamon for faster build
@@ -21,9 +20,10 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
       expect \
-      libncurses5:i386 libstdc++6:i386 zlib1g:i386
-      #libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
-RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+      libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
+      usbutils
+#RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+RUN curl -LO https://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
@@ -31,9 +31,41 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 COPY ./scripts/container.dev.android.initial.sh ./initial.sh
 # make the shell script executable!
 RUN ["chmod", "+x", "initial.sh"]
-RUN ["./initial.sh", "android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.2,android-23,addon-google_apis_x86-google-21,extra-android-support,extra-android-m2repository,extra-google-m2repository"]
-VOLUME /root/.m2
-VOLUME /workspace
+# install android tools
+# RUN ["./initial.sh", "android update sdk --filter tools --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter platform-tools --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter \"android-23\" --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a --no-https"]
+# RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a --no-https"]
+RUN ["./initial.sh", "android update sdk --filter tools --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
+RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 
-RUN apt-get clean
+# config adb connection
+COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
+EXPOSE 5037
+
+# install maven dependencies manually
+ARG MAVEN_VERSION=3.3.9
+WORKDIR /opt
+RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
+ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
+RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+    -DrepoUrl=http://repo1.maven.org/maven2 \
+    -Dartifact=com.android.tools.build:gradle:2.1.3
+
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* \
+    /tmp/* \
+    /var/tmp/* \
+    /opt/apache-maven-${MAVEN_VERSION} \
+    /opt/initial.sh
 WORKDIR /app
