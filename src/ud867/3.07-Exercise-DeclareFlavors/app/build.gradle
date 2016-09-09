@@ -38,6 +38,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+      free {
+
+      }
+      paid {
+        
+      }
+    }
 }
 
 /*
@@ -52,5 +60,3 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.3.0'
 }
-
-
