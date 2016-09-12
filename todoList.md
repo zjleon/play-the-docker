@@ -96,9 +96,12 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
-* create docker ignore for each build: put under config folder, then copy it in each docker file
+* ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
 * re-think the package.json file management
-* avoid contaminate the origin file/folder
+* ~~avoid contaminate the origin file/folder~~
+* use tini to make sure server stop as expect
+  https://github.com/krallin/tini/issues/45#issuecomment-236117771
+  https://github.com/krallin/tini
 ## prod:
 * overide the dev yaml setting
 ## dev:
