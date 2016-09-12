@@ -39,6 +39,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 To do this set org.gradle.jvmargs=-Xmx2048M in the project gradle.properties.
 For more information see https://docs.gradle.org/current/userguide/build_environment.html
   * **write down the process of adding gradle dependencies in docker file**
+  * connect adt's build option to android container
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
   * ~~mount the phone on mac(http://stackoverflow.com/questions/35854886/how-do-i-access-a-usb-drive-on-a-osx-host-from-inside-a-docker-container)~~
   * ~~mount phone on linux(by mount the usb file from host to container)~~
@@ -95,9 +96,12 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 # docker compose
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
-* create docker ignore for each build: put under config folder, then copy it in each docker file
+* ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
 * re-think the package.json file management
-* avoid contaminate the origin file/folder
+* ~~avoid contaminate the origin file/folder~~
+* use tini to make sure server stop as expect
+  https://github.com/krallin/tini/issues/45#issuecomment-236117771
+  https://github.com/krallin/tini
 ## prod:
 * overide the dev yaml setting
 ## dev:
@@ -105,8 +109,10 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * IOS development environment
 
 # **handle build error and show message log errors in static file**
-* option 1: generate error report as html, and set a express server for it
-* option 2: output to console directly
+~~* option 1: generate error report as html, and set a express server for it
+* option 2: output to console directly~~
+* android: use adb logcat --filter in android studio to track run time error, but build error?
+* web_static: generate error report and use tail command in atom shell package
 
 # github
 * decide which cloud to use
