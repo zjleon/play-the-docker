@@ -25,7 +25,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 # react-native
 * how to support animation, gesture
-* fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
+* fix the gap between react and react-native:
+  1. fix the element difference: https://github.com/search?utf8=%E2%9C%93&q=react+native+web
+  2. organize code:
+  https://habd.as/awesome-react-boilerplates/#react-native
 * *rich text editor*
 
 ## android
@@ -50,7 +53,7 @@ For more information see https://docs.gradle.org/current/userguide/build_environ
     * auto sign script
 
   * simulator
-    * setup genymotion in mac and ubuntu use shell script: 
+    * setup genymotion in mac and ubuntu use shell script:
     https://docs.genymotion.com/Content/04_Tools/GMTool/General_commands.htm
     * setup android emulator container
     https://hub.docker.com/r/tracer0tong/android-emulator/
