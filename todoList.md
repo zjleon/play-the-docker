@@ -23,10 +23,11 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 # source map
 
-#react-native
+# react-native
 * how to support animation, gesture
 * fix the gap between react and react-native(https://github.com/search?utf8=%E2%9C%93&q=react+native+web)
 * *rich text editor*
+
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * adb response for apk install on device, buck and gradle response for compile the code to apk
@@ -47,8 +48,16 @@ For more information see https://docs.gradle.org/current/userguide/build_environ
   * sign the app, store key in docker android container
   https://developer.android.com/studio/publish/app-signing.html#signing-manually
     * auto sign script
+
   * simulator
-    * setup genymotion in mac and ubuntu use shell script
+    * setup genymotion in mac and ubuntu use shell script: 
+    https://docs.genymotion.com/Content/04_Tools/GMTool/General_commands.htm
+    * setup android emulator container
+    https://hub.docker.com/r/tracer0tong/android-emulator/
+    this container is no-ui, but can run monkey test in it automatically
+    monkey: https://developer.android.com/studio/test/monkey.html
+    monkey runner:
+    https://developer.android.com/studio/test/monkeyrunner/index.html
     * **create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)**
     * **use shell script to connect simulator in android container(related process in 'run-project')**
   * real device

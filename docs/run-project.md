@@ -30,16 +30,16 @@ docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
   6. unplug the device, detachable start the vm, restart docker machine in command line
   7. check ``$ docker-machine ls``
 * connect genymotion on Mac:
-  2. disable host machine's adb before start genymotion:
+  1. disable host machine's adb before start genymotion:
   ``$ adb kill-server``
-  1. in host machine:
+  2. in host machine:
   ```
   adb devices // mark the device ip
-  adb tcpip 5559 // OPTIONAL: change the device or simulator port
+  adb tcpip 5559 // OPTIONAL: change the device or simulator port, to avoid adb conflict
   ```
-  2. disable host machine's adb:
+  3. disable host machine's adb:
   ``$ adb kill-server``
-  2. in container, connect to the host simulator:
+  4. in container, connect to the host simulator:
   ```
   adb connect 192.168.56.101:5555 //connect to remote devices
   ```
