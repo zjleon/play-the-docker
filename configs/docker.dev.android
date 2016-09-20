@@ -60,6 +60,7 @@ RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binar
 ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
 #ARG MAVEN_REPO=http://repo1.maven.org/maven2
 ARG JFROG_REPO=http://jcenter.bintray.com/
+# pre-install all project dependencies
 RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
     -DremoteRepositories=${JFROG_REPO} \
     -Dartifact=com.android.tools.build:gradle:2.2.0
@@ -69,6 +70,9 @@ RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
 RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
     -DremoteRepositories=${JFROG_REPO} \
     -Dartifact=com.android.tools:annotations:25.2.0
+RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+    -DremoteRepositories=${JFROG_REPO} \
+    -Dartifact=de.undercouch:gradle-download-task:3.1.1
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* \
