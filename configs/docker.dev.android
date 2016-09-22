@@ -73,6 +73,26 @@ RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
 RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
     -DremoteRepositories=${JFROG_REPO} \
     -Dartifact=de.undercouch:gradle-download-task:3.1.1
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+#     -DremoteRepositories=${JFROG_REPO} \
+#     -Dartifact=com.facebook.fresco:imagepipeline-okhttp3:0.11.0
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+#     -DremoteRepositories=${JFROG_REPO} \
+#     -Dartifact=com.squareup.okio:okio:1.9.0
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+#     -DremoteRepositories=${JFROG_REPO} \
+#     -Dartifact=com.facebook.soloader:soloader:0.1.0
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
+#     -DremoteRepositories=${JFROG_REPO} \
+#     -Dartifact=com.facebook.soloader:soloader:0.1.0
+
+# install NDK
+# WORKDIR WORKDIR /opt
+# ARG NDK_VERSION=r12b
+# RUN curl -LO https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux-x86_64.zip
+# RUN tar xzf android-ndk-${NDK_VERSION}-linux-x86_64.zip && \
+#     rm -f android-ndk-${NDK_VERSION}-linux-x86_64.zip
+# ENV ANDROID_NDK=/opt/android-ndk-${NDK_VERSION}
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* \

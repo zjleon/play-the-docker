@@ -4,6 +4,7 @@
 * integrate webpack and babel to gulp
 * ~~run dirTree~~, generate atom package task
 * code structure for real big code base project
+* run gulp in an isolated container, observe code changes, send signal to other container
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
