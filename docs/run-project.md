@@ -17,8 +17,10 @@ docker run --privileged -it -v /Users/appledev114/Desktop/practise/docker/src/ud
 * clear non-used images and containers to free space
 ```
 # Delete all stopped containers
+docker ps -q -f status=exited | xargs docker rm
 docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
 # Delete all dangling (unused) images
+docker images -q -f dangling=true | xargs docker rmi
 docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 ```
 * Mac only - enable usb function in virtual box

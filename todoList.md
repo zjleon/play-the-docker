@@ -99,6 +99,8 @@ and another speed up:  http://zeroturnaround.com/rebellabs/making-gradle-builds-
   1. 'file hash -> build version' map
   2. resource map(js, css map)
   3. release documentation(**what's that?**)
+## dev:
+* update code in app hub
 
 # node environment
 ## prod:

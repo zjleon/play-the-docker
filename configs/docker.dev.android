@@ -61,30 +61,10 @@ ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
 #ARG MAVEN_REPO=http://repo1.maven.org/maven2
 ARG JFROG_REPO=http://jcenter.bintray.com/
 # pre-install all project dependencies
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-    -DremoteRepositories=${JFROG_REPO} \
-    -Dartifact=com.android.tools.build:gradle:2.2.0
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-    -DremoteRepositories=${JFROG_REPO} \
-    -Dartifact=com.google.guava:guava:18.0
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-    -DremoteRepositories=${JFROG_REPO} \
-    -Dartifact=com.android.tools:annotations:25.2.0
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-    -DremoteRepositories=${JFROG_REPO} \
-    -Dartifact=de.undercouch:gradle-download-task:3.1.1
-# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-#     -DremoteRepositories=${JFROG_REPO} \
-#     -Dartifact=com.facebook.fresco:imagepipeline-okhttp3:0.11.0
-# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-#     -DremoteRepositories=${JFROG_REPO} \
-#     -Dartifact=com.squareup.okio:okio:1.9.0
-# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-#     -DremoteRepositories=${JFROG_REPO} \
-#     -Dartifact=com.facebook.soloader:soloader:0.1.0
-# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get \
-#     -DremoteRepositories=${JFROG_REPO} \
-#     -Dartifact=com.facebook.soloader:soloader:0.1.0
+COPY ./configs/pom.xml /tmp/pom.xml
+WORKDIR /tmp
+# RUN mvn dependency:go-offline
+RUN mvn dependency:resolve -Dclassifier=sources
 
 # install NDK
 # WORKDIR WORKDIR /opt
