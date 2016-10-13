@@ -38,7 +38,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~gradle setup in container~~
 * **finish the apk build-install-start process**
 * how to build android app in container. specify sdk version for app
-  * build react-native android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html
+  * **build react-native android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * ~~figure out how exactly react-native build the native project~~ and send to device
   * ~~learning gradle course, figure out wether should use gradle instead of watch man~~
@@ -63,7 +63,7 @@ and another speed up:  http://zeroturnaround.com/rebellabs/making-gradle-builds-
     monkey: https://developer.android.com/studio/test/monkey.html
     monkey runner:
     https://developer.android.com/studio/test/monkeyrunner/index.html
-    * **create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)**
+    * create virtual phone via shell script(use local genymotion install file, set the network mode as NAT)
     * **use shell script to connect simulator in android container(related process in 'run-project')**
   * real device
     * **write down the process of adding gradle dependencies in docker file**
