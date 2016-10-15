@@ -1,12 +1,10 @@
-'use strict';
-
-import React from 'react';
+import React from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
 class HelloWorld extends React.Component {
   render() {
@@ -17,7 +15,7 @@ class HelloWorld extends React.Component {
     )
   }
 }
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -27,6 +25,6 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-});
+})
 
-AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
+AppRegistry.registerComponent('androidApp', () => HelloWorld)

@@ -34,19 +34,26 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
-* adb response for apk install on device, buck and gradle response for compile the code to apk
+* adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * **finish the apk build-install-start process**
 * how to build android app in container. specify sdk version for app
-  * **build react-native android code from resource: https://facebook.github.io/react-native/docs/android-building-from-source.html**
+  * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
   * ~~figure out how exactly react-native build the native project~~ and send to device
   * ~~learning gradle course, figure out wether should use gradle instead of watch man~~
-  * For faster builds, increase the maximum heap size for the Gradle daemon to more than 2048 MB.
-To do this set org.gradle.jvmargs=-Xmx2048M in the project gradle.properties.
-For more information see https://docs.gradle.org/current/userguide/build_environment.html
-and another speed up:  http://zeroturnaround.com/rebellabs/making-gradle-builds-faster/
-  * connect adt's build option to android container
+  * ~~For faster builds, increase the maximum heap size for the Gradle daemon to more than 2048 MB.
+    To do this set org.gradle.jvmargs=-Xmx2048M in the project gradle.properties.~~
+    For more information see https://docs.gradle.org/current/userguide/build_environment.html
+    and another speed up:  http://zeroturnaround.com/rebellabs/making-gradle-builds-faster/
+  * re-organize the andriod code:
+    1. ~~change path to com.projectName~~
+    1. change minsdk version to 16
+    1. each build command should have --info
+    1. npm start to pack js code
+  * **a script to install the react native package when container up**
+  * react-native app production build type
+  * connect adt's build option to android container. https://github.com/facebook/react-native/blob/master/docs/IntegrationWithExistingApps.md#creating-a-release-build-in-android-studio
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
   * ~~mount the phone on mac(http://stackoverflow.com/questions/35854886/how-do-i-access-a-usb-drive-on-a-osx-host-from-inside-a-docker-container)~~
   * ~~mount phone on linux(by mount the usb file from host to container)~~

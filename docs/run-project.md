@@ -11,17 +11,15 @@ instruction to installation
 ``docker build -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run --privileged -it -v $(pwd)/src:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
-docker run --privileged -it -v $(pwd)/src:/app test_gradle
+docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
+docker run --privileged -it -v $(pwd)/src/android:/app test_gradle
 ```
 * clear non-used images and containers to free space
 ```
 # Delete all stopped containers
 docker ps -q -f status=exited | xargs docker rm
-docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
 # Delete all dangling (unused) images
 docker images -q -f dangling=true | xargs docker rmi
-docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 ```
 * Mac only - enable usb function in virtual box
   1. open virtualbox, check it's version: Help - Contents
