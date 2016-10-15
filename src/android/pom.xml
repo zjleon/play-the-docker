@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.zjleon.downloader</groupId>
-    <artifactId>gradle-dependencies-downloader</artifactId>
-    <version>0.1</version>
+    <groupId>com.udacity.gradle.buildtypes</groupId>
+    <artifactId>gs-maven-android</artifactId>
+    <version>0.1.0</version>
 
     <properties>
         <!-- use UTF-8 for everything -->
@@ -14,14 +14,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.android.tools.build</groupId>
-            <artifactId>gradle</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>de.undercouch</groupId>
-            <artifactId>gradle-download-task</artifactId>
-            <version>3.1.1</version>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-downloader</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

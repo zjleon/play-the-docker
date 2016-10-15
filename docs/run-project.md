@@ -8,11 +8,11 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build --rm -t test_gradle -f configs/docker.dev.android .``
+``docker build -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run --privileged -it -v /dev/bus/usb:/dev/bus/usb test_gradle
-docker run --privileged -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
+docker run --privileged -it -v $(pwd)/src:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
+docker run --privileged -it -v $(pwd)/src:/app test_gradle
 ```
 * clear non-used images and containers to free space
 ```

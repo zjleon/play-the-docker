@@ -51,18 +51,19 @@ RUN ["./initial.sh", "android update sdk --filter \"extra-google-m2repository\" 
 COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
 EXPOSE 5037
 
-# install maven dependencies manually
+# install maven dependencies downloader
 ARG MAVEN_VERSION=3.3.9
 WORKDIR /opt
 RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
 ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
+
+# pre-install all project dependencies, via pom.xml
 #ARG MAVEN_REPO=http://repo1.maven.org/maven2
-ARG JFROG_REPO=http://jcenter.bintray.com/
-# pre-install all project dependencies
-COPY ./configs/pom.xml /tmp/pom.xml
+# ARG JFROG_REPO=http://jcenter.bintray.com/
 WORKDIR /tmp
+COPY ./configs/pom.xml ./pom.xml
 # RUN mvn dependency:go-offline
 RUN mvn dependency:resolve -Dclassifier=sources
 
@@ -74,10 +75,12 @@ RUN mvn dependency:resolve -Dclassifier=sources
 #     rm -f android-ndk-${NDK_VERSION}-linux-x86_64.zip
 # ENV ANDROID_NDK=/opt/android-ndk-${NDK_VERSION}
 
+# do some clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* \
     /tmp/* \
     /var/tmp/* \
     # /opt/apache-maven-${MAVEN_VERSION} \
     /opt/initial.sh
+
 WORKDIR /app
