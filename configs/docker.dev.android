@@ -1,20 +1,36 @@
 FROM ubuntu:15.10
-FROM java:8
+FROM openjdk:8u102-jdk
 FROM node:6.2.2-wheezy
+
+# install basic package
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --force-yes --no-install-recommends \
+      expect \
+      libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
+      usbutils \
+      unzip
 
 # install maven dependencies downloader
 WORKDIR /opt
 ARG MAVEN_VERSION=3.3.9
-RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
-    tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+# RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
+COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
+RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
 ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
 
 # install gradle
 WORKDIR /usr/bin
 ARG GRADLE_VERSION=3.1
-RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
-  unzip gradle-${GRADLE_VERSION}-bin.zip && \
+# RUN curl -LO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
+#   unzip gradle-${GRADLE_VERSION}-bin.zip && \
+#   ln -s gradle-${GRADLE_VERSION} gradle && \
+#   rm gradle-${GRADLE_VERSION}-bin.zip
+COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
+RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
   ln -s gradle-${GRADLE_VERSION} gradle && \
   rm gradle-${GRADLE_VERSION}-bin.zip
 ENV GRADLE_HOME="/usr/bin/gradle"
@@ -25,15 +41,11 @@ ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 # install android sdk
 WORKDIR /opt
 ARG ANDROID_SDK_VERSION=r24.4.1
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y --force-yes --no-install-recommends \
-      expect \
-      libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
-      usbutils
-#RUN curl -LO http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
-RUN curl -LO https://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
-    tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+# RUN curl -LO https://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+#     tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+#     rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+COPY ./resources/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz ./android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+RUN tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
     rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
@@ -56,7 +68,7 @@ EXPOSE 5037
 WORKDIR /tmp
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
 # RUN mvn dependency:go-offline
-RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
+# RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
 # install react-native packages to /tmp, copy to /app when run time
 
