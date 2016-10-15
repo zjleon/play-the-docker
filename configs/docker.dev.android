@@ -62,8 +62,8 @@ ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
 # pre-install all project dependencies, via pom.xml
 #ARG MAVEN_REPO=http://repo1.maven.org/maven2
 # ARG JFROG_REPO=http://jcenter.bintray.com/
-COPY ./configs/pom.xml /tmp/pom.xml
-# WORKDIR /tmp
+WORKDIR /tmp
+COPY ./configs/pom.xml ./pom.xml
 # RUN mvn dependency:go-offline
 RUN mvn dependency:resolve -Dclassifier=sources
 
