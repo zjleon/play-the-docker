@@ -54,4 +54,8 @@ To use our solution, uncomment the following line.
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.3.0'
+    // compile "com.facebook.react:react-native:+"
+    compile "com.facebook.react:react-native:0.33.0"
+
+    // compile project(':ReactAndroid')
 }

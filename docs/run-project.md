@@ -8,41 +8,43 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build --rm -t test_gradle -f configs/docker.dev.android .``
-* run image(**all docker parameteor must add before image tag**):
+``docker build -t test_gradle -f configs/docker.dev.android .``
+* run image(**all docker parameter must add before image tag**):
 ```
-docker run --privileged -it -v /home/zjleon/play-the-docker/src/ud867:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
-docker run --privileged -it -v /Users/appledev114/Desktop/practise/docker/src/ud867:/app test_gradle
+docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
+docker run --privileged -it -v $(pwd)/src/android:/app test_gradle
 ```
 * clear non-used images and containers to free space
 ```
 # Delete all stopped containers
-docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
+docker ps -q -f status=exited | xargs docker rm
 # Delete all dangling (unused) images
-docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+docker images -q -f dangling=true | xargs docker rmi
 ```
 * Mac only - enable usb function in virtual box
   1. open virtualbox, check it's version: Help - Contents
   2. download and install properer extend package: http://www.virtualbox.org/wiki/Download_Old_Builds
   3. stop the 'default' vm
   4. click 'settings' - ports - usb - enable USB controller - select usb 2.0
-  5. plugin the device, click 'add new usb filter' on the right side of the window, select the device name
-  6. unplug the device, detachable start the vm, restart docker machine in command liine
-  7. check docker-machine ls
-* Mac only - disable host machine's adb:
-``$ adb kill-server``
+  5. plugin the device, click 'add new usb filter' on the bottom right of the window, select the device name
+  6. unplug the device, detachable start the vm, restart docker machine in command line
+  7. check ``$ docker-machine ls``
 * connect genymotion on Mac:
-1. in host machine:
-```
-adb devices // mark the device ip
-adb tcpip 5559 // change device or simulator port
-```
-2. in container, connect to the host simulator:
-```
-adb connect ip:port //connect to remote devices
-```
-then use gradle task to build and install apk
-* to install the apk to device, uninstall it
+  1. disable host machine's adb before start genymotion:
+  ``$ adb kill-server``
+  2. in host machine:
+  ```
+  adb devices // mark the device ip
+  adb tcpip 5559 // OPTIONAL: change the device or simulator port, to avoid adb conflict
+  ```
+  3. disable host machine's adb:
+  ``$ adb kill-server``
+  4. in container, connect to the host simulator:
+  ```
+  adb connect 192.168.56.101:5555 //connect to remote devices
+  ```
+  then use gradle task to build and install apk
+* to install the apk to device, uninstall it first
 
 # docker-compose helper
 ## 1. build docker images
