@@ -8,7 +8,7 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build --rm -t test_gradle -f configs/docker.dev.android .``
+``docker build -t test_gradle -f configs/docker.dev.android .``
 * run image(**all docker parameter must add before image tag**):
 ```
 docker run --privileged -it -v /dev/bus/usb:/dev/bus/usb test_gradle
