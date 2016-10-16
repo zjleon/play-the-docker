@@ -37,6 +37,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * **finish the apk build-install-start process**
+* **try to decompose the android container, by learning how the react packager interact with build process**
+* **set up a proxy for maven download**
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
@@ -50,8 +52,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. ~~change path to com.projectName~~
     1. change minsdk version to 16
     1. each build command should have --info
-    1. npm start to pack js code
-  * **a script to install the react native package when container up**
+  * **a script to install the react native package when container up. 'npm start to pack js code'**
   * react-native app production build type
   * connect adt's build option to android container. https://github.com/facebook/react-native/blob/master/docs/IntegrationWithExistingApps.md#creating-a-release-build-in-android-studio
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
