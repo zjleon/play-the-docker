@@ -73,11 +73,12 @@ EXPOSE 5037
 
 # pre-install all project dependencies, via pom.xml
 WORKDIR /tmp
+# COPY ./configs/maven.dev.settings.xml /opt/apache-maven-${MAVEN_VERSION}/ref/settings.xml
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
 # RUN mvn dependency:go-offline
 # COPY ./configs/maven.dev.settings.xml
 # mvn dependency:resolve -Dclassifier=sources
-# RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
+RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
 # TODO: install react-native packages to /tmp, copy to /app when run time
 
