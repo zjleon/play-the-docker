@@ -7,16 +7,18 @@ RUN dpkg --add-architecture i386 && \
       expect \
       libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
       usbutils \
-      unzip \
-      openjdk-8-jdk \
-      build-essential
+      build-essential \
+      # openjdk-8-jdk \
+      openjdk-8-jre-headless \
+      curl \
+      unzip
 
 # install node
-ARG NODE_VERSION=6.8.1
-COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar ./node.tar
-RUN tar xzf node.tar --directory /opt && \
-    rm -f node.tar
-ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
+# ARG NODE_VERSION=6.8.1
+# COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar ./node.tar
+# RUN tar xzf node.tar --directory /opt && \
+#     rm -f node.tar
+# ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
 
 # set java environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
@@ -28,38 +30,41 @@ ARG MAVEN_VERSION=3.3.9
 COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
 RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
+# RUN curl -LO http://mirrors.cnnic.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
 ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
 
 # install gradle
-WORKDIR /usr/bin
-ARG GRADLE_VERSION=3.1
-COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
-RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
-  ln -s gradle-${GRADLE_VERSION} gradle && \
-  rm gradle-${GRADLE_VERSION}-bin.zip
-ENV GRADLE_HOME="/usr/bin/gradle"
-ENV PATH $PATH:$GRADLE_HOME/bin
-# enable gradle deamon for faster build
-ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
+# WORKDIR /usr/bin
+# ARG GRADLE_VERSION=3.1
+# COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
+# RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
+#   ln -s gradle-${GRADLE_VERSION} gradle && \
+#   rm gradle-${GRADLE_VERSION}-bin.zip
+# ENV GRADLE_HOME="/usr/bin/gradle"
+# ENV PATH $PATH:$GRADLE_HOME/bin
+# # enable gradle deamon for faster build
+# ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 # install android sdk
-WORKDIR /opt
-ARG ANDROID_SDK_VERSION=r24.4.1
-COPY ./resources/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz ./android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
-RUN tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
-    rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
-ENV ANDROID_HOME /opt/android-sdk-linux
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-COPY ./scripts/android.dev.agree_to_install_dependencies.sh ./agree.sh
-RUN ["chmod", "+x", "agree.sh"]
-# install android tools
-RUN ["./agree.sh", "android update sdk --filter tools --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
+# WORKDIR /opt
+# ARG ANDROID_SDK_VERSION=r24.4.1
+# COPY ./resources/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz ./android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+# RUN tar xzf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz && \
+#     rm -f android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+# ENV ANDROID_HOME /opt/android-sdk-linux
+# ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+# COPY ./scripts/android.dev.agree_to_install_dependencies.sh ./agree.sh
+# RUN ["chmod", "+x", "agree.sh"]
+# # install android tools
+# RUN ["./agree.sh", "android update sdk --filter tools --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 
 # config adb connection
 COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
@@ -67,6 +72,7 @@ EXPOSE 5037
 
 # pre-install all project dependencies, via pom.xml
 WORKDIR /tmp
+COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
 # RUN mvn dependency:go-offline
 RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]

@@ -4,8 +4,6 @@ instruction to installation
 # install docker
 instruction to installation
 
-# install docker-machine(only required on ubuntu)
-
 # docker helper:
 * build image:
 ``docker build -t test_gradle -f configs/docker.dev.android .``
@@ -53,3 +51,5 @@ docker images -q -f dangling=true | xargs docker rmi
 ``docker-compose -f configs/compose.dev.web_static.yml up -d``
 ## 3. check the logs of web_static
 ``docker-compose -f configs/compose.dev.web_static.yml logs web_static``
+
+# [maven repository](https://mvnrepository.com/repos)
