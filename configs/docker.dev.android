@@ -12,6 +12,10 @@ RUN dpkg --add-architecture i386 && \
       build-essential
 
 # #############Installation start################
+# fix open jdk ssl issue:
+# http://stackoverflow.com/questions/6784463/error-trustanchors-parameter-must-be-non-empty
+RUN ["/var/lib/dpkg/info/ca-certificates-java.postinst", "configure"]
+
 # install maven dependencies downloader
 WORKDIR /opt
 ARG MAVEN_VERSION=3.3.9
@@ -43,13 +47,18 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 COPY ./scripts/android.dev.agree_to_install_dependencies.sh ./agree.sh
 RUN ["chmod", "+x", "agree.sh"]
 # install android tools
-RUN ["./agree.sh", "android update sdk --filter tools --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
-RUN ["./agree.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
+# android update sdk --filter tools,platform-tools,android-23,build-tools-23.0.3,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force -a
+RUN ["./agree.sh", "android update sdk --filter tools,platform-tools,android-23,build-tools-23.0.3,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force -a"]
+# copy android sdk licenses
+COPY ./configs/android-sdk-license ${ANDROID_HOME}/licenses/android-sdk-license
+COPY ./configs/android-sdk-preview-license ${ANDROID_HOME}/licenses/android-sdk-preview-license
+# RUN ["./agree.sh", "android update sdk --filter tools --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 
 # install node
 ARG NODE_VERSION=6.8.1
@@ -65,7 +74,6 @@ RUN chmod +x /tini
 # #################Configuration start################
 # set java environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
-# ENV JAVA_VERSION 8u102
 
 # config adb connection
 COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
@@ -73,14 +81,16 @@ EXPOSE 5037
 
 # pre-install all project dependencies, via pom.xml
 WORKDIR /tmp
+COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
 # RUN mvn dependency:go-offline
 RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
 # TODO: install react-native packages to /tmp, copy to /app when run time
 WORKDIR /node_packages
-COPY ./src/android/package.json ./package.json
-RUN ["npm", "install"]
+COPY ./resources/node_modules.tar.gz node_modules.tar.gz
+# COPY ./src/android/package.json ./package.json
+# RUN ["npm", "install", "--quiet"]
 
 # do some clean up
 RUN apt-get clean && \
@@ -92,4 +102,4 @@ RUN apt-get clean && \
 
 WORKDIR /app
 ENTRYPOINT ["/tini", "--"]
-CMD ["bash"]
+CMD ["gradle", "tasks", "--info"]
