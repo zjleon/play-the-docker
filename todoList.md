@@ -39,7 +39,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * **finish the apk build-install-start process**
-* **try to decompose the android container, by learning how the react packager interact with build process**
+* **try to decompose the android container, by learning how the react packager interact with build process, with symlinks**
 * ~~set up a proxy for maven download~~
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
