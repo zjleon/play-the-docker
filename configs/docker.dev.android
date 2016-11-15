@@ -17,24 +17,24 @@ RUN dpkg --add-architecture i386 && \
 RUN ["/var/lib/dpkg/info/ca-certificates-java.postinst", "configure"]
 
 # install maven dependencies downloader
-WORKDIR /opt
-ARG MAVEN_VERSION=3.3.9
-COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
-RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
-    rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
-ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
-
-# install gradle
-WORKDIR /usr/bin
-ARG GRADLE_VERSION=3.1
-COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
-RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
-  ln -s gradle-${GRADLE_VERSION} gradle && \
-  rm gradle-${GRADLE_VERSION}-bin.zip
-ENV GRADLE_HOME="/usr/bin/gradle"
-ENV PATH $PATH:$GRADLE_HOME/bin
-# enable gradle deamon for faster build
-ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
+# WORKDIR /opt
+# ARG MAVEN_VERSION=3.3.9
+# COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
+# RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
+# ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
+#
+# # install gradle
+# WORKDIR /usr/bin
+# ARG GRADLE_VERSION=3.1
+# COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
+# RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
+#   ln -s gradle-${GRADLE_VERSION} gradle && \
+#   rm gradle-${GRADLE_VERSION}-bin.zip
+# ENV GRADLE_HOME="/usr/bin/gradle"
+# ENV PATH $PATH:$GRADLE_HOME/bin
+# # enable gradle deamon for faster build
+# ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 # install android sdk
 WORKDIR /opt
@@ -61,44 +61,44 @@ COPY ./configs/android-sdk-preview-license ${ANDROID_HOME}/licenses/android-sdk-
 # RUN ["./agree.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 
 # install node
-ARG NODE_VERSION=6.8.1
-COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar ./node.tar
-RUN tar xzf node.tar --directory /opt && \
-    rm -f node.tar
-ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
-
-# install tini
-COPY ./resources/tini /tini
-RUN chmod +x /tini
-
-# #################Configuration start################
-# set java environment variables
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
-
-# config adb connection
-COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
-EXPOSE 5037
-
-# pre-install all project dependencies, via pom.xml
-WORKDIR /tmp
-COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
-COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
-# RUN mvn dependency:go-offline
-RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
-
-# TODO: install react-native packages to /tmp, copy to /app when run time
-WORKDIR /node_packages
-COPY ./resources/node_modules.tar.gz node_modules.tar.gz
-# COPY ./src/android/package.json ./package.json
-# RUN ["npm", "install", "--quiet"]
-
-# do some clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* \
-    # /tmp/* \
-    /var/tmp/* \
-    # /opt/apache-maven-${MAVEN_VERSION} \
-    /opt/agree.sh
+# ARG NODE_VERSION=6.8.1
+# COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar ./node.tar
+# RUN tar xzf node.tar --directory /opt && \
+#     rm -f node.tar
+# ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
+#
+# # install tini
+# COPY ./resources/tini /tini
+# RUN chmod +x /tini
+#
+# # #################Configuration start################
+# # set java environment variables
+# ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
+#
+# # config adb connection
+# COPY ./configs/51-android.rules /etc/udev/rules.d/51-android.rules
+# EXPOSE 5037
+#
+# # pre-install all project dependencies, via pom.xml
+# WORKDIR /tmp
+# COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
+# COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
+# # RUN mvn dependency:go-offline
+# RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
+#
+# # TODO: install react-native packages to /tmp, copy to /app when run time
+# WORKDIR /node_packages
+# COPY ./resources/node_modules.tar.gz node_modules.tar.gz
+# # COPY ./src/android/package.json ./package.json
+# # RUN ["npm", "install", "--quiet"]
+#
+# # do some clean up
+# RUN apt-get clean && \
+#     rm -rf /var/lib/apt/lists/* \
+#     # /tmp/* \
+#     /var/tmp/* \
+#     # /opt/apache-maven-${MAVEN_VERSION} \
+#     /opt/agree.sh
 
 WORKDIR /app
 ENTRYPOINT ["/tini", "--"]
