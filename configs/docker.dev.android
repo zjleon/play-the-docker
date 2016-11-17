@@ -19,24 +19,24 @@ RUN dpkg --add-architecture i386 && \
 RUN ["/var/lib/dpkg/info/ca-certificates-java.postinst", "configure"]
 
 # install maven dependencies downloader
-WORKDIR /opt
-ARG MAVEN_VERSION=3.3.9
-COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
-RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
-    rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
-ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
-
-# install gradle
-WORKDIR /usr/bin
-ARG GRADLE_VERSION=3.1
-COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
-RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
-  ln -s gradle-${GRADLE_VERSION} gradle && \
-  rm gradle-${GRADLE_VERSION}-bin.zip
-ENV GRADLE_HOME="/usr/bin/gradle"
-ENV PATH $PATH:$GRADLE_HOME/bin
-# enable gradle deamon for faster build
-ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
+# WORKDIR /opt
+# ARG MAVEN_VERSION=3.3.9
+# COPY ./resources/apache-maven-${MAVEN_VERSION}-bin.tar.gz ./apache-maven-${MAVEN_VERSION}-bin.tar.gz
+# RUN tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+#     rm -f apache-maven-${MAVEN_VERSION}-bin.tar.gz
+# ENV PATH ${PATH}:/opt/apache-maven-${MAVEN_VERSION}/bin
+#
+# # install gradle
+# WORKDIR /usr/bin
+# ARG GRADLE_VERSION=3.1
+# COPY ./resources/gradle-${GRADLE_VERSION}-bin.zip ./gradle-${GRADLE_VERSION}-bin.zip
+# RUN unzip gradle-${GRADLE_VERSION}-bin.zip && \
+#   ln -s gradle-${GRADLE_VERSION} gradle && \
+#   rm gradle-${GRADLE_VERSION}-bin.zip
+# ENV GRADLE_HOME="/usr/bin/gradle"
+# ENV PATH $PATH:$GRADLE_HOME/bin
+# # enable gradle deamon for faster build
+# ENV GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 # install android sdk
 WORKDIR /opt
