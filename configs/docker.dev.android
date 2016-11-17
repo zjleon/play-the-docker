@@ -5,7 +5,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
       expect \
-      libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
+      # android sdk esential:
+      libncurses5:i386 libstdc++6:i386 zlib1g:i386 libc6:i386 libbz2-1.0:i386 \
+      # usb capibility
       usbutils \
       unzip \
       openjdk-8-jdk \
@@ -52,10 +54,13 @@ COPY ./configs/android-sdk-preview-license ${ANDROID_HOME}/licenses/android-sdk-
 # android update sdk --filter tools,platform-tools,android-23,build-tools-23.0.3,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force -a
 # RUN ["./agree.sh", "android update sdk --filter tools,platform-tools,android-23,build-tools-23.0.3,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force -a"]
 # copy android sdk licenses
-COPY ./resources/platform-tools_r25-linux.zip /root/.android/cache/platform-tools_r25-linux.zip
-COPY ./resources/tools_r25.2.2-linux.zip /root/.android/cache/tools_r25.2.2-linux.zip
-RUN ["./agree.sh", "android update sdk --filter tools --no-ui --force -a"]
+RUN ls $ANDROID_HOME/tools/ -a
+COPY ./resources/platform-tools_r25-linux.zip ${ANDROID_HOME}/temp/platform-tools_r25-linux.zip
 RUN ["./agree.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+RUN ls $ANDROID_HOME/
+COPY ./resources/tools_r25.2.2-linux.zip ${ANDROID_HOME}/temp/tools_r25.2.2-linux.zip
+RUN ["./agree.sh", "android update sdk --filter tool --no-ui --force -a"]
+RUN ls $ANDROID_HOME/tools/
 # RUN ["./agree.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
 # RUN ["./agree.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
 # RUN ["./agree.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
