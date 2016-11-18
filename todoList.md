@@ -93,6 +93,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * /tools/qemu
   * /tools/NOTICE
   * /tools/bin or bin64(depend on which one is not used)
+  * /support/v1*
   ``$ rm emulator*``
 
 # react and redux
