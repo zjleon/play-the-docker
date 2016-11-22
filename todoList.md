@@ -56,6 +56,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. each build command should have --info
   * **a script to install the react native package when container up. 'npm start to pack js code'**
   * **android support seems intall fail or the version of appcompat-v7 should be 25.0.0**
+  * ~~figure out how gralde build an android application~~
   * react-native app production build type
   * connect adt's build option to android container. https://github.com/facebook/react-native/blob/master/docs/IntegrationWithExistingApps.md#creating-a-release-build-in-android-studio
   * ~~copy entry file then trigger gradle download android dependencies at build stage~~
