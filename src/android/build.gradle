@@ -19,14 +19,39 @@ buildscript {
     // }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.0'
+    classpath 'com.android.tools.build:gradle:2.2.2'
 
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files
   }
 }
 
+gradle.taskGraph.beforeTask { Task task ->
+  println "beforeTask"
+}
+gradle.taskGraph.afterTask { Task task ->
+  if (state.failure) {
+    println "fail"
+  }
+  else {
+    println "afterTask"
+  }
+}
+
 allprojects {
+  beforeEvaluate {
+    project ->
+    println "beforeEvaluate"
+  }
+  afterEvaluate {
+    project ->
+    println "afterEvaluate"
+  }
+  //
+  // afterProject { project, projectState ->
+  //   println "afterProject"
+  // }
+
   repositories {
     mavenLocal()
     // maven { url 'http://repo1.maven.org/maven2' }

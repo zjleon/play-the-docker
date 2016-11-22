@@ -1,6 +1,7 @@
-package com.android;
+package com.androidApp;
 
 import com.facebook.react.ReactActivity;
+import android.util.Log;
 
 public class MainActivity  extends ReactActivity {
   /**
@@ -9,6 +10,7 @@ public class MainActivity  extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+    Log.i("aaaa","==================");
       return "androidApp";
   }
 }
