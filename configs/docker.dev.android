@@ -117,5 +117,6 @@ RUN apt-get clean && \
 
 WORKDIR /app
 COPY ./scripts/container.dev.android.initial.sh /tmp/initial.sh
+RUN ["chmod", "+x", "/tmp/initial.sh"]
 ENTRYPOINT ["/tini", "--"]
 CMD ["/tmp/initial.sh"]
