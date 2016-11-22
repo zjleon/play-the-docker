@@ -26,32 +26,7 @@ buildscript {
   }
 }
 
-gradle.taskGraph.beforeTask { Task task ->
-  println "beforeTask"
-}
-gradle.taskGraph.afterTask { Task task ->
-  if (state.failure) {
-    println "fail"
-  }
-  else {
-    println "afterTask"
-  }
-}
-
 allprojects {
-  beforeEvaluate {
-    project ->
-    println "beforeEvaluate"
-  }
-  afterEvaluate {
-    project ->
-    println "afterEvaluate"
-  }
-  //
-  // afterProject { project, projectState ->
-  //   println "afterProject"
-  // }
-
   repositories {
     mavenLocal()
     // maven { url 'http://repo1.maven.org/maven2' }
