@@ -1,7 +1,6 @@
 # ignore unnecessary files
 src/android/*
 src/android/gradle
-.idea
 !src/android/*.*
 !*/
 **/node_modules
@@ -10,3 +9,4 @@ docs
 **/.git
 dist
 src/ud867
+src/android/.idea
