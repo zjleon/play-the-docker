@@ -39,3 +39,8 @@ jspm_packages
 dist
 build
 .gradle
+gradlew.bat
+gradlew
+*.iml
+src/android/.idea/
+src/android/gradle/
