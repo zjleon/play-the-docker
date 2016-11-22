@@ -44,3 +44,4 @@ gradlew
 *.iml
 src/android/.idea/
 src/android/gradle/
+local.properties
