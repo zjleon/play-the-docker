@@ -54,7 +54,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. ~~change path to com.projectName~~
     1. change minsdk version to 16
     1. each build command should have --info
-  * **a script to install the react native package when container up. 'npm start to pack js code'**
+  * **a systemd service to start the react native packager when container runs.**
   * **android support seems intall fail or the version of appcompat-v7 should be 25.0.0**
   * ~~figure out how gralde build an android application~~
   * react-native app production build type
@@ -138,9 +138,9 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * re-think the package.json file management
 * ~~avoid contaminate the origin file/folder~~
 * **include android image process**
-* use tini to make sure server stop as expect
+* ~~use tini to make sure server stop as expect
   https://github.com/krallin/tini/issues/45#issuecomment-236117771
-  https://github.com/krallin/tini
+  https://github.com/krallin/tini~~
 ## prod:
 * overide the dev yaml setting
 ## dev:
