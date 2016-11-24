@@ -101,11 +101,10 @@ COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
 # RUN mvn dependency:go-offline
 RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
-# TODO: install react-native packages to /tmp, copy to /app when run time
-WORKDIR /node_packages
-# COPY ./resources/node_modules.tar.gz node_modules.tar.gz
-COPY ./src/android/package.json ./package.json
-RUN ["npm", "install", "--quiet"]
+# WORKDIR /node_packages
+# # COPY ./resources/node_modules.tar.gz node_modules.tar.gz
+# COPY ./src/android/package.json ./package.json
+# RUN ["npm", "install", "--quiet"]
 
 # do some clean up
 RUN apt-get clean && \
