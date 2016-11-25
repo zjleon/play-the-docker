@@ -55,8 +55,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. change minsdk version to 16
     1. each build command should have --info
   * **a systemd service to start the react native packager when container runs.(https://certsimple.com/blog/deploy-node-on-linux#node-js-ssl)**
-  * **android support seems intall fail or the version of appcompat-v7 should be 25.0.0**
-  * **is NDK required for react-native?**
+  * ~~android support seems intall fail or the version of appcompat-v7 should be 25.0.0~~
+  * ~~is NDK required for react-native?~~No, only required when change react-native android code
   * ~~figure out how gralde build an android application~~
   * react-native app production build type
   * connect adt's build option to android container. https://github.com/facebook/react-native/blob/master/docs/IntegrationWithExistingApps.md#creating-a-release-build-in-android-studio
