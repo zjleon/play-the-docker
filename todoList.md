@@ -39,7 +39,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * **finish the apk build-install-start process**
-* **try to decompose the android container, by learning how the react packager interact with build process, with symlinks**
+* **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
@@ -55,8 +55,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. change minsdk version to 16
     1. each build command should have --info
   * **a systemd service to start the react native packager when container runs.(https://certsimple.com/blog/deploy-node-on-linux#node-js-ssl)**
-  * **android support seems intall fail or the version of appcompat-v7 should be 25.0.0**
-  * **is NDK required for react-native?**
+  * ~~android support seems intall fail or the version of appcompat-v7 should be 25.0.0~~
+  * ~~is NDK required for react-native?~~No, only required when change react-native android code
   * ~~figure out how gralde build an android application~~
   * react-native app production build type
   * connect adt's build option to android container. https://github.com/facebook/react-native/blob/master/docs/IntegrationWithExistingApps.md#creating-a-release-build-in-android-studio
