@@ -43,6 +43,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * react-native navigator:
   https://github.com/exponentjs/ex-navigation
 
+## web
+* use webworker for web and mobile web
+
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
