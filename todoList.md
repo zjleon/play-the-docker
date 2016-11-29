@@ -24,10 +24,12 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 # css or sass or html
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
+* shared element transition
 
 # source map
 
 # react-native
+## Road map: https://github.com/exponentjs/ex-navigation
 * how to support animation, gesture
 * fix the gap between react and react-native:
   1. fix the element difference: https://github.com/search?utf8=%E2%9C%93&q=react+native+web
@@ -54,6 +56,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
+* android back button handler ``AndroidBackButtonBehavior``
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
