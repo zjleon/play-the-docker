@@ -34,6 +34,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://habd.as/awesome-react-boilerplates/#react-native
   3. platform specify code:
   https://facebook.github.io/react-native/releases/0.26/docs/platform-specific-code.html
+  4. webpack 'alias' in 'resolve' section
+  https://webpack.github.io/docs/configuration.html#resolve-alias
 * *rich text editor*
 
 ## android
