@@ -20,6 +20,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * set on atom, export the package list.
 * how to write unit test quickly
 * static the unit test coverage by tool
+* try 'flow'
 
 # css or sass or html
 * doc down how to avoid reflow
