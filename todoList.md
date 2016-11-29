@@ -50,6 +50,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **finish the apk build-install-start process**
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
+* **figure out how and where the js run in android**
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
