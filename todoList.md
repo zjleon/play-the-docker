@@ -32,6 +32,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   1. fix the element difference: https://github.com/search?utf8=%E2%9C%93&q=react+native+web
   2. organize code:
   https://habd.as/awesome-react-boilerplates/#react-native
+  3. platform specify code:
+  https://facebook.github.io/react-native/releases/0.26/docs/platform-specific-code.html
 * *rich text editor*
 
 ## android
