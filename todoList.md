@@ -5,6 +5,7 @@
 * ~~run dirTree~~, generate atom package task
 * code structure for real big code base project
 * run gulp in an isolated container, observe code changes, send signal to other container
+*
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -36,8 +37,11 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://facebook.github.io/react-native/releases/0.26/docs/platform-specific-code.html
   4. webpack 'alias' in 'resolve' section
   https://webpack.github.io/docs/configuration.html#resolve-alias
+  5. **how the navigator work when integrate with native function?**
 * *rich text editor*
 * **0.36 have keyboard dismiss and background activity support**
+* react-native navigator:
+  https://github.com/exponentjs/ex-navigation
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
