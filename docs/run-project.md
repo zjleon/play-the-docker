@@ -12,10 +12,9 @@ docker build -t packager -f configs/docker.dev.react_native_packager .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
+docker run -d -p 8081:8081 -v $(pwd)/src/android:/app packager
 docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
-docker run --privileged -it -v $(pwd)/src/android:/app test_gradle
-docker run -d -p 8081:8081 packager
-
+docker run --privileged -it -v $(pwd)/src/android:/app test_gradle bash
 ```
 * clear non-used images and containers to free space
 ```
