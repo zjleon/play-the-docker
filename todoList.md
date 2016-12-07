@@ -33,6 +33,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   2. organize code:
   https://habd.as/awesome-react-boilerplates/#react-native
 * *rich text editor*
+* ~~port forward in mac: http://superuser.com/questions/30917/how-to-make-a-port-forward-in-mac-os-x~~
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
