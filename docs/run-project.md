@@ -13,11 +13,11 @@ docker build -t packager -f configs/docker.dev.react_native_packager .
 * react-native packager port forward: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run -d -p 8081:8081 -v $(pwd)/src/android:/app packager
+docker run -it -p 8081:8081 -v $(pwd)/src/android:/app packager
 docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
 docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/var/media test_gradle bash
 ```
-* enter docker, ``$ adb logcat ActivityManager:I androidApp:D *:S``
+* enter docker, ``$ adb logcat *:S ReactNative:V ReactNativeJS:V``
 * make sure device is not used by chrome: open ``chrome://inspect/#devices`` in chrome
 * clear non-used images and containers to free space
 ```
