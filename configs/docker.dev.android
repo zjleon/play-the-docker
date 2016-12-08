@@ -98,9 +98,10 @@ EXPOSE 5037
 WORKDIR /tmp
 COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
+RUN mvn dependency:resolve -Dclassifier=sources
 # RUN mvn dependency:go-offline
-RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
+# for android lib require
 WORKDIR /node_packages
 COPY ./src/android/package.json ./package.json
 RUN ["npm", "install", "--quiet"]

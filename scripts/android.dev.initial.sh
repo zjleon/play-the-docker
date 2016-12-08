@@ -1,5 +1,3 @@
+cp -r /node_packages/node_modules /app
 npm install --quiet
-# npm run start
 # gradle tasks --info
-# systemctl daemon-reload
-# systemctl start packager
