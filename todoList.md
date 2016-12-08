@@ -39,7 +39,11 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **many docker build process are similar to jenkins android build, search accordingly**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
-* **finish the apk build-install-start process**
+* ~~finish the apk build-install-start process~~
+* **packager not refresh after files change**
+  * use gulp to restart the packager
+  * fix by:
+https://github.com/facebook/react-native/issues/7257
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
 * how to build android app in container. specify sdk version for app
