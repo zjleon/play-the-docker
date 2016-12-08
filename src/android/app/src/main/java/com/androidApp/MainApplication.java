@@ -16,14 +16,12 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     protected boolean getUseDeveloperSupport() {
-      Log.i("bbb", "1111");
       return BuildConfig.DEBUG;
 //       return false;
     }
 
     @Override
     protected List<ReactPackage> getPackages() {
-      Log.i("bbb", "2222");
       return Arrays.<ReactPackage>asList(
           new MainReactPackage()
       );
@@ -33,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-    Log.i("aaaa","==================");
       return mReactNativeHost;
   }
 }

@@ -42,6 +42,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://webpack.github.io/docs/configuration.html#resolve-alias
   5. **how the navigator work when integrate with native function?**
 * *rich text editor*
+* ~~port forward in mac: http://superuser.com/questions/30917/how-to-make-a-port-forward-in-mac-os-x~~
 * **0.36 have keyboard dismiss and background activity support**
 * react-native navigator:
   https://github.com/exponentjs/ex-navigation
@@ -53,7 +54,11 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **many docker build process are similar to jenkins android build, search accordingly**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
-* **finish the apk build-install-start process**
+* ~~finish the apk build-install-start process~~
+* **packager not refresh after files change**
+  * use gulp to restart the packager
+  * fix by:
+https://github.com/facebook/react-native/issues/7257
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
@@ -71,7 +76,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     1. ~~change path to com.projectName~~
     1. change minsdk version to 16
     1. each build command should have --info
-  * **a systemd service to start the react native packager when container runs.(https://certsimple.com/blog/deploy-node-on-linux#node-js-ssl)**
+  * a gulp task monitor the java code and when they changes, run the ``gradle assembleDebug`` command; ``gradle assembleRelease`` for production, **run ``gradle lint && gradle clean`` to verify any configuration error**
+  * ~~a systemd service to start the react native packager when container runs.(https://certsimple.com/blog/deploy-node-on-linux#node-js-ssl)~~put packager server in other container instead
   * ~~android support seems intall fail or the version of appcompat-v7 should be 25.0.0~~
   * ~~is NDK required for react-native?~~No, only required when change react-native android code
   * ~~figure out how gralde build an android application~~

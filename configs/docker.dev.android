@@ -76,7 +76,7 @@ RUN cd /tmp \
 RUN ["./agree.sh", "android update sdk --filter extra-android-m2repository,extra-google-m2repository --no-ui --force -a"]
 
 # install node
-ARG NODE_VERSION=6.9.1
+ENV NODE_VERSION=6.9.1
 COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
@@ -98,13 +98,13 @@ EXPOSE 5037
 WORKDIR /tmp
 COPY ./configs/maven.dev.settings.xml /root/.m2/settings.xml
 COPY ./configs/maven.dev.android_dependencies.xml ./pom.xml
+RUN mvn dependency:resolve -Dclassifier=sources
 # RUN mvn dependency:go-offline
-RUN ["mvn", "dependency:resolve", "-Dclassifier=sources"]
 
-# WORKDIR /node_packages
-# # COPY ./resources/node_modules.tar.gz node_modules.tar.gz
-# COPY ./src/android/package.json ./package.json
-# RUN ["npm", "install", "--quiet"]
+# for android lib require
+WORKDIR /node_packages
+COPY ./src/android/package.json ./package.json
+RUN ["npm", "install", "--quiet"]
 
 # do some clean up
 RUN apt-get clean && \
@@ -115,7 +115,7 @@ RUN apt-get clean && \
     /opt/agree.sh
 
 WORKDIR /app
-COPY ./scripts/container.dev.android.initial.sh /tmp/initial.sh
+COPY ./scripts/android.dev.initial.sh /tmp/initial.sh
 RUN ["chmod", "+x", "/tmp/initial.sh"]
 ENTRYPOINT ["/tini", "--"]
 CMD ["/tmp/initial.sh"]

@@ -6,12 +6,19 @@ instruction to installation
 
 # docker helper:
 * build image:
-``docker build -t test_gradle -f configs/docker.dev.android .``
+```
+docker build -t test_gradle -f configs/docker.dev.android .
+docker build -t packager -f configs/docker.dev.react_native_packager .
+```
+* react-native packager port forward: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb -p 8081:8081 test_gradle
-docker run --privileged -it -v $(pwd)/src/android:/app -p 8081:8081 test_gradle
+docker run -it -p 8081:8081 -v $(pwd)/src/android:/app packager
+docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
+docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/var/media test_gradle bash
 ```
+* enter docker, ``$ adb logcat *:S ReactNative:V ReactNativeJS:V``
+* make sure device is not used by chrome: open ``chrome://inspect/#devices`` in chrome
 * clear non-used images and containers to free space
 ```
 # Delete all stopped containers
@@ -25,8 +32,10 @@ docker images -q -f dangling=true | xargs docker rmi
   3. stop the 'default' vm
   4. click 'settings' - ports - usb - enable USB controller - select usb 2.0
   5. plugin the device, click 'add new usb filter' on the bottom right of the window, select the device name
+  5. run ``df`` and make sure there is a row ends with '/Volumes/VirtualBox'
   6. unplug the device, detachable start the vm, restart docker machine in command line
-  7. check ``$ docker-machine ls``
+  7. run docker image with ``-v /Volumes/VirtualBox:/var/media``
+
 * connect genymotion on Mac:
   1. disable host machine's adb before start genymotion:
   ``$ adb kill-server``

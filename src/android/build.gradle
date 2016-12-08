@@ -32,8 +32,7 @@ allprojects {
     // maven { url 'http://repo1.maven.org/maven2' }
     maven {
       // All of React Native (JS, Android binaries) is installed from npm
-      url "$projectDir/../node_modules/react-native/android"
-      // url "$rootDir/node_modules/react-native/android"
+       url "$rootDir/node_modules/react-native/android"
     }
     jcenter {
       url "http://jcenter.bintray.com/"
