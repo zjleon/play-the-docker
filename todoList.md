@@ -5,6 +5,7 @@
 * ~~run dirTree~~, generate atom package task
 * code structure for real big code base project
 * run gulp in an isolated container, observe code changes, send signal to other container
+* gulp task to split the platform specified code with annotation
 ### prod:
 * just ~~use the webpack~~ and setup an express server to serve all static files
 * ~~hash for js files and change it in html~~
@@ -19,21 +20,35 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * set on atom, export the package list.
 * how to write unit test quickly
 * static the unit test coverage by tool
+* try 'flow'
 
 # css or sass or html
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
+* shared element transition
 
 # source map
 
 # react-native
+## Road map: https://github.com/exponentjs/ex-navigation
 * how to support animation, gesture
 * fix the gap between react and react-native:
   1. fix the element difference: https://github.com/search?utf8=%E2%9C%93&q=react+native+web
   2. organize code:
   https://habd.as/awesome-react-boilerplates/#react-native
+  3. platform specify code:
+  https://facebook.github.io/react-native/releases/0.26/docs/platform-specific-code.html
+  4. webpack 'alias' in 'resolve' section
+  https://webpack.github.io/docs/configuration.html#resolve-alias
+  5. **how the navigator work when integrate with native function?**
 * *rich text editor*
 * ~~port forward in mac: http://superuser.com/questions/30917/how-to-make-a-port-forward-in-mac-os-x~~
+* **0.36 have keyboard dismiss and background activity support**
+* react-native navigator:
+  https://github.com/exponentjs/ex-navigation
+
+## web
+* use webworker for web and mobile web
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
@@ -46,6 +61,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 https://github.com/facebook/react-native/issues/7257
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
+* **figure out how and where the js run in android**
+* android back button handler ``AndroidBackButtonBehavior``
 * how to build android app in container. specify sdk version for app
   * **integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html**
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle
