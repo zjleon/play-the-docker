@@ -12,16 +12,19 @@ RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
 ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
 
-WORKDIR /app
-# COPY ./resources/node_modules.tar.gz node_modules.tar.gz
+WORKDIR /node_resources
+# # COPY ./resources/node_modules.tar.gz node_modules.tar.gz
 COPY ./src/android/package.json ./package.json
-RUN ["npm", "install", "--silent"]
+# RUN ["npm", "install", "--silent", "&&", "rm", "./package.json"]
+RUN npm install --silent \
+    && rm -f package.json
 
 EXPOSE 8081
 
 COPY ./resources/tini /tini
 RUN chmod +x /tini
 
+WORKDIR /app
 COPY ./scripts/react_native_packager.dev.initial.sh /tmp/initial.sh
 RUN ["chmod", "+x", "/tmp/initial.sh"]
 ENTRYPOINT ["/tini", "--"]
