@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RN 0.1</string>
+    <string name="app_name">RN</string>
     <string name="action_settings">Settings</string>
     <string name="welcome_message"></string>
 </resources>
