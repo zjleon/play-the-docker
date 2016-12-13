@@ -43,7 +43,7 @@ gradlew.bat
 gradlew
 *.iml
 src/android/.idea/
-src/android/gradle/
+src/android/.gradle/**
 local.properties
 react-native-packager-cache-*
 haste-map-react-native-packager-*
