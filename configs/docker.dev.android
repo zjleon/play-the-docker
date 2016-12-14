@@ -67,7 +67,7 @@ RUN cd /tmp \
     && mv $ANDROID_HOME/build-tools/android-6.0 $ANDROID_HOME/build-tools/23.0.3 \
     && mkdir -p ${ANDROID_HOME}/extras/android ${ANDROID_HOME}/extras/google \
     && unzip -qq -o support_r23.2.1.zip -d ${ANDROID_HOME}/extras/android \
-    # && unzip -qq -o android_m2repository_r40.zip -d ${ANDROID_HOME}/extras/android \
+    && unzip -qq -o android_m2repository_r40.zip -d ${ANDROID_HOME}/extras/android \
     # && unzip -qq -o google_m2repository_gms_v7_rc28_wear_2a3.zip -d ${ANDROID_HOME}/extras/google \
     && rm -r ./*
 # keep repository update,
