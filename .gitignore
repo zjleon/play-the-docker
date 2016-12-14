@@ -38,12 +38,12 @@ jspm_packages
 
 dist
 build
-.gradle
 gradlew.bat
 gradlew
 *.iml
 src/android/.idea/
-src/android/gradle
+gradle
+.gradle
 local.properties
 react-native-packager-cache-*
 haste-map-react-native-packager-*
