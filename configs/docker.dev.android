@@ -73,7 +73,8 @@ RUN cd /tmp \
 # keep repository update,
 # save git lfs space,
 # let android make ~/.android folder
-RUN ["./agree.sh", "android update sdk --filter extra-android-m2repository,extra-google-m2repository --no-ui --force -a"]
+# RUN ["./agree.sh", "android update sdk --filter extra-android-m2repository,extra-google-m2repository --no-ui --force -a"]
+RUN ["./agree.sh", "android update sdk --filter extra-google-m2repository --no-ui --force -a"]
 
 # install node
 ENV NODE_VERSION=6.9.1
