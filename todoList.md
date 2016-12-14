@@ -78,6 +78,7 @@ https://github.com/facebook/react-native/issues/7257
     1. change minsdk version to 16
     1. each build command should have --info
   * a gulp task monitor the java code and when they changes, run the ``gradle assembleDebug`` command; ``gradle assembleRelease`` for production, **run ``gradle lint && gradle clean`` to verify any configuration error**
+  * **run ``adb uninstall com.androidApp`` to clear app remaining and ``install -lrdg app/build/outputs/apk/app-debug.apk``**
   * ~~a systemd service to start the react native packager when container runs.(https://certsimple.com/blog/deploy-node-on-linux#node-js-ssl)~~put packager server in other container instead
   * ~~android support seems intall fail or the version of appcompat-v7 should be 25.0.0~~
   * ~~is NDK required for react-native?~~No, only required when change react-native android code
