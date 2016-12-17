@@ -129,6 +129,7 @@ https://github.com/facebook/react-native/issues/7257
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control render inside child componenet
 * add immutable.js
+* **java code dispatch redux action**
 
 # CI server
 ## prod:
