@@ -2,7 +2,10 @@ FROM ubuntu:15.10
 
 RUN apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
-    xz-utils
+    xz-utils \
+    build-essential \
+    automake \
+    autoconf
 
 WORKDIR /opt
 # install node

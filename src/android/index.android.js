@@ -10,7 +10,7 @@ class HelloWorld extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.hello}>Hello, Worldjj</Text>
+        <Text style={styles.hello}>Hello, Worldjjyyy</Text>
       </View>
     )
   }
