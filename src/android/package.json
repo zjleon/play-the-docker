@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache=true",
+    "start": "node node_modules/react-native/local-cli/cli.js start --skipflow",
+    "packager_help": "node node_modules/react-native/local-cli/cli.js start --help",
     "bundle": "node node_modules/react-native/local-cli/cli.js bundle",
     "debugAndroid": "node node_modules/react-native/local-cli/cli.js log-android",
     "debugIOS": "node node_modules/react-native/local-cli/cli.js log-ios"

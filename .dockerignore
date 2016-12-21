@@ -7,3 +7,5 @@ docs
 dist
 **/.gradle
 !src/android/package.json
+resources/android-packages
+*.lock

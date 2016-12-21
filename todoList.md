@@ -55,10 +55,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
-* **packager not refresh after files change**
-  * use gulp to restart the packager
-  * fix by:
-https://github.com/facebook/react-native/issues/7257
+* **packager not refresh after files change, because '*.lock' existing in current folder, use ``find $directory -type f -name "*.lock"`` to confirm.https://github.com/facebook/react-native/issues/4357**
 * **try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder**
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
@@ -148,6 +145,7 @@ https://github.com/facebook/react-native/issues/7257
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
+* error, debug info logging, Profiling: https://www.npmjs.com/package/winston
 
 ## dev:
 * ~~install project dependencies via node script
