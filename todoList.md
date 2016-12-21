@@ -29,6 +29,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 # source map
 
+# docker image watch issue
+https://github.com/brikis98/docker-osx-dev
+https://github.com/rnplay/react-native-packager-docker/issues/1
+
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
 * how to support animation, gesture
