@@ -60,13 +60,14 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
-* **add watchman to react-native packager**
+* ~~add watchman to react-native packager~~
 * **packager not refresh after files change**
   * ~~use gulp to restart the packager~~
   * ~~fix by:
 https://github.com/facebook/react-native/issues/7257~~
   * docker-sync: https://github.com/EugenMayer/docker-sync/wiki
   * ~~other solutions: https://github.com/EugenMayer/docker-sync/wiki/Alternatives-to-docker-sync~~
+  * **packager not refresh after files change, because '*.lock' existing in current folder, use ``find $directory -type f -name "*.lock"`` to confirm.https://github.com/facebook/react-native/issues/4357**
   * related discussion:
     * https://github.com/docker/docker/issues/15793
     * https://github.com/docker/docker/issues/18246
@@ -159,6 +160,7 @@ https://github.com/facebook/react-native/issues/7257~~
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
+* error, debug info logging, Profiling: https://www.npmjs.com/package/winston
 
 ## dev:
 * ~~install project dependencies via node script

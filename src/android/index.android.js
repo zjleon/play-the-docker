@@ -16,14 +16,10 @@ class HelloWorld extends React.Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
   hello: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 12,
   },
 })
 
