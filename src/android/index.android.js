@@ -5,7 +5,6 @@ import {
   Text,
   View
 } from 'react-native'
-import CustomText from './aaa/CustomText.js'
 
 class HelloWorld extends React.Component {
   render() {

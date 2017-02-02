@@ -6,6 +6,6 @@ docs
 **/.git
 dist
 **/.gradle
-#!src/android/package.json
+# !src/android/package.json
 resources/android-packages
 *.lock
