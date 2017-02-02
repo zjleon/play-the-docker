@@ -1,9 +1,9 @@
 # ignore unnecessary files
-src
+# src
 **/node_modules
 docs
 **/build
 **/.git
 dist
 **/.gradle
-!src/android/package.json
+# !src/android/package.json

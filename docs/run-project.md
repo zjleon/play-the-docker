@@ -62,3 +62,6 @@ docker images -q -f dangling=true | xargs docker rmi
 ``docker-compose -f configs/compose.dev.web_static.yml logs web_static``
 
 # [maven repository](https://mvnrepository.com/repos)
+
+# remove docker on mac:
+`` sudo ./scripts/docker.uninstall.sh``
