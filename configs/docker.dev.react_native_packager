@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:15.10
 
 RUN apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
@@ -9,7 +9,7 @@ RUN apt-get update && \
 
 WORKDIR /opt
 # install node
-ENV NODE_VERSION=7.2.1
+ENV NODE_VERSION=6.9.1
 COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
@@ -20,7 +20,7 @@ ARG WATCHMAN_VERSION=4.7.0
 COPY ./resources/watchman-${WATCHMAN_VERSION}.tar.gz ./watchman.tar.gz
 RUN tar xzf watchman.tar.gz --directory /opt && \
     rm -f watchman.tar.gz
-# initial watchman
+# initialize watchman
 WORKDIR /opt/watchman-${WATCHMAN_VERSION}
 RUN ./autogen.sh \
     && ./configure \

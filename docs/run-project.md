@@ -10,7 +10,7 @@ instruction to installation
 docker build -t test_gradle -f configs/docker.dev.android .
 docker build -t packager -f configs/docker.dev.react_native_packager .
 ```
-* react-native packager port forward: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
+* forward react-native packager for real phone visiting: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
 * run image(**all docker parameter must add before image tag**):
 ```
 docker run -it -p 8081:8081 -v $(pwd)/src/android:/app packager
