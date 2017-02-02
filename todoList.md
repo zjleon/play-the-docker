@@ -67,6 +67,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 https://github.com/facebook/react-native/issues/7257~~
   * docker-sync: https://github.com/EugenMayer/docker-sync/wiki
   * ~~other solutions: https://github.com/EugenMayer/docker-sync/wiki/Alternatives-to-docker-sync~~
+  * **packager not refresh after files change, because '*.lock' existing in current folder, use ``find $directory -type f -name "*.lock"`` to confirm.https://github.com/facebook/react-native/issues/4357**
   * related discussion:
     * https://github.com/docker/docker/issues/15793
     * https://github.com/docker/docker/issues/18246
