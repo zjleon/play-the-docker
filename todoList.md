@@ -60,7 +60,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
-* **add watchman to react-native packager**
+* ~~add watchman to react-native packager~~
 * **packager not refresh after files change**
   * ~~use gulp to restart the packager~~
   * ~~fix by:
