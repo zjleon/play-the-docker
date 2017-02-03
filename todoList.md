@@ -61,6 +61,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
 * ~~add watchman to react-native packager~~
+* **apply docker-sync and new file structure to android and packager container**
 * **packager not refresh after files change**
   * ~~use gulp to restart the packager~~
   * ~~fix by:
@@ -76,6 +77,7 @@ https://github.com/facebook/react-native/issues/7257~~
 * **figure out how and where the js run in android**
 * request 'draw over other app' privilege
 * android back button handler ``AndroidBackButtonBehavior``
+* install react-native from npm only in the android container
 * how to build android app in container. specify sdk version for app
   * integrate react-native to android project: https://facebook.github.io/react-native/docs/integration-with-existing-apps.html
   * gradle entry point: https://github.com/facebook/react-native/blob/master/local-cli/generator-android/templates/src/app/build.gradle

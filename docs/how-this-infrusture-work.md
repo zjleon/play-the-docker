@@ -1,5 +1,5 @@
 # container:
-* web_static: build and hold static resources
+* web_static: build and hold web app resources
 * android: build android code with react-native
 
 # key feature:
