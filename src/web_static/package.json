@@ -1,7 +1,7 @@
 {
-  "name": "blank",
+  "name": "web_static",
   "version": "1.0.0",
-  "description": "",
+  "description": "static web service",
   "main": "index.js",
   "scripts": {
     "start": "better-npm-run dev:web_static",
