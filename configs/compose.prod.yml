@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  web_static:
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.web_static
+    ports:
+     - "8080:8080"
+    # command: ["ls", "/app/node_modules"]
+    command: ["/bin/bash", "./initial.sh"]
+    # volumes:
+    #  - ../src:/web_static/src
+    #  - ../configs:/web_static/configs
+    #  - ../scripts:/web_static/scripts
+  # TODO: packager and android container

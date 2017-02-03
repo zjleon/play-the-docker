@@ -4,7 +4,14 @@ instruction to installation
 # install docker
 instruction to installation
 
-# docker helper:
+# install docker-sync for development:
+```
+gem install docker-sync
+brew install fswatch
+brew install rsync
+```
+
+# android container build helper:
 * build image:
 ```
 docker build -t test_gradle -f configs/docker.dev.android .
@@ -52,6 +59,16 @@ docker images -q -f dangling=true | xargs docker rmi
   ```
   then use gradle task to build and install apk
 * to install the apk to device, uninstall it first
+
+# web container build helper:
+* build image:
+```
+docker build -t web_static -f configs/docker.dev.web_static .
+```
+* run image(**all docker parameter must add before image tag**):
+```
+docker run -it -p 8080:8080 -v $(pwd)/src:/app packager
+```
 
 # docker-compose helper
 ## 1. build docker images

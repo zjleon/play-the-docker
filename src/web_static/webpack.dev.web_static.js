@@ -1,7 +1,7 @@
 const WebpackDevServer = require("webpack-dev-server")
 const webpack = require("webpack")
-const config = require('../configs/webpack.prod.web_static')
-const devServerConfig = require('../configs/webpack.dev.web_static')
+const config = require('./configs/webpack.prod.web_static')
+const devServerConfig = require('./configs/webpack.dev.web_static')
 
 const compiler = webpack(config)
 const server = new WebpackDevServer(compiler, devServerConfig)

@@ -1,11 +1,32 @@
 FROM ubuntu:15.10
-FROM node:6.2.2-wheezy
 
-RUN mkdir /web_static
-WORKDIR /web_static
-ADD ./package.json ./package.json
-RUN npm install
-#VOLUME ["/web_static/node_modules"]
+RUN apt-get update && \
+    apt-get install -y --force-yes --no-install-recommends \
+    xz-utils
 
-COPY ./scripts/container.dev.web_static.initial.sh ./initial.sh
-CMD ["bash", "./initial.sh"]
+# install node
+WORKDIR /opt
+ENV NODE_VERSION=6.9.1
+COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
+RUN tar xJf node.tar.xz --directory /opt && \
+    rm -f node.tar.xz
+ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
+
+# install tini
+COPY ./resources/tini /tini
+RUN chmod +x /tini
+
+# pre-install node resources
+WORKDIR /node_resources
+COPY ./src/web_static/package.json ./package.json
+RUN npm install --quiet \
+    && rm -f package.json
+
+EXPOSE 8080
+
+# execute initialize script
+WORKDIR /app
+# COPY ./scripts/web_static.dev.initial.sh ./initial.sh
+# RUN ["chmod", "+x", "./initial.sh"]
+ENTRYPOINT ["/tini", "--"]
+CMD ["/bin/bash", "./initial.sh"]
