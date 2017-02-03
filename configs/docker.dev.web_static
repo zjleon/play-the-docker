@@ -26,7 +26,5 @@ EXPOSE 8080
 
 # execute initialize script
 WORKDIR /app
-# COPY ./scripts/web_static.dev.initial.sh ./initial.sh
-# RUN ["chmod", "+x", "./initial.sh"]
 ENTRYPOINT ["/tini", "--"]
 CMD ["/bin/bash", "./initial.sh"]
