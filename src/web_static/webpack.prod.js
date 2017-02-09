@@ -1,5 +1,5 @@
 const webpack = require("webpack")
-const config = require('../configs/webpack.prod.web_static')
+const config = require('./configs/webpack.prod.web_static')
 const compiler = webpack(config)
 
 compiler.run(function(error, stats) {

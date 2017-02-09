@@ -62,6 +62,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * ~~finish the apk build-install-start process~~
 * ~~add watchman to react-native packager~~
 * **apply docker-sync and new file structure to android and packager container**
+* switch packager container's network from NAT to bridge
 * **packager not refresh after files change**
   * ~~use gulp to restart the packager~~
   * ~~fix by:
