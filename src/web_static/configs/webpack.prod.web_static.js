@@ -1,43 +1,50 @@
+const webpack = require("webpack")
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const NpmInstallPlugin = require('npm-install-webpack-plugin')
 const enviromentPrefix = 'prod'
 const projectName = 'web_static'
-const srcPath = path.resolve('./src/' + projectName)
-const distPath = path.resolve('./dist/' + projectName)
+const srcPath = path.resolve('.')
+const distPath = path.resolve('./dist')
 
 module.exports = {
-  entry: srcPath + '/index.js',
+  entry: {
+    entry: srcPath + '/index.js',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+  },
   output: {
-    path: distPath,
     publicPath: "/assets/",
-    filename: 'app-[hash].js'
+    path: distPath,
+    filename: '[chunkhash].[name].js',
+    // filename: 'app-[hash].js'
   },
   resolve: {
-    modulesDirectories: [
-      srcPath + '/node_modules'
-    ]
+    modules: [srcPath + '/node_modules'],
   },
   module: {
-    loaders: [
+    rules: [
       {
-        resolveLoader: {
-          root: [
-            path.resolve('./node_modules')
-          ]
-        },
         test: /\.js/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: [
-            'es2015',
-            'react',
-          ]
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'es2015',
+                'react',
+              ],
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        use: ['html-loader']
       }
     ]
   },
@@ -45,6 +52,21 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: srcPath + '/index.html',
       filename: distPath + '/index.html',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: (module) => {
+        // this assumes your vendor imports exist in the node_modules directory
+        return module.context && module.context.indexOf('node_modules') !== -1
+      },
+    }),
+    new CleanWebpackPlugin(['dist'], {
+      root: srcPath,
+      verbose: true,
+      dry: false,
+      exclude: []
     })
-  ]
+    // new NpmInstallPlugin(),
+  ],
+  devtool: 'source-map',
 }

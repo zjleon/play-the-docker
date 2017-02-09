@@ -67,7 +67,7 @@ docker build -t web_static -f configs/docker.dev.web_static .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run -it -p 8080:8080 -v $(pwd)/src:/app packager
+docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusableComponents:/app/common web_static bash
 ```
 
 # docker-compose helper
@@ -77,6 +77,8 @@ docker run -it -p 8080:8080 -v $(pwd)/src:/app packager
 ``docker-compose -f configs/compose.dev.web_static.yml up -d``
 ## 3. check the logs of web_static
 ``docker-compose -f configs/compose.dev.web_static.yml logs web_static``
+## 4. check status:
+``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml ps``
 
 # [maven repository](https://mvnrepository.com/repos)
 
