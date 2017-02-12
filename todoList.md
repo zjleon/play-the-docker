@@ -1,21 +1,5 @@
 # fill in readme
 
-# gulp task:
-* integrate webpack and babel to gulp
-* ~~run dirTree~~, generate atom package task
-* code structure for real big code base project
-* run gulp in an isolated container, observe code changes, send signal to other container
-* gulp task to split the platform specified code with annotation
-### prod:
-* just ~~use the webpack~~ and setup an express server to serve all static files
-* ~~hash for js files and change it in html~~
-### dev:
-* ~~use dev server~~
-* ~~set script~~
-* doc how to use async module(https://github.com/petehunt/webpack-howto)
-* unit test process, include UI test -- make sure app stable after small UI changes
-issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-
 ## eslint and autofix and unit test
 * set on atom, export the package list.
 * how to write unit test quickly
@@ -27,7 +11,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
 
-# source map
+# ~~source map~~
 
 # docker image watch issue
 https://github.com/brikis98/docker-osx-dev
@@ -44,7 +28,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
   https://facebook.github.io/react-native/releases/0.26/docs/platform-specific-code.html
   4. webpack 'alias' in 'resolve' section
   https://webpack.github.io/docs/configuration.html#resolve-alias
-  5. **how the navigator work when integrate with native function?**
+  5. ~~how the navigator work when integrate with native function?~~catalyst ui
 * *rich text editor*
 * ~~port forward in mac: http://superuser.com/questions/30917/how-to-make-a-port-forward-in-mac-os-x~~
 * **0.36 have keyboard dismiss and background activity support**
@@ -54,6 +38,23 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 ## web
 * use webworker for web and mobile web
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
+* **react component lazy load**
+* **integrate webpack and babel to gulp**
+* ~~run dirTree~~, generate atom package task
+* **use WebpackDevServer for now, waiting for gulp pulgin update.production config and auto pack -> run the project using webpack and express and gulp**
+* code structure for real big code base project
+* ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, express as gulp tasks
+* ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
+* **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
+### prod:
+* just ~~use the webpack~~ and setup an express server to serve all static files
+* ~~hash for js files and change it in html~~
+### dev:
+* ~~use dev server~~
+* ~~set script~~
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
+* unit test process, include UI test -- make sure app stable after small UI changes
+issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
@@ -187,6 +188,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 
 ## prod:
 * overide the dev yaml setting
+* apply production error track tool: https://sentry.io/welcome/
 
 ## dev:
 * ~~create a volume for each service~~

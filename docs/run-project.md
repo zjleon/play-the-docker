@@ -1,5 +1,10 @@
 # install atom and its package
-instruction to installation
+```
+// export packages
+apm list --installed --bare > configs/atom.packages.txt
+// import packages
+apm install --packages-file atom.packages.txt
+```
 
 # install docker
 instruction to installation
