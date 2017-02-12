@@ -19,6 +19,8 @@ module.exports = {
     ],
   },
   output: {
+    // XXX:also apply to html files
+    // see https://webpack.js.org/configuration/output/#output-publicpath
     publicPath: "/",
     path: distPath,
     filename: '[chunkhash].[name].js',
