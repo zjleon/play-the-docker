@@ -10,7 +10,7 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "node ./webpack.dev.js",
+      "command": "node ./entry.dev.js",
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
@@ -40,7 +40,8 @@
   "dependencies": {
     "better-npm-run": "0.0.14",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "express": "^4.14.1"
   },
   "devDependencies": {
     "babel-core": "6.22.1",
@@ -55,6 +56,8 @@
     "css-loader": "0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "0.10.0",
+    "gulp": "^3.9.1",
+    "gulp-webpack": "^1.5.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.26.0",
     "node-sass": "^4.3.0",
@@ -67,6 +70,7 @@
     "webpack": "2.2.1",
     "webpack-cleanup-plugin": "^0.4.1",
     "webpack-dashboard": "^0.3.0",
+    "webpack-dev-middleware": "^1.10.0",
     "webpack-dev-server": "2.3.0"
   }
 }

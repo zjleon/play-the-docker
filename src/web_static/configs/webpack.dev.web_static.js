@@ -1,47 +1,74 @@
-const webpackConfig = require('./webpack.prod.web_static')
+const webpack = require("webpack")
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const NpmInstallPlugin = require('npm-install-webpack-plugin')
+const enviromentPrefix = 'prod'
+const projectName = 'web_static'
+const srcPath = path.resolve('.')
+const distPath = path.resolve('./dist')
+const fs = require('fs')
+const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 module.exports = {
-  // webpack-dev-server options
-
-  // contentBase: "./dist",
-  contentBase: webpackConfig.output.path,
-  // or: contentBase: "http://localhost/",
-
-  hot: true,
-  // Enable special support for Hot Module Replacement
-  // Page is no longer updated, but a "webpackHotUpdate" message is send to the content
-  // Use "webpack/hot/dev-server" as additional module in your entry point
-  // Note: this does _not_ add the `HotModuleReplacementPlugin` like the CLI option does.
-
-  // Set this as true if you want to access dev server from arbitrary url.
-  // This is handy if you are using a html5 router.
-  historyApiFallback: false,
-
-  // Set this if you want to enable gzip compression for assets
-  compress: false,
-
-  // Set this if you want webpack-dev-server to delegate a single path to an arbitrary server.
-  // Use "*" to proxy all paths to the specified server.
-  // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
-  // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
-  // proxy: {
-  //   "*": "http://localhost:9090"
-  // },
-
-  // pass [static options](http://expressjs.com/en/4x/api.html#express.static) to inner express server
-  staticOptions: {
+  entry: {
+    entry: srcPath + '/index.js',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
   },
-
-  // webpack-dev-middleware options
-  quiet: false,
-  noInfo: false,
-  lazy: true,
-  publicPath: webpackConfig.output.publicPath,
-  filename: webpackConfig.output.filename,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
+  output: {
+    publicPath: "/",
+    path: distPath,
+    filename: '[chunkhash].[name].js',
+    // filename: 'app-[hash].js'
   },
-  headers: { "X-Custom-Header": "yes" },
-  stats: { colors: true }
+  watch: true,
+  resolve: {
+    modules: [srcPath + '/node_modules'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'es2015',
+                'react',
+              ],
+            },
+          },
+        ],
+      },
+      {
+        test: /\.html$/,
+        use: ['html-loader']
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: srcPath + '/index.html',
+      filename: distPath + '/index.html',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: (module) => {
+        // this assumes your vendor imports exist in the node_modules directory
+        return module.context && module.context.indexOf('node_modules') !== -1
+      },
+    }),
+    new CleanWebpackPlugin(['dist'], {
+      root: srcPath,
+      verbose: true,
+      dry: false,
+      exclude: [],
+    })
+    // new NpmInstallPlugin(),
+  ],
 }
