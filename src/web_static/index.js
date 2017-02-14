@@ -1,10 +1,23 @@
+import { AppContainer } from 'react-hot-loader'
+import Header from './common/header/header.js'
 import React from 'react'
 import { render } from 'react-dom'
+
 // import { Router, browserHistory, Route, Redirect } from 'react-router'
 
-// import Header from '../components/header/header'
+const hotRender = (Component) => {
+  render(
+    <AppContainer>
+      <Component/>
+    </AppContainer>,
+    document.getElementById('appContainer')
+  )
+}
 
-render(
-  <div>123</div>,
-  document.getElementById('appContainer')
-)
+hotRender(Header)
+
+if (module.hot) {
+  module.hot.accept('./common/header/header.js', () => {
+    hotRender(Header)
+  })
+}
