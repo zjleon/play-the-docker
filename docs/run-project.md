@@ -72,7 +72,7 @@ docker build -t web_static -f configs/docker.dev.web_static .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusableComponents:/app/common web_static bash
+docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusableComponents:/app/common web_static
 ```
 
 # docker-compose helper

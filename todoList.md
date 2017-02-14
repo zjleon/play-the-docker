@@ -39,9 +39,8 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * use webworker for web and mobile web
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
-* **integrate webpack and babel to gulp**
 * ~~run dirTree~~, generate atom package task
-* **use WebpackDevServer for now, waiting for gulp pulgin update.production config and auto pack -> run the project using webpack and express and gulp**
+* **~~use WebpackDevServer~~.production config and auto pack -> run the project using webpack and express and gulp**
 * code structure for real big code base project
 * hapi and backend container
 * nginx for ssl

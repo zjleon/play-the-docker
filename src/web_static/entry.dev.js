@@ -28,7 +28,7 @@ let compiler = webpack(webpackConfig)
 
 // Done processing
 const server = new WebpackDevServer(compiler)
-server.listen(8080, "localhost", () => {
+server.listen(8080, "0.0.0.0", () => {
   console.log('dev server started up')
 })
 // server.close();

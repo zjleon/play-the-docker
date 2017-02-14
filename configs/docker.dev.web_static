@@ -21,10 +21,12 @@ WORKDIR /node_resources
 COPY ./src/web_static/package.json ./package.json
 RUN npm install --quiet \
     && rm -f package.json
-
 EXPOSE 8080
+ENV PORT=8080
+ENV NODE_ENV=development
 
 # execute initialize script
 WORKDIR /app
 ENTRYPOINT ["/tini", "--"]
+# initial.sh will be mounted to client disk
 CMD ["/bin/bash", "./initial.sh"]
