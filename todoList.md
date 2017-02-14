@@ -50,7 +50,7 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
 ### prod:
-* just ~~use the webpack~~ and setup an express server to serve all static files
+* just ~~use the webpack~~ and setup an express server for production to serve all static files
 * ~~hash for js files and change it in html~~
 ### dev:
 * ~~use dev server~~
