@@ -17,7 +17,9 @@ const hotRender = (Component) => {
 hotRender(Header)
 
 if (module.hot) {
+  console.log(module)
   module.hot.accept('./common/header/header.js', () => {
+    console.log(Header)
     hotRender(Header)
   })
 }
