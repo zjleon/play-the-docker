@@ -10,7 +10,7 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "webpack-dev-server",
+      "command": "node ./entry.dev.js",
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
