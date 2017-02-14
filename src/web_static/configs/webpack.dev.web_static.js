@@ -12,8 +12,16 @@ const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 module.exports = {
   entry: {
-    entry: srcPath + '/index.js',
+    entry: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      'webpack/hot/only-dev-server',
+      srcPath + '/index.js',
+    ],
     vendor: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      'webpack/hot/only-dev-server',
       'react',
       'react-dom',
     ],
@@ -23,8 +31,7 @@ module.exports = {
     // see https://webpack.js.org/configuration/output/#output-publicpath
     publicPath: "/",
     path: distPath,
-    filename: '[chunkhash].[name].js',
-    // filename: 'app-[hash].js'
+    filename: '[hash].[name].js',
   },
   watch: true,
   resolve: {
@@ -70,7 +77,14 @@ module.exports = {
       verbose: true,
       dry: false,
       exclude: [],
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     // new NpmInstallPlugin(),
   ],
+  devServer: {
+    hot: true,
+    contentBase: distPath,
+    publicPath: '/',
+  },
 }
