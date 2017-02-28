@@ -1,0 +1,29 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "description": "This file is for code style check only",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-plugin-react": "^6.10.0",
+    "eslint-plugin-react-native": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjleon/play-the-docker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjleon/play-the-docker/issues"
+  },
+  "homepage": "https://github.com/zjleon/play-the-docker#readme"
+}

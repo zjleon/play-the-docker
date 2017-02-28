@@ -1,7 +1,7 @@
 # fill in readme
 
 ## eslint and autofix and unit test
-* set on atom, export the package list.
+* ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
 * try 'flow'
@@ -10,12 +10,6 @@
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
-
-# ~~source map~~
-
-# docker image watch issue
-https://github.com/brikis98/docker-osx-dev
-https://github.com/rnplay/react-native-packager-docker/issues/1
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -39,17 +33,17 @@ https://github.com/rnplay/react-native-packager-docker/issues/1
 * use webworker for web and mobile web
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
-* ~~run dirTree~~, generate atom package task
-* **~~use WebpackDevServer~~.production config and auto pack -> run the project using webpack and express and gulp**
+* ~~run dirTree~~, ~~generate atom package task~~
+* **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
 * code structure for real big code base project
 * hapi and backend container
 * nginx for ssl
 * web socket to frontend and backend services in nginx
-* ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, express as gulp tasks
+* ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, hapi as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
 ### prod:
-* just ~~use the webpack~~ and setup an express server for production to serve all static files
+* just ~~use the webpack~~ and setup an hapi server for production to serve all static files
 * ~~hash for js files and change it in html~~
 ### dev:
 * ~~use dev server~~
@@ -209,3 +203,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
   * on server side, trigger CI server when commit into master
 
 # ~~tree tool~~
+# ~~source map~~
+# ~~docker image watch issue~~solved in 1.13
+~~https://github.com/brikis98/docker-osx-dev
+https://github.com/rnplay/react-native-packager-docker/issues/1~~
