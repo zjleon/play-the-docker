@@ -9,8 +9,13 @@
       "sourceType": "module",
       "ecmaFeatures": {
         "jsx": true
+        "react-native"
       }
   },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
   "rules": {
 /**
  * Strict mode
@@ -154,6 +159,14 @@
     "space-before-function-paren": [2, "never"], // http://eslint.org/docs/rules/space-before-function-paren
     "space-infix-ops": 2,            // http://eslint.org/docs/rules/space-infix-ops
     "spaced-comment": 2,             // http://eslint.org/docs/rules/spaced-comment
-    "no-multi-spaces": 2             // http://eslint.org/docs/rules/no-multi-spaces
-  }
+    "no-multi-spaces": 2,             // http://eslint.org/docs/rules/no-multi-spaces
+/**
+ * react-native
+ */
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
+  },
+  "extends": ["plugin:react/recommended"]
 }
