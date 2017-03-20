@@ -2,7 +2,7 @@
 
 ## eslint and autofix and unit test
 * ~~set on atom, export the package list.~~
-* how to write unit test quickly
+* how to write unit test quickly, https://mochajs.org/
 * static the unit test coverage by tool
 * try 'flow'
 
@@ -36,14 +36,15 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~run dirTree~~, ~~generate atom package task~~
 * **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
 * code structure for real big code base project
-* hapi and backend container
+* *hapi and backend container*
 * nginx for ssl
 * web socket to frontend and backend services in nginx
-* ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, hapi as gulp tasks
+* nginx container
+* ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
 ### prod:
-* just ~~use the webpack~~ and setup an hapi server for production to serve all static files
+* just ~~use the webpack~~ and *setup an hapi server* for production to serve all static files
 * ~~hash for js files and change it in html~~
 ### dev:
 * ~~use dev server~~
