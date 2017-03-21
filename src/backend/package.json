@@ -1,0 +1,45 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend service for android and web",
+  "scripts": {
+    "start": "better-npm-run dev:web_static",
+    "start_prod": "better-npm-run prod:web_static",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "betterScripts": {
+    "dev:web_static": {
+      "command": "node ./entry.dev.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development",
+        "PORT": 8070,
+        "APIPORT": 8081
+      }
+    },
+    "dev:dirTree": {
+      "command": "node ./dirTree.dev.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development"
+      }
+    },
+    "prod:web_static": {
+      "command": "node ./webpack.prod.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "production",
+        "PORT": 80,
+        "APIPORT": 8081
+      }
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-npm-run": "0.0.14",
+    "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+  }
+}

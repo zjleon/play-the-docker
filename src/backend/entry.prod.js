@@ -1,5 +1,6 @@
 const WebpackDevServer = require("webpack-dev-server")
 const webpack = require("webpack")
+// const config = require('./configs/webpack.prod.web_static')
 const webpackConfig = require('./configs/webpack.dev.web_static')
 const gulp = require('gulp')
 const express = require("express")
@@ -34,7 +35,7 @@ app.use(webpackDevMiddleware(compiler, {
 }))
 app.use(require("webpack-hot-middleware")(compiler))
 
-app.listen(process.env.PORT, '0.0.0.0', function() {
+app.listen(process.env.PORT, function() {
   console.log(111)
 })
 
