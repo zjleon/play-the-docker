@@ -1,9 +1,9 @@
-const WebpackDevServer = require("webpack-dev-server")
-const webpack = require("webpack")
-const webpackConfig = require('./configs/webpack.dev.web_static')
-const gulp = require('gulp')
+// const WebpackDevServer = require("webpack-dev-server")
+// const webpack = require("webpack")
+// const webpackConfig = require('./configs/webpack.dev.web_static')
+// const gulp = require('gulp')
 const express = require("express")
-const webpackDevMiddleware = require("webpack-dev-middleware")
+// const webpackDevMiddleware = require("webpack-dev-middleware")
 
 const errorTrace = (err, stats) => {
   if (err) {
@@ -26,16 +26,10 @@ const errorTrace = (err, stats) => {
 }
 
 let app = express()
-let compiler = webpack(webpackConfig)
-
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  index: "index.html"
-}))
-app.use(require("webpack-hot-middleware")(compiler))
+app.use(express.static('dist'))
 
 app.listen(process.env.PORT, '0.0.0.0', function() {
-  console.log(111)
+  console.log('express started')
 })
 
 app.get('*', function(req, res, next) {

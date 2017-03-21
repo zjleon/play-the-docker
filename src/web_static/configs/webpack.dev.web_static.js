@@ -12,7 +12,7 @@ const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 module.exports = {
   entry: {
-    entry: [
+    main: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:' + process.env.PORT,
       'webpack/hot/only-dev-server',
