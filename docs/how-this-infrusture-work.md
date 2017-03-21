@@ -8,3 +8,8 @@
 * use gradle to build android code(react-native)
 * run unit test, eslint in atom and build process
 * auto generate [project_structure](../docs/project_structure.md) after each build.
+
+# CI:
+* auto pull code
+* generate static code by webpack
+* build image with static codes

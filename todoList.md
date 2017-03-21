@@ -36,10 +36,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~run dirTree~~, ~~generate atom package task~~
 * **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
 * code structure for real big code base project
+* **router strategic for prod and dev env**
 * *hapi and backend container*
 * nginx for ssl
 * web socket to frontend and backend services in nginx
 * nginx container
+* web socket on express server
 * ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
@@ -146,8 +148,12 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # CI server
 ## prod:
+* **use config for develop and production env**
 * unit test, and do search about how to write unit test efficiently then doc it
 * build docker image then push it to private registry.
+* use webpack to generate code then pack those code into image
+  * ``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env
+  * put db link into environment variable
 * generate documentation about:
   1. 'file hash -> build version' map
   2. resource map(js, css map)
@@ -176,9 +182,9 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
-* re-think the package.json file management
+* ~~re-think the package.json file management~~src/project have project specify package, package under root only for atom eslint
 * ~~avoid contaminate the origin file/folder~~
-* **include android image process**
+* ~~include android image process~~
 * ~~use tini to make sure server stop as expect
   https://github.com/krallin/tini/issues/45#issuecomment-236117771
   https://github.com/krallin/tini~~

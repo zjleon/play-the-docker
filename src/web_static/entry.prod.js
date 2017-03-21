@@ -1,10 +1,9 @@
-const WebpackDevServer = require("webpack-dev-server")
-const webpack = require("webpack")
-// const config = require('./configs/webpack.prod.web_static')
-const webpackConfig = require('./configs/webpack.dev.web_static')
-const gulp = require('gulp')
+// const WebpackDevServer = require("webpack-dev-server")
+// const webpack = require("webpack")
+// const webpackConfig = require('./configs/webpack.dev.web_static')
+// const gulp = require('gulp')
 const express = require("express")
-const webpackDevMiddleware = require("webpack-dev-middleware")
+// const webpackDevMiddleware = require("webpack-dev-middleware")
 
 const errorTrace = (err, stats) => {
   if (err) {
@@ -27,26 +26,13 @@ const errorTrace = (err, stats) => {
 }
 
 let app = express()
-let compiler = webpack(webpackConfig)
+app.use(express.static('dist'))
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  index: "index.html"
-}))
-app.use(require("webpack-hot-middleware")(compiler))
-
-app.listen(process.env.PORT, function() {
-  console.log(111)
+app.listen(process.env.PORT, '0.0.0.0', function() {
+  console.log('express started')
 })
 
 app.get('*', function(req, res, next) {
   req.url = 'index.html'
   next('route')
 })
-
-// Done processing
-// const server = new WebpackDevServer(compiler, devServerConfig)
-// server.listen(8080, "localhost", () => {
-//   console.log('dev server started up')
-// })
-// server.close();
