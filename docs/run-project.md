@@ -9,12 +9,8 @@ apm install --packages-file atom.packages.txt
 # install docker
 instruction to installation
 
-# install docker-sync for development:
-```
-gem install docker-sync
-brew install fswatch
-brew install rsync
-```
+# web container helper:
+* use source-map to debug in prod, in source panel of chrome debug tool, click webpack
 
 # android container build helper:
 * build image:
