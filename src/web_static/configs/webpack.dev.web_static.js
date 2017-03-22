@@ -32,8 +32,8 @@ module.exports = {
     publicPath: "/",
     path: distPath,
     filename: '[hash].[name].js',
+    sourceMapFilename: '[hash].[name].js.map'
   },
-  watch: true,
   resolve: {
     modules: [srcPath + '/node_modules'],
   },
@@ -87,4 +87,6 @@ module.exports = {
     contentBase: distPath,
     publicPath: '/',
   },
+  watch: true,
+  devtool: 'source-map',
 }
