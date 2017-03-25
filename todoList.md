@@ -54,6 +54,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * unit test process, include UI test -- make sure app stable after small UI changes
 issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
+### prod:
+* production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
@@ -167,7 +169,7 @@ https://github.com/facebook/react-native/issues/7257~~
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
-* error, debug info logging, Profiling: https://www.npmjs.com/package/winston
+* **error, debug info logging, Profiling: https://www.npmjs.com/package/winston**
 
 ## dev:
 * ~~install project dependencies via node script
