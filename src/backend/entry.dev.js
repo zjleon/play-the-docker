@@ -1,5 +1,7 @@
 let WebSocketServer = require('websocket').server
 let http = require('http')
+let tvService = require('./services/TVService')
+let phoneService = require('./services/PhoneService')
 
 let server = http.createServer(function(request, response) {
   console.log((new Date()) + ' Received request for ' + request.url)
@@ -36,13 +38,23 @@ wsServer.on('request', function(request) {
   let connection = request.accept('echo-protocol', request.origin)
   console.log((new Date()) + ' Connection accepted.')
   connection.on('message', function(message) {
-    if (message.type === 'utf8') {
-      console.log('Received Message: ' + message.utf8Data)
-      connection.sendUTF(message.utf8Data)
-    } else if (message.type === 'binary') {
-      console.log('Received Binary Message of ' + message.binaryData.length + ' bytes')
-      connection.sendBytes(message.binaryData)
+    switch (message.device) {
+    case 'tv':
+      tvService.onMessageReceive(connection, message)
+      break
+    case 'phone':
+      phoneService.onMessageReceive(connection, message)
+      break
+    default:
+
     }
+    // if (message.device === 'tv') {
+    //   // connection.sendUTF(message.utf8Data)
+    //   phoneService.onMessageReceive(connection, message)
+    // } else if (message.type === 'binary') {
+    //   console.log('Received Binary Message of ' + message.binaryData.length + ' bytes')
+    //   connection.sendBytes(message.binaryData)
+    // }
   })
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.')

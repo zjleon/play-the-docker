@@ -1,0 +1,105 @@
+{
+  "name": "web_static",
+  "version": "1.0.0",
+  "description": "static web service",
+  "main": "index.js",
+  "scripts": {
+    "start": "better-npm-run dev:web_static",
+    "start_prod": "better-npm-run prod:web_static",
+    "test": "better-npm-run test"
+  },
+  "betterScripts": {
+    "dev:web_static": {
+      "command": "node ./entry.dev.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development",
+        "PORT": 8080,
+        "WSENDPOINT": "ws://localhost:8070/"
+      }
+    },
+    "dev:dirTree": {
+      "command": "node ./dirTree.dev.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "development"
+      }
+    },
+    "prod:web_static": {
+      "command": "node ./entry.prod.js",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "production",
+        "PORT": 80
+      }
+    },
+    "test": {
+      "command": "jest",
+      "env": {
+        "NODE_PATH": ".",
+        "NODE_ENV": "test",
+        "PORT": 8080
+      }
+    }
+  },
+  "jest": {
+    "modulePaths": [
+      "/shared/vendor/modules"
+    ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "bower_components", "shared"],
+
+    "moduleNameMapper": {
+      "^react(.*)$": "<rootDir>/vendor/react-master$1",
+      "^config$": "<rootDir>/configs/app-config.js",
+
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-npm-run": "0.0.14",
+    "express": "^4.14.1",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+    "babel-core": "6.22.1",
+    "babel-loader": "6.2.10",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-class-properties": "^6.22.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-runtime": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.15",
+    "css-loader": "0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "0.10.0",
+    "gulp": "^3.9.1",
+    "gulp-webpack": "^1.5.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.26.0",
+    "jest": "^19.0.2",
+    "node-sass": "^4.3.0",
+    "npm-install-webpack-plugin": "^4.0.4",
+    "postcss-loader": "^1.2.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-transform-hmr": "^1.0.4",
+    "regenerator-runtime": "^0.10.3",
+    "sass-loader": "^5.0.0",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "webpack": "2.2.1",
+    "webpack-cleanup-plugin": "^0.4.1",
+    "webpack-dashboard": "^0.3.0",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-dev-server": "2.3.0",
+    "webpack-hot-middleware": "^2.16.1"
+  }
+}
