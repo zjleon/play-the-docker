@@ -6,19 +6,19 @@ client.onerror = function() {
   console.log('Connection Error')
 }
 
-client.onopen = function() {
-  console.log('WebSocket Client Connected')
-
-  const sendNumber = () => {
-    if (client.readyState === client.OPEN) {
-      let number = Math.round(Math.random() * 0xFFFFFF)
-      client.send(number.toString())
-      console.log(number.toString())
-      setTimeout(sendNumber, 1000)
-    }
-  }
-  sendNumber()
-}
+// client.onopen = function() {
+//   console.log('WebSocket Client Connected')
+//
+//   const sendNumber = () => {
+//     if (client.readyState === client.OPEN) {
+//       let number = Math.round(Math.random() * 0xFFFFFF)
+//       client.send(number.toString())
+//       console.log(number.toString())
+//       setTimeout(sendNumber, 1000)
+//     }
+//   }
+//   sendNumber()
+// }
 
 client.onclose = function() {
   console.log('echo-protocol Client Closed')
@@ -29,3 +29,5 @@ client.onmessage = function(e) {
     console.log("Received: '" + e.data + "'")
   }
 }
+
+export default client

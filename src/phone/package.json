@@ -15,7 +15,7 @@
         "NODE_PATH": ".",
         "NODE_ENV": "development",
         "PORT": 8080,
-        "WSENDPOINT": "ws://localhost:8070/"
+        "WS_ENDPOINT": "ws://localhost:8070/"
       }
     },
     "dev:dirTree": {
@@ -46,13 +46,18 @@
     "modulePaths": [
       "/shared/vendor/modules"
     ],
-    "moduleFileExtensions": ["js", "jsx"],
-    "moduleDirectories": ["node_modules", "bower_components", "shared"],
-
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
     "moduleNameMapper": {
       "^react(.*)$": "<rootDir>/vendor/react-master$1",
       "^config$": "<rootDir>/configs/app-config.js",
-
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
     }
@@ -61,6 +66,7 @@
   "license": "ISC",
   "dependencies": {
     "better-npm-run": "0.0.14",
+    "dotenv-webpack": "^1.4.3",
     "express": "^4.14.1",
     "react": "15.4.2",
     "react-dom": "15.4.2",
