@@ -1,5 +1,7 @@
 let WebSocketServer = require('websocket').server
 let http = require('http')
+let tvService = require('./services/TVService')
+let phoneService = require('./services/PhoneService')
 
 let server = http.createServer(function(request, response) {
   console.log((new Date()) + ' Received request for ' + request.url)
@@ -24,7 +26,10 @@ function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
   return true
 }
-
+let ws = {
+  tv: null,
+  phone: null,
+}
 wsServer.on('request', function(request) {
   if (!originIsAllowed(request.origin)) {
       // Make sure we only accept requests from an allowed origin
@@ -33,18 +38,39 @@ wsServer.on('request', function(request) {
     return
   }
 
-  let connection = request.accept('echo-protocol', request.origin)
-  console.log((new Date()) + ' Connection accepted.')
-  connection.on('message', function(message) {
-    if (message.type === 'utf8') {
-      console.log('Received Message: ' + message.utf8Data)
-      connection.sendUTF(message.utf8Data)
-    } else if (message.type === 'binary') {
-      console.log('Received Binary Message of ' + message.binaryData.length + ' bytes')
-      connection.sendBytes(message.binaryData)
-    }
-  })
-  connection.on('close', function(reasonCode, description) {
-    console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.')
-  })
+  switch (request.resource) {
+  case '/phone':
+    ws.phone = (new phoneService(request, ws)).connection
+    break
+  case '/tv':
+    ws.tv = (new tvService(request, ws)).connection
+    break
+  default:
+
+  }
+  // let connection = request.accept('echo-protocol', request.origin)
+  // console.log((new Date()) + ' Connection accepted.')
+  // connection.on('message', function(message) {
+  //   let data = JSON.parse(message[message.type + 'Data'])
+  //   switch () {
+  //   case 'tv':
+  //     tvService.onMessageReceive(connection, data.data)
+  //     break
+  //   case 'phone':
+  //     phoneService.onMessageReceive(connection, data.data)
+  //     break
+  //   default:
+  //
+  //   }
+  //   // if (message.device === 'tv') {
+  //   //   // connection.sendUTF(message.utf8Data)
+  //   //   phoneService.onMessageReceive(connection, message)
+  //   // } else if (message.type === 'binary') {
+  //   //   console.log('Received Binary Message of ' + message.binaryData.length + ' bytes')
+  //   //   connection.sendBytes(message.binaryData)
+  //   // }
+  // })
+  // connection.on('close', function(reasonCode, description) {
+  //   console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.')
+  // })
 })
