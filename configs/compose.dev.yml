@@ -3,14 +3,12 @@
 
 version: "2"
 services:
-  web_static:
-    volumes_from:
-      - container:web_static-sync:rw
-      - container:common-sync:rw
-
-# that the important thing
-volumes:
-  web_static-sync:
-    external: true
-  common-sync:
-    external: true
+  phone:
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.phone
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../src/phone:/app
+    # command: ls -a .
