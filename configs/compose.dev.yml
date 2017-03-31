@@ -4,7 +4,7 @@ services:
   phone:
     build:
       context: ../
-      dockerfile: configs/docker.dev.phone
+      dockerfile: configs/docker.dev.web_static
       args:
         - PROJECT=phone
     ports:

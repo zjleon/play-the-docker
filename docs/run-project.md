@@ -70,10 +70,11 @@ docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusable
 ```
 
 ## production environment:
-1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
 1. build image:
-``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.phone  --build-arg PROJECT=phone .
+``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.web_static  --build-arg PROJECT=phone .
 ``
+1. test in local: check docker-compose helper
+1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
 1. deploy to kubernete:
 
 
