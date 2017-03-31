@@ -16,17 +16,21 @@ ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
 COPY ./resources/tini /tini
 RUN chmod +x /tini
 
+# define variables
+ARG PROJECT=web_static
+
 # pre-install node resources
 WORKDIR /node_resources
-COPY ./src/web_static/package.json ./package.json
+COPY ./src/${PROJECT}/package.json ./package.json
 RUN npm install --quiet \
     && rm -f package.json
 EXPOSE 8080
 ENV PORT=8080
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 # execute initialize script
 WORKDIR /app
+COPY ./src/${PROJECT} .
 ENTRYPOINT ["/tini", "--"]
 # initial.sh will be mounted to client disk
 CMD ["/bin/bash", "./initial.sh"]

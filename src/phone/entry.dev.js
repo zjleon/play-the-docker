@@ -1,6 +1,6 @@
 const WebpackDevServer = require("webpack-dev-server")
 const webpack = require("webpack")
-const webpackConfig = require('./configs/webpack.dev.web_static')
+const webpackConfig = require('./configs/webpack.dev')
 const gulp = require('gulp')
 
 let compiler = webpack(webpackConfig)

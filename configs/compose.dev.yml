@@ -1,12 +1,12 @@
-# this is our development docker-compose building on top of the prodicker docker-compose, just mounting
-# the sync image - not redefining anything else
-
 version: "2"
+
 services:
   phone:
     build:
       context: ../
       dockerfile: configs/docker.dev.phone
+      args:
+        - PROJECT=phone
     ports:
       - "8080:8080"
     volumes:
