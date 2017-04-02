@@ -5,9 +5,13 @@ services:
     image: 'asia.gcr.io/pg-us-e-app-518137/phone:prod'
     ports:
       - "80:8080"
-    command: ["ls", "/app"]
+    links:
+      - backend
+    depends_on:
+      - backend
+    # command: ["ls", "/app"]
   backend:
     image: 'asia.gcr.io/pg-us-e-app-518137/backend:prod'
     ports:
-      - "80:8080"
-    command: ["ls", "/app"]
+      - "8001:8080"
+    # command: ["ls", "/app"]
