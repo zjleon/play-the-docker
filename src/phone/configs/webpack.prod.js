@@ -1,7 +1,8 @@
-const devConfig = require('./webpack.dev.web_static')
+const devConfig = require('./webpack.dev')
 let prodConfig = devConfig
 
 prodConfig.watch = false
+prodConfig.watchOptions = {}
 
 prodConfig.devServer = {}
 

@@ -1,12 +1,17 @@
 version: '2'
 
 services:
-  web_static:
-    build:
-      context: ../
-      dockerfile: configs/docker.dev.web_static
+  phone:
+    image: 'asia.gcr.io/pg-us-e-app-518137/phone:prod'
     ports:
-     - "8080:8080"
-    # command: ["ls", "/app/node_modules"]
-    command: ["/bin/bash", "./initial.sh"]
-  # TODO: packager and android container
+      - "80:8080"
+    links:
+      - backend
+    depends_on:
+      - backend
+    # command: ["ls", "/app"]
+  backend:
+    image: 'asia.gcr.io/pg-us-e-app-518137/backend:prod'
+    ports:
+      - "8001:8080"
+    # command: ["ls", "/app"]

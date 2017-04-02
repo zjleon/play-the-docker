@@ -14,8 +14,7 @@
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
-        "PORT": 8080,
-        "WS_ENDPOINT": "ws://localhost:8070/"
+        "PORT": 8080
       }
     },
     "dev:dirTree": {
@@ -26,11 +25,11 @@
       }
     },
     "prod:web_static": {
-      "command": "node ./entry.prod.js",
+      "command": "webpack --config configs/webpack.prod.js -p && node ./entry.prod.js",
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "production",
-        "PORT": 80
+        "PORT": 8080
       }
     },
     "test": {
@@ -92,7 +91,6 @@
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.26.0",
     "jest": "^19.0.2",
-    "node-sass": "^4.3.0",
     "npm-install-webpack-plugin": "^4.0.4",
     "postcss-loader": "^1.2.2",
     "react-hot-loader": "^3.0.0-beta.6",

@@ -34,6 +34,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
 * ~~run dirTree~~, ~~generate atom package task~~
+* **unified the entry of prod and dev**
 * **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
 * code structure for real big code base project
 * **router strategic for prod and dev env**
@@ -78,6 +79,7 @@ https://github.com/facebook/react-native/issues/7257~~
 * ~~try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder~~
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
+* **use proxy for packager:https://github.com/silarsis/docker-proxy**
 * request 'draw over other app' privilege
 * android back button handler ``AndroidBackButtonBehavior``
 * install react-native from npm only in the android container
@@ -154,7 +156,7 @@ https://github.com/facebook/react-native/issues/7257~~
 * unit test, and do search about how to write unit test efficiently then doc it
 * build docker image then push it to private registry.
 * use webpack to generate code then pack those code into image
-  * ``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env
+  * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
   * put db link into environment variable
 * generate documentation about:
   1. 'file hash -> build version' map
@@ -181,6 +183,14 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
+* **generate the docker ignore file base on project**
+* **manage docker container in local using nodejs api**
+  * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
+  * node api: https://github.com/apocas/dockerode
+  * python: https://docs.docker.com/engine/api/sdks/
+* **docker log:**
+  * https://www.slideshare.net/raychaser/6-million-ways-to-log-in-docker-nyc-docker-meetup-12172014
+  * https://github.com/veggiemonk/awesome-docker#monitoring--logging
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
@@ -199,7 +209,6 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * ~~create a volume for each service~~
 * IOS development environment
 
-# **handle build error and show message log errors in static file**
 * ~~option 1: generate error report as html, and set a express server for it~~
 * ~~option 2: output to console directly~~
 * android: use adb logcat --filter in android studio to track run time error, but build error?

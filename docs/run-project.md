@@ -1,4 +1,5 @@
-# install atom and its package
+# pre-request:
+## install atom and its package
 ```
 // export packages
 apm list --installed --bare > configs/atom.packages.txt
@@ -6,34 +7,31 @@ apm list --installed --bare > configs/atom.packages.txt
 apm install --packages-file atom.packages.txt
 ```
 
-# install docker
+## install docker
 instruction to installation
+
+## convert compose to kubernete
+download: http://kompose.io/setup/
 
 # web container helper:
 * use source-map to debug in prod, in source panel of chrome debug tool, click webpack
 
 # android container build helper:
-* build image:
+## development environment:
+1. build image:
 ```
 docker build -t test_gradle -f configs/docker.dev.android .
 docker build -t packager -f configs/docker.dev.react_native_packager .
 ```
-* forward react-native packager for real phone visiting: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
-* run image(**all docker parameter must add before image tag**):
+1. forward react-native packager for real phone visiting: ``$ ssh -L 192.168.2.1:8081:192.168.99.100:8081 -N 127.0.0.1``
+1. run image(**all docker parameter must add before image tag**):
 ```
 docker run -it -p 8081:8081 -v $(pwd)/src/android:/app packager
 docker run --privileged -it -v $(pwd)/src/android:/app -v /dev/bus/usb:/dev/bus/usb test_gradle
 docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/var/media test_gradle bash
 ```
-* enter docker, ``$ adb logcat *:S ReactNative:V ReactNativeJS:V``
-* make sure device is not used by chrome: open ``chrome://inspect/#devices`` in chrome
-* clear non-used images and containers to free space
-```
-# Delete all stopped containers
-docker ps -q -f status=exited | xargs docker rm
-# Delete all dangling (unused) images
-docker images -q -f dangling=true | xargs docker rmi
-```
+1. enter docker, ``$ adb logcat *:S ReactNative:V ReactNativeJS:V``
+1. make sure device is not used by chrome: open ``chrome://inspect/#devices`` in chrome
 * Mac only - enable usb function in virtual box
   1. open virtualbox, check it's version: Help - Contents
   2. download and install properer extend package: http://www.virtualbox.org/wiki/Download_Old_Builds
@@ -60,28 +58,43 @@ docker images -q -f dangling=true | xargs docker rmi
   ```
   then use gradle task to build and install apk
 * to install the apk to device, uninstall it first
+* [maven repository](https://mvnrepository.com/repos)
 
 # web container build helper:
-* build image:
+## development environment:
 ```
-docker build -t web_static -f configs/docker.dev.web_static .
+docker build -t web_static -f configs/docker.dev.web_static --build-arg PROJECT=phone .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
 docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusableComponents:/app/common web_static
 ```
 
+## production environment:
+1. build image:
+``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .``
+1. test single container: ``docker run -it -v $(pwd)/src/phone:/app -p 8080:8080 asia.gcr.io/pg-us-e-app-518137/phone:prod``
+1. test in local: check docker-compose helper
+1. push image: ``gcloud docker -- push gcr.io/pg-us-e-app-518137/phone:prod``
+1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
+1. deploy to kubernete:
+
 # docker-compose helper
 ## 1. build docker images
-``docker-compose -f configs/compose.dev.web_static.yml build``
+``docker-compose -f configs/compose.dev.yml build``
 ## 2. start them all services
-``docker-compose -f configs/compose.dev.web_static.yml up -d``
+``docker-compose -f configs/compose.dev.yml up -d``
 ## 3. check the logs of web_static
-``docker-compose -f configs/compose.dev.web_static.yml logs web_static``
+``docker-compose -f configs/compose.dev.yml logs web_static``
 ## 4. check status:
 ``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml ps``
-
-# [maven repository](https://mvnrepository.com/repos)
+## 1. clear non-used images and containers to free space
+```
+# Delete all stopped containers
+docker ps -q -f status=exited | xargs docker rm
+# Delete all dangling (unused) images
+docker images -q -f dangling=true | xargs docker rmi
+```
 
 # remove docker on mac:
 `` sudo ./scripts/docker.uninstall.sh``

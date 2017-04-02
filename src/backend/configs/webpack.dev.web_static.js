@@ -4,15 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 const enviromentPrefix = 'prod'
-const projectName = 'web_static'
 const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')
 const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: {
-    entry: [
+    main: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:' + process.env.PORT,
       'webpack/hot/only-dev-server',
@@ -32,8 +32,8 @@ module.exports = {
     publicPath: "/",
     path: distPath,
     filename: '[hash].[name].js',
+    sourceMapFilename: '[hash].[name].js.map'
   },
-  watch: true,
   resolve: {
     modules: [srcPath + '/node_modules'],
   },
@@ -81,10 +81,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     // new NpmInstallPlugin(),
+    new Dotenv({
+      path: './' + (process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ? process.env.NODE_ENV : '') + '.env',
+      // safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+    }),
   ],
   devServer: {
     hot: true,
     contentBase: distPath,
     publicPath: '/',
   },
+  watch: true,
+  watchOptions: {
+    ignored: ['/node_modules/', distPath]
+  },
+  devtool: 'source-map',
 }

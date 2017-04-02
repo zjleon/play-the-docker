@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 const enviromentPrefix = 'prod'
-const projectName = 'web_static'
 const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')
@@ -83,7 +82,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     // new NpmInstallPlugin(),
     new Dotenv({
-      path: './' + process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ? process.env.NODE_ENV : '' + '.env', // Path to .env file (this is the default)
+      path: './' + (process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ? process.env.NODE_ENV : '') + '.env',
       // safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
     }),
   ],
@@ -93,5 +92,8 @@ module.exports = {
     publicPath: '/',
   },
   watch: true,
+  watchOptions: {
+    ignored: ['/node_modules/', distPath]
+  },
   devtool: 'source-map',
 }

@@ -48,29 +48,4 @@ wsServer.on('request', function(request) {
   default:
 
   }
-  // let connection = request.accept('echo-protocol', request.origin)
-  // console.log((new Date()) + ' Connection accepted.')
-  // connection.on('message', function(message) {
-  //   let data = JSON.parse(message[message.type + 'Data'])
-  //   switch () {
-  //   case 'tv':
-  //     tvService.onMessageReceive(connection, data.data)
-  //     break
-  //   case 'phone':
-  //     phoneService.onMessageReceive(connection, data.data)
-  //     break
-  //   default:
-  //
-  //   }
-  //   // if (message.device === 'tv') {
-  //   //   // connection.sendUTF(message.utf8Data)
-  //   //   phoneService.onMessageReceive(connection, message)
-  //   // } else if (message.type === 'binary') {
-  //   //   console.log('Received Binary Message of ' + message.binaryData.length + ' bytes')
-  //   //   connection.sendBytes(message.binaryData)
-  //   // }
-  // })
-  // connection.on('close', function(reasonCode, description) {
-  //   console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.')
-  // })
 })
