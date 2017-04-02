@@ -1,3 +1,5 @@
+const directionAndMovement = require('./DirectionAndMovementService')
+
 class PhoneService {
   constructor(request, ws) {
     console.log((new Date()) + ' Connection accepted.')
@@ -11,17 +13,26 @@ class PhoneService {
     let data = JSON.parse(message[message.type + 'Data'])
 
     if (data.phone && this.ws.phone) {
-      console.log('phone')
-      this.ws.phone.sendUTF('this is from phone')
+      console.log('phone:' + JSON.stringify(data.phone))
+      if (data.phone.action === 'initializeDirection') {
+        directionAndMovement.initializeDirection(data.phone.movements)
+      } else {
+        this.ws.phone.sendUTF('this is from phone')
+      }
     }
     if (data.tv && this.ws.tv) {
-      console.log('tv')
-      this.ws.tv.sendUTF('this is from tv')
+      console.log('tv: ' + JSON.stringify(data.tv))
+      if (data.tv.action === 'phoneMove') {
+        data = directionAndMovement.getMovement(data.tv.movements)
+        console.log(data)
+        this.ws.tv.sendUTF(data)
+      }
     }
   }
 
   onClose(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + this.connection.remoteAddress + ' disconnected.')
+    directionAndMovement.resetDirection()
   }
 }
 

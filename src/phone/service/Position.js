@@ -95,7 +95,7 @@ class PositionService {
       const xAxisEndPoints = this.xAxisEndPoint.slice(0, maxLength)
       const yAxisEndPoints = this.yAxisEndPoint.slice(0, maxLength)
       let result = {}
-      result.movement = xAxisEndPoints.reduce((accumulator, xAxisEndPoint, xIndex) => {
+      result.distance = xAxisEndPoints.reduce((accumulator, xAxisEndPoint, xIndex) => {
         // TODO: this is where the round-trip distance mis-caculated
         let movement = Math.sqrt(
           Math.pow(xAxisEndPoint.distanceFromCenter, 2)
