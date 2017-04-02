@@ -30,6 +30,8 @@ class PositionService {
     this.onReachTimer = props.onReachTimer || null
     this.timerClock = props.timerClock || 500
     this.timer = null
+    this.startTimer = this.startTimer.bind(this)
+    this.startTimer()
   }
 
   populateX(acceleration, timeSpent) {
@@ -84,21 +86,34 @@ class PositionService {
     return endPosition.distanceFromCenter
   }
 
+  // TODO: to be more particular, calculate the movement angle,
+  // and current approach will mis-caculated the round-trip distance
   OnTimeout() {
     const maxLength = this.xAxisEndPoint.length <= this.yAxisEndPoint.length ?
       this.xAxisEndPoint.length : this.yAxisEndPoint.length
-    const xAxisEndPoints = this.xAxisEndPoint.slice(0, maxLength)
-    const yAxisEndPoints = this.yAxisEndPoint.slice(0, maxLength)
-    Math.sqrt(Math.pow(xAxisEndPoints, 2) + Math.pow(yAxisEndPoints, 2))
-    // TODO: pow will lose direction
-    // const endpoint = xAxisEndPoints.reduce((accumulator, xAxisEndPoint) => {
-    //   return accumulator +
-    // }, 0)
-    this.onReachTimer ? this.onReachTimer() : null
+    if (maxLength > 1) {
+      const xAxisEndPoints = this.xAxisEndPoint.slice(0, maxLength)
+      const yAxisEndPoints = this.yAxisEndPoint.slice(0, maxLength)
+      let result = {}
+      result.movement = xAxisEndPoints.reduce((accumulator, xAxisEndPoint, xIndex) => {
+        // TODO: this is where the round-trip distance mis-caculated
+        let movement = Math.sqrt(
+          Math.pow(xAxisEndPoint.distanceFromCenter, 2)
+          + Math.pow(yAxisEndPoints[xIndex].distanceFromCenter, 2)
+        )
+        return accumulator + movement
+      }, 0)
+      result.towardEast = xAxisEndPoints[0] > 0
+      result.towardNorth = yAxisEndPoints[0] > 0
+      this.onReachTimer ? this.onReachTimer(result) : null
+    }
   }
 
   startTimer() {
-    this.timer = setTimeout(() => this.OnTimeout)
+    this.timer = setTimeout(() => {
+      this.OnTimeout()
+      this.startTimer()
+    }, this.timerClock)
   }
 
   stopTimer() {

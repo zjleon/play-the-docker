@@ -62,7 +62,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 # web container build helper:
 ## development environment:
 ```
-docker build -t web_static -f configs/docker.dev.web_static .
+docker build -t web_static -f configs/docker.dev.web_static --build-arg PROJECT=phone .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
@@ -71,12 +71,12 @@ docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusable
 
 ## production environment:
 1. build image:
-``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.web_static  --build-arg PROJECT=phone .
-``
+``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .``
+1. test single container: ``docker run -it -v $(pwd)/src/phone:/app -p 8080:8080 asia.gcr.io/pg-us-e-app-518137/phone:prod``
 1. test in local: check docker-compose helper
+1. push image: ``gcloud docker -- push gcr.io/pg-us-e-app-518137/phone:prod``
 1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
 1. deploy to kubernete:
-
 
 # docker-compose helper
 ## 1. build docker images

@@ -21,7 +21,7 @@ ARG PROJECT=web_static
 # pre-install node resources
 WORKDIR /node_resources
 COPY ./src/${PROJECT}/package.json ./package.json
-RUN npm install --quiet \
+RUN npm install \
     && rm -f package.json
 EXPOSE 8080
 ENV PORT=8080
