@@ -58,6 +58,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
   ```
   then use gradle task to build and install apk
 * to install the apk to device, uninstall it first
+* [maven repository](https://mvnrepository.com/repos)
 
 # web container build helper:
 ## development environment:
@@ -94,13 +95,6 @@ docker ps -q -f status=exited | xargs docker rm
 # Delete all dangling (unused) images
 docker images -q -f dangling=true | xargs docker rmi
 ```
-
-# convert compose to kubernete:
-1. download the convert tool: http://kompose.io/setup/
-1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
-
-
-# [maven repository](https://mvnrepository.com/repos)
 
 # remove docker on mac:
 `` sudo ./scripts/docker.uninstall.sh``

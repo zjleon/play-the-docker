@@ -6,10 +6,10 @@ cp -r /node_resources/node_modules /app
 # chown -R root:root /app/node_modules
 npm install --quiet
 
-if [ $NODE_ENV == "x" ]; then
-	echo "start development"
-  npm start
-else
-	echo "start production"
+if [ $NODE_ENV == "production" ]; then
+  echo "start production"
   npm run start_prod
+else
+  echo "start development"
+  npm start
 fi

@@ -4,7 +4,7 @@
   "description": "static web service",
   "main": "index.js",
   "scripts": {
-    "start": "better-npm-run dev:web_static",
+    "start": "node ./entry.dev.js",
     "start_prod": "better-npm-run prod:web_static",
     "test": "better-npm-run test"
   },
@@ -14,8 +14,7 @@
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
-        "PORT": 8080,
-        "WS_ENDPOINT": "ws://localhost:8070/"
+        "PORT": 8080
       }
     },
     "dev:dirTree": {

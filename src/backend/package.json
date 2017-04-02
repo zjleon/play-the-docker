@@ -13,8 +13,7 @@
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "development",
-        "PORT": 8070,
-        "APIPORT": 8081
+        "PORT": 8070
       }
     },
     "dev:dirTree": {
@@ -29,8 +28,7 @@
       "env": {
         "NODE_PATH": ".",
         "NODE_ENV": "production",
-        "PORT": 80,
-        "APIPORT": 8081
+        "PORT": 80
       }
     }
   },

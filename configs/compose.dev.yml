@@ -11,4 +11,22 @@ services:
       - "8080:8080"
     volumes:
       - ../src/phone:/app
-    # command: ls -a .
+    links:
+      - backend
+    depends_on:
+      - backend
+    # environment:
+    #   # config the link in .env.dockerdev
+    #   - NODE_ENV=dockerdev
+    # command: env
+  backend:
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.web_static
+      args:
+        - PROJECT=backend
+    ports:
+      - "8070:8070"
+    volumes:
+      - ../src/backend:/app
+    # command: env
