@@ -25,43 +25,71 @@ if (module.hot) {
   })
 }
 
-tvClient.onopen = function() {
-  console.log('WebSocket Client Connected')
-
-  const sendNumber = () => {
-    if (tvClient.readyState === tvClient.OPEN) {
-      let test = {
-        phone: {a: 1},
-        tv: {b: 2},
-      }
-      tvClient.send(JSON.stringify(test))
-    }
-  }
-  sendNumber()
-}
-
+// tvClient.onopen = function() {
+//   console.log('WebSocket Client Connected')
+//
+//   const sendNumber = () => {
+//     if (tvClient.readyState === tvClient.OPEN) {
+//       let test = {
+//         phone: {
+//           action: 'initializeDirection',
+//           movements: {
+//             towardNorth: true,
+//             towardEast: true,
+//             movement: 10,
+//           }
+//         },
+//         tv: {b: 2},
+//       }
+//       tvClient.send(JSON.stringify(test))
+//     }
+//   }
+//   sendNumber()
+// }
+//
 tvClient.onmessage = function(e) {
   console.log("tv Received: '" + JSON.stringify(e.data) + "'")
 }
+//
+// tvClient.onerror = function() {
+//   console.log('Connection Error')
+// }
+//
+// tvClient.onclose = function() {
+//   console.log('echo-protocol Client Closed')
+// }
 
-tvClient.onerror = function() {
-  console.log('Connection Error')
-}
-
-tvClient.onclose = function() {
-  console.log('echo-protocol Client Closed')
-}
-
+let initialized = false
 phoneClient.onopen = function() {
-  console.log('WebSocket Client Connected')
-
   const sendNumber = () => {
     if (phoneClient.readyState === phoneClient.OPEN) {
       let test = {
-        phone: {a: 3},
-        tv: {b: 4},
+        phone: {
+          action: 'initializeDirection',
+          movements: {
+            towardNorth: true,
+            towardEast: true,
+            distance: 10,
+          },
+        },
       }
-      phoneClient.send(JSON.stringify(test))
+      let test2 = {
+        tv: {
+          action: 'phoneMove',
+          movements: {
+            towardNorth: true,
+            towardEast: true,
+            distance: 10,
+          },
+        },
+      }
+      if (initialized) {
+        phoneClient.send(JSON.stringify(test2))
+      } else {
+        initialized = true
+        phoneClient.send(JSON.stringify(test))
+      }
+      setTimeout(sendNumber, 500)
     }
   }
   sendNumber()
