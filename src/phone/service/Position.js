@@ -40,7 +40,7 @@ class PositionService {
       timeSpent,
     })
     if (length >= this.threshold) {
-      return this.calculateX(this.xAxisMovements.slice(0, this.threshold))
+      return this.calculateX(this.xAxisMovements.splice(0, this.threshold))
     }
     return null
   }
@@ -66,7 +66,7 @@ class PositionService {
       timeSpent,
     })
     if (length >= this.threshold) {
-      return this.calculateY(this.yAxisMovements.slice(0, this.threshold))
+      return this.calculateY(this.yAxisMovements.splice(0, this.threshold))
     }
     return null
   }
@@ -92,19 +92,39 @@ class PositionService {
     const maxLength = this.xAxisEndPoint.length <= this.yAxisEndPoint.length ?
       this.xAxisEndPoint.length : this.yAxisEndPoint.length
     if (maxLength > 1) {
-      const xAxisEndPoints = this.xAxisEndPoint.slice(0, maxLength)
-      const yAxisEndPoints = this.yAxisEndPoint.slice(0, maxLength)
+      const xAxisEndPoints = this.xAxisEndPoint.splice(0, maxLength)
+      const yAxisEndPoints = this.yAxisEndPoint.splice(0, maxLength)
+      console.log('xAxisEndPoints', JSON.stringify(xAxisEndPoints))
+      console.log('yAxisEndPoints', JSON.stringify(yAxisEndPoints))
       let result = {}
-      result.distance = xAxisEndPoints.reduce((accumulator, xAxisEndPoint, xIndex) => {
+      let direction = xAxisEndPoints.reduce((accumulator, xAxisEndPoint, xIndex) => {
         // TODO: this is where the round-trip distance mis-caculated
         let movement = Math.sqrt(
           Math.pow(xAxisEndPoint.distanceFromCenter, 2)
           + Math.pow(yAxisEndPoints[xIndex].distanceFromCenter, 2)
         )
-        return accumulator + movement
-      }, 0)
-      result.towardEast = xAxisEndPoints[0] > 0
-      result.towardNorth = yAxisEndPoints[0] > 0
+        accumulator.distance = accumulator.distance + movement
+        accumulator.towardEast = accumulator.towardEast + xAxisEndPoint.velocity
+        accumulator.towardNorth = accumulator.towardNorth + yAxisEndPoints[xIndex].velocity
+        return accumulator
+      }, {
+        distance: 0,
+        towardEast: 0,
+        towardNorth: 0,
+      })
+      result.distance = direction.distance
+      result.towardEast = direction.towardEast > 0
+      result.towardNorth = direction.towardNorth > 0
+      console.log(direction)
+
+      this.xAxisEndPoint.push({
+        velocity: xAxisEndPoints[xAxisEndPoints.length - 1].velocity,
+        distanceFromCenter: 0,
+      })
+      this.yAxisEndPoint.push({
+        velocity: yAxisEndPoints[yAxisEndPoints.length - 1].velocity,
+        distanceFromCenter: 0,
+      })
       this.onReachTimer ? this.onReachTimer(result) : null
     }
   }
