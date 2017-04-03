@@ -1,6 +1,6 @@
 import { AppContainer } from 'react-hot-loader'
-import Header from './common/header/header.js'
 import React from 'react'
+import Router from './common/Router'
 import { render } from 'react-dom'
 // import wsService from './service/WSServices'
 let W3CWebSocket = require('websocket').w3cwebsocket
@@ -16,12 +16,11 @@ const hotRender = (Component) => {
   )
 }
 
-hotRender(Header)
+hotRender(Router)
 
 if (module.hot) {
   module.hot.accept('./common/header/header.js', () => {
-    console.log(Header)
-    hotRender(Header)
+    hotRender(Router)
   })
 }
 
@@ -59,50 +58,50 @@ tvClient.onmessage = function(e) {
 //   console.log('echo-protocol Client Closed')
 // }
 
-let initialized = false
-phoneClient.onopen = function() {
-  const sendNumber = () => {
-    if (phoneClient.readyState === phoneClient.OPEN) {
-      let test = {
-        phone: {
-          action: 'initializeDirection',
-          movements: {
-            towardNorth: true,
-            towardEast: true,
-            distance: 10,
-          },
-        },
-      }
-      let test2 = {
-        tv: {
-          action: 'phoneMove',
-          movements: {
-            towardNorth: true,
-            towardEast: true,
-            distance: 10,
-          },
-        },
-      }
-      if (initialized) {
-        phoneClient.send(JSON.stringify(test2))
-      } else {
-        initialized = true
-        phoneClient.send(JSON.stringify(test))
-      }
-      setTimeout(sendNumber, 500)
-    }
-  }
-  sendNumber()
-}
-
-phoneClient.onmessage = function(e) {
-  console.log("phone Received: '" + JSON.stringify(e.data) + "'")
-}
-
-phoneClient.onerror = function() {
-  console.log('Connection Error')
-}
-
-phoneClient.onclose = function() {
-  console.log('echo-protocol Client Closed')
-}
+// let initialized = false
+// phoneClient.onopen = function() {
+//   const sendNumber = () => {
+//     if (phoneClient.readyState === phoneClient.OPEN) {
+//       let test = {
+//         phone: {
+//           action: 'initializeDirection',
+//           movements: {
+//             towardNorth: true,
+//             towardEast: true,
+//             distance: 10,
+//           },
+//         },
+//       }
+//       let test2 = {
+//         tv: {
+//           action: 'phoneMove',
+//           movements: {
+//             towardNorth: true,
+//             towardEast: true,
+//             distance: 10,
+//           },
+//         },
+//       }
+//       if (initialized) {
+//         phoneClient.send(JSON.stringify(test2))
+//       } else {
+//         initialized = true
+//         phoneClient.send(JSON.stringify(test))
+//       }
+//       setTimeout(sendNumber, 500)
+//     }
+//   }
+//   sendNumber()
+// }
+//
+// phoneClient.onmessage = function(e) {
+//   console.log("phone Received: '" + JSON.stringify(e.data) + "'")
+// }
+//
+// phoneClient.onerror = function() {
+//   console.log('Connection Error')
+// }
+//
+// phoneClient.onclose = function() {
+//   console.log('echo-protocol Client Closed')
+// }
