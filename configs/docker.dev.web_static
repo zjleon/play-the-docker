@@ -3,6 +3,8 @@ FROM ubuntu:15.10
 RUN apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
     xz-utils
+    # apt-transport-https \
+    # curl
 
 # install node
 WORKDIR /opt
@@ -11,6 +13,13 @@ COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
 ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
+
+# install yarn
+COPY ./resources/yarn-v0.21.3.tar.gz ./yarn.tar.gz
+RUN mkdir yarn && \
+    tar zxf yarn.tar.gz --directory /opt/yarn --strip-components=1 &&  \
+    rm -f yarn.tar.gz
+ENV PATH ${PATH}:/opt/yarn/bin
 
 # install tini
 COPY ./resources/tini /tini
@@ -21,8 +30,8 @@ ARG PROJECT=web_static
 # pre-install node resources
 WORKDIR /node_resources
 COPY ./src/${PROJECT}/package.json ./package.json
-RUN npm install \
-    && rm -f package.json
+RUN yarn install \
+   && rm -f package.json
 EXPOSE 8080
 ENV PORT=8080
 ENV NODE_ENV=development

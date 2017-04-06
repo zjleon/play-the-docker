@@ -19,6 +19,24 @@ services:
     #   # config the link in .env.dockerdev
     #   - NODE_ENV=dockerdev
     # command: env
+  tv:
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.web_static
+      args:
+        - PROJECT=tv
+    ports:
+      - "8081:8080"
+    volumes:
+      - ../src/tv:/app
+    links:
+      - backend
+    depends_on:
+      - backend
+    # environment:
+    #   # config the link in .env.dockerdev
+    #   - NODE_ENV=dockerdev
+    # command: env
   backend:
     build:
       context: ../

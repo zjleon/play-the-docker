@@ -24,7 +24,7 @@ class PhoneService {
       console.log('tv: ' + JSON.stringify(data.tv))
       if (data.tv.action === 'phoneMove') {
         data = directionAndMovement.getMovement(data.tv.movements)
-        console.log(data)
+        console.log(JSON.stringify(data))
         this.ws.tv.sendUTF(data)
       }
     }
@@ -33,6 +33,7 @@ class PhoneService {
   onClose(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + this.connection.remoteAddress + ' disconnected.')
     directionAndMovement.resetDirection()
+    this.ws.phone = null
   }
 }
 
