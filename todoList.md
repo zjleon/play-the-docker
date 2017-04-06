@@ -29,19 +29,22 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * react-native navigator:
   https://github.com/exponentjs/ex-navigation
 
+## nginx:
+* ssl
+* web socket to frontend and backend services in nginx
+* nginx container
+* if destination server unavailable, redirect to another one
+
 ## web
 * use webworker for web and mobile web
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
 * ~~run dirTree~~, ~~generate atom package task~~
-* **unified the entry of prod and dev**
+* ~~unified the entry of prod and dev~~no need to do
 * **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
 * code structure for real big code base project
-* **router strategic for prod and dev env**
+* ~~router strategic for prod and dev env~~replace with nginx
 * *hapi and backend container*
-* nginx for ssl
-* web socket to frontend and backend services in nginx
-* nginx container
 * web socket on express server
 * ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
@@ -64,18 +67,18 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
 * ~~add watchman to react-native packager~~
-* **apply docker-sync and new file structure to android and packager container**
+* ~apply docker-sync and new file structure to android and packager container~~
 * switch packager container's network from NAT to bridge
-* **packager not refresh after files change**
+* ~~packager not refresh after files change~~
   * ~~use gulp to restart the packager~~
   * ~~fix by:
 https://github.com/facebook/react-native/issues/7257~~
-  * docker-sync: https://github.com/EugenMayer/docker-sync/wiki
+  * ~~docker-sync: https://github.com/EugenMayer/docker-sync/wiki~~
   * ~~other solutions: https://github.com/EugenMayer/docker-sync/wiki/Alternatives-to-docker-sync~~
-  * **packager not refresh after files change, because '*.lock' existing in current folder, use ``find $directory -type f -name "*.lock"`` to confirm.https://github.com/facebook/react-native/issues/4357**
-  * related discussion:
-    * https://github.com/docker/docker/issues/15793
-    * https://github.com/docker/docker/issues/18246
+  * ~~packager not refresh after files change, because '*.lock' existing in current folder, use ``find $directory -type f -name "*.lock"`` to confirm.https://github.com/facebook/react-native/issues/4357~~
+  * ~~related discussion:~~
+    * ~~https://github.com/docker/docker/issues/15793~~
+    * ~~https://github.com/docker/docker/issues/18246~~
 * ~~try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder~~
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
