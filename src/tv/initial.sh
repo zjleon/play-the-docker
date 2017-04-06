@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # file will be copied to project root, when container up
+rm -frd /app/node_modules
 cp -r /node_resources/node_modules /app
 # sudo chmod -R 777 node_modules/
-chown -R root:root /app/node_modules
-npm install --quiet
+# chown -R root:root /app/node_modules
+# npm install --quiet
+yarn install
 
 if [ $NODE_ENV == "production" ]; then
   echo "start production"
