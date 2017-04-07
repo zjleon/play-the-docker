@@ -13,3 +13,6 @@
 * auto pull code
 * generate static code by webpack
 * build image with static codes
+
+# web container:
+* config env in development.env and production.env, when container up, it will use the env file base on NODE_ENV

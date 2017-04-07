@@ -33,7 +33,6 @@ COPY ./src/${PROJECT}/package.json ./package.json
 RUN yarn install \
    && rm -f package.json
 EXPOSE 8080
-ENV PORT=8080
 ENV NODE_ENV=development
 
 # execute initialize script

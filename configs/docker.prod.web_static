@@ -22,10 +22,9 @@ ARG PROJECT=web_static
 # pre-install node resources
 WORKDIR /node_resources
 COPY ./src/${PROJECT}/package.json ./package.json
-RUN npm install --quiet \
-    && rm -f package.json
+RUN yarn install --production \
+   && rm -f package.json
 EXPOSE 8080
-ENV PORT=8080
 ENV NODE_ENV=production
 
 # execute initialize script

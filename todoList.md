@@ -63,6 +63,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
+* **remove yarn.lock after yarn install and before android build**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
