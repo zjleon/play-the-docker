@@ -81,10 +81,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     // new NpmInstallPlugin(),
-    new Dotenv({
-      path: './' + (process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ? process.env.NODE_ENV : '') + '.env',
-      // safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
-    }),
+    // new Dotenv({
+    //   path: './' + (process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ? process.env.NODE_ENV : '') + '.env',
+    //   // safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+    // }),
   ],
   target: 'node',
   devServer: {

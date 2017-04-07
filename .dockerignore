@@ -8,6 +8,7 @@ dist
 **/.gradle
 resources/android-packages
 *.lock
+.env
 
 # temparary ignore
 src/android

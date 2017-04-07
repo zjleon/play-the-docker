@@ -13,9 +13,6 @@ instruction to installation
 ## convert compose to kubernete
 download: http://kompose.io/setup/
 
-# web container helper:
-* use source-map to debug in prod, in source panel of chrome debug tool, click webpack
-
 # android container build helper:
 ## development environment:
 1. build image:
@@ -61,13 +58,14 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 * [maven repository](https://mvnrepository.com/repos)
 
 # web container build helper:
+* use source-map to debug in prod, in source panel of chrome debug tool, click webpack
 ## development environment:
 ```
-docker build -t web_static -f configs/docker.dev.web_static --build-arg PROJECT=phone .
+docker build -t asia.gcr.io/pg-us-e-app-518137/phone -f configs/docker.dev.web_static --build-arg PROJECT=phone .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run -it -p 8080:8080 -v $(pwd)/src/web_static:/app -v $(pwd)/src/reusableComponents:/app/common web_static
+docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app -v $(pwd)/src/reusableComponents:/app/common asia.gcr.io/pg-us-e-app-518137/phone
 ```
 
 ## production environment:
