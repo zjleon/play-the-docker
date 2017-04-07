@@ -9,7 +9,7 @@ const distPath = path.resolve('./dist')
 const fs = require('fs')
 const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 const Dotenv = require('dotenv-webpack')
-console.log(process.env)
+
 module.exports = {
   entry: {
     main: [
