@@ -10,35 +10,16 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "node ./entry.dev.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "development",
-        "PORT": 8080
-      }
+      "command": "node ./entry.dev.js"
     },
     "dev:dirTree": {
-      "command": "node ./dirTree.dev.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "development"
-      }
+      "command": "node ./dirTree.dev.js"
     },
     "prod:web_static": {
-      "command": "webpack --config configs/webpack.prod.js -p && node ./entry.prod.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "production",
-        "PORT": 8080
-      }
+      "command": "webpack --config configs/webpack.prod.js -p && node ./entry.prod.js"
     },
     "test": {
-      "command": "jest",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "test",
-        "PORT": 8080
-      }
+      "command": "jest"
     }
   },
   "jest": {
@@ -68,14 +49,12 @@
     "express": "^4.14.1",
     "material-ui": "^0.17.1",
     "react": "15.4.2",
-    "react-canvas": "^1.3.0",
     "react-dom": "15.4.2",
     "react-router-dom": "^4.0.0",
     "react-tap-event-plugin": "^2.0.1",
     "websocket": "^1.0.24"
   },
   "devDependencies": {
-    "dotenv-webpack": "^1.4.3",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-plugin-react-transform": "^2.0.2",
