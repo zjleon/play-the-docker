@@ -83,7 +83,7 @@ https://github.com/facebook/react-native/issues/7257~~
 * ~~try to decompose the android container, by learning how the react packager interact with build process, with link resource folder to build folder~~
 * ~~set up a proxy for maven download~~
 * **figure out how and where the js run in android**
-* **use proxy for packager:https://github.com/silarsis/docker-proxy**
+* **use proxy for packager:https://github.com/silarsis/docker-proxy, put packager server link into android container env**
 * request 'draw over other app' privilege
 * android back button handler ``AndroidBackButtonBehavior``
 * install react-native from npm only in the android container

@@ -15,4 +15,5 @@
 * build image with static codes
 
 # web container:
-* config env in development.env and production.env, when container up, it will use the env file base on NODE_ENV
+* config env live in development.env and production.env, when container up, it will use the env file base on NODE_ENV
+  PS: all env are set in *.env files, for developer's convenience, except NODE_ENV

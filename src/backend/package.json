@@ -9,27 +9,13 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "node ./entry.dev.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "development",
-        "PORT": 8070
-      }
+      "command": "node ./entry.dev.js"
     },
     "dev:dirTree": {
-      "command": "node ./dirTree.dev.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "development"
-      }
+      "command": "node ./dirTree.dev.js"
     },
     "prod:web_static": {
-      "command": "node ./webpack.prod.js",
-      "env": {
-        "NODE_PATH": ".",
-        "NODE_ENV": "production",
-        "PORT": 80
-      }
+      "command": "node ./webpack.prod.js"
     }
   },
   "author": "",
