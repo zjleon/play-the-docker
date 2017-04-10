@@ -81,12 +81,14 @@ docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app -v $(pwd)/src/reusableCompo
 ## 1. build docker images
 ``docker-compose -f configs/compose.dev.yml build``
 ## 2. start them all services
-``docker-compose -f configs/compose.dev.yml up -d``
+``docker-compose -f configs/compose.dev.yml up``
 ## 3. check the logs of web_static
 ``docker-compose -f configs/compose.dev.yml logs web_static``
 ## 4. check status:
 ``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml ps``
 ## 1. clear non-used images and containers to free space
+install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
+or:
 ```
 # Delete all stopped containers
 docker ps -q -f status=exited | xargs docker rm

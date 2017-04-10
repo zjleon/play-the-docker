@@ -161,10 +161,10 @@ https://github.com/facebook/react-native/issues/7257~~
 * build docker image then push it to private registry.
 * use webpack to generate code then pack those code into image
   * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
-  * put db link into environment variable
+  * ~~put db link into environment variable~~manage env in project level
 * generate documentation about:
   1. 'file hash -> build version' map
-  2. resource map(js, css map)
+  2. ~~resource map(js, css map)~~
   3. release documentation(**what's that?**)
 ## dev:
 * update code in app hub
@@ -179,7 +179,7 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 
 ## dev:
 * ~~install project dependencies via node script
-``https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options``~~
+https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options~~
 * ~~a script to install package to particular project
 ``npm install --prefix ./src/web_static package name``~~
 * fix the npm install issue:
@@ -187,7 +187,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
-* **generate the docker ignore file base on project**
+* generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**
   * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
   * node api: https://github.com/apocas/dockerode
