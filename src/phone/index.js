@@ -21,7 +21,7 @@ const hotRender = (Component) => {
 hotRender(Router)
 
 if (module.hot) {
-  module.hot.accept('./common/header/header.js', () => {
+  module.hot.accept('./common/Router', () => {
     hotRender(Router)
   })
 }

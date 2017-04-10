@@ -148,18 +148,18 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # react and redux
 * how server side rendering work
-* tap event support on web
+* ~~tap event support on web~~
 * doc how to use non-style component
-* doc how to use shouldComponentUpdate, control render inside child componenet
+* doc how to use shouldComponentUpdate, control the render of inner componenet
 * add immutable.js
 * **java code dispatch redux action**
 
 # CI server
 ## prod:
-* **use config for develop and production env**
-* unit test, and do search about how to write unit test efficiently then doc it
+* ~~use config for develop and production env~~
+* ~~unit test~~, and do search about how to write unit test efficiently then doc it
 * build docker image then push it to private registry.
-* use webpack to generate code then pack those code into image
+* ~~use webpack to generate code then pack those code into image~~
   * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
   * ~~put db link into environment variable~~manage env in project level
 * generate documentation about:
@@ -182,11 +182,12 @@ https://docs.npmjs.com/private-modules/docker-and-private-modules
 https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options~~
 * ~~a script to install package to particular project
 ``npm install --prefix ./src/web_static package name``~~
-* fix the npm install issue:
-http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
+* ~~fix the npm install issue:
+http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
+* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**
   * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
