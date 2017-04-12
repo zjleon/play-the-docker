@@ -31,12 +31,14 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * ssl
-* web socket to frontend and backend services in nginx
+* **web socket to frontend and backend services in nginx**
 * nginx container
 * if destination server unavailable, redirect to another one
+* open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
 
 ## web
 * use webworker for web and mobile web
+* **server side render: https://reacttraining.com/react-router/web/api/StaticRouter**
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
 * ~~run dirTree~~, ~~generate atom package task~~
@@ -187,7 +189,8 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
-* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files
+* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files or use link to link folder
+* **change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58**
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**
   * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container

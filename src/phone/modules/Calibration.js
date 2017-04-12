@@ -2,8 +2,9 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
 import FlatButton from 'material-ui/FlatButton'
-import position from '../service/Position'
-import ws from '../service/WS'
+
+// import position from '../service/Position'
+// import ws from '../service/WS'
 
 let send = 0
 class Calibration extends Component {
@@ -21,38 +22,38 @@ class Calibration extends Component {
       interval: null,
     }
 
-    this.positionService = new position({
-      threshold: 5,
-      onReachTimer: this.onReachTimer.bind(this)
-    })
+    // this.positionService = new position({
+    //   threshold: 5,
+    //   onReachTimer: this.onReachTimer.bind(this)
+    // })
   }
 
   componentDidMount() {
-    window.addEventListener('deviceorientation', (event) => {
-      let absolute = event.absolute
-      let alpha = event.alpha
-      let beta = event.beta
-      let gamma = event.gamma
-      console.log(gamma)
-      let data = {
-        phone: {
-          action: 'phoneMove',
-          movements: gamma,
-        },
-      }
-      ws.send(JSON.stringify(gamma))
-
-      // Do stuff with the new orientation data
-      // this.setState({
-      //   absolute,
-      //   alpha,
-      //   beta,
-      //   gamma,
-      // })
-    }, false)
-    ws.onmessage = (e) => {
-      console.log("phone Received: '" + JSON.stringify(e) + "'")
-    }
+    // window.addEventListener('deviceorientation', (event) => {
+    //   let absolute = event.absolute
+    //   let alpha = event.alpha
+    //   let beta = event.beta
+    //   let gamma = event.gamma
+    //   console.log(gamma)
+    //   let data = {
+    //     phone: {
+    //       action: 'phoneMove',
+    //       movements: gamma,
+    //     },
+    //   }
+    //   ws.send(JSON.stringify(gamma))
+    //
+    //   // Do stuff with the new orientation data
+    //   // this.setState({
+    //   //   absolute,
+    //   //   alpha,
+    //   //   beta,
+    //   //   gamma,
+    //   // })
+    // }, false)
+    // ws.onmessage = (e) => {
+    //   console.log("phone Received: '" + JSON.stringify(e) + "'")
+    // }
     // window.addEventListener('devicemotion', (event) => {
     //   let acceleration = event.acceleration
     //   let accelerationIncludingGravity = event.accelerationIncludingGravity

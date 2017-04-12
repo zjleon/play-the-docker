@@ -13,13 +13,15 @@ module.exports = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      'webpack-dev-server/client?http://localhost:' + process.env.PORT
+        + (process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''),
       'webpack/hot/only-dev-server',
       srcPath + '/index.js',
     ],
     vendor: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      'webpack-dev-server/client?http://localhost:' + process.env.PORT
+        + (process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''),
       'webpack/hot/only-dev-server',
       'react',
       'react-dom',
@@ -28,10 +30,11 @@ module.exports = {
   output: {
     // XXX:also apply to html files
     // see https://webpack.js.org/configuration/output/#output-publicpath
-    publicPath: "/",
+    publicPath: "/" + (process.env.DOCKER_ENV ? process.env.PROJECT_ID : ''),
     path: distPath,
     filename: '[hash].[name].js',
-    sourceMapFilename: '[hash].[name].js.map'
+    sourceMapFilename: '[hash].[name].js.map',
+    crossOriginLoading: "anonymous",
   },
   resolve: {
     modules: [srcPath + '/node_modules'],
@@ -85,6 +88,10 @@ module.exports = {
     hot: true,
     contentBase: distPath,
     publicPath: '/',
+    headers: {
+      "X-Custom-Foo": "bar",
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   watch: true,
   watchOptions: {

@@ -7,6 +7,7 @@ language-babel@2.55.1
 language-docker@1.1.7
 language-gradle@0.0.3
 language-groovy@0.6.0
+language-nginx@0.7.2
 linter@1.11.23
 linter-eslint@8.1.2
 merge-conflicts@1.4.4

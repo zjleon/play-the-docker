@@ -1,6 +1,5 @@
 let W3CWebSocket = require('websocket').w3cwebsocket
 let phoneClient = new W3CWebSocket(process.env.WS_ENDPOINT, 'echo-protocol')
-// let tvClient = new W3CWebSocket(process.env.WS_ENDPOINT1, 'echo-protocol')
 console.log('ws initialized')
 
 // phoneClient.onopen = function() {

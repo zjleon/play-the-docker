@@ -66,6 +66,7 @@ docker build -t asia.gcr.io/pg-us-e-app-518137/phone -f configs/docker.dev.web_s
 * run image(**all docker parameter must add before image tag**):
 ```
 docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app -v $(pwd)/src/reusableComponents:/app/common asia.gcr.io/pg-us-e-app-518137/phone
+docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ```
 
 ## production environment:
