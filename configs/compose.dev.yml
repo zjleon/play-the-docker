@@ -12,6 +12,10 @@ services:
       - phone
       # - tv
       # - backend
+    depends_on:
+      - phone
+      # - tv
+      # - backend
   phone:
     restart: always
     build:
@@ -19,8 +23,8 @@ services:
       dockerfile: configs/docker.dev.web_static
       args:
         - PROJECT=phone
-    ports:
-      - "8080:8080"
+    # ports:
+    #   - "8080:8080"
     volumes:
       - ../src/phone:/app
     environment:

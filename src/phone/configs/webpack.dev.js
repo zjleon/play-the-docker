@@ -8,20 +8,24 @@ const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')
 const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
+// XXX: in docker compose env, all request should be point to 3000 ports, which nginx lives
+const devServerEndPoint = process.env.DOCKER_ENV ?
+  'webpack-dev-server/client?http://localhost:3000' + '/' + process.env.PROJECT_ID
+  :
+  'webpack-dev-server/client?http://localhost:' + process.env.PORT
+const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
 
 module.exports = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT
-        + (process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''),
+      devServerEndPoint,
       'webpack/hot/only-dev-server',
       srcPath + '/index.js',
     ],
     vendor: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT
-        + (process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''),
+      devServerEndPoint,
       'webpack/hot/only-dev-server',
       'react',
       'react-dom',
@@ -30,7 +34,7 @@ module.exports = {
   output: {
     // XXX:also apply to html files
     // see https://webpack.js.org/configuration/output/#output-publicpath
-    publicPath: "/" + (process.env.DOCKER_ENV ? process.env.PROJECT_ID : ''),
+    publicPath: publicPath,
     path: distPath,
     filename: '[hash].[name].js',
     sourceMapFilename: '[hash].[name].js.map',
@@ -82,20 +86,23 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin(['DOCKER_ENV', 'PROJECT_ID']),
     // new NpmInstallPlugin(),
   ],
   devServer: {
     hot: true,
     contentBase: distPath,
-    publicPath: '/',
-    headers: {
-      "X-Custom-Foo": "bar",
-      'Access-Control-Allow-Origin': '*',
-    },
+    publicPath: publicPath,
+    // headers: {
+    //   "X-Custom-Foo": "bar",
+    //   'Access-Control-Allow-Origin': '*',
+    // },
   },
   watch: true,
   watchOptions: {
-    ignored: ['/node_modules/', distPath]
+    ignored: ['/node_modules/', distPath],
+    // poll: 1000,
+    // aggregateTimeout: 400,
   },
   devtool: 'source-map',
 }
