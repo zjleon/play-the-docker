@@ -31,15 +31,17 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * ssl
-* support hash and test the history api
+* ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
 * open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
 
 ## web
+* static resources server, apply hash to all resources
+* API to generate the resources link to other services,
 * use webworker for web and mobile web
-* **server side render: https://reacttraining.com/react-router/web/api/StaticRouter**
+* ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**
 * ~~run dirTree~~, ~~generate atom package task~~
@@ -53,7 +55,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
 ### prod:
-* just ~~use the webpack~~ and *setup an hapi server* for production to serve all static files
+* ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
 ### dev:
 * ~~use dev server~~
