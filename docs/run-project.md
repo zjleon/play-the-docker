@@ -61,19 +61,21 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 * use source-map to debug in prod, in source panel of chrome debug tool, click webpack
 ## development environment:
 ```
-docker build -t asia.gcr.io/pg-us-e-app-518137/phone -f configs/docker.dev.web_static --build-arg PROJECT=phone .
+docker build -t asia.gcr.io/pwc-mwc-app/phone -f configs/docker.dev.web_static --build-arg PROJECT=phone .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
-docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app -v $(pwd)/src/reusableComponents:/app/common asia.gcr.io/pg-us-e-app-518137/phone
+docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app -v $(pwd)/src/reusableComponents:/app/common asia.gcr.io/pwc-mwc-app/phone
+docker run -it -p 8080:8080 -v $(pwd)/src/phone:/app asia.gcr.io/pwc-mwc-app/phone
+docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ```
 
 ## production environment:
 1. build image:
-``docker build -t asia.gcr.io/pg-us-e-app-518137/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .``
-1. test single container: ``docker run -it -v $(pwd)/src/phone:/app -p 8080:8080 asia.gcr.io/pg-us-e-app-518137/phone:prod``
+``docker build -t asia.gcr.io/pwc-mwc-app/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .``
+1. test single container: ``docker run -it -v $(pwd)/src/phone:/app -p 8080:8080 asia.gcr.io/pwc-mwc-app/phone:prod``
 1. test in local: check docker-compose helper
-1. push image: ``gcloud docker -- push gcr.io/pg-us-e-app-518137/phone:prod``
+1. push image: ``gcloud docker -- push gcr.io/pwc-mwc-app/phone:prod``
 1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
 1. deploy to kubernete:
 

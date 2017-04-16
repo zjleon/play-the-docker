@@ -8,18 +8,24 @@ const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')
 const projectConfigs = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
+// XXX: in docker compose env, all request should be point to 3000 ports, which nginx lives
+const devServerEndPoint = process.env.DOCKER_ENV ?
+  'webpack-dev-server/client?http://localhost:3000' + '/' + process.env.PROJECT_ID
+  :
+  'webpack-dev-server/client?http://localhost:' + process.env.PORT
+const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
 
 module.exports = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      devServerEndPoint,
       'webpack/hot/only-dev-server',
       srcPath + '/index.js',
     ],
     vendor: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
+      devServerEndPoint,
       'webpack/hot/only-dev-server',
       'react',
       'react-dom',
@@ -28,10 +34,11 @@ module.exports = {
   output: {
     // XXX:also apply to html files
     // see https://webpack.js.org/configuration/output/#output-publicpath
-    publicPath: "/",
+    publicPath: publicPath,
     path: distPath,
     filename: '[hash].[name].js',
-    sourceMapFilename: '[hash].[name].js.map'
+    sourceMapFilename: '[hash].[name].js.map',
+    crossOriginLoading: "anonymous",
   },
   resolve: {
     modules: [srcPath + '/node_modules'],
@@ -79,16 +86,27 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin({
+      'DOCKER_ENV': 0,
+      'PROJECT_ID': 0,
+    }),
     // new NpmInstallPlugin(),
   ],
   devServer: {
     hot: true,
     contentBase: distPath,
-    publicPath: '/',
+    publicPath: publicPath,
+    historyApiFallback: true,
+    // historyApiFallback: {
+    //   rewrites: [
+    //     { from: /.+/, to: '/' },
+    //   ],
+    //   verbose: true,
+    // },
   },
   watch: true,
   watchOptions: {
-    ignored: ['/node_modules/', distPath]
+    ignored: ['/node_modules/', distPath],
   },
   devtool: 'source-map',
 }
