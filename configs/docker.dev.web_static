@@ -39,8 +39,9 @@ ARG PROJECT=web_static
 # pre-install node resources
 WORKDIR /node_resources
 COPY ./src/${PROJECT}/package.json ./package.json
-RUN yarn install \
-   && rm -f package.json
+COPY ./src/${PROJECT}/.yarnrc ./.yarnrc
+RUN yarn install && \
+    rm -f package.json
 EXPOSE 8080
 ENV NODE_ENV=development
 
