@@ -2,7 +2,7 @@
 
 ## eslint and autofix and unit test
 * ~~set on atom, export the package list.~~
-* how to write unit test quickly, https://mochajs.org/
+* how to write unit test quickly
 * static the unit test coverage by tool
 * try 'flow'
 
@@ -25,7 +25,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   5. ~~how the navigator work when integrate with native function?~~catalyst ui
 * *rich text editor*
 * ~~port forward in mac: http://superuser.com/questions/30917/how-to-make-a-port-forward-in-mac-os-x~~
-* **0.36 have keyboard dismiss and background activity support**
 * react-native navigator:
   https://github.com/exponentjs/ex-navigation
 
@@ -152,7 +151,7 @@ https://github.com/facebook/react-native/issues/7257~~
   ``$ rm emulator*``
 
 # react and redux
-* how server side rendering work
+* ~~how server side rendering work~~``renderToString in server side router``
 * ~~tap event support on web~~
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
@@ -176,6 +175,7 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # node environment
 ## prod:
+* *link instead of cp node modules.*yarn cache is enough for now
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
@@ -193,7 +193,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 
 # docker compose
 * faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files or **use link to link the node_modules folder**
-* **change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58**
+* *change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58*
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**
   * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
