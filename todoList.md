@@ -31,9 +31,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * ssl
-* **web socket to frontend and backend services in nginx**
-* nginx container
-* if destination server unavailable, redirect to another one
+* support hash and test the history api
+* ~~web socket to frontend and backend services in nginx~~
+* ~~nginx container~~
+* ~~if destination server unavailable, redirect to another one~~set 404 default page
 * open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
 
 ## web
@@ -189,7 +190,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
-* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files or use link to link folder
+* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files or **use link to link the node_modules folder**
 * **change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58**
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**

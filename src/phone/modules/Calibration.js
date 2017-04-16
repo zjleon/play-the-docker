@@ -2,6 +2,9 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
 import FlatButton from 'material-ui/FlatButton'
+import {
+  Link,
+} from 'react-router-dom'
 
 // import position from '../service/Position'
 // import ws from '../service/WS'
@@ -92,6 +95,7 @@ class Calibration extends Component {
   // }
 
   render() {
+    console.log(this.props)
     return <div style={styles.container}>
       <Card>
         <CardHeader
@@ -107,6 +111,9 @@ class Calibration extends Component {
           3. Hit 'finish' button.
         </CardText>
         <CardActions>
+          <Link to={`/calibration`}>
+            Rendering with React
+          </Link>
           <FlatButton label="Finish" />
         </CardActions>
       </Card>

@@ -86,23 +86,27 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.EnvironmentPlugin(['DOCKER_ENV', 'PROJECT_ID']),
+    new webpack.EnvironmentPlugin({
+      'DOCKER_ENV': 0,
+      'PROJECT_ID': 0,
+    }),
     // new NpmInstallPlugin(),
   ],
   devServer: {
     hot: true,
     contentBase: distPath,
     publicPath: publicPath,
-    // headers: {
-    //   "X-Custom-Foo": "bar",
-    //   'Access-Control-Allow-Origin': '*',
+    historyApiFallback: true,
+    // historyApiFallback: {
+    //   rewrites: [
+    //     { from: /.+/, to: '/' },
+    //   ],
+    //   verbose: true,
     // },
   },
   watch: true,
   watchOptions: {
     ignored: ['/node_modules/', distPath],
-    // poll: 1000,
-    // aggregateTimeout: 400,
   },
   devtool: 'source-map',
 }
