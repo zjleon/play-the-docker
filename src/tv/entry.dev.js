@@ -10,5 +10,4 @@ const server = new WebpackDevServer(compiler)
 server.listen(process.env.PORT, "0.0.0.0", () => {
   console.log('dev server started up at port' + process.env.PORT)
 })
-console.log(process.env)
 // server.close();

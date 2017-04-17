@@ -1,5 +1,6 @@
 let W3CWebSocket = require('websocket').w3cwebsocket
 let tvClient = new W3CWebSocket(process.env.WS_ENDPOINT, 'echo-protocol')
+console.log(process.env.WS_ENDPOINT)
 console.log('ws initialized')
 
 // tvClient.onopen = function() {

@@ -30,6 +30,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * ssl
+* auto reload the configs: https://github.com/rhumaric/docker.nginx-autoreload
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
@@ -192,7 +193,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
-* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files or **use link to link the node_modules folder**
+* faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files
 * *change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58*
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**

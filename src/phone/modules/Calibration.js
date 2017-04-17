@@ -5,9 +5,8 @@ import FlatButton from 'material-ui/FlatButton'
 import {
   Link,
 } from 'react-router-dom'
-
 // import position from '../service/Position'
-// import ws from '../service/WS'
+import ws from '../service/WS'
 
 let send = 0
 class Calibration extends Component {
