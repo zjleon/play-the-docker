@@ -62,6 +62,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 ## development environment:
 ```
 docker build -t asia.gcr.io/pwc-mwc-app/phone -f configs/docker.dev.web_static --build-arg PROJECT=phone .
+docker build -t asia.gcr.io/pwc-mwc-app/nginx -f configs/docker.dev.nginx .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
