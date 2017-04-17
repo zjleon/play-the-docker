@@ -88,7 +88,9 @@ docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ## 3. check the logs of web_static
 ``docker-compose -f configs/compose.dev.yml logs web_static``
 ## 4. check status:
-``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml ps``
+``docker-compose -f configs/compose.dev.yml ps``
+## 4. restart nginx service:
+``docker-compose -f configs/compose.dev.yml restart nginx``
 ## 1. clear non-used images and containers to free space
 install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
 or:

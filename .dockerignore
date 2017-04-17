@@ -12,8 +12,5 @@ resources/android-packages
 
 # temparary ignore
 src/android
-resources/androidPackages
-resources/android-sdk_r24.4.1-linux.tgz
-resources/apache-maven-3.3.9-bin.tar.gz
-resources/gradle-3.2-bin.zip
-resources/watchman-4.7.0.tar.gz
+resources/android
+resources/lfs
