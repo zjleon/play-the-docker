@@ -3,7 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
-const enviromentPrefix = 'prod'
+
 const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')
@@ -14,6 +14,11 @@ const devServerEndPoint = process.env.DOCKER_ENV ?
   :
   'webpack-dev-server/client?http://localhost:' + process.env.PORT
 const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
+let envFile = fs.readFileSync('.env', 'utf8')
+let envToClient = {}
+envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {
+  envToClient[$1] = $3 ? Number($3) : $2
+})
 
 module.exports = {
   entry: {
@@ -86,10 +91,7 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.EnvironmentPlugin({
-      'DOCKER_ENV': 0,
-      'PROJECT_ID': 0,
-    }),
+    new webpack.EnvironmentPlugin(envToClient),
     // new NpmInstallPlugin(),
   ],
   devServer: {

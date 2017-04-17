@@ -3,7 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
-const enviromentPrefix = 'prod'
+
 const srcPath = path.resolve('.')
 const distPath = path.resolve('./dist')
 const fs = require('fs')

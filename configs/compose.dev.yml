@@ -10,12 +10,12 @@ services:
       - "3000:3000"
     links:
       - phone
-      # - tv
-      # - backend
+      - tv
+      - backend
     depends_on:
       - phone
-      # - tv
-      # - backend
+      - tv
+      - backend
   phone:
     restart: always
     build:
@@ -29,41 +29,44 @@ services:
       - ../src/phone:/app
     environment:
       # the env(like link to other service) will be manage in project level(.env),
-      # expect NODE_ENV are managed in docker file
+      # expect NODE_ENV are managed in docker file,
+      # and DOCKER_ENV for link between client and microservices
       - DOCKER_ENV=1
-    # links:
-    #   - backend
+    links:
+      - backend
     # depends_on:
     #   - backend
-    # # command: env
-  # tv:
-  #   build:
-  #     restart: always
-  #     context: ../
-  #     dockerfile: configs/docker.dev.web_static
-  #     args:
-  #       - PROJECT=tv
-  #   ports:
-  #     - "8081:8081"
-  #   volumes:
-  #     - ../src/tv:/app
-  #   links:
-  #     - backend
-  #   depends_on:
-  #     - backend
-  #   # environment:
-  #     # the env(like link to other service) will be manage in project level(.env),
-  #     # expect NODE_ENV are managed in docker file
-  #   # command: env
-  # backend:
-      # restart: always
-  #   build:
-  #     context: ../
-  #     dockerfile: configs/docker.dev.web_static
-  #     args:
-  #       - PROJECT=backend
-  #   ports:
-  #     - "8070:8070"
-  #   volumes:
-  #     - ../src/backend:/app
-  #   # command: env
+    # command: env
+  tv:
+    restart: always
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.web_static
+      args:
+        - PROJECT=tv
+    # ports:
+    #   - "8081:8081"
+    volumes:
+      - ../src/tv:/app
+    links:
+      - backend
+    # depends_on:
+    #   - backend
+    environment:
+      # the env(like link to other service) will be manage in project level(.env),
+      # expect NODE_ENV are managed in docker file,
+      # and DOCKER_ENV for link between client and microservices
+      - DOCKER_ENV=1
+    # command: env
+  backend:
+    restart: always
+    build:
+      context: ../
+      dockerfile: configs/docker.dev.web_static
+      args:
+        - PROJECT=backend
+    # ports:
+    #   - "8070:8070"
+    volumes:
+      - ../src/backend:/app
+    # command: env
