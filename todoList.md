@@ -30,7 +30,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * ssl
-* auto reload the configs: https://github.com/rhumaric/docker.nginx-autoreload
+* ~~auto reload the configs~~``docker-compose restart`` instead
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
