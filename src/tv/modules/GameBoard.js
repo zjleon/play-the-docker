@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import position from '../service/Position'
 import ws from '../service/WS'
 
 class GameBoard extends Component {
@@ -16,6 +15,7 @@ class GameBoard extends Component {
 
   render() {
     return <div style={styles.container}>
+      game start6
     </div>
   }
 }

@@ -7,7 +7,8 @@ import React, { Component } from 'react'
 
 import Calibration from '../modules/Calibration'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {createBrowserHistory} from 'history'
+
+// import {createBrowserHistory} from 'history'
 
 const pathPrefix = process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''
 
