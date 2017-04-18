@@ -9,7 +9,6 @@ import GameBoard from '../modules/GameBoard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const pathPrefix = process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''
-console.log(process.env.DOCKER_ENV)
 
 class Router extends Component {
   constructor() {

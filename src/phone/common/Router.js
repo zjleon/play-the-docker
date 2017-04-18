@@ -11,7 +11,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 // import {createBrowserHistory} from 'history'
 
 const pathPrefix = process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''
-console.log(process.env.DOCKER_ENV)
 
 class Router extends Component {
   constructor() {
