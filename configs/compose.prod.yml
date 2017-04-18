@@ -1,6 +1,21 @@
 version: '2'
 
 services:
+  nginx:
+    restart: always
+    image: nginx
+    volumes:
+      - ../configs:/etc/nginx
+    ports:
+      - "3000:3000"
+    links:
+      - phone
+      - tv
+      - backend
+    depends_on:
+      - phone
+      - tv
+      - backend
   phone:
     image: 'asia.gcr.io/pg-us-e-app-518137/phone:prod'
     ports:

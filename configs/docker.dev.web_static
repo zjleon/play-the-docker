@@ -42,7 +42,9 @@ COPY ./src/${PROJECT}/package.json ./package.json
 COPY ./src/${PROJECT}/.yarnrc ./.yarnrc
 RUN yarn install && \
     rm -f package.json
+EXPOSE 8070
 EXPOSE 8080
+EXPOSE 8081
 ENV NODE_ENV=development
 
 # execute initialize script

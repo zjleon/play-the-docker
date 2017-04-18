@@ -111,7 +111,7 @@ class Calibration extends Component {
         </CardText>
         <CardActions>
           <Link to={`/calibration`}>
-            Rendering with React
+            Rendering with React23
           </Link>
           <FlatButton label="Finish" />
         </CardActions>
