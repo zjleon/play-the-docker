@@ -1,72 +1,31 @@
-version: "2"
+version: '2'
 
 services:
   nginx:
-    restart: always
-    image: nginx
-    volumes:
-      - ../configs:/etc/nginx
+    restart: no
+    # image: configs_nginx
     ports:
       - "3000:3000"
-    links:
-      - phone
-      - tv
-      - backend
-    depends_on:
-      - phone
-      - tv
-      - backend
+    volumes:
+      - ../configs:/etc/nginx
   phone:
-    restart: always
-    build:
-      context: ../
-      dockerfile: configs/docker.dev.web_static
-      args:
-        - PROJECT=phone
-    # ports:
-    #   - "8080:8080"
+    restart: no
     volumes:
       - ../src/phone:/app
     environment:
-      # the env(like link to other service) will be manage in project level(.env),
-      # expect NODE_ENV are managed in docker file,
-      # and DOCKER_ENV for link between client and microservices
-      - DOCKER_ENV=1
-    links:
-      - backend
-    # depends_on:
-    #   - backend
+      - NODE_ENV=development
     # command: env
   tv:
-    restart: always
-    build:
-      context: ../
-      dockerfile: configs/docker.dev.web_static
-      args:
-        - PROJECT=tv
-    # ports:
-    #   - "8081:8081"
+    restart: no
     volumes:
       - ../src/tv:/app
-    links:
-      - backend
-    # depends_on:
-    #   - backend
     environment:
-      # the env(like link to other service) will be manage in project level(.env),
-      # expect NODE_ENV are managed in docker file,
-      # and DOCKER_ENV for link between client and microservices
-      - DOCKER_ENV=1
+      - NODE_ENV=development
     # command: env
   backend:
-    restart: always
-    build:
-      context: ../
-      dockerfile: configs/docker.dev.web_static
-      args:
-        - PROJECT=backend
-    # ports:
-    #   - "8070:8070"
+    restart: no
+    environment:
+      - NODE_ENV=development
     volumes:
       - ../src/backend:/app
     # command: env

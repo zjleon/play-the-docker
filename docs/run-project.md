@@ -75,24 +75,33 @@ docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 
 ## production environment:
 1. build image:
-``docker build -t asia.gcr.io/pwc-mwc-app/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .``
-1. test single container: ``docker run -it -v $(pwd)/src/phone:/app -p 8080:8080 asia.gcr.io/pwc-mwc-app/phone:prod``
+```
+docker build -t asia.gcr.io/pwc-mwc-app/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .
+docker build -t asia.gcr.io/pwc-mwc-app/tv:prod -f configs/docker.prod.web_static --build-arg PROJECT=tv .
+docker build -t asia.gcr.io/pwc-mwc-app/backend:prod -f configs/docker.prod.web_static --build-arg PROJECT=backend .
+docker build -t asia.gcr.io/pwc-mwc-app/nginx:prod -f configs/docker.prod.nginx .
+```
+1. test single container: ``docker run -it -p 8080:8080 asia.gcr.io/pwc-mwc-app/phone:prod``
 1. test in local: check docker-compose helper
-1. push image: ``gcloud docker -- push gcr.io/pwc-mwc-app/phone:prod``
+1. push image: ``gcloud docker -- push asia.gcr.io/pwc-mwc-app/phone:prod``
 1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
 1. deploy to kubernete:
 
 # docker-compose helper
 ## 1. build docker images
-``docker-compose -f configs/compose.dev.yml build``
-## 2. start them all services
-``docker-compose -f configs/compose.dev.yml up``
+``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml build``
+for production build:
+``docker-compose -f configs/compose.prod.yml build``
+## 2. start all services
+``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ up``
+for production build:
+``docker-compose -f configs/compose.dev.yml -f configs/compose.prod.yml -p asia.gcr.io/pwc-mwc-app/ up``
 ## 3. check the logs of web_static
-``docker-compose -f configs/compose.dev.yml logs web_static``
+``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ logs web_static``
 ## 4. check status:
-``docker-compose -f configs/compose.dev.yml ps``
+``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ ps``
 ## 4. restart nginx service:
-``docker-compose -f configs/compose.dev.yml restart nginx``
+``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ restart nginx``
 ## 1. clear non-used images and containers to free space
 install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
 or:

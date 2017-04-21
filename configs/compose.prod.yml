@@ -1,13 +1,14 @@
-version: '2'
+version: "2"
 
 services:
   nginx:
     restart: always
-    image: nginx
-    volumes:
-      - ../configs:/etc/nginx
+    build:
+      context: ../
+      dockerfile: configs/docker.prod.nginx
+    image: asia.gcr.io/pwc-mwc-app/nginx:prod
     ports:
-      - "3000:3000"
+      - "80:3000"
     links:
       - phone
       - tv
@@ -17,16 +18,45 @@ services:
       - tv
       - backend
   phone:
-    image: 'asia.gcr.io/pg-us-e-app-518137/phone:prod'
-    ports:
-      - "80:8080"
+    restart: always
+    build:
+      context: ../
+      dockerfile: configs/docker.prod.web_static
+      args:
+        - PROJECT=phone
+    image: asia.gcr.io/pwc-mwc-app/phone:prod
+    environment:
+      # the env(like link to other service) will be manage in project level(.env),
+      # expect NODE_ENV are managed in docker file,
+      # and DOCKER_ENV for link between client and microservices
+      - DOCKER_ENV=1
+      - NODE_ENV=production
     links:
       - backend
-    depends_on:
+    # command: env
+  tv:
+    restart: always
+    build:
+      context: ../
+      dockerfile: configs/docker.prod.web_static
+      args:
+        - PROJECT=tv
+    image: asia.gcr.io/pwc-mwc-app/tv:prod
+    links:
       - backend
-    # command: ["ls", "/app"]
+    environment:
+      # the env(like link to other service) will be manage in project level(.env),
+      # expect NODE_ENV are managed in docker file,
+      # and DOCKER_ENV for link between client and microservices
+      - DOCKER_ENV=1
+      - NODE_ENV=production
+    # command: env
   backend:
-    image: 'asia.gcr.io/pg-us-e-app-518137/backend:prod'
-    ports:
-      - "8001:8080"
-    # command: ["ls", "/app"]
+    restart: always
+    build:
+      context: ../
+      dockerfile: configs/docker.prod.web_static
+      args:
+        - PROJECT=backend
+    image: asia.gcr.io/pwc-mwc-app/backend:prod
+    # command: env

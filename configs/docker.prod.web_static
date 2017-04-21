@@ -2,6 +2,15 @@ FROM ubuntu:15.10
 
 RUN apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
+    ssh \
+    git \
+    python \
+    pkg-config \
+    libcairo2-dev \
+    libjpeg-dev \
+    libgif-dev \
+    build-essential \
+    curl \
     xz-utils
 
 # install node
@@ -11,6 +20,17 @@ COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
 ENV PATH ${PATH}:/opt/node-v${NODE_VERSION}-linux-x64/bin
+# node-gyp build require node header, and doing this can get it from offline
+RUN curl -o /opt/node-v${NODE_VERSION}-headers.tar.gz -k https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-headers.tar.gz
+ENV npm_config_nodedir=/opt/node-v${NODE_VERSION}-linux-x64/
+ENV npm_config_tarball=/opt/node-v${NODE_VERSION}-headers.tar.gz
+
+# install yarn
+COPY ./resources/yarn-v0.23.2.tar.gz ./yarn.tar.gz
+RUN mkdir yarn && \
+    tar zxf yarn.tar.gz --directory /opt/yarn --strip-components=1 &&  \
+    rm -f yarn.tar.gz
+ENV PATH ${PATH}:/opt/yarn/bin
 
 # install tini
 COPY ./resources/tini /tini
@@ -19,17 +39,36 @@ RUN chmod +x /tini
 # define variables
 ARG PROJECT=web_static
 
-# pre-install node resources
+# add ssh key before yarn install
+# RUN mkdir /root/.ssh/
+# ADD ./configs/id_rsa /root/.ssh/id_rsa
+# RUN touch /root/.ssh/known_hosts && \
+#     ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts && \
+#     ssh-keyscan github.com >> ~/.ssh/known_hosts && \
+#     echo "Host github.com\n\tUser git\n" >> /root/.ssh/config
+
+# cache the project dependencies
 WORKDIR /node_resources
 COPY ./src/${PROJECT}/package.json ./package.json
-RUN yarn install --production \
-   && rm -f package.json
-EXPOSE 8080
-ENV NODE_ENV=production
+COPY ./src/${PROJECT}/.yarnrc ./.yarnrc
+RUN yarn install && \
+    rm -frd /node_resources
 
 # execute initialize script
 WORKDIR /app
 COPY ./src/${PROJECT} .
+# XXX: in NODE_ENV=production, webpack will not be installed
+# RUN rm /app/yarn.lock && \
+#     yarn install && \
+#     npm run build_prod && \
+#     rm -frd /app/node_modules && \
+#     rm /app/yarn.lock
+# ENV NODE_ENV=production
+
+EXPOSE 8070
+EXPOSE 8080
+EXPOSE 8081
+
 ENTRYPOINT ["/tini", "--"]
 # initial.sh will be mounted to client disk
 CMD ["/bin/bash", "./initial.sh"]

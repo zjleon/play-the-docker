@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "better-npm-run dev:web_static",
+    "build_prod": "better-npm-run prod:build",
     "start_prod": "better-npm-run prod:web_static",
     "test": "better-npm-run test"
   },
@@ -15,8 +16,11 @@
     "dev:dirTree": {
       "command": "node ./dirTree.dev.js"
     },
+    "prod:build": {
+      "command": "node node_modules/webpack/bin/webpack.js --config configs/webpack.prod.js -p"
+    },
     "prod:web_static": {
-      "command": "webpack --config configs/webpack.prod.js -p && node ./entry.prod.js"
+      "command": "node ./entry.prod.js"
     },
     "test": {
       "command": "jest"
