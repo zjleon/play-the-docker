@@ -14,7 +14,6 @@ const devServerEndPoint = process.env.DOCKER_ENV ?
   :
   'webpack-dev-server/client?http://localhost:' + process.env.PORT
 const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
-console.log('********process.env.DOCKER_ENV: ', process.env.DOCKER_ENV)
 let envFile = fs.readFileSync('.env', 'utf8')
 let envToClient = {
   DOCKER_ENV: process.env.DOCKER_ENV || 0,
