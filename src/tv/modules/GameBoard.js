@@ -15,7 +15,7 @@ class GameBoard extends Component {
 
   render() {
     return <div style={styles.container}>
-      game start6
+      game start2
     </div>
   }
 }

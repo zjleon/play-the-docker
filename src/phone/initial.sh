@@ -11,8 +11,6 @@ echo "starting..."
 
 if [ $NODE_ENV == "production" ]; then
   echo "webpack building"
-  # unset NODE_ENV
-  # echo $NODE_ENV
   rm /app/yarn.lock
   NODE_ENV=development yarn install
   NODE_ENV=development npm run build_prod
@@ -20,8 +18,6 @@ if [ $NODE_ENV == "production" ]; then
   rm -frd /app/node_modules
   rm /app/yarn.lock
   # install only production dependencies
-  # export NODE_ENV=production
-  # echo $NODE_ENV
   yarn install --production
   rm -f /app/.env
   cp /app/production.env /app/.env
