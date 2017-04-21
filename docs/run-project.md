@@ -74,14 +74,6 @@ docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ```
 
 ## production environment:
-1. build image:
-```
-docker build -t asia.gcr.io/pwc-mwc-app/phone:prod -f configs/docker.prod.web_static --build-arg PROJECT=phone .
-docker build -t asia.gcr.io/pwc-mwc-app/tv:prod -f configs/docker.prod.web_static --build-arg PROJECT=tv .
-docker build -t asia.gcr.io/pwc-mwc-app/backend:prod -f configs/docker.prod.web_static --build-arg PROJECT=backend .
-docker build -t asia.gcr.io/pwc-mwc-app/nginx:prod -f configs/docker.prod.nginx .
-```
-1. test single container: ``docker run -it -p 8080:8080 asia.gcr.io/pwc-mwc-app/phone:prod``
 1. test in local: check docker-compose helper
 1. push image: ``gcloud docker -- push asia.gcr.io/pwc-mwc-app/phone:prod``
 1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
