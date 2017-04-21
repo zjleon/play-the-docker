@@ -16,7 +16,7 @@ const devServerEndPoint = process.env.DOCKER_ENV ?
 const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
 let envFile = fs.readFileSync('.env', 'utf8')
 let envToClient = {
-  DOCKER_ENV: process.env.DOCKER_ENV,
+  DOCKER_ENV: process.env.DOCKER_ENV || 0,
 }
 envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {
   envToClient[$1] = $3 ? Number($3) : $2

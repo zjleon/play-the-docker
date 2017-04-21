@@ -4,6 +4,7 @@
   "description": "backend service for android and web",
   "scripts": {
     "start": "better-npm-run dev:web_static",
+    "build_prod": "echo skip build for backend",
     "start_prod": "better-npm-run prod:web_static",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,7 +16,7 @@
       "command": "node ./dirTree.dev.js"
     },
     "prod:web_static": {
-      "command": "node ./webpack.prod.js"
+      "command": "node ./entry.dev.js"
     }
   },
   "author": "",
