@@ -54,21 +54,14 @@ COPY ./src/${PROJECT}/.yarnrc ./.yarnrc
 RUN yarn install && \
     rm -frd /node_resources
 
-# execute initialize script
 WORKDIR /app
 COPY ./src/${PROJECT} .
-# XXX: in NODE_ENV=production, webpack will not be installed
-# RUN rm /app/yarn.lock && \
-#     yarn install && \
-#     npm run build_prod && \
-#     rm -frd /app/node_modules && \
-#     rm /app/yarn.lock
-# ENV NODE_ENV=production
 
 EXPOSE 8070
 EXPOSE 8080
 EXPOSE 8081
 
+# execute initialize script
 ENTRYPOINT ["/tini", "--"]
 # initial.sh will be mounted to client disk
 CMD ["/bin/bash", "./initial.sh"]
