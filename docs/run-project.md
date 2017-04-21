@@ -93,15 +93,15 @@ docker build -t asia.gcr.io/pwc-mwc-app/nginx:prod -f configs/docker.prod.nginx 
 for production build:
 ``docker-compose -f configs/compose.prod.yml build``
 ## 2. start all services
-``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ up``
+``docker-compose -f configs/compose.dev.yml -f configs/compose.dev.yml up``
 for production build:
-``docker-compose -f configs/compose.dev.yml -f configs/compose.prod.yml -p asia.gcr.io/pwc-mwc-app/ up``
+``docker-compose -f configs/compose.prod.yml up``
 ## 3. check the logs of web_static
-``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ logs web_static``
+``docker-compose -f configs/compose.prod.yml logs web_static``
 ## 4. check status:
-``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ ps``
+``docker-compose -f configs/compose.prod.yml ps``
 ## 4. restart nginx service:
-``docker-compose -f configs/compose.dev.yml -p asia.gcr.io/pwc-mwc-app/ restart nginx``
+``docker-compose -f configs/compose.prod.yml restart nginx``
 ## 1. clear non-used images and containers to free space
 install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
 or:
