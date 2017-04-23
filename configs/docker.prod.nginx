@@ -1,4 +1,6 @@
 FROM nginx
+
+# keep for future production debugging
 RUN apt-get update && \
     apt-get install -y --force-yes --no-install-recommends \
     dnsutils \
@@ -7,4 +9,3 @@ RUN apt-get update && \
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
-# CMD ["ping", "127.0.0.1", "-c", "9999999"]
