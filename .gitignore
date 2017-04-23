@@ -50,5 +50,5 @@ gradle
 local.properties
 react-native-packager-cache-*
 haste-map-react-native-packager-*
-*-depolyment.yaml
+*-deployment.yaml
 *-service.yaml
