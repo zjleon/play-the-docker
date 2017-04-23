@@ -216,7 +216,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
   https://github.com/krallin/tini~~
 
 ## prod:
-* overide the dev yaml setting
+* ~~overide the dev yaml setting~~
 * apply production error track tool: https://sentry.io/welcome/
 
 ## dev:

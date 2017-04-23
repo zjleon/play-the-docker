@@ -1,5 +1,10 @@
 FROM nginx
+RUN apt-get update && \
+    apt-get install -y --force-yes --no-install-recommends \
+    dnsutils \
+    iputils-ping
 
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
+# CMD ["ping", "127.0.0.1", "-c", "9999999"]
