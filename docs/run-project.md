@@ -63,7 +63,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 ```
 docker build -t asia.gcr.io/pwc-mwc-app/phone -f configs/docker.dev.web_static --build-arg PROJECT=phone .
 docker build -t asia.gcr.io/pwc-mwc-app/tv -f configs/docker.dev.web_static --build-arg PROJECT=tv .
-docker build -t asia.gcr.io/pwc-mwc-app/nginx -f configs/docker.dev.nginx .
+docker build -t asia.gcr.io/pwc-mwc-app/nginx -f configs/docker.prod.nginx .
 ```
 * run image(**all docker parameter must add before image tag**):
 ```
@@ -75,9 +75,18 @@ docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 
 ## production environment:
 1. test in local: check docker-compose helper
-1. push image: ``gcloud docker -- push asia.gcr.io/pwc-mwc-app/phone:prod``
-1. convert the production config files: ``kompose -f configs/compose.prod.yml convert``
+1. push image:
+```
+/bin/bash ./scripts/gcloud.push_images.sh
+```
 1. deploy to kubernete:
+```
+kompose -f configs/compose.prod.yml up
+// or
+kompose -f configs/compose.prod.yml convert
+kubectl create -f phone-deployment.yaml -f tv-deployment.yaml
+```
+
 
 # docker-compose helper
 ## 1. build docker images

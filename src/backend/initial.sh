@@ -9,7 +9,7 @@ echo "starting..."
 # chown -R root:root /app/node_modules
 
 if [ $NODE_ENV == "production" ]; then
-  rm /app/yarn.lock
+  rm ./yarn.lock
   yarn install --production
   rm -f /app/.env
   cp /app/production.env /app/.env

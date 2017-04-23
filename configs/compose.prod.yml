@@ -13,10 +13,14 @@ services:
       - phone
       - tv
       - backend
+    environment:
+      - GET_HOSTS_FROM=dns
     depends_on:
       - phone
       - tv
       - backend
+    labels:
+      kompose.service.type: loadbalancer
   phone:
     restart: always
     build:
@@ -25,12 +29,15 @@ services:
       args:
         - PROJECT=phone
     image: asia.gcr.io/pwc-mwc-app/phone:prod
+    ports:
+      - "8080"
     environment:
       # the env(like link to other service) will be manage in project level(.env),
       # expect NODE_ENV are managed in docker file,
       # and DOCKER_ENV for link between client and microservices
       - DOCKER_ENV=1
       - NODE_ENV=production
+      - GET_HOSTS_FROM=dns
     links:
       - backend
     # command: env
@@ -42,6 +49,8 @@ services:
       args:
         - PROJECT=tv
     image: asia.gcr.io/pwc-mwc-app/tv:prod
+    ports:
+      - "8081"
     links:
       - backend
     environment:
@@ -50,13 +59,18 @@ services:
       # and DOCKER_ENV for link between client and microservices
       - DOCKER_ENV=1
       - NODE_ENV=production
+      - GET_HOSTS_FROM=dns
     # command: env
   backend:
     restart: always
+    ports:
+      - "8070"
     build:
       context: ../
       dockerfile: configs/docker.prod.web_static
       args:
         - PROJECT=backend
+    environment:
+      - GET_HOSTS_FROM=dns
     image: asia.gcr.io/pwc-mwc-app/backend:prod
     # command: env
