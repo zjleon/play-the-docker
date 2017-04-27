@@ -29,6 +29,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://github.com/exponentjs/ex-navigation
 
 ## nginx:
+* sever domain.com for prod config
 * ssl
 * ~~auto reload the configs~~``docker-compose restart`` instead
 * ~~support hash and test the history api~~
