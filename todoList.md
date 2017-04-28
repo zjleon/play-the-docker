@@ -195,6 +195,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 
 # docker compose
 * **put the nginx endpoint in compose instead of .env**
+* use rolling update to update k8s deployment
 * ~~build multi containers.~~ ~~docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~
 * ~~faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files~~
 * *change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58*
