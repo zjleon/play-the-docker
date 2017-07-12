@@ -50,6 +50,7 @@
   "license": "ISC",
   "dependencies": {
     "better-npm-run": "0.0.14",
+    "clone": "^2.1.1",
     "express": "^4.14.1",
     "three": "^0.85.2",
     "websocket": "^1.0.24"

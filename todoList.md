@@ -36,6 +36,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~nginx container~~
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
 * open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
+* map all backend api to each front end service instance automatically
 
 ## web
 * static resources server, apply hash to all resources
