@@ -31,28 +31,28 @@ class Calibration extends Component {
   }
 
   componentDidMount() {
-    // window.addEventListener('deviceorientation', (event) => {
-    //   let absolute = event.absolute
-    //   let alpha = event.alpha
-    //   let beta = event.beta
-    //   let gamma = event.gamma
-    //   console.log(gamma)
-    //   let data = {
-    //     phone: {
-    //       action: 'phoneMove',
-    //       movements: gamma,
-    //     },
-    //   }
-    //   ws.send(JSON.stringify(gamma))
-    //
-    //   // Do stuff with the new orientation data
-    //   // this.setState({
-    //   //   absolute,
-    //   //   alpha,
-    //   //   beta,
-    //   //   gamma,
-    //   // })
-    // }, false)
+    window.addEventListener('deviceorientation', (event) => {
+      let absolute = event.absolute
+      let alpha = event.alpha
+      let beta = event.beta
+      let gamma = event.gamma
+      console.log('z:', alpha, ' || x', beta)
+      // let data = {
+      //   phone: {
+      //     action: 'phoneMove',
+      //     movements: gamma,
+      //   },
+      // }
+      // ws.send(JSON.stringify(gamma))
+
+      // Do stuff with the new orientation data
+      // this.setState({
+      //   absolute,
+      //   alpha,
+      //   beta,
+      //   gamma,
+      // })
+    }, false)
     // ws.onmessage = (e) => {
     //   console.log("phone Received: '" + JSON.stringify(e) + "'")
     // }
