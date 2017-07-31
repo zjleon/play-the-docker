@@ -1,10 +1,11 @@
 # pre-request:
 ## install atom and its package
 ```
-// export packages
-apm list --installed --bare > configs/atom.packages.txt
+// export packages and settings
+pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && popd && mv ~/.atom/atom.zip ./resources/atom.zip
+
 // import packages
-apm install --packages-file atom.packages.txt
+unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 ```
 
 ## install docker
