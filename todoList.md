@@ -40,8 +40,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* create initial state in redux, apply immutable js
+* use the SSR to render the basic html, keep the html at minimal and has the very
+basic content in it so user can see some content without waiting,
+but how to handle the js render after the initial render
 * static resources server, apply hash to all resources
-* API to generate the resources link to other services,
+* ~~API to generate the resources link to other services,~~
 * use webworker for web and mobile web
 * ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
@@ -232,7 +236,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * web_static: generate error report and use tail command in atom shell package
 
 # github
-* decide which cloud to use
+* decide which cloud to use as CI
 * webhook on github
   * on client side, do all unit test before commit
   * on server side, trigger CI server when commit into master

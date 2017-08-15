@@ -5,6 +5,9 @@ import FlatButton from 'material-ui/FlatButton'
 import {
   Link,
 } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import store from '../redux/store'
 // import position from '../service/Position'
 import ws from '../service/WS'
 
@@ -93,8 +96,16 @@ class Calibration extends Component {
   //   }
   // }
 
+  onClickButton() {
+    this.props.dispatch({
+      type: 'CHANGE_QUATERNION',
+      quaternion: 123,
+    })
+  }
+
   render() {
     console.log(this.props)
+    console.log(store.getState())
     return <div style={styles.container}>
       <Card>
         <CardHeader
@@ -113,11 +124,15 @@ class Calibration extends Component {
           <Link to={`/calibration`}>
             Rendering with React23
           </Link>
-          <FlatButton label="Finish" />
+          <FlatButton label="Finish" onClick={this.onClickButton.bind(this)} />
         </CardActions>
       </Card>
     </div>
   }
+}
+
+Calibration.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 }
 
 const styles = {
@@ -126,4 +141,7 @@ const styles = {
   },
 }
 
-export default Calibration
+// export default Calibration
+export default connect((state, ownProps) => ({
+  homeReducer: state.homeReducer,
+}))(Calibration)
