@@ -8,8 +8,8 @@
       "ecmaVersion": 6,
       "sourceType": "module",
       "ecmaFeatures": {
-        "jsx": true
-        "react-native"
+        "jsx": true,
+        "react-native": true
       }
   },
   "plugins": [
@@ -167,6 +167,7 @@
     "react-native/split-platform-components": 2,
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
+    "react/prop-types": [0],
   },
   "extends": ["plugin:react/recommended"]
 }

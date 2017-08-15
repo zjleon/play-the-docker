@@ -22,7 +22,6 @@ const hotRender = () => {
   )
 }
 
-// store.subscribe(hotRender)
 hotRender()
 
 if (module.hot) {

@@ -7,9 +7,9 @@ import sagaMoniter from './sagamoniter'
 
 const sagaMiddleware = createSagaMiddleware({sagaMoniter})
 const store = createStore(
-  rootReducer
-  // applyMiddleware(sagaMiddleware)
+  rootReducer,
+  applyMiddleware(sagaMiddleware)
 )
-// sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga)
 
 export default store

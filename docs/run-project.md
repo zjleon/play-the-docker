@@ -8,6 +8,11 @@ pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && p
 unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 ```
 
+## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+## install flow:
+``npm i -g flow-bin``
+
 ## install docker
 instruction to installation
 

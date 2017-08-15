@@ -7,6 +7,7 @@ import {
 import React, { Component } from 'react'
 
 import Calibration from '../modules/Calibration'
+import Home from '../modules/Home'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
@@ -21,13 +22,12 @@ class Router extends Component {
   }
 
   render() {
-    console.log('router')
     return (
       <Provider store={store}>
         <BrowserRouter basename={pathPrefix}>
           <MuiThemeProvider>
             <div>
-              <Route exact path={"/"} component={Calibration}/>
+              <Route exact path={"/"} component={Home}/>
               <Route path={"/calibration"} component={Calibration}/>
               {/* <Route path="/topics" component={Topics}/> */}
             </div>

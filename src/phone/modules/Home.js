@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import ws from '../service/WS'
 
 let send = 0
-class Calibration extends Component {
+class Home extends Component {
   constructor() {
     super()
 
@@ -129,10 +129,6 @@ class Calibration extends Component {
   }
 }
 
-Calibration.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-}
-
 const styles = {
   container: {
     margin: 20,
@@ -140,4 +136,6 @@ const styles = {
 }
 
 // export default Calibration
-export default connect()(Calibration)
+export default connect((state, ownProps) => ({
+  home: state.home,
+}))(Home)
