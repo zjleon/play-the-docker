@@ -55,7 +55,7 @@ function* receiverSaga() {
 }
 
 function* senderSaga() {
-
+  yield 1
 }
 
 // socketConnection.onopen = function() {
@@ -97,5 +97,5 @@ function* senderSaga() {
 // export default socketConnection
 export {
   senderSaga,
-  receiverSaga,
+  // receiverSaga,
 }
