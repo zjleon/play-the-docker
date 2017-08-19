@@ -8,7 +8,9 @@ import {
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import position from '../service/Position'
-import ws from '../service/WS'
+import store from '../redux/store'
+
+// import ws from '../service/WS'
 
 let send = 0
 class Home extends Component {
@@ -82,6 +84,10 @@ class Home extends Component {
     // })
   }
 
+  componentUnMount() {
+
+  }
+
   // onReachTimer(movement) {
   //   if (send < 10) {
   //     let data = {
@@ -97,13 +103,13 @@ class Home extends Component {
 
   onClickButton() {
     this.props.dispatch({
-      type: 'CHANGE_QUATERNION',
-      quaternion: 123,
+      type: 'REQUEST_GET',
+      url: 'aaa'
     })
   }
 
   render() {
-    console.log(this.props)
+    console.log('render2', this.props)
     return <div style={styles.container}>
       <Card>
         <CardHeader
@@ -122,7 +128,7 @@ class Home extends Component {
           <Link to={`/calibration`}>
             Rendering with React23
           </Link>
-          <FlatButton label="Finish" onClick={this.onClickButton.bind(this)} />
+          <FlatButton label="ajax" onClick={this.onClickButton.bind(this)} />
         </CardActions>
       </Card>
     </div>
@@ -135,7 +141,6 @@ const styles = {
   },
 }
 
-// export default Calibration
 export default connect((state, ownProps) => ({
   home: state.home,
 }))(Home)

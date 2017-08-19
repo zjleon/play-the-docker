@@ -100,9 +100,18 @@ module.exports = {
   ],
   devServer: {
     hot: true,
+    host: '0.0.0.0',
     contentBase: distPath,
     publicPath: publicPath,
-    historyApiFallback: true,
+    disableHostCheck: true,
+    setup: function(app) {
+      app.all('*', function(req, res, next) {
+        console.log('req headers', req.headers)
+        console.log('req path', req.path)
+        console.log('req query', req.query)
+        next()
+      })
+    },
     // historyApiFallback: {
     //   rewrites: [
     //     { from: /.+/, to: '/' },

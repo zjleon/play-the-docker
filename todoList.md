@@ -40,7 +40,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* create initial state in redux, apply immutable js
+* **the production express should record the request path, query, header, response result of each request**
+* apply immutable js, create loading spin animation
 * use the SSR to render the basic html, keep the html at minimal and has the very
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render

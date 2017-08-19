@@ -15,7 +15,7 @@ RUN apt-get update && \
 
 # install node
 WORKDIR /opt
-ENV NODE_VERSION=6.9.1
+ENV NODE_VERSION=6.11.2
 COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz

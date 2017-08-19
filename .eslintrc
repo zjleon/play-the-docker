@@ -9,7 +9,8 @@
       "sourceType": "module",
       "ecmaFeatures": {
         "jsx": true,
-        "react-native": true
+        "react-native": true,
+        "experimentalObjectRestSpread": true
       }
   },
   "plugins": [
@@ -129,7 +130,7 @@
     "comma-style": [2, "last"],      // http://eslint.org/docs/rules/comma-style
     "eol-last": 2,                   // http://eslint.org/docs/rules/eol-last
     "func-names": 0,                 // http://eslint.org/docs/rules/func-names
-    "func-style": [2, "expression"], // http://eslint.org/docs/rules/func-style
+    "func-style": [2, "declaration", { "allowArrowFunctions": true }], // http://eslint.org/docs/rules/func-style
     "key-spacing": [2, {             // http://eslint.org/docs/rules/key-spacing
         "beforeColon": false,
         "afterColon": true
@@ -160,6 +161,7 @@
     "space-infix-ops": 2,            // http://eslint.org/docs/rules/space-infix-ops
     "spaced-comment": 2,             // http://eslint.org/docs/rules/spaced-comment
     "no-multi-spaces": 2,             // http://eslint.org/docs/rules/no-multi-spaces
+    "generator-star-spacing": ["error", {"before": false, "after": true}],
 /**
  * react-native
  */
@@ -167,7 +169,9 @@
     "react-native/split-platform-components": 2,
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
-    "react/prop-types": [0],
+    "react/prop-types": [0]
   },
-  "extends": ["plugin:react/recommended"]
+  "extends": [
+    "plugin:react/recommended"
+  ]
 }

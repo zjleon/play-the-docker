@@ -6,7 +6,7 @@ const gulp = require('gulp')
 let compiler = webpack(webpackConfig)
 
 // Done processing
-const server = new WebpackDevServer(compiler)
+const server = new WebpackDevServer(compiler, webpackConfig.devServer)
 server.listen(process.env.PORT, "0.0.0.0", () => {
   console.log('dev server started up at port' + process.env.PORT)
 })

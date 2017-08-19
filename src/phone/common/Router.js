@@ -14,7 +14,6 @@ import createHistory from 'history/createBrowserHistory'
 import store from '../redux/store'
 
 const pathPrefix = process.env.DOCKER_ENV ? '/' + process.env.PROJECT_ID : ''
-// const history = createHistory()
 
 class Router extends Component {
   constructor() {

@@ -3,11 +3,11 @@
     ["es2015", {"modules": false}],
     "stage-1",
     "stage-2",
-    "react",
-    "flow"
+    "react"
   ],
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
   ],
   "env": {
     "test": {

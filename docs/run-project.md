@@ -10,9 +10,6 @@ unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 
 ## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
-## install flow:
-``npm i -g flow-bin``
-
 ## install docker
 instruction to installation
 
@@ -100,7 +97,7 @@ kubectl create -f phone-deployment.yaml -f tv-deployment.yaml
 for production build:
 ``docker-compose -f configs/compose.prod.yml build``
 ## 2. start all services
-``docker-compose -f configs/compose.dev.yml -f configs/compose.dev.yml up``
+``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml up``
 for production build:
 ``docker-compose -f configs/compose.prod.yml up``
 ## 3. check the logs of web_static

@@ -7,8 +7,9 @@ import {
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 // import position from '../service/Position'
-import ws from '../service/WS'
+// import ws from '../service/WS'
 
 let send = 0
 class Calibration extends Component {
