@@ -79,7 +79,7 @@ function* senderSaga() {
 }
 
 function socketSender(action) {
-  console.log('socketSender', action)
+  console.log('socketSender3', action)
   if (socketConnection.readyState === socketConnection.OPEN) {
     let test = {
       phone: {

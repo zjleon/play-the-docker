@@ -107,7 +107,7 @@ class Home extends Component {
     //   url: 'aaa'
     // })
     this.props.dispatch({
-      type: 'test1',
+      type: 'SOCKET_SEND_MESSSGE',
       value: 'aaa'
     })
   }

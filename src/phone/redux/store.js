@@ -11,13 +11,18 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 )
-sagaMiddleware.run(rootSaga)
+let sagaTask = sagaMiddleware.run(rootSaga)
 
 if (module.hot) {
-  console.log(111)
   module.hot.accept('./reducers/', (module) => {
-    console.log(module)
     store.replaceReducer(require('./reducers/index.js').default)
+  })
+  module.hot.accept('./sagas/', (module) => {
+    const getNewSagas = require('./sagas/').default
+    sagaTask.cancel()
+    sagaTask.done.then(() => {
+      sagaTask = sagaMiddleware.run(getNewSagas)
+    })
   })
 }
 

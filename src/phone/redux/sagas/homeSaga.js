@@ -1,9 +1,13 @@
-import {put, takeEvery, takeLatest} from 'redux-saga/effects'
+import {all, put, takeEvery, takeLatest} from 'redux-saga/effects'
 
-function* onMessageReceived(message) {
-  console.log('onMessageReceived', message)
+function* onMessageReceived() {
+  takeEvery('SOCKET_MESSAGE_ARRIVED', function* (action) {
+    console.log('onMessageReceived', action)
+  })
 }
 
 export default function* homeSaga() {
-  yield takeEvery('SOCKET_MESSAGE_ARRIVED', onMessageReceived)
+  yield all([
+    onMessageReceived(),
+  ])
 }
