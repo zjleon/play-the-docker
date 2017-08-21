@@ -102,9 +102,13 @@ class Home extends Component {
   // }
 
   onClickButton() {
+    // this.props.dispatch({
+    //   type: 'REQUEST_GET',
+    //   url: 'aaa'
+    // })
     this.props.dispatch({
-      type: 'REQUEST_GET',
-      url: 'aaa'
+      type: 'test1',
+      value: 'aaa'
     })
   }
 

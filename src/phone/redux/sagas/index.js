@@ -1,9 +1,9 @@
 import {hideModal, showModal} from './uiSaga'
+import {receiverSaga, senderSaga} from './socketSaga'
 
 import {all} from 'redux-saga/effects'
 import {get} from './restfulSaga'
 import homeSaga from './homeSaga'
-import {senderSaga} from './socketSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -11,5 +11,7 @@ export default function* rootSaga() {
     get(),
     hideModal(),
     showModal(),
+    senderSaga(),
+    receiverSaga(),
   ])
 }

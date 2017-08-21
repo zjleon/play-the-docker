@@ -2,6 +2,7 @@ import {Map} from 'immutable'
 
 const initialState = Map({
   quaternion: null,
+  test1: 1,
 })
 
 export default (state = initialState, action) => {

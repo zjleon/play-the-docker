@@ -12,8 +12,14 @@
 # websocket config
 ``./.env`` is where the socket url lives
 ## usage:
-once the app start, the socket will be set automatically
-once a message is arrived the client side, an action will be dispatch with format:
+* once the app start, the socket will be set automatically, and an action will be dispatched like:
+```
+{
+  type: 'SOCKET_OPEN',
+}
+```
+
+* once a message is arrived the client side, an action will be dispatched with format:
 ```
 {
   type: 'SOCKET_MESSAGE_ARRIVED',
@@ -21,3 +27,24 @@ once a message is arrived the client side, an action will be dispatch with forma
 }
 ```
 and in each saga, use ``takeEvery('SOCKET_MESSAGE_ARRIVED', handler)`` to get the message
+
+* To send a message, dispatched below action:
+```
+{
+  type: 'SOCKET_SEND_MESSSGE',
+  message,
+}
+```
+
+# make file changes hot reload:
+In ``index.js``, add file names in:
+```
+if (module.hot) {
+  module.hot.accept('./common/Router.js', () => {
+    hotRender()
+  })
+  module.hot.accept('./redux/store.js', () => {
+    hotRender()
+  })
+}
+```

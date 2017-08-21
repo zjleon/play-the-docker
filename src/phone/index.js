@@ -26,40 +26,6 @@ hotRender()
 
 if (module.hot) {
   module.hot.accept('./common/Router.js', () => {
-    hotRender(Router)
+    hotRender()
   })
 }
-
-// tvClient.onopen = function() {
-//   console.log('WebSocket Client Connected')
-//
-//   const sendNumber = () => {
-//     if (tvClient.readyState === tvClient.OPEN) {
-//       let test = {
-//         phone: {
-//           action: 'initializeDirection',
-//           movements: {
-//             towardNorth: true,
-//             towardEast: true,
-//             movement: 10,
-//           }
-//         },
-//         tv: {b: 2},
-//       }
-//       tvClient.send(JSON.stringify(test))
-//     }
-//   }
-//   sendNumber()
-// }
-//
-// tvClient.onmessage = function(e) {
-//   console.log("tv Received: '" + JSON.stringify(e.data) + "'")
-// }
-//
-// tvClient.onerror = function() {
-//   console.log('Connection Error')
-// }
-//
-// tvClient.onclose = function() {
-//   console.log('echo-protocol Client Closed')
-// }

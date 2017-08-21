@@ -41,7 +41,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## web
 * **the production express should record the request path, query, header, response result of each request**
-* apply immutable js, create loading spin animation
+* ~~apply immutable js~~
+* apply FLOW
+* loading util with animation and saga
 * use the SSR to render the basic html, keep the html at minimal and has the very
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
