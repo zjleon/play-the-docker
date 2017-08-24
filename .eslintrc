@@ -4,6 +4,7 @@
     "browser": true,
     "node": true,
   },
+  "parser": "babel-eslint",
   "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module",
@@ -15,7 +16,8 @@
   },
   "plugins": [
     "react",
-    "react-native"
+    "react-native",
+    "flowtype"
   ],
   "rules": {
 /**
@@ -172,6 +174,7 @@
     "react/prop-types": [0]
   },
   "extends": [
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
   ]
 }

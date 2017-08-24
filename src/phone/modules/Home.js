@@ -1,6 +1,8 @@
+// @flow
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
+import type {Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import {
   Link,
@@ -10,10 +12,11 @@ import { connect } from 'react-redux'
 // import position from '../service/Position'
 import store from '../redux/store'
 
-// import ws from '../service/WS'
-
-let send = 0
-class Home extends Component {
+let send: number = 0
+type Props = {
+  dispatch: Dispatch<string>
+}
+class Home extends Component<Props, States> {
   constructor() {
     super()
 
@@ -25,7 +28,7 @@ class Home extends Component {
       acceleration: {},
       accelerationIncludingGravity: {},
       rotationRate: {},
-      interval: null,
+      interval: 0,
     }
 
     // this.positionService = new position({
@@ -35,7 +38,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('deviceorientation', (event) => {
+    window.addEventListener('deviceorientation', (event: Event) => {
       let absolute = event.absolute
       let alpha = event.alpha
       let beta = event.beta
