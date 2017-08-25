@@ -14,35 +14,30 @@ import store from '../redux/store'
 
 let send: number = 0
 type Props = {
-  dispatch: Dispatch<string>
+  dispatch: Dispatch<{type: string }>
 }
-class Home extends Component<Props, States> {
-  constructor() {
-    super()
+type States = {
+  +interval: number,
+}
 
-    this.state = {
-      // absolute: null,
-      // alpha: null,
-      // beta: null,
-      // gamma: null,
-      acceleration: {},
-      accelerationIncludingGravity: {},
-      rotationRate: {},
-      interval: 0,
-    }
-
-    // this.positionService = new position({
-    //   threshold: 5,
-    //   onReachTimer: this.onReachTimer.bind(this)
-    // })
+class Home extends Component<void, Props, States> {
+  state = {
+    interval: 0,
   }
 
   componentDidMount() {
-    window.addEventListener('deviceorientation', (event: Event) => {
-      let absolute = event.absolute
-      let alpha = event.alpha
-      let beta = event.beta
-      let gamma = event.gamma
+    type Events = {
+      absolute: number,
+      alpha: number,
+      beta: number,
+      gamma: number,
+    }
+    // $FlowFixMe
+    document.addEventListener('deviceorientation', (event: Events) => {
+      let absolute: number = event.absolute
+      let alpha: number = event.alpha
+      let beta: number = event.beta
+      let gamma: number = event.gamma
       console.log('z:', alpha, ' || x', beta)
       // let data = {
       //   phone: {
@@ -148,6 +143,6 @@ const styles = {
   },
 }
 
-export default connect((state, ownProps) => ({
+export default connect((state: {home: string}) => ({
   home: state.home,
 }))(Home)
