@@ -33,11 +33,14 @@ const socketEventChannel = () => {
     }
 
     socketConnection.onclose = function() {
-      console.log('echo-protocol Client Closed')
+      console.log('Socket Saga Closed')
       emmiter(END)
     }
 
-    return () => socketConnection.close()
+    return () => {
+      console.log('echo-protocol Client Closed')
+      socketConnection.close()
+    }
   })
 }
 
@@ -79,35 +82,21 @@ function* senderSaga() {
 }
 
 function socketSender(action) {
-  console.log('socketSender3', action)
   if (socketConnection.readyState === socketConnection.OPEN) {
-    let test = {
-      phone: {
-        action: 'initializeDirection',
-        movements: {
-          towardNorth: true,
-          towardEast: true,
-          distance: 10,
-        },
-      },
+    let data
+    try {
+      data = JSON.stringify(action.message)
+    } catch (e) {
+      console.log(`${action} send as original format`)
+      data = action
+    } finally {
+      socketConnection.send(data)
     }
-    let test2 = {
-      tv: {
-        action: 'phoneMove',
-        movements: {
-          towardNorth: true,
-          towardEast: true,
-          distance: 10,
-        },
-      },
-    }
-    socketConnection.send(JSON.stringify(test))
   } else {
     console.log('socket is not established')
   }
 }
 
-// export default socketConnection
 export {
   senderSaga,
   receiverSaga,

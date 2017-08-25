@@ -96,6 +96,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin(envToClient),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: ['node_modules'],
+    })
     // new NpmInstallPlugin(),
   ],
   devServer: {

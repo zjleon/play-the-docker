@@ -10,6 +10,19 @@ unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 
 ## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
+## install [flow](https://flow.org/en/docs/install/) then [integrate it in editor](https://flow.org/en/docs/editors/)
+
+## include flow type check for library:
+1. find the library definition [here](https://github.com/flowtype/flow-typed/tree/master/definitions/npm)
+2. run below command to install definition for modules in ``packages.json``
+```
+// in project folder:
+npm run flowTyped install
+```
+3. flow the instruction [here](https://flow.org/en/docs/react/redux/)
+and [here](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
+and [here](https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705)
+
 ## install docker
 instruction to installation
 

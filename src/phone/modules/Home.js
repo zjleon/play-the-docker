@@ -1,6 +1,8 @@
+// @flow
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
+import type {Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import {
   Link,
@@ -10,36 +12,32 @@ import { connect } from 'react-redux'
 // import position from '../service/Position'
 import store from '../redux/store'
 
-// import ws from '../service/WS'
+let send: number = 0
+type Props = {
+  dispatch: Dispatch<{type: string }>
+}
+type States = {
+  +interval: number,
+}
 
-let send = 0
-class Home extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      // absolute: null,
-      // alpha: null,
-      // beta: null,
-      // gamma: null,
-      acceleration: {},
-      accelerationIncludingGravity: {},
-      rotationRate: {},
-      interval: null,
-    }
-
-    // this.positionService = new position({
-    //   threshold: 5,
-    //   onReachTimer: this.onReachTimer.bind(this)
-    // })
+class Home extends Component<void, Props, States> {
+  state = {
+    interval: 0,
   }
 
   componentDidMount() {
-    window.addEventListener('deviceorientation', (event) => {
-      let absolute = event.absolute
-      let alpha = event.alpha
-      let beta = event.beta
-      let gamma = event.gamma
+    type Events = {
+      absolute: number,
+      alpha: number,
+      beta: number,
+      gamma: number,
+    }
+    // $FlowFixMe
+    document.addEventListener('deviceorientation', (event: Events) => {
+      let absolute: number = event.absolute
+      let alpha: number = event.alpha
+      let beta: number = event.beta
+      let gamma: number = event.gamma
       console.log('z:', alpha, ' || x', beta)
       // let data = {
       //   phone: {
@@ -108,7 +106,7 @@ class Home extends Component {
     // })
     this.props.dispatch({
       type: 'SOCKET_SEND_MESSSGE',
-      value: 'aaa'
+      message: 'aaa'
     })
   }
 
@@ -145,6 +143,6 @@ const styles = {
   },
 }
 
-export default connect((state, ownProps) => ({
+export default connect((state: {home: string}) => ({
   home: state.home,
 }))(Home)
