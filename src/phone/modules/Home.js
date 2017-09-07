@@ -111,7 +111,6 @@ class Home extends Component<void, Props, States> {
   }
 
   render() {
-    console.log('render2', this.props)
     return <div style={styles.container}>
       <Card>
         <CardHeader

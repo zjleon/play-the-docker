@@ -22,6 +22,8 @@ envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {
   envToClient[$1] = $3 ? Number($3) : $2
 })
 
+const babelOptions = JSON.parse(fs.readFileSync('.babelrc', 'utf8'))
+
 module.exports = {
   entry: {
     main: [
@@ -60,12 +62,7 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                'es2015',
-                'react',
-              ],
-            },
+            options: babelOptions,
           },
         ],
       },

@@ -4,12 +4,13 @@
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
-* try 'flow'
+* apply FLOW(~~in atom~~, **in webpack build process**)
 
 # css or sass or html
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
+* **is it possible to generate final style to specified element while using sass or less(for using out link stylesheet in web, and use in-line css for android)**
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -30,7 +31,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## nginx:
 * sever domain.com for prod config
-* ssl
+* [tsl](https://letsencrypt.org/getting-started/), [http2](https://www.nginx.com/blog/nginx-1-9-5/)
 * ~~auto reload the configs~~``docker-compose restart`` instead
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
@@ -40,14 +41,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* **the production express should record the request path, query, header, response result of each request**
+* **the production express should record the request path, query, header, response result of each request, output it to log system**
 * ~~apply immutable js~~
-* apply FLOW(~~in atom~~, in webpack build process)
-* loading util with animation and saga
 * use the SSR to render the basic html, keep the html at minimal and has the very
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
-* static resources server, apply hash to all resources
+* ~~static resources server, apply hash to all resources~~
 * ~~API to generate the resources link to other services,~~
 * use webworker for web and mobile web
 * ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
@@ -59,13 +58,17 @@ but how to handle the js render after the initial render
 * code structure for real big code base project
 * ~~router strategic for prod and dev env~~replace with nginx
 * *hapi and backend container*
-* web socket on express server
+* ~~web socket on express server~~
 * ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
+
 ### prod:
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
+* [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+* [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
+
 ### dev:
 * ~~use dev server~~
 * ~~set script~~
@@ -165,7 +168,6 @@ https://github.com/facebook/react-native/issues/7257~~
 * ~~tap event support on web~~
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
-* add immutable.js
 * **java code dispatch redux action**
 
 # CI server
