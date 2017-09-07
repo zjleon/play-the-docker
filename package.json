@@ -16,7 +16,7 @@
     "flow-typed": "^2.1.5"
   },
   "scripts": {
-    "flowTyped": "node node_modules/flow-typed/dist/cli.js",
+    "flowInstall": "node node_modules/flow-typed/dist/cli.js install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
