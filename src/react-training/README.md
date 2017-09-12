@@ -1,3 +1,7 @@
+# This is for demo purpose only
+* pure react sample
+* react + redux + immutable + saga sample
+
 # infrastructure
 ``./common/Router.js`` is where the actual logic lives
 ``./index.js`` is only responsible for referring ``./common/Router.js`` and do the hot-reloading stuff
@@ -9,32 +13,6 @@
 
 # (recommanded) install eslint in your editor
 
-# websocket config
-``./.env`` is where the socket url lives
-## usage:
-* once the app start, the socket will be set automatically, and an action will be dispatched like:
-```
-{
-  type: 'SOCKET_OPEN',
-}
-```
-
-* once a message is arrived the client side, an action will be dispatched with format:
-```
-{
-  type: 'SOCKET_MESSAGE_ARRIVED',
-  message,
-}
-```
-and in each saga, use ``takeEvery('SOCKET_MESSAGE_ARRIVED', handler)`` to get the message
-
-* To send a message, dispatched below action:
-```
-{
-  type: 'SOCKET_SEND_MESSSGE',
-  message,
-}
-```
 
 # make file changes hot reload:
 In ``index.js``, add file names in:

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import homeReducer from './homeReducer'
-import socketReducer from './socketReducer'
+import userReducer from './userReducer'
 
 const rootReducer = combineReducers({
+  user: userReducer,
   home: homeReducer,
-  socket: socketReducer,
 })
 
 export default rootReducer

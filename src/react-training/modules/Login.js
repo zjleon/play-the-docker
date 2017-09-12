@@ -1,11 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 
-import Button from 'material-ui/Button'
+import Button from './Button'
 import Grid from 'material-ui/Grid'
-import {
-  Link,
-} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import { compose } from 'recompose'
@@ -15,51 +12,45 @@ import { withStyles } from 'material-ui/styles'
 type Props = {
   dispatch: Dispatch<any>,
   classes: any,
+  history: {push: (arg: string) => {}},
 }
 type States = {
   +username: string,
 }
 
 class Login extends Component<void, Props, States> {
-  state = {
-    username: '',
+  onClickLogin(event) {
+    this.props.dispatch({
+      type: 'USER_SIGN_IN',
+      username: this.props.user.username,
+    })
   }
 
-  constructor() {
-    super()
-  }
-
-  componentDidMount() {
-  }
-
-  onClickButton() {
-    // this.props.dispatch({
-    //   type: 'CHANGE_QUATERNION',
-    //   quaternion: 123,
-    // })
-    console.log(this.props)
-    this.props.history.push('/home')
+  onChangeUsername(event) {
+    this.props.dispatch({
+      type: 'CHANGE_USERNAME',
+      username: event.target.value,
+    })
   }
 
   render() {
+    console.log(this.props)
     const classes = this.props.classes
     return (
-      <Grid className={classes.container} container>
-        <Grid item xs={12}>
-          <form noValidate>
-            <TextField
-              id="username"
-              label="username"
-              className={classes.textField}
-              value={this.state.username}
-              // $FlowFixMe
-              onChange={(event: Event) => this.setState({ username: event.target.value })}
-              margin="normal"
-            />
-          </form>
-          <Button color="primary" onTouchTap={this.onClickButton.bind(this)}>
-            Login
-          </Button>
+      <Grid container>
+        <Grid item xs={12} lg={12}>
+          <TextField
+            id="username"
+            label="username"
+            className={classes.textField}
+            value={this.props.user.username}
+            // $FlowFixMe
+            onChange={this.onChangeUsername.bind(this)}
+            margin="normal"
+          />
+          <Button
+            onTapButton={this.onClickLogin.bind(this)}
+           />
         </Grid>
       </Grid>
     )
@@ -67,11 +58,6 @@ class Login extends Component<void, Props, States> {
 }
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: 20,
-  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -80,7 +66,9 @@ const styles = theme => ({
 })
 
 const enhance = compose(
-  connect(),
+  connect(state => ({
+    user: state.user,
+  })),
   withStyles(styles),
 )
 

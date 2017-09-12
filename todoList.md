@@ -5,12 +5,14 @@
 * how to write unit test quickly
 * static the unit test coverage by tool
 * apply FLOW(~~in atom~~, **in webpack build process**)
+* when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
 
 # css or sass or html
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
 * **is it possible to generate final style to specified element while using sass or less(for using out link stylesheet in web, and use in-line css for android)**
+* **research [stylus](http://stylus-lang.com/) and [radium](https://github.com/FormidableLabs/radium#how-does-radium-work)**
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -41,6 +43,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
+* babel source map
 * **the production express should record the request path, query, header, response result of each request, output it to log system**
 * ~~apply immutable js~~
 * use the SSR to render the basic html, keep the html at minimal and has the very

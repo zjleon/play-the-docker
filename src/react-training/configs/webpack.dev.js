@@ -112,12 +112,12 @@ module.exports = {
         next()
       })
     },
-    // historyApiFallback: {
-    //   rewrites: [
-    //     { from: /.+/, to: '/' },
-    //   ],
-    //   verbose: true,
-    // },
+    historyApiFallback: {
+      rewrites: [
+        { from: /.+/, to: '/' },
+      ],
+      verbose: true,
+    },
   },
   watch: true,
   watchOptions: {
