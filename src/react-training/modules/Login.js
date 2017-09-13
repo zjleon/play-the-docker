@@ -9,16 +9,7 @@ import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 
-type Props = {
-  dispatch: Dispatch<any>,
-  classes: any,
-  history: {push: (arg: string) => {}},
-}
-type States = {
-  +username: string,
-}
-
-class Login extends Component<void, Props, States> {
+class Login extends Component {
   onClickLogin(event) {
     this.props.dispatch({
       type: 'USER_SIGN_IN',
@@ -44,13 +35,14 @@ class Login extends Component<void, Props, States> {
             label="username"
             className={classes.textField}
             value={this.props.user.username}
-            // $FlowFixMe
             onChange={this.onChangeUsername.bind(this)}
             margin="normal"
           />
           <Button
+            buttonText={'Login'}
             onTapButton={this.onClickLogin.bind(this)}
            />
+          <div>{this.props.user.username}</div>
         </Grid>
       </Grid>
     )
