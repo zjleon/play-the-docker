@@ -4,9 +4,6 @@ import React, { Component } from 'react'
 
 import type {Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
-import {
-  Link,
-} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import position from '../service/Position'
@@ -105,33 +102,27 @@ class Home extends Component<void, Props, States> {
     //   url: 'aaa'
     // })
     this.props.dispatch({
-      type: 'SOCKET_SEND_MESSSGE',
-      message: 'aaa'
+      type: 'CHANGE_QUATERNION',
+      quaternion: ['a', 'b']
     })
+    // this.props.dispatch({
+    //   type: 'TEST_CHANGES',
+    //   data: 'a'
+    // })
   }
 
   render() {
+    console.log('render', this.props)
+    this.props.testChanges.a = 2
     return <div style={styles.container}>
-      <Card>
-        <CardHeader
-          title="Calibrate your phone"
-        />
-        <CardText>
-          1. First move your phone to the left.
-        </CardText>
-        <CardText>
-          2. Then move your phone back to the center.
-        </CardText>
-        <CardText>
-          3. Hit 'finish' button.
-        </CardText>
-        <CardActions>
-          <Link to={`/calibration`}>
-            Rendering with React23
-          </Link>
-          <FlatButton label="ajax" onClick={this.onClickButton.bind(this)} />
-        </CardActions>
-      </Card>
+      <div>
+        Welcome, {this.props.testChanges.a}
+        Welcome1, {this.props.home.get('quaternion').join(',')}
+      </div>
+      <button onClick={this.onClickButton.bind(this)}>'aa'</button>
+      {/* <CardActions>
+        <FlatButton label="ajax" onClick={this.onClickButton.bind(this)} />
+      </CardActions> */}
     </div>
   }
 }
@@ -142,6 +133,7 @@ const styles = {
   },
 }
 
-export default connect((state: {home: string}) => ({
+export default connect((state: {home: string, testChanges: string}) => ({
   home: state.home,
+  testChanges: state.testChanges,
 }))(Home)

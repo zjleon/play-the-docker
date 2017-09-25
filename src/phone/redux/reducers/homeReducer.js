@@ -1,17 +1,17 @@
 // @flow
-import {Map} from 'immutable'
+import {Map, is} from 'immutable'
 
-const initialState = Map({
-  quaternion: [],
-})
+import initialStore from '../initialStore'
 
 export default (
-  state: Map<*, *> = initialState,
+  state: Map<*, *> = initialStore.home,
   action: {type: string, quaternion: Array<number>}
 ) => {
   switch (action.type) {
   case 'CHANGE_QUATERNION':
-    return state.set('quaternion', action.quaternion)
+    let newState = state.set('quaternion', action.quaternion)
+    console.log('CHANGE_QUATERNION', is(newState, state))
+    return newState
   default:
     return state
   }

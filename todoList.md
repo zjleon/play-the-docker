@@ -43,6 +43,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* Progressive Web App
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
 * **the production express should record the request path, query, header, response result of each request, output it to log system**
@@ -208,6 +209,9 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker compose
+* sharable file and config between projects
+* [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
+
 * **put the nginx endpoint in compose instead of .env**
 * use rolling update to update k8s deployment
 * ~~build multi containers.~~ ~~docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~

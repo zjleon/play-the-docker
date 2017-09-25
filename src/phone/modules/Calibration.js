@@ -2,9 +2,6 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
 import FlatButton from 'material-ui/FlatButton'
-import {
-  Link,
-} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -120,9 +117,6 @@ class Calibration extends Component {
           3. Hit 'finish' button.
         </CardText>
         <CardActions>
-          <Link to={`/calibration`}>
-            Rendering with React23
-          </Link>
           <FlatButton label="Finish" onClick={this.onClickButton.bind(this)} />
         </CardActions>
       </Card>

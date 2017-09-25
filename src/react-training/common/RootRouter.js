@@ -1,11 +1,9 @@
-import {
-  Link,
-  Route,
-  Router,
-  withRouter,
-} from 'react-router'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import React, { Component } from 'react'
+import {
+  Route,
+  Router,
+} from 'react-router'
 
 import Home from '../modules/Home'
 import Login from '../modules/Login'
@@ -14,9 +12,6 @@ import history from '../service/history'
 import store from '../redux/store'
 
 const theme = createMuiTheme()
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-
 
 class RootRouter extends Component {
   render() {

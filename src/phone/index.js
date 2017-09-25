@@ -1,7 +1,7 @@
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import React from 'react'
-import Router from './common/Router'
+import RootRouter from './RootRouter'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 
@@ -18,11 +18,11 @@ const hotRender = (NextRouter) => {
   )
 }
 
-hotRender(Router)
+hotRender(RootRouter)
 
 if (module.hot) {
-  module.hot.accept('./common/Router.js', () => {
-    const nextRouter = require('./common/Router.js').default
+  module.hot.accept('./RootRouter.js', () => {
+    const nextRouter = require('./RootRouter.js').default
     hotRender(nextRouter)
   })
 }
