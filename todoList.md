@@ -1,5 +1,8 @@
 # fill in readme
 
+## the interactive game:
+
+
 ## eslint and autofix and unit test
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
@@ -12,7 +15,7 @@
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
 * **is it possible to generate final style to specified element while using sass or less(for using out link stylesheet in web, and use in-line css for android)**
-* **research [stylus](http://stylus-lang.com/) and [radium](https://github.com/FormidableLabs/radium#how-does-radium-work)**
+* research [stylus](http://stylus-lang.com/) and [radium](https://github.com/FormidableLabs/radium#how-does-radium-work)
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -32,6 +35,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://github.com/exponentjs/ex-navigation
 
 ## nginx:
+* OPTION can be use for auth check and prevent api error
 * sever domain.com for prod config
 * [tsl](https://letsencrypt.org/getting-started/), [http2](https://www.nginx.com/blog/nginx-1-9-5/)
 * ~~auto reload the configs~~``docker-compose restart`` instead
@@ -43,10 +47,26 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* Progressive Web App
+* resize image on server side with media query, a function that add screen info to all image requests(to let server side cut to the image to right size)[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata) or use [gulp-image-resize](https://www.npmjs.com/package/gulp-image-resize) to resize when add images with [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+* image component that can:
+  * add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)
+  * lazy load, only load the best suitable image for current screen resolution
+  * create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474), place error image when target image was not found
+   * e.g:
+    1. without resolution, return original image: /picture_name
+    2. with resolution, choose the best image: /picture_name_1920_1080
+  * can use with the service worker cache
+* <meta name="viewport" content="width=device-width">
+* the media query
+* **different of font-size unit**
+* why reselect?
+* Progressive Web App:
+  * github: lighthouse,
+  * [PWA course](https://www.youtube.com/watch?v=17kGWJOuL-A&list=PLNYkxOF6rcIAdnzEsWkg0KpMn2WJwMBmN)
+  * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+  * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
-* **the production express should record the request path, query, header, response result of each request, output it to log system**
 * ~~apply immutable js~~
 * use the SSR to render the basic html, keep the html at minimal and has the very
 basic content in it so user can see some content without waiting,
@@ -197,7 +217,7 @@ https://github.com/facebook/react-native/issues/7257~~
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
-* **error, debug info logging, Profiling: https://www.npmjs.com/package/winston**
+* error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
 
 ## dev:
 * ~~install project dependencies via node script

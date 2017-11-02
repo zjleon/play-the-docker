@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 
 import type {Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
+import ImageContainer from '../common/ImageContainer'
+import ImageInfo from '../common/ImageInfo.json'
+import {Map} from 'immutable'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import position from '../service/Position'
@@ -11,7 +14,10 @@ import store from '../redux/store'
 
 let send: number = 0
 type Props = {
-  dispatch: Dispatch<{type: string }>
+  dispatch: Dispatch<{type: string }>,
+  testChanges: {a: number},
+  home: Map<*, *>,
+  quaternion: Array<number>,
 }
 type States = {
   +interval: number,
@@ -20,6 +26,10 @@ type States = {
 class Home extends Component<void, Props, States> {
   state = {
     interval: 0,
+  }
+
+  static method1() {
+    console.log(1)
   }
 
   componentDidMount() {
@@ -113,11 +123,19 @@ class Home extends Component<void, Props, States> {
 
   render() {
     console.log('render', this.props)
+    // will change the store modal
     this.props.testChanges.a = 2
+    // won't change the store modal
+    this.props.home.set('quaternion', [2])
     return <div style={styles.container}>
       <div>
         Welcome, {this.props.testChanges.a}
-        Welcome1, {this.props.home.get('quaternion').join(',')}
+        Welcome1, {this.props.quaternion.join(',')}
+      </div>
+      <div>
+        <ImageContainer
+          src={ImageInfo.home_mole.path}
+          aspect={ImageInfo.home_mole.aspect} />
       </div>
       <button onClick={this.onClickButton.bind(this)}>'aa'</button>
       {/* <CardActions>
@@ -133,7 +151,8 @@ const styles = {
   },
 }
 
-export default connect((state: {home: string, testChanges: string}) => ({
+export default connect((state: {home: Map<*, *>, testChanges: string}) => ({
   home: state.home,
+  quaternion: state.home.get('quaternion'),
   testChanges: state.testChanges,
 }))(Home)

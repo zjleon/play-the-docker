@@ -1,7 +1,7 @@
 const webpack = require("webpack")
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 const srcPath = path.resolve('.')
@@ -84,12 +84,12 @@ module.exports = {
         return module.context && module.context.indexOf('node_modules') !== -1
       },
     }),
-    new CleanWebpackPlugin(['dist'], {
-      root: srcPath,
-      verbose: true,
-      dry: false,
-      exclude: [],
-    }),
+    // new CleanWebpackPlugin(['dist'], {
+    //   root: srcPath,
+    //   verbose: true,
+    //   dry: false,
+    //   exclude: [],
+    // }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin(envToClient),
