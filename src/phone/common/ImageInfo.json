@@ -39,7 +39,7 @@
     "height": 1200,
     "aspect": 0.625,
     "extention": ".jpg",
-    "lastModifed": "2017-11-07T04:32:47.000Z",
+    "lastModifed": "2017-11-07T09:19:33.000Z",
     "path": "/images/test copy_jpg.jpg"
   },
   "test_jpg@320": {
@@ -84,5 +84,48 @@
     "extention": ".jpg",
     "lastModifed": "2017-11-05T13:33:46.000Z",
     "path": "/images/test_jpg.jpg"
+  },
+  "test copy 2_jpg@320": {
+    "width": 320,
+    "height": 200,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test copy 2_jpg@320.jpg"
+  },
+  "test copy 2_jpg@720": {
+    "width": 720,
+    "height": 450,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test copy 2_jpg@720.jpg"
+  },
+  "test copy 2_jpg@1080": {
+    "width": 1080,
+    "height": 675,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test copy 2_jpg@1080.jpg"
+  },
+  "test copy 2_jpg@1440": {
+    "width": 1440,
+    "height": 900,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test copy 2_jpg@1440.jpg"
+  },
+  "test copy 2_jpg@2160": {
+    "width": 2160,
+    "height": 1350,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test copy 2_jpg@2160.jpg"
+  },
+  "test copy 2_jpg": {
+    "width": 1920,
+    "height": 1200,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "lastModifed": "2017-11-07T09:18:47.000Z",
+    "path": "/images/test copy 2_jpg.jpg"
   }
 }

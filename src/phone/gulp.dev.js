@@ -8,6 +8,7 @@ const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
 const deepequal = require('deepequal')
+const watch = require('gulp-watch')
 
 let compiler = webpack(webpackConfig)
 let server
@@ -31,8 +32,7 @@ try {
   fs.mkdirSync(imageFolderDist)
 } catch (e) {e}
 gulp.task('watchImages', () => {
-  return gulp.watch('./images/*.*')
-  .on('change', (event) => {
+  return watch('./images/*.*', {events: ['add', 'change']}, function(event) {
     sharpImage(path.relative(path.resolve('./'), event.path))
   })
 })
@@ -54,10 +54,8 @@ const sharpImage = (file) => {
   if (!filePath.name || !filePath.ext) {
     return Promise.resolve()
   }
-  return new Promise((resolve) => {
-    const originFileStat = fs.statSync(file)
-    return toTargetResolution(sharp(file), filePath.name, filePath.ext, originFileStat.ctime)
-  })
+  const originFileStat = fs.statSync(file)
+  return toTargetResolution(sharp(file), filePath.name, filePath.ext, originFileStat.ctime)
 }
 let imageInfo
 try {
@@ -92,7 +90,8 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
         extention: imageExtention,
         path: path.resolve(
           webpackConfig.output.publicPath,
-          './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention),
+          './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention
+        ),
       }
     }
     targets[imageFullName] = meta

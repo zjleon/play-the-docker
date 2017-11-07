@@ -35,8 +35,8 @@ class ImageContainer extends Component {
     this.setState({aspect: imageInfo.aspect})
     const src = imageInfo.path
     let image = new Image()
+    // TODO: handle the image load error
     image.onload = () => {
-      console.log('onload', this)
       this.setState({src})
     }
     image.src = src
@@ -44,7 +44,6 @@ class ImageContainer extends Component {
 
   render() {
     const {src, style, ...props} = this.props
-    console.log('ImageContainer', targetWidth, this.props)
     const paddingBottom = this.state.aspect * 100 + '%'
     return <div style={{...styles.container, paddingBottom}}>
       <img style={{...styles.image, ...style}} src={this.state.src} {...props} />
