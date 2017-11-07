@@ -18,6 +18,7 @@ let envFile = fs.readFileSync('.env', 'utf8')
 let envToClient = {
   DOCKER_ENV: process.env.DOCKER_ENV || 0,
 }
+// convert numeric in client env
 envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {
   envToClient[$1] = $3 ? Number($3) : $2
 })
@@ -57,7 +58,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
@@ -101,7 +102,7 @@ module.exports = {
   devServer: {
     hot: true,
     host: '0.0.0.0',
-    contentBase: distPath,
+    contentBase: [distPath],
     publicPath: publicPath,
     disableHostCheck: true,
     setup: function(app) {

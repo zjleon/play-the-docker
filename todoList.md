@@ -47,16 +47,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* resize image on server side with media query, a function that add screen info to all image requests(to let server side cut to the image to right size)[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata) or use [gulp-image-resize](https://www.npmjs.com/package/gulp-image-resize) to resize when add images with [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+* a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 * image component that can:
   * add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)
   * lazy load, only load the best suitable image for current screen resolution
-  * create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474), place error image when target image was not found
-   * e.g:
-    1. without resolution, return original image: /picture_name
-    2. with resolution, choose the best image: /picture_name_1920_1080
+  * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
   * can use with the service worker cache
-* <meta name="viewport" content="width=device-width">
+  * a pattern to skip the convertion
 * the media query
 * **different of font-size unit**
 * why reselect?

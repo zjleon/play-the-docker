@@ -1,10 +1,37 @@
 import React, { Component } from 'react'
 
+import ImageInfo from '../common/ImageInfo.json'
+
 class ImageContainer extends Component {
+  state = {
+    src: '',
+    aspect: 0,
+  }
+
+  static screen = {
+    width: window.screen.availWidth,
+    height: window.screen.availHeight,
+    devicePixelRatio: window.devicePixelRatio,
+  }
+
+  componentWillMount() {
+    // props.useOriginal = true, load the original image
+    const src = this.props.useOriginal ?
+      ImageInfo[this.props.name] :
+      ImageInfo[this.props.name + '@' + this.screen.width]
+    let image = new Image()
+    image.onload = () => {
+      console.log(this)
+      this.setState({src})
+    }
+    image.src = src
+  }
+
   render() {
-    const {src, aspect, ...props} = this.props
-    return <div style={styles.container}>
-      <img style={styles.image} src={this.props.src} {...props} />
+    const {src, aspect, style, ...props} = this.props
+    console.log('ImageContainer', this.screen, this.props)
+    return <div style={{...styles.container, paddingBottom: this.state.aspect}}>
+      <img style={{...styles.image, ...style}} src={this.state.src} {...props} />
     </div>
   }
 }
@@ -12,7 +39,6 @@ class ImageContainer extends Component {
 const styles = {
   container: {
     width: '100%',
-    paddingBottom: this.props.aspect,
     position: 'relative',
   },
   image: {

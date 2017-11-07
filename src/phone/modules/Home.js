@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import type {Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import ImageContainer from '../common/ImageContainer'
-import ImageInfo from '../common/ImageInfo.json'
 import {Map} from 'immutable'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -134,8 +133,10 @@ class Home extends Component<void, Props, States> {
       </div>
       <div>
         <ImageContainer
+          name={'test.png'} />
+        {/* <ImageContainer
           src={ImageInfo.home_mole.path}
-          aspect={ImageInfo.home_mole.aspect} />
+          aspect={ImageInfo.home_mole.aspect} /> */}
       </div>
       <button onClick={this.onClickButton.bind(this)}>'aa'</button>
       {/* <CardActions>

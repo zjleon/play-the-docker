@@ -1,7 +1,45 @@
 {
-  "home_mole": {
-    "width": 197,
-    "height": 276,
-    "aspect": 0.7137681159420289
+  "test.jpg@320": {
+    "width": 320,
+    "height": 200,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "path": "/image/test.jpg"
+  },
+  "test.jpg@720": {
+    "width": 720,
+    "height": 450,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "path": "/image/test.jpg"
+  },
+  "test.jpg@1080": {
+    "width": 1080,
+    "height": 675,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "path": "/image/test.jpg"
+  },
+  "test.jpg@1440": {
+    "width": 1440,
+    "height": 900,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "path": "/image/test.jpg"
+  },
+  "test.jpg@2160": {
+    "width": 2160,
+    "height": 1350,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "path": "/image/test.jpg"
+  },
+  "test.jpg": {
+    "width": 1920,
+    "height": 1200,
+    "aspect": 1.6,
+    "extention": ".jpg",
+    "lastModifed": "2017-11-05T13:33:46.000Z",
+    "path": "/image/test.jpg"
   }
 }
