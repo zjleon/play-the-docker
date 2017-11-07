@@ -32,8 +32,13 @@ try {
   fs.mkdirSync(imageFolderDist)
 } catch (e) {e}
 gulp.task('watchImages', () => {
-  return watch('./images/*.*', {events: ['add', 'change']}, function(event) {
-    sharpImage(path.relative(path.resolve('./'), event.path))
+  return watch('./images/*.*', function(event) {
+    console.log(event.path)
+    if (event.contents) {
+      sharpImage(path.relative(path.resolve('./'), event.path))
+    } else {
+      removeImageInfo(path.relative(path.resolve('./'), event.path))
+    }
   })
 })
 gulp.task('convertImages', (callback) => {
@@ -51,6 +56,7 @@ gulp.task('convertImages', (callback) => {
 const targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
 const sharpImage = (file) => {
   const filePath = path.parse(file)
+  console.log('filePath', filePath)
   if (!filePath.name || !filePath.ext) {
     return Promise.resolve()
   }
@@ -71,9 +77,10 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
       width: metadata.width,
       height: metadata.height,
       aspect: metadata.height / metadata.width,
-      extention: imageExtention,
+      // extention: imageExtention,
       lastModifed: lastModifed,
       path: path.resolve(webpackConfig.output.publicPath, './images/' + imageFullName + imageExtention),
+      siblings: [],
     }
     if (
       imageInfo[imageFullName] &&
@@ -84,15 +91,16 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
     let targets = {}
     for (let i = 0; i < targetDeviceWidth.length; i++) {
       targets[imageFullName + '@' + targetDeviceWidth[i]] = {
-        width: targetDeviceWidth[i],
-        height: parseInt(targetDeviceWidth[i] * meta.aspect, 10),
+        // width: targetDeviceWidth[i],
+        // height: parseInt(targetDeviceWidth[i] * meta.aspect, 10),
         aspect: meta.aspect,
-        extention: imageExtention,
+        // extention: imageExtention,
         path: path.resolve(
           webpackConfig.output.publicPath,
           './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention
         ),
       }
+      meta.siblings.push(imageFullName + '@' + targetDeviceWidth[i])
     }
     targets[imageFullName] = meta
 
@@ -102,7 +110,7 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
         promises.push(
           imagePromise.clone()
           .resize(targets[key].width, targets[key].height)
-          .toFile(imageFolderDist + '/' + key + targets[key].extention)
+          .toFile(imageFolderDist + '/' + key + imageExtention)
         )
       }
     }
@@ -121,6 +129,29 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
       console.log(`saved image: ${imageFullName}`)
     })
   })
+}
+const removeImageInfo = (file) => {
+  const filePath = path.parse(file)
+  if (!filePath.name || !filePath.ext) {
+    return Promise.resolve()
+  }
+  const imageFullName = filePath.name + filePath.ext.replace('.', '_')
+
+  const targets = imageInfo[imageFullName].siblings
+  for (let i = 0; i < targets.length; i++) {
+    delete imageInfo[targets[i]]
+  }
+  delete imageInfo[imageFullName]
+  let writePromise = new Promise((resolve, reject) => {
+    fs.writeFile('./common/ImageInfo.json', JSON.stringify(imageInfo, null, 2), function(err) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
+  return writePromise
 }
 
 gulp.task('default', [

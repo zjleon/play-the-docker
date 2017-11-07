@@ -133,9 +133,6 @@ class Home extends Component<void, Props, States> {
       <div>
         <ImageContainer
           name={'test.jpg'} />
-        {/* <ImageContainer
-          src={ImageInfo.home_mole.path}
-          aspect={ImageInfo.home_mole.aspect} /> */}
       </div>
       <button onClick={this.onClickButton.bind(this)}>'aa'</button>
       {/* <CardActions>
