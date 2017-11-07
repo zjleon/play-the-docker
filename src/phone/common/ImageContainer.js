@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ImageInfo from '../common/ImageInfo.json'
+import ImageInfo from '../dist/imageInfo.json'
 
 const getResolutionWidth = () => {
   const availWidth = window.screen.availWidth * window.devicePixelRatio

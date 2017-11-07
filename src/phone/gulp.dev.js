@@ -28,6 +28,7 @@ gulp.task('startWebpackServer', (callback) => {
 // image auto resize
 const imageFolderDist = './dist/images'
 const imageFolderSrc = './images'
+const imageInfoFilePath = './dist/imageInfo.json'
 try {
   fs.mkdirSync(imageFolderDist)
 } catch (e) {e}
@@ -56,7 +57,6 @@ gulp.task('convertImages', (callback) => {
 const targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
 const sharpImage = (file) => {
   const filePath = path.parse(file)
-  console.log('filePath', filePath)
   if (!filePath.name || !filePath.ext) {
     return Promise.resolve()
   }
@@ -65,7 +65,7 @@ const sharpImage = (file) => {
 }
 let imageInfo
 try {
-  imageInfo = JSON.parse(fs.readFileSync('./common/ImageInfo.json', 'utf8'))
+  imageInfo = JSON.parse(fs.readFileSync(imageInfoFilePath, 'utf8'))
 } catch (e) {
   imageInfo = {}
 }
@@ -117,7 +117,7 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
 
     promises.push(new Promise(function(resolve, reject) {
       Object.assign(imageInfo, targets)
-      fs.writeFile('./common/ImageInfo.json', JSON.stringify(imageInfo, null, 2), function(err) {
+      fs.writeFile(imageInfoFilePath, JSON.stringify(imageInfo, null, 2), function(err) {
         if (err) {
           reject(err)
         } else {
@@ -143,7 +143,7 @@ const removeImageInfo = (file) => {
   }
   delete imageInfo[imageFullName]
   let writePromise = new Promise((resolve, reject) => {
-    fs.writeFile('./common/ImageInfo.json', JSON.stringify(imageInfo, null, 2), function(err) {
+    fs.writeFile(imageInfoFilePath, JSON.stringify(imageInfo, null, 2), function(err) {
       if (err) {
         reject(err)
       } else {
