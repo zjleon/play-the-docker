@@ -1,8 +1,8 @@
+require('dotenv').config()
 const WebpackDevServer = require("webpack-dev-server")
 const webpack = require("webpack")
 const webpackConfig = require('./configs/webpack.dev')
 const gulp = require('gulp')
-require('dotenv').config()
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
@@ -29,9 +29,7 @@ const imageFolderDist = './dist/images'
 const imageFolderSrc = './images'
 try {
   fs.mkdirSync(imageFolderDist)
-} catch (e) {
-
-}
+} catch (e) {e}
 gulp.task('watchImages', () => {
   return gulp.watch('./images/*.*')
   .on('change', (event) => {
@@ -50,13 +48,7 @@ gulp.task('convertImages', (callback) => {
     })
   })
 })
-const targetDeviceWidth = [
-  320,
-  720,
-  1080,
-  1440,
-  2160,
-]
+const targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
 const sharpImage = (file) => {
   const filePath = path.parse(file)
   if (!filePath.name || !filePath.ext) {
@@ -76,14 +68,14 @@ try {
 const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed) => {
   return imagePromise.metadata()
   .then((metadata) => {
-    const imageFullName = imageName + imageExtention
+    const imageFullName = imageName + imageExtention.replace('.', '_')
     const meta = {
       width: metadata.width,
       height: metadata.height,
-      aspect: metadata.width / metadata.height,
+      aspect: metadata.height / metadata.width,
       extention: imageExtention,
       lastModifed: lastModifed,
-      path: path.resolve(webpackConfig.output.publicPath, './images/' + imageFullName),
+      path: path.resolve(webpackConfig.output.publicPath, './images/' + imageFullName + imageExtention),
     }
     if (
       imageInfo[imageFullName] &&
@@ -94,11 +86,13 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
     let targets = {}
     for (let i = 0; i < targetDeviceWidth.length; i++) {
       targets[imageFullName + '@' + targetDeviceWidth[i]] = {
-        width: parseInt(targetDeviceWidth[i], 10),
-        height: parseInt(parseInt(targetDeviceWidth[i], 10) / meta.aspect, 10),
+        width: targetDeviceWidth[i],
+        height: parseInt(targetDeviceWidth[i] * meta.aspect, 10),
         aspect: meta.aspect,
         extention: imageExtention,
-        path: path.resolve(webpackConfig.output.publicPath, './image/' + imageFullName),
+        path: path.resolve(
+          webpackConfig.output.publicPath,
+          './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention),
       }
     }
     targets[imageFullName] = meta
@@ -129,7 +123,6 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
     })
   })
 }
-
 
 gulp.task('default', [
   'convertImages',

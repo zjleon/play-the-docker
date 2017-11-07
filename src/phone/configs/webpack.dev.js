@@ -17,6 +17,7 @@ const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
 let envFile = fs.readFileSync('.env', 'utf8')
 let envToClient = {
   DOCKER_ENV: process.env.DOCKER_ENV || 0,
+  IMAGE_RESIZE_CONFIG: process.env.IMAGE_RESIZE_CONFIG
 }
 // convert numeric in client env
 envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {

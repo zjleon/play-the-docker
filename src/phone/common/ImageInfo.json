@@ -1,45 +1,88 @@
 {
-  "test.jpg@320": {
+  "test copy_jpg@320": {
     "width": 320,
     "height": 200,
-    "aspect": 1.6,
+    "aspect": 0.625,
     "extention": ".jpg",
-    "path": "/image/test.jpg"
+    "path": "/images/test copy_jpg@320.jpg"
   },
-  "test.jpg@720": {
+  "test copy_jpg@720": {
     "width": 720,
     "height": 450,
-    "aspect": 1.6,
+    "aspect": 0.625,
     "extention": ".jpg",
-    "path": "/image/test.jpg"
+    "path": "/images/test copy_jpg@720.jpg"
   },
-  "test.jpg@1080": {
+  "test copy_jpg@1080": {
     "width": 1080,
     "height": 675,
-    "aspect": 1.6,
+    "aspect": 0.625,
     "extention": ".jpg",
-    "path": "/image/test.jpg"
+    "path": "/images/test copy_jpg@1080.jpg"
   },
-  "test.jpg@1440": {
+  "test copy_jpg@1440": {
     "width": 1440,
     "height": 900,
-    "aspect": 1.6,
+    "aspect": 0.625,
     "extention": ".jpg",
-    "path": "/image/test.jpg"
+    "path": "/images/test copy_jpg@1440.jpg"
   },
-  "test.jpg@2160": {
+  "test copy_jpg@2160": {
     "width": 2160,
     "height": 1350,
-    "aspect": 1.6,
+    "aspect": 0.625,
     "extention": ".jpg",
-    "path": "/image/test.jpg"
+    "path": "/images/test copy_jpg@2160.jpg"
   },
-  "test.jpg": {
+  "test copy_jpg": {
     "width": 1920,
     "height": 1200,
-    "aspect": 1.6,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "lastModifed": "2017-11-07T04:32:47.000Z",
+    "path": "/images/test copy_jpg.jpg"
+  },
+  "test_jpg@320": {
+    "width": 320,
+    "height": 200,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test_jpg@320.jpg"
+  },
+  "test_jpg@720": {
+    "width": 720,
+    "height": 450,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test_jpg@720.jpg"
+  },
+  "test_jpg@1080": {
+    "width": 1080,
+    "height": 675,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test_jpg@1080.jpg"
+  },
+  "test_jpg@1440": {
+    "width": 1440,
+    "height": 900,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test_jpg@1440.jpg"
+  },
+  "test_jpg@2160": {
+    "width": 2160,
+    "height": 1350,
+    "aspect": 0.625,
+    "extention": ".jpg",
+    "path": "/images/test_jpg@2160.jpg"
+  },
+  "test_jpg": {
+    "width": 1920,
+    "height": 1200,
+    "aspect": 0.625,
     "extention": ".jpg",
     "lastModifed": "2017-11-05T13:33:46.000Z",
-    "path": "/image/test.jpg"
+    "path": "/images/test_jpg.jpg"
   }
 }

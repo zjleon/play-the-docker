@@ -121,7 +121,6 @@ class Home extends Component<void, Props, States> {
   }
 
   render() {
-    console.log('render', this.props)
     // will change the store modal
     this.props.testChanges.a = 2
     // won't change the store modal
@@ -133,7 +132,7 @@ class Home extends Component<void, Props, States> {
       </div>
       <div>
         <ImageContainer
-          name={'test.png'} />
+          name={'test.jpg'} />
         {/* <ImageContainer
           src={ImageInfo.home_mole.path}
           aspect={ImageInfo.home_mole.aspect} /> */}
