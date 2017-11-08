@@ -7,8 +7,9 @@
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
-* apply FLOW(~~in atom~~, **in webpack build process**)
+* ~~apply FLOW(in atom)~~
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
+* Phantomjs
 
 # css or sass or html
 * doc down how to avoid reflow
@@ -47,14 +48,15 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
-* image component that can:
-  * add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)
-  * lazy load, only load the best suitable image for current screen resolution
+* ~~a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)~~
+* ~~image component that can:~~
+  * ~~add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)~~
+  * ~~lazy load, only load the best suitable image for current screen resolution~~
   * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
-  * can use with the service worker cache
-  * a pattern to skip the convertion
+  * can use with the service worker cache: a global switch for service worker
+  * ~~the documentation~~
 * the media query
+* the rxjs can use with complicated data interaction
 * **different of font-size unit**
 * why reselect?
 * Progressive Web App:
@@ -70,7 +72,7 @@ basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
 * ~~static resources server, apply hash to all resources~~
 * ~~API to generate the resources link to other services,~~
-* use webworker for web and mobile web
+* ~~use webworker for web and mobile web~~ no need for now
 * ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * **react component lazy load**

@@ -48,3 +48,12 @@ if (module.hot) {
   })
 }
 ```
+
+# the image auto resize component:
+this component will automatically create images for different screen resolution, use lazy load and avoid page reflow
+config lives in gulp.dev and .env
+usage:
+```
+<ImageContainer
+  name={'test.jpg'} />
+```
