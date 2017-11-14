@@ -9,6 +9,13 @@
 * static the unit test coverage by tool
 * ~~apply FLOW(in atom)~~
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
+* bdd and agile, user story creation
+  * [bdd intro](https://en.wikipedia.org/wiki/Behavior-driven_development#cite_note-IntroToBDD_DanNorth-11)[epic and user story in agile](http://www.mountaingoatsoftware.com/agile/user-stories)
+  * bdd with saga generator
+  1. bdd is start from BA, help BA to split the user story to small pieces,
+  2. in each small story, developer and QA can help to create all the scenarios(when things go toward right way and wrong way),
+  3. then developer can use bdd tool to create test case
+  4. then developer can start to implement code to make the test case pass
 * Phantomjs
 
 # css or sass or html
@@ -17,6 +24,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
 * **is it possible to generate final style to specified element while using sass or less(for using out link stylesheet in web, and use in-line css for android)**
 * research [stylus](http://stylus-lang.com/) and [radium](https://github.com/FormidableLabs/radium#how-does-radium-work)
+[react-css-modules](https://github.com/gajus/react-css-modules#the-implementation)
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -48,15 +56,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
-* ~~a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)~~
-* ~~image component that can:~~
-  * ~~add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)~~
-  * ~~lazy load, only load the best suitable image for current screen resolution~~
-  * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
-  * can use with the service worker cache: a global switch for service worker
-  * ~~the documentation~~
+* [go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)
 * the media query
-* the rxjs can use with complicated data interaction
+* the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * **different of font-size unit**
 * why reselect?
 * Progressive Web App:
@@ -66,26 +68,34 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
-* ~~apply immutable js~~
+* handle high concurrency in node
+* **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
 * use the SSR to render the basic html, keep the html at minimal and has the very
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
-* ~~static resources server, apply hash to all resources~~
-* ~~API to generate the resources link to other services,~~
-* ~~use webworker for web and mobile web~~ no need for now
-* ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
-* **react component lazy load**
-* ~~run dirTree~~, ~~generate atom package task~~
-* ~~unified the entry of prod and dev~~no need to do
-* **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
+* react component lazy load
 * code structure for real big code base project
-* ~~router strategic for prod and dev env~~replace with nginx
 * *hapi and backend container*
+* ~~use WebpackDevServer.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container~~
+* ~~unified the entry of prod and dev~~done
 * ~~web socket on express server~~
+* ~~router strategic for prod and dev env~~replace with nginx
 * ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
-* **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
+* ~~image component that can:~~
+  * ~~a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)~~
+  * ~~add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)~~
+  * ~~lazy load, only load the best suitable image for current screen resolution~~
+  * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
+  * can use with the service worker cache: a global switch for service worker
+  * ~~the documentation~~
+* ~~apply immutable js~~
+* ~~static resources server, apply hash to all resources~~
+* ~~API to generate the resources link to other services,~~put in common folder instead
+* ~~use webworker for web and mobile web~~ no need for now
+* ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
+* ~~run dirTree, generate atom package task~~
 
 ### prod:
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
