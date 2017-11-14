@@ -1,7 +1,7 @@
 # fill in readme
 
 ## the interactive game:
-
+* [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)
 
 ## eslint and autofix and unit test
 * ~~set on atom, export the package list.~~
@@ -66,6 +66,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [PWA course](https://www.youtube.com/watch?v=17kGWJOuL-A&list=PLNYkxOF6rcIAdnzEsWkg0KpMn2WJwMBmN)
   * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
+  * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
 * handle high concurrency in node
