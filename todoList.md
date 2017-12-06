@@ -90,6 +90,7 @@ but how to handle the js render after the initial render
   * ~~lazy load, only load the best suitable image for current screen resolution~~
   * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
   * can use with the service worker cache: a global switch for service worker
+  * response to font-size changes
   * ~~the documentation~~
 * ~~apply immutable js~~
 * ~~static resources server, apply hash to all resources~~
