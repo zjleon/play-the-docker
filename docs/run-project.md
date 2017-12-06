@@ -12,6 +12,9 @@ pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && p
 unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 ```
 
+## [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
+
+
 ## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
 ## install [flow](https://flow.org/en/docs/install/) then [integrate it in editor](https://flow.org/en/docs/editors/)
