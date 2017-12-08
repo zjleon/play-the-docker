@@ -9,6 +9,7 @@ dist
 resources/android-packages
 *.lock
 .env
+package-lock.json
 
 # temparary ignore
 src/android

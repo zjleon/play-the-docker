@@ -120,6 +120,10 @@ class Home extends Component<void, Props, States> {
     // })
   }
 
+  onClickJumpPage() {
+    console.log(this.props.history.push('/calibration'));
+  }
+
   render() {
     // will change the store modal
     this.props.testChanges.a = 2
@@ -135,6 +139,7 @@ class Home extends Component<void, Props, States> {
           name={'test.jpg'} />
       </div>
       <button onClick={this.onClickButton.bind(this)}>'aa'</button>
+      <button onClick={this.onClickJumpPage.bind(this)}>bb</button>
       {/* <CardActions>
         <FlatButton label="ajax" onClick={this.onClickButton.bind(this)} />
       </CardActions> */}

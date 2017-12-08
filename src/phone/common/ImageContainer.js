@@ -11,7 +11,11 @@ const getResolutionWidth = () => {
     console.error('missed targetDeviceWidth config in process.env,', e)
     targetDeviceWidth = []
   }
-  return targetDeviceWidth.find((deviceWidth) => availWidth <= deviceWidth)
+  return targetDeviceWidth.find((deviceWidth, index, deviceWidthArray) => {
+    // get the lastest element 
+    return availWidth <= deviceWidth ||
+      (index + 1) === deviceWidthArray.length
+  })
 }
 
 const targetWidth = getResolutionWidth()

@@ -11,7 +11,7 @@
   },
   "betterScripts": {
     "dev:web_static": {
-      "command": "node ./entry.dev.js"
+      "command": "node node_modules/gulp/bin/gulp.js --gulpfile gulp.dev.js"
     },
     "dev:dirTree": {
       "command": "node ./dirTree.dev.js"
@@ -20,7 +20,7 @@
       "command": "node node_modules/webpack/bin/webpack.js --config configs/webpack.prod.js -p"
     },
     "prod:web_static": {
-      "command": "node ./entry.prod.js"
+      "command": "cp .env.production .env && node ./entry.prod.js"
     },
     "test": {
       "command": "jest"
