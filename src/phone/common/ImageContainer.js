@@ -12,7 +12,8 @@ const getResolutionWidth = () => {
     targetDeviceWidth = []
   }
   return targetDeviceWidth.find((deviceWidth, index, deviceWidthArray) => {
-    // get the lastest element 
+    // get the most suitable resolution
+    // or return the lastest one when no match
     return availWidth <= deviceWidth ||
       (index + 1) === deviceWidthArray.length
   })
