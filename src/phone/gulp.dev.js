@@ -21,9 +21,10 @@ gulp.task('initProject', (callback) => {
   try {
     fs.mkdirSync(imageFolderDist)
   } catch (e) {
-    console.error(e)
-    fs.mkdirSync(webpackConfig.output.path)
-    fs.mkdirSync(imageFolderDist)
+    if (e.code === 'ENOENT') {
+      fs.mkdirSync(webpackConfig.output.path)
+      fs.mkdirSync(imageFolderDist)
+    }
   }
   // copy env file
   fs.copyFileSync('.env.development', '.env')
