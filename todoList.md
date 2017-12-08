@@ -56,6 +56,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* token with hot reload
 * [go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
