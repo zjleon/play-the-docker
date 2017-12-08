@@ -10,29 +10,29 @@ const moment = require('moment')
 const deepequal = require('deepequal')
 const watch = require('gulp-watch')
 
+const imageFolderDist = path.resolve(webpackConfig.output.path, './images')
+const imageInfoFilePath = path.resolve(webpackConfig.output.path, './imageInfo.json')
+const imageFolderSrc = './images'
 let compiler = webpack(webpackConfig)
 let server
 
-gulp.task('startWebpackServer', (callback) => {
-  if (server) {
-    server.close()
+gulp.task('initProject', (callback) => {
+  // create distination directory
+  try {
+    fs.mkdirSync(imageFolderDist)
+  } catch (e) {
+    console.error(e)
+    fs.mkdirSync(webpackConfig.output.path)
+    fs.mkdirSync(imageFolderDist)
   }
-  // Done processing
-  server = new WebpackDevServer(compiler, webpackConfig.devServer)
-  server.listen(process.env.PORT, "0.0.0.0", () => {
-    console.log('dev server started up at port' + process.env.PORT)
-    callback()
-  })
+  // copy env file
+  fs.copyFileSync('.env.development', '.env')
+  callback()
 })
 
 // image auto resize
-const imageFolderDist = './dist/images'
-const imageFolderSrc = './images'
-const imageInfoFilePath = './dist/imageInfo.json'
-try {
-  fs.mkdirSync(imageFolderDist)
-} catch (e) {e}
-gulp.task('watchImages', () => {
+
+gulp.task('watchImages', ['initProject'], () => {
   return watch('./images/*.*', function(event) {
     console.log(event.path)
     if (event.contents) {
@@ -42,7 +42,7 @@ gulp.task('watchImages', () => {
     }
   })
 })
-gulp.task('convertImages', (callback) => {
+gulp.task('convertImages', ['initProject'], (callback) => {
   // convert all images at the first-time gulp runs
   fs.readdir(imageFolderSrc, (error, files) => {
     let promises = files.map((file) => {
@@ -154,7 +154,20 @@ const removeImageInfo = (file) => {
   return writePromise
 }
 
+gulp.task('startWebpackServer', ['initProject', 'convertImages'], (callback) => {
+  if (server) {
+    server.close()
+  }
+  // Done processing
+  server = new WebpackDevServer(compiler, webpackConfig.devServer)
+  server.listen(process.env.PORT, "0.0.0.0", () => {
+    console.log('dev server started up at port' + process.env.PORT)
+    callback()
+  })
+})
+
 gulp.task('default', [
+  'initProject',
   'convertImages',
   'watchImages',
   'startWebpackServer',
