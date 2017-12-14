@@ -3,17 +3,18 @@
 ```
 // export packages and settings
 pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && popd && mv ~/.atom/atom.zip ./resources/atom.zip
-// install git hubflow
-1. git clone https://github.com/datasift/gitflow.git
-1. cd gitflow
-1. sudo ./install.sh
 
-// import packages
+// import packages and settings
 unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 ```
 
-## [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
+## config git
+```
+git config --global user.name "zjleon"
+git config --global user.email zjleon2010@gmail.com
+```
 
+## [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
 
 ## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
