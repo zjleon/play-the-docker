@@ -3,7 +3,7 @@
 ```
 // export packages and settings
 pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && popd && mv ~/.atom/atom.zip ./resources/atom.zip
-// install git hubflow
+// install git hub flow
 1. git clone https://github.com/datasift/gitflow.git
 1. cd gitflow
 1. sudo ./install.sh
