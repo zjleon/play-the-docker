@@ -1,4 +1,4 @@
-# pre-request:
+# first-time setup:
 ## install atom and its package
 ```
 // export packages and settings
@@ -9,27 +9,26 @@ unzip -o -u -C ./resources/atom.zip -d ~/.atom/
 ```
 
 ## config git
+1. username and email
 ```
 git config --global user.name "zjleon"
 git config --global user.email zjleon2010@gmail.com
 ```
+2. [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
 
-## [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
-
-## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
-
-## install [flow](https://flow.org/en/docs/install/) then [integrate it in editor](https://flow.org/en/docs/editors/)
-
-## include flow type check for library:
-1. find the library definition [here](https://github.com/flowtype/flow-typed/tree/master/definitions/npm)
-2. run below command to install definition for modules in ``packages.json``
-```
-// in project folder:
-npm run flowTyped install
-```
-3. flow the instruction [here](https://flow.org/en/docs/react/redux/)
-and [here](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
-and [here](https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705)
+## install helpful tools:
+1. [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+1. [flow - type check tool](https://flow.org/en/docs/install/) then [integrate it in editor](https://flow.org/en/docs/editors/)
+1. include flow type check for library:
+  1. find the library definition [here](https://github.com/flowtype/flow-typed/tree/master/definitions/npm)
+  2. run below command to install definition for modules in ``packages.json``
+  ```
+  // in project folder:
+  npm run flowTyped install
+  ```
+  3. flow the instruction [here](https://flow.org/en/docs/react/redux/)
+  and [here](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
+  and [here](https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705)
 
 ## install docker
 instruction to installation
