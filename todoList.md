@@ -57,7 +57,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## web
 * token with hot reload
-* **gulp script for build production code**
+* **gulp script for build production code, script to run production code**
 * [go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction

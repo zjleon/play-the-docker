@@ -1,34 +1,34 @@
-# pre-request:
-## install atom and its package
+# first-time setup:
+## install and config atom
 ```
 // export packages and settings
 pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && popd && mv ~/.atom/atom.zip ./resources/atom.zip
-// install git hubflow
-1. git clone https://github.com/datasift/gitflow.git
-1. cd gitflow
-1. sudo ./install.sh
 
-// import packages
+// import packages and settings
 unzip -o -u -C ./resources/atom.zip -d ~/.atom/
+// under 'play-the-docker' folder, install linter packages
+npm i
 ```
+config linter-eslint: 'enable fix error on save'
+config the flow-bin path in atom package 'linter-flow': ``./node_modules/.bin/flow``
 
-## [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
+## config git
+1. username and email
+```
+git config --global user.name "zjleon"
+git config --global user.email zjleon2010@gmail.com
+```
+2. [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
 
+## config chrome:
+1. install [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
-## [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
-
-## install [flow](https://flow.org/en/docs/install/) then [integrate it in editor](https://flow.org/en/docs/editors/)
-
-## include flow type check for library:
+## add flow type for new packages
+1. run ``npm run flow-typed-search packageName`` to check if package has flow type support, or
 1. find the library definition [here](https://github.com/flowtype/flow-typed/tree/master/definitions/npm)
-2. run below command to install definition for modules in ``packages.json``
-```
-// in project folder:
-npm run flowTyped install
-```
-3. flow the instruction [here](https://flow.org/en/docs/react/redux/)
+1. use ``npm run flow-typed-install package@version`` to install
+3. follow the instruction [here](https://flow.org/en/docs/react/redux/)
 and [here](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
-and [here](https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705)
 
 ## install docker
 instruction to installation
