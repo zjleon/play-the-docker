@@ -121,7 +121,7 @@ class Home extends Component<void, Props, States> {
   }
 
   onClickJumpPage() {
-    console.log(this.props.history.push('/calibration'));
+    console.log(this.props.history.push('/calibration'))
   }
 
   render() {

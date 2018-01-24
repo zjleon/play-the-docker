@@ -56,9 +56,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* change to material v1
+* pass file buffer to sharp
 * token with hot reload
 * **gulp script for build production code, script to run production code**
-* [go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * **different of font-size unit**
@@ -80,6 +81,7 @@ but how to handle the js render after the initial render
 * react component lazy load
 * code structure for real big code base project
 * *hapi and backend container*
+* ~~[go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)~~
 * ~~use WebpackDevServer.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container~~
 * ~~unified the entry of prod and dev~~done
 * ~~web socket on express server~~

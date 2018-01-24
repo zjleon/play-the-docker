@@ -37,6 +37,7 @@ gulp.task('watchImages', ['initProject'], () => {
   return watch('./images/*.*', function(event) {
     console.log(event.path)
     if (event.contents) {
+      // TODO: content is a buffer, just write it to destination
       sharpImage(path.relative(path.resolve('./'), event.path))
     } else {
       removeImageInfo(path.relative(path.resolve('./'), event.path))
