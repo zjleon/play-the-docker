@@ -118,6 +118,9 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 ### prod:
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 
+## backend:
+* install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
+
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**

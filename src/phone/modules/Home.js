@@ -106,14 +106,14 @@ class Home extends Component<void, Props, States> {
   // }
 
   onClickButton() {
-    // this.props.dispatch({
-    //   type: 'REQUEST_GET',
-    //   url: 'aaa'
-    // })
     this.props.dispatch({
-      type: 'CHANGE_QUATERNION',
-      quaternion: ['a', 'b']
+      type: 'REQUEST_GET',
+      url: 'aaa'
     })
+    // this.props.dispatch({
+    //   type: 'CHANGE_QUATERNION',
+    //   quaternion: ['a', 'b']
+    // })
     // this.props.dispatch({
     //   type: 'TEST_CHANGES',
     //   data: 'a'
