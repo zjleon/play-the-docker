@@ -56,9 +56,15 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * map all backend api to each front end service instance automatically
 
 ## web
+* doc how to use non-style component
+* doc how to use shouldComponentUpdate, control the render of inner componenet
+* the folder structure of child project should be same as root project
+* case sensitive check plugin in webpack
 * change to material v1
-* pass file buffer to sharp
-* token with hot reload
+* move header into router, connect each component at root router, so no more repeat code
+* [the router push in saga](https://github.com/jfairbank/redux-saga-router)
+* smart redux action
+* pass file buffer to sharp in gulp task
 * **gulp script for build production code, script to run production code**
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
@@ -81,6 +87,8 @@ but how to handle the js render after the initial render
 * react component lazy load
 * code structure for real big code base project
 * *hapi and backend container*
+* ~~tap event support on web~~
+* ~~how server side rendering work~~``renderToString in server side router``
 * ~~[go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)~~
 * ~~use WebpackDevServer.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container~~
 * ~~unified the entry of prod and dev~~done
@@ -124,6 +132,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**
+* **learn how the redux work in android**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
@@ -206,12 +215,10 @@ https://github.com/facebook/react-native/issues/7257~~
   * /support/v1*
   ``$ rm emulator*``
 
-# react and redux
-* ~~how server side rendering work~~``renderToString in server side router``
-* ~~tap event support on web~~
-* doc how to use non-style component
-* doc how to use shouldComponentUpdate, control the render of inner componenet
-* **java code dispatch redux action**
+# backend service
+* token with hot reload
+* restart dev server in gulp
+* nodejs debug tool
 
 # CI server
 ## prod:
@@ -246,7 +253,7 @@ https://nodejs.org/api/child_process.html#child_process_child_process_execsync_c
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
-# docker compose
+# docker
 * sharable file and config between projects
 * [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
 
