@@ -44,18 +44,21 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://github.com/exponentjs/ex-navigation
 
 ## nginx:
+* **play the nginx starter tutorial**
 * OPTION can be use for auth check and prevent api error
 * sever domain.com for prod config
 * [tsl](https://letsencrypt.org/getting-started/), [http2](https://www.nginx.com/blog/nginx-1-9-5/)
+* open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
+* map all backend api to each front end service instance automatically
 * ~~auto reload the configs~~``docker-compose restart`` instead
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
-* open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
-* map all backend api to each front end service instance automatically
 
 ## web
+* [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
+* the script should be able to read different configs at different environment
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
 * the folder structure of child project should be same as root project
@@ -255,8 +258,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 
 # docker
 * sharable file and config between projects
-* [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
-
+* vault service for env storage
 * **put the nginx endpoint in compose instead of .env**
 * use rolling update to update k8s deployment
 * ~~build multi containers.~~ ~~docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~
