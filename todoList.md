@@ -57,6 +57,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
 
 ## web
+* **production optimize**:
+  * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+  * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
+  * webpack bundle size plugin
+  * express production [settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
+  * webpack build [settings](https://webpack.js.org/guides/build-performance/)
+* env for client and server. production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
 * the script should be able to read different configs at different environment
 * doc how to use non-style component
@@ -113,12 +120,9 @@ but how to handle the js render after the initial render
 * ~~use webworker for web and mobile web~~ no need for now
 * ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * ~~run dirTree, generate atom package task~~
-
-### prod:
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
-* [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
-* [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
+
 
 ### dev:
 * ~~use dev server~~
@@ -126,8 +130,6 @@ but how to handle the js render after the initial render
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * unit test process, include UI test -- make sure app stable after small UI changes
 issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-### prod:
-* production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
