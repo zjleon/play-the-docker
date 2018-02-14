@@ -60,9 +60,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
-  * webpack bundle size plugin
-  * express production [settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
-  * webpack build [settings](https://webpack.js.org/guides/build-performance/)
+  * [webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
+  * [webpack build settings](https://webpack.js.org/guides/build-performance/)
+  * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
 * env for client and server. production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
 * the script should be able to read different configs at different environment
@@ -86,6 +87,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
+  * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
 * handle high concurrency in node
@@ -94,7 +96,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
-* react component lazy load
+
 * code structure for real big code base project
 * *hapi and backend container*
 * ~~tap event support on web~~
