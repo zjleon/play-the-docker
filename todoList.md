@@ -88,15 +88,18 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
   * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  * use the SSR to render the basic html.
+    * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
+    * [Code Splitting and Server-Side Rendering](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md#code-splitting-and-server-side-rendering)
+    * read cookie to know which page to be render(is auth?)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
 * handle high concurrency in node
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
-* use the SSR to render the basic html, keep the html at minimal and has the very
+
 basic content in it so user can see some content without waiting,
 but how to handle the js render after the initial render
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
-
 * code structure for real big code base project
 * *hapi and backend container*
 * ~~tap event support on web~~
@@ -120,7 +123,6 @@ but how to handle the js render after the initial render
 * ~~static resources server, apply hash to all resources~~
 * ~~API to generate the resources link to other services,~~put in common folder instead
 * ~~use webworker for web and mobile web~~ no need for now
-* ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
 * ~~run dirTree, generate atom package task~~
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
