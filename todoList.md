@@ -91,14 +91,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * use the SSR to render the basic html.
     * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
     * [Code Splitting and Server-Side Rendering](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md#code-splitting-and-server-side-rendering)
+    basic content in it so user can see some content without waiting,
+    but how to handle the js render after the initial render
     * read cookie to know which page to be render(is auth?)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
 * handle high concurrency in node
 * **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
-
-basic content in it so user can see some content without waiting,
-but how to handle the js render after the initial render
 * **applied 'react-native-web' https://github.com/necolas/react-native-web**
 * code structure for real big code base project
 * *hapi and backend container*
@@ -228,6 +227,7 @@ https://github.com/facebook/react-native/issues/7257~~
 * token with hot reload
 * restart dev server in gulp
 * nodejs debug tool
+* services share a common config list that define access auth to each data table, so service know which service should it talk to
 
 # CI server
 ## prod:
