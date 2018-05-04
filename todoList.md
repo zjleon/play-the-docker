@@ -57,6 +57,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
 
 ## web
+* put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
@@ -136,6 +137,7 @@ issue: support traditional non-js-render web(https://github.com/b00giZm/docker-c
 
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
+* find a way to debug the code(start by gulp)
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
@@ -263,6 +265,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker
+* container for building and runtime
 * sharable file and config between projects
 * vault service for env storage
 * **put the nginx endpoint in compose instead of .env**
