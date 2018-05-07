@@ -57,6 +57,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~set 404 default page
 
 ## web
+* unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
 * put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
@@ -127,16 +129,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
 
-
-### dev:
-* ~~use dev server~~
-* ~~set script~~
-* doc how to use async module(https://github.com/petehunt/webpack-howto)
-* unit test process, include UI test -- make sure app stable after small UI changes
-issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
+* export the API to frontEnd
 * find a way to debug the code(start by gulp)
 
 ## android
