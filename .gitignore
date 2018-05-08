@@ -52,3 +52,4 @@ react-native-packager-cache-*
 haste-map-react-native-packager-*
 *-deployment.yaml
 *-service.yaml
+package-lock.json

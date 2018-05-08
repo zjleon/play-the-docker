@@ -1,7 +1,7 @@
 const webpack = require("webpack")
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 const srcPath = path.resolve('.')
@@ -17,10 +17,14 @@ const publicPath = process.env.DOCKER_ENV ? "/" + process.env.PROJECT_ID : '/'
 let envFile = fs.readFileSync('.env', 'utf8')
 let envToClient = {
   DOCKER_ENV: process.env.DOCKER_ENV || 0,
+  IMAGE_RESIZE_CONFIG: process.env.IMAGE_RESIZE_CONFIG
 }
+// convert numeric in client env
 envFile.replace(/(\w+)=((\d+)|.+)/g, function($0, $1, $2, $3) {
   envToClient[$1] = $3 ? Number($3) : $2
 })
+
+const babelOptions = JSON.parse(fs.readFileSync('.babelrc', 'utf8'))
 
 module.exports = {
   entry: {
@@ -28,12 +32,14 @@ module.exports = {
       'react-hot-loader/patch',
       devServerEndPoint,
       'webpack/hot/only-dev-server',
+      'babel-polyfill',
       srcPath + '/index.js',
     ],
     vendor: [
       'react-hot-loader/patch',
       devServerEndPoint,
       'webpack/hot/only-dev-server',
+      'babel-polyfill',
       'react',
       'react-dom',
     ],
@@ -53,17 +59,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                'es2015',
-                'react',
-              ],
-            },
+            options: babelOptions,
           },
         ],
       },
@@ -85,28 +86,40 @@ module.exports = {
         return module.context && module.context.indexOf('node_modules') !== -1
       },
     }),
-    new CleanWebpackPlugin(['dist'], {
-      root: srcPath,
-      verbose: true,
-      dry: false,
-      exclude: [],
-    }),
+    // new CleanWebpackPlugin(['dist'], {
+    //   root: srcPath,
+    //   verbose: true,
+    //   dry: false,
+    //   exclude: [],
+    // }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin(envToClient),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: ['node_modules'],
+    })
     // new NpmInstallPlugin(),
   ],
   devServer: {
     hot: true,
-    contentBase: distPath,
+    host: '0.0.0.0',
+    contentBase: [distPath],
     publicPath: publicPath,
-    historyApiFallback: true,
-    // historyApiFallback: {
-    //   rewrites: [
-    //     { from: /.+/, to: '/' },
-    //   ],
-    //   verbose: true,
-    // },
+    disableHostCheck: true,
+    setup: function(app) {
+      app.all('*', function(req, res, next) {
+        console.log('req headers', req.headers)
+        console.log('req path', req.path)
+        console.log('req query', req.query)
+        next()
+      })
+    },
+    historyApiFallback: {
+      rewrites: [
+        { from: /.+/, to: '/' },
+      ],
+      verbose: true,
+    },
   },
   watch: true,
   watchOptions: {

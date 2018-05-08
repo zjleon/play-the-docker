@@ -1,15 +1,30 @@
 # fill in readme
 
+## the interactive game:
+* [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)
+
 ## eslint and autofix and unit test
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
-* try 'flow'
+* ~~apply FLOW(in atom)~~
+* when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
+* bdd and agile, user story creation
+  * [bdd intro](https://en.wikipedia.org/wiki/Behavior-driven_development#cite_note-IntroToBDD_DanNorth-11)[epic and user story in agile](http://www.mountaingoatsoftware.com/agile/user-stories)
+  * bdd with saga generator
+  1. bdd is start from BA, help BA to split the user story to small pieces,
+  2. in each small story, developer and QA can help to create all the scenarios(when things go toward right way and wrong way),
+  3. then developer can use bdd tool to create test case
+  4. then developer can start to implement code to make the test case pass
+* Phantomjs
 
 # css or sass or html
 * doc down how to avoid reflow
 http://taligarsiel.com/Projects/howbrowserswork1.htm
 * shared element transition
+* **is it possible to generate final style to specified element while using sass or less(for using out link stylesheet in web, and use in-line css for android)**
+* research [stylus](http://stylus-lang.com/) and [radium](https://github.com/FormidableLabs/radium#how-does-radium-work)
+[react-css-modules](https://github.com/gajus/react-css-modules#the-implementation)
 
 # react-native
 ## Road map: https://github.com/exponentjs/ex-navigation
@@ -29,48 +44,103 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   https://github.com/exponentjs/ex-navigation
 
 ## nginx:
+* **play the nginx starter tutorial**
+* OPTION can be use for auth check and prevent api error
 * sever domain.com for prod config
-* ssl
-* ~~auto reload the configs~~``docker-compose restart`` instead
+* [tsl](https://letsencrypt.org/getting-started/), [http2](https://www.nginx.com/blog/nginx-1-9-5/)
+* open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
+* map all backend api to each front end service instance automatically
+* ~~auto reload the configs~~ ``docker-compose restart`` instead
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
-* ~~if destination server unavailable, redirect to another one~~set 404 default page
-* open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
-* map all backend api to each front end service instance automatically
+* ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* static resources server, apply hash to all resources
-* API to generate the resources link to other services,
-* use webworker for web and mobile web
-* ~~server side render: https://reacttraining.com/react-router/web/api/StaticRouter~~
-* **applied 'react-native-web' https://github.com/necolas/react-native-web**
-* **react component lazy load**
-* ~~run dirTree~~, ~~generate atom package task~~
-* ~~unified the entry of prod and dev~~no need to do
-* **~~use WebpackDevServer~~.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container**
+* put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
 * code structure for real big code base project
-* ~~router strategic for prod and dev env~~replace with nginx
+* the folder structure of child project should be same as root project
+* env for client and server.
+* case sensitive check plugin in webpack
+* **gulp script for build production code, script to run production code**
+    * copy the common code folder into each execute app
+    * watch code and relaunch the express
+* **production optimize**:
+  * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+  * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
+  * [webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
+  * [webpack build settings](https://webpack.js.org/guides/build-performance/)
+  * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+* production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
+* ~~the script should be able to read different configs at different environment~~ use env secure server
+* doc how to use non-style component
+* doc how to use shouldComponentUpdate, control the render of inner componenet
+* change to material v1
+* move header into router, connect each component at root router, so no more repeat code
+* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
+* smart redux action
+* pass file buffer to sharp in gulp task
+* the media query
+* the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
+* why reselect?
+* Progressive Web App:
+  * github: lighthouse,
+  * [PWA course](https://www.youtube.com/watch?v=17kGWJOuL-A&list=PLNYkxOF6rcIAdnzEsWkg0KpMn2WJwMBmN)
+  * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+  * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
+  * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
+  * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  * use the SSR to render the basic html.
+    * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
+    * [Code Splitting and Server-Side Rendering](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md#code-splitting-and-server-side-rendering)
+    basic content in it so user can see some content without waiting,
+    but how to handle the js render after the initial render
+    * read cookie to know which page to be render(is auth?)
+* [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
+* babel source map
+* applied 'react-native-web' https://github.com/necolas/react-native-web
+* unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
+* *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
 * *hapi and backend container*
-* web socket on express server
+* ~~different of font-size unit~~
+* ~~[ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)~~ Deprecated
+* ~~tap event support on web~~
+* ~~how server side rendering work~~``renderToString in server side router``
+* ~~[go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)~~
+* ~~use WebpackDevServer.define a gulp task to: use production config and auto pack -> run the project using webpack and express in container~~
+* ~~unified the entry of prod and dev~~done
+* ~~web socket on express server~~
+* ~~router strategic for prod and dev env~~replace with nginx
 * ~~run gulp in an isolated container, observe code changes, send signal to other container~~run webpack, *hapi* as gulp tasks
 * ~~gulp task to split the platform specified code with annotation~~use webpack resolve.alias
-* **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
-### prod:
+* ~~image component that can:~~
+  * ~~a function that add screen info to all image requests[sharp](http://sharp.dimens.io/en/stable/api-output/#withmetadata)  [Responsive_images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)~~
+  * ~~add query to image url base on screen resolution(runtime, support different window.devicePixelRatio)~~
+  * ~~lazy load, only load the best suitable image for current screen resolution~~
+  * ~~create place holder to avoid content reflow(get info from json file that auto generate by gulp plugin)[link](https://www.codecaptain.io/blog/web-development/responsive-images-and-preventing-page-reflow/474)~~, place error image when target image was not found
+  * can use with the service worker cache: a global switch for service worker
+  * response to font-size changes
+  * ~~the documentation~~
+* ~~apply immutable js~~
+* ~~static resources server, apply hash to all resources~~
+* ~~API to generate the resources link to other services,~~put in common folder instead
+* ~~use webworker for web and mobile web~~ no need for now
+* ~~run dirTree, generate atom package task~~
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
-### dev:
-* ~~use dev server~~
-* ~~set script~~
-* doc how to use async module(https://github.com/petehunt/webpack-howto)
-* unit test process, include UI test -- make sure app stable after small UI changes
-issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-### prod:
-* production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
+
+## backend:
+* install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
+* export the API to frontEnd
+* handle high concurrency in node
+* find a way to debug the code(start by gulp)
 
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**
+* **learn how the redux work in android**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
@@ -153,13 +223,11 @@ https://github.com/facebook/react-native/issues/7257~~
   * /support/v1*
   ``$ rm emulator*``
 
-# react and redux
-* ~~how server side rendering work~~``renderToString in server side router``
-* ~~tap event support on web~~
-* doc how to use non-style component
-* doc how to use shouldComponentUpdate, control the render of inner componenet
-* add immutable.js
-* **java code dispatch redux action**
+# backend service
+* token with hot reload
+* restart dev server in gulp
+* nodejs debug tool
+* services share a common config list that define access auth to each data table, so service know which service should it talk to
 
 # CI server
 ## prod:
@@ -183,7 +251,7 @@ https://github.com/facebook/react-native/issues/7257~~
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
-* **error, debug info logging, Profiling: https://www.npmjs.com/package/winston**
+* error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
 
 ## dev:
 * ~~install project dependencies via node script
@@ -194,7 +262,10 @@ https://nodejs.org/api/child_process.html#child_process_child_process_execsync_c
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
-# docker compose
+# docker
+* container for building and runtime
+* sharable file and config between projects
+* vault service for env storage
 * **put the nginx endpoint in compose instead of .env**
 * use rolling update to update k8s deployment
 * ~~build multi containers.~~ ~~docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~
@@ -232,7 +303,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * web_static: generate error report and use tail command in atom shell package
 
 # github
-* decide which cloud to use
+* decide which cloud to use as CI
 * webhook on github
   * on client side, do all unit test before commit
   * on server side, trigger CI server when commit into master

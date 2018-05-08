@@ -7,13 +7,20 @@
     "doc": "docs"
   },
   "dependencies": {
+    "npm": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.16.1",
-    "eslint-plugin-react": "^6.10.0",
-    "eslint-plugin-react-native": "^2.2.1"
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react-native": "^3.2.1",
+    "flow-bin": "^0.71.0",
+    "flow-typed": "^2.1.5"
   },
   "scripts": {
+    "flow-typed-install": "node node_modules/flow-typed/dist/cli.js install",
+    "flow-typed-search": "node node_modules/flow-typed/dist/cli.js search",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,7 +1,8 @@
 const express = require("express")
+const prodConfig = require("./configs/webpack.prod")
 
 let app = express()
-app.use(express.static('dist'))
+app.use(express.static(prodConfig.publicPath))
 
 app.listen(process.env.PORT, '0.0.0.0', function() {
   console.log('express started in at port' + process.env.PORT)

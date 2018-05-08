@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-import clone from 'clone'
+// import clone from 'clone'
 
 let malletProps = {
   startDegree: 90,
@@ -43,6 +43,7 @@ const movementRange = {
   y: Math.abs(malletProps.endPosition.y - malletProps.startPosition.y),
   z: Math.abs(malletProps.endPosition.z - malletProps.startPosition.z),
 }
+// TODO: set by phone's quaternion
 const setMalletStateByAngle = (angle) => {
   let positionPercentage = Math.abs(malletProps.startDegree - angle) / angleRange
   let targetQuaternion = mallet.getWorldQuaternion()

@@ -1,11 +1,34 @@
-# pre-request:
-## install atom and its package
+# first-time setup:
+## install and config atom
 ```
-// export packages
-apm list --installed --bare > configs/atom.packages.txt
-// import packages
-apm install --packages-file atom.packages.txt
+// export packages and settings
+pushd ~/.atom/ && zip -r -X atom.zip ./styles.less ./config.cson ./packages && popd && mv ~/.atom/atom.zip ./resources/atom.zip
+
+// import packages and settings
+unzip -o -u -C ./resources/atom.zip -d ~/.atom/
+// under 'play-the-docker' folder, install linter packages
+npm i
 ```
+config linter-eslint: 'enable fix error on save'
+config the flow-bin path in atom package 'linter-flow': ``./node_modules/.bin/flow``
+
+## config git
+1. username and email
+```
+git config --global user.name "zjleon"
+git config --global user.email zjleon2010@gmail.com
+```
+2. [setup the github ssh key](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) then ``git remote set-url origin git@github.com:username/your-repository.git``
+
+## config chrome:
+1. install [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+## add flow type for new packages
+1. run ``npm run flow-typed-search packageName`` to check if package has flow type support, or
+1. find the library definition [here](https://github.com/flowtype/flow-typed/tree/master/definitions/npm)
+1. use ``npm run flow-typed-install package@version`` to install
+3. follow the instruction [here](https://flow.org/en/docs/react/redux/)
+and [here](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
 
 ## install docker
 instruction to installation
@@ -94,7 +117,7 @@ kubectl create -f phone-deployment.yaml -f tv-deployment.yaml
 for production build:
 ``docker-compose -f configs/compose.prod.yml build``
 ## 2. start all services
-``docker-compose -f configs/compose.dev.yml -f configs/compose.dev.yml up``
+``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml up``
 for production build:
 ``docker-compose -f configs/compose.prod.yml up``
 ## 3. check the logs of web_static

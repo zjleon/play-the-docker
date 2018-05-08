@@ -19,14 +19,14 @@ if [ $NODE_ENV == "production" ]; then
   rm ./yarn.lock
   # install only production dependencies
   yarn install --production
-  rm -f /app/.env
-  cp /app/production.env /app/.env
+  # rm -f /app/.env
+  # cp /app/.env.production /app/.env
   echo "start production"
   npm run start_prod
 else
   yarn install
-  rm -f /app/.env
-  cp /app/development.env /app/.env
+  # rm -f /app/.env
+  # cp /app/.env.development /app/.env
   echo "start development"
   npm start
 fi
