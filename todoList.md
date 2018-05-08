@@ -141,6 +141,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**
 * **learn how the redux work in android**
+* **Change the android folder to adapt new folder structure**
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~

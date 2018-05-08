@@ -15,7 +15,7 @@ RUN apt-get update && \
 
 # install node
 WORKDIR /opt
-ENV NODE_VERSION=6.11.2
+ENV NODE_VERSION=8.11.1
 COPY ./resources/node-v${NODE_VERSION}-linux-x64.tar.xz ./node.tar.xz
 RUN tar xJf node.tar.xz --directory /opt && \
     rm -f node.tar.xz
@@ -26,7 +26,7 @@ ENV npm_config_nodedir=/opt/node-v${NODE_VERSION}-linux-x64/
 ENV npm_config_tarball=/opt/node-v${NODE_VERSION}-headers.tar.gz
 
 # install yarn
-COPY ./resources/yarn-v0.23.2.tar.gz ./yarn.tar.gz
+COPY ./resources/yarn-v1.6.0.tar.gz ./yarn.tar.gz
 RUN mkdir yarn && \
     tar zxf yarn.tar.gz --directory /opt/yarn --strip-components=1 &&  \
     rm -f yarn.tar.gz
