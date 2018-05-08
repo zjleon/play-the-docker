@@ -57,6 +57,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
+* load all backend api when fontend server start
 * put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
 * code structure for real big code base project
 * the folder structure of child project should be same as root project
@@ -133,7 +134,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
-* export the API to frontEnd
 * handle high concurrency in node
 * find a way to debug the code(start by gulp)
 
