@@ -50,16 +50,21 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * [tsl](https://letsencrypt.org/getting-started/), [http2](https://www.nginx.com/blog/nginx-1-9-5/)
 * open debug: https://coderwall.com/p/nmgwnw/debugging-nginx-rewrite
 * map all backend api to each front end service instance automatically
-* ~~auto reload the configs~~``docker-compose restart`` instead
+* ~~auto reload the configs~~ ``docker-compose restart`` instead
 * ~~support hash and test the history api~~
 * ~~web socket to frontend and backend services in nginx~~
 * ~~nginx container~~
-* ~~if destination server unavailable, redirect to another one~~set 404 default page
+* ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-* doc how to use async module(https://github.com/petehunt/webpack-howto)
 * put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
+* code structure for real big code base project
+* the folder structure of child project should be same as root project
+* env for client and server.
+* case sensitive check plugin in webpack
+* **gulp script for build production code, script to run production code**
+    * copy the common code folder into each execute app
+    * watch code and relaunch the express
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
@@ -67,22 +72,17 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
   * [webpack build settings](https://webpack.js.org/guides/build-performance/)
   * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
-* env for client and server. production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
-* [ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)
-* the script should be able to read different configs at different environment
+* production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
+* ~~the script should be able to read different configs at different environment~~ use env secure server
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
-* the folder structure of child project should be same as root project
-* case sensitive check plugin in webpack
 * change to material v1
 * move header into router, connect each component at root router, so no more repeat code
-* [the router push in saga](https://github.com/jfairbank/redux-saga-router)
+* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
 * smart redux action
 * pass file buffer to sharp in gulp task
-* **gulp script for build production code, script to run production code**
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
-* **different of font-size unit**
 * why reselect?
 * Progressive Web App:
   * github: lighthouse,
@@ -99,11 +99,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     * read cookie to know which page to be render(is auth?)
 * [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
 * babel source map
-* handle high concurrency in node
-* **auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin**
-* **applied 'react-native-web' https://github.com/necolas/react-native-web**
-* code structure for real big code base project
+* applied 'react-native-web' https://github.com/necolas/react-native-web
+* unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
+* doc how to use async module(https://github.com/petehunt/webpack-howto)
+* *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
 * *hapi and backend container*
+* ~~different of font-size unit~~
+* ~~[ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)~~ Deprecated
 * ~~tap event support on web~~
 * ~~how server side rendering work~~``renderToString in server side router``
 * ~~[go through the es6 class](http://2ality.com/2015/02/es6-classes-final.html)~~
@@ -132,6 +134,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
 * export the API to frontEnd
+* handle high concurrency in node
 * find a way to debug the code(start by gulp)
 
 ## android
