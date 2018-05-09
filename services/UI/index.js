@@ -1,28 +1,29 @@
-import { AppContainer } from 'react-hot-loader'
+// import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import React from 'react'
-import RootRouter from './RootRouter'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+// import RootRouter from './RootRouter'
+// import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin()
+// injectTapEventPlugin()
 
 const hotRender = (NextRouter) => {
   render(
-    <AppContainer>
-      <NextRouter/>
-    </AppContainer>,
+    <div>123</div>,
+    // <AppContainer>
+    //   <NextRouter/>
+    // </AppContainer>,
     document.getElementById('appContainer')
   )
 }
 
-hotRender(RootRouter)
+hotRender()
 
-if (module.hot) {
-  module.hot.accept('./RootRouter.js', () => {
-    const nextRouter = require('./RootRouter.js').default
-    hotRender(nextRouter)
-  })
-}
+// if (module.hot) {
+//   module.hot.accept('./RootRouter.js', () => {
+//     const nextRouter = require('./RootRouter.js').default
+//     hotRender(nextRouter)
+//   })
+// }

@@ -60,7 +60,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * load all backend api when fontend server start
 * put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
 * code structure for real big code base project
-* the folder structure of child project should be same as root project
+* ~~the folder structure of child project should be same as root project~~
 * env for client and server.
 * case sensitive check plugin in webpack
 * **gulp script for build production code, script to run production code**

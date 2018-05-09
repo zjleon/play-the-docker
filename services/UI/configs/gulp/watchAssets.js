@@ -1,14 +1,11 @@
 require('dotenv').config()
-const WebpackDevServer = require("webpack-dev-server")
-const webpack = require("webpack")
-const webpackConfig = require('./configs/webpack.dev')
-const gulp = require('gulp')
+
+const watch = require('gulp-watch')
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
 const deepequal = require('deepequal')
-const watch = require('gulp-watch')
 
 const imageFolderDist = path.resolve(webpackConfig.output.path, './images')
 const imageInfoFilePath = path.resolve(webpackConfig.output.path, './imageInfo.json')
@@ -37,8 +34,8 @@ gulp.task('watchImages', ['initProject'], () => {
   return watch('./images/*.*', function(event) {
     console.log(event.path)
     if (event.contents) {
-      // TODO: content is a buffer, just write it to destination
-      sharpImage(path.relative(path.resolve('./'), event.path))
+      // sharpImage(path.relative(path.resolve('./'), event.path))
+      sharpImage(event.contents)
     } else {
       removeImageInfo(path.relative(path.resolve('./'), event.path))
     }
@@ -155,22 +152,3 @@ const removeImageInfo = (file) => {
   })
   return writePromise
 }
-
-gulp.task('startWebpackServer', ['initProject', 'convertImages'], (callback) => {
-  if (server) {
-    server.close()
-  }
-  // Done processing
-  server = new WebpackDevServer(compiler, webpackConfig.devServer)
-  server.listen(process.env.PORT, "0.0.0.0", () => {
-    console.log('dev server started up at port' + process.env.PORT)
-    callback()
-  })
-})
-
-gulp.task('default', [
-  'initProject',
-  'convertImages',
-  'watchImages',
-  'startWebpackServer',
-])
