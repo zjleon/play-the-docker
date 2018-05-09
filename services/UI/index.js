@@ -1,7 +1,7 @@
-// import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import React from 'react'
-// import RootRouter from './RootRouter'
+import RootRouter from './modules/RootRouter'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 
@@ -11,19 +11,20 @@ import { render } from 'react-dom'
 
 const hotRender = (NextRouter) => {
   render(
-    <div>123</div>,
-    // <AppContainer>
-    //   <NextRouter/>
-    // </AppContainer>,
+    <AppContainer>
+      <NextRouter/>
+    </AppContainer>,
     document.getElementById('appContainer')
   )
 }
 
 hotRender()
 
-// if (module.hot) {
-//   module.hot.accept('./RootRouter.js', () => {
-//     const nextRouter = require('./RootRouter.js').default
-//     hotRender(nextRouter)
-//   })
-// }
+console.log('product check: ', module.hot)
+
+if (module.hot) {
+  module.hot.accept('./RootRouter.js', () => {
+    const nextRouter = require('./RootRouter.js').default
+    hotRender(nextRouter)
+  })
+}
