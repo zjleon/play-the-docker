@@ -1,7 +1,7 @@
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import React from 'react'
-import RootRouter from './modules/RootRouter'
+import RootRouter from './modules/Routers'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 
