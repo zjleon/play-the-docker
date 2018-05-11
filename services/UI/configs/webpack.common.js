@@ -45,7 +45,7 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors1',
+          name: 'vendors',
           enforce: true,
           chunks: 'all'
         }
@@ -115,5 +115,5 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin(envToClient),
   ],
-
+  target: 'node'
 }

@@ -1,17 +1,18 @@
-// @flow
-import {Map, is} from 'immutable'
+// import {Map, is} from 'immutable'
 
-import initialStore from '../initialStore'
+import {
+  REQUEST_SAMPLE,
+} from '../../configs/actionTypes'
 
 export default (
-  state: Map<*, *> = initialStore.home,
-  action: {type: string, quaternion: Array<number>}
+  state,
+  action
 ) => {
   switch (action.type) {
-  case 'CHANGE_QUATERNION':
-    let newState = state.set('quaternion', action.quaternion)
-    console.log('CHANGE_QUATERNION', is(newState, state))
-    return newState
+  case REQUEST_SAMPLE.SUCESS:
+    // let newState = state.set('quaternion', action.quaternion)
+    console.log('111')
+    return state
   default:
     return state
   }

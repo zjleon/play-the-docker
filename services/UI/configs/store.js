@@ -2,8 +2,8 @@ import { applyMiddleware, compose, createStore } from 'redux'
 
 import createSagaMiddleware from 'redux-saga'
 import initialStore from './initialStore'
-import rootReducer from './reducers'
-import rootSaga from './sagas'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
 // import sagaMoniter from './sagamoniter'
 const sagaMiddleware = createSagaMiddleware()
@@ -16,11 +16,11 @@ const store = createStore(
 let sagaTask = sagaMiddleware.run(rootSaga)
 
 if (module.hot) {
-  module.hot.accept('./reducers/', (module) => {
-    store.replaceReducer(require('./reducers/index.js').default)
+  module.hot.accept('./rootReducer.js', (module) => {
+    store.replaceReducer(require('./rootReducer.js').default)
   })
-  module.hot.accept('./sagas/', (module) => {
-    const getNewSagas = require('./sagas/').default
+  module.hot.accept('./rootSaga.js', (module) => {
+    const getNewSagas = require('./rootSaga.js').default
     sagaTask.cancel()
     sagaTask.done.then(() => {
       sagaTask = sagaMiddleware.run(getNewSagas)

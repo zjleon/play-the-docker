@@ -4,7 +4,6 @@ const {readdirSync, createWriteStream, watch} = require('fs')
 const projectRoot = resolve(__dirname, '../../')
 const modulePath = resolve(projectRoot, './modules')
 const routeFilePath = resolve(modulePath, './Routers/routes.js')
-// const routeFileTemplate =
 const exculdedModuleNames = [
   'Common',
   'Routers',
@@ -18,14 +17,15 @@ function getComponentsFromDirectory() {
   })
 }
 
-function watchComponents() {
-  return watch(
+function watchComponents(done) {
+  watch(
     modulePath,
     {read: false},
     (event, filename) => {
       generateRouters()
     }
   )
+  done()
 }
 
 function generateRouters(done) {

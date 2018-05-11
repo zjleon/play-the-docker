@@ -10,5 +10,5 @@ gulp.task('generateRouters', generateRouters)
 gulp.task('default', gulp.series(
   'generateRouters',
   'watchComponents',
-  // 'startDevServer',
+  'startDevServer',
 ))

@@ -7,30 +7,41 @@ import {
 import Loadable from 'react-loadable'
 import LoadingAnimation from '../Common/Loading'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {NODE_ENV} from '../../configs/constants'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import history from '../../utils/history'
+import { hot } from 'react-hot-loader'
 import routes from './routes'
 import store from '../../configs/store'
 
-const LoadableComponent = Loadable({
-  loader: () => import('./my-component'),
-  loading: LoadingAnimation,
-})
+console.log('NODE_ENV', NODE_ENV, __DEV__)
 
-// export default class Routers extends React.Component {
-//   render() {
-//     return <LoadableComponent/>
-//   }
-// }
+function getRouters() {
+  return <div>
+    {routes.map((route) => {
+      return Loadable({
+        loader: () => {
+          const component = import(route)
+          if (NODE_ENV === 'development') {
+            return hot(component)
+          }
+          return component
+        },
+        loading: LoadingAnimation,
+      })
+    })}
+  </div>
+}
 
 class RootRouter extends Component {
   render() {
+    console.log('getRouters', getRouters)
     return (
       <Provider store={store}>
         <Router basename={pathPrefix} history={history}>
           <MuiThemeProvider>
-            {routes}
+            {getRouters()}
           </MuiThemeProvider>
         </Router>
       </Provider>

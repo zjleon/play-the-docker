@@ -1,13 +1,24 @@
 import {all, put, takeEvery, takeLatest} from 'redux-saga/effects'
 
-function* onMessageReceived() {
-  takeEvery('SOCKET_MESSAGE_ARRIVED', function* (action) {
-    console.log('onMessageReceived', action)
-  })
+import {
+  REQUEST_SAMPLE,
+} from '../../configs/actionTypes'
+import {request} from '../../utils/request/restfulSaga'
+
+// TODO: verify the user name and password
+function* verifyDataSample() {
+
+}
+
+function* requestSample(action) {
+  console.log('requestSample', action)
+  // const {username, password} = yield select((state) => {return state.get('userInfo').toJS()})
+  yield* request(action)
+  // modify data belong to reducer
 }
 
 export default function* homeSaga() {
   yield all([
-    onMessageReceived(),
+    takeEvery(REQUEST_SAMPLE.REQUEST, requestSample),
   ])
 }

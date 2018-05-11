@@ -1,12 +1,7 @@
-// @flow
-import {List, Map} from 'immutable'
+import {fromJS} from 'immutable'
 
-export default {
-  home: Map({
-    quaternion: [],
-  }),
-  socket: Map({
-    connection: 'closed',
-  }),
-  testChanges: {a: 1},
+const store = {
+  home: {},
 }
+
+export default fromJS(store)

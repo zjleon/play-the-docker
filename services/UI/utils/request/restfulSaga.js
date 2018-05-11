@@ -23,7 +23,7 @@ const restfulConfig = {
   // },
 }
 
-function* request(options) {
+export function* request(options) {
   put({type: 'REQUEST_GET_START'})
   const opt = {...restfulConfig, ...options}
   let response
@@ -37,10 +37,4 @@ function* request(options) {
   }
 }
 
-function* get() {
-  yield takeEvery('REQUEST_GET', request)
-}
-
-export {
-  get,
-}
+// TODO: file upload saga

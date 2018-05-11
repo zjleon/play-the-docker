@@ -16,11 +16,6 @@ const devSettings = {
       'webpack-dev-server/client?http://localhost:' + PORT,
       'webpack/hot/only-dev-server',
     ],
-    vendor: [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + PORT,
-      'webpack/hot/only-dev-server',
-    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

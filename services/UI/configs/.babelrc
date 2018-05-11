@@ -6,13 +6,18 @@
     "react"
   ],
   "plugins": [
-    "react-hot-loader/babel",
     ["transform-object-rest-spread", { "useBuiltIns": true }],
-    "transform-class-properties"
+    "transform-class-properties",
+    "syntax-dynamic-import"
   ],
   "env": {
+    "development": {
+      "plugins": ["react-hot-loader/babel"]
+    },
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
     }
   }
 }
