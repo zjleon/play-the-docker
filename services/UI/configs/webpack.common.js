@@ -4,19 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fs = require('fs')
 const packageJSON = require('../package.json')
 
-// require('dotenv')
-// .parse({
-//   path: path.resolve(__dirname, '../', '.env')
-// })
 const srcPath = path.resolve(__dirname, '../')
 const distPath = path.resolve(__dirname, '../dist')
 const publicPath = '/'
 
-// const {
-//   IMAGE_RESIZE_CONFIG,
-// } = require('./constants')
-
-// let envToClient = require('dotenv').parse(path.resolve(__dirname, '../', '.env'))
 const envToClient = {
   IMAGE_RESIZE_CONFIG: process.env.IMAGE_RESIZE_CONFIG,
   PROJECT_ID: process.env.PROJECT_ID,

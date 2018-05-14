@@ -7,31 +7,16 @@ const path = require('path')
 const moment = require('moment')
 const deepequal = require('deepequal')
 
-const imageFolderDist = path.resolve(webpackConfig.output.path, './images')
-const imageInfoFilePath = path.resolve(webpackConfig.output.path, './imageInfo.json')
-const imageFolderSrc = './images'
-let compiler = webpack(webpackConfig)
-let server
-
-gulp.task('initProject', (callback) => {
-  // create distination directory
-  try {
-    fs.mkdirSync(imageFolderDist)
-  } catch (e) {
-    if (e.code === 'ENOENT') {
-      fs.mkdirSync(webpackConfig.output.path)
-      fs.mkdirSync(imageFolderDist)
-    }
-  }
-  // copy env file
-  fs.copyFileSync('.env.development', '.env')
-  callback()
-})
+const {IMAGE_RESIZE_CONFIG} = require('../constants')
+const webpackSettings = process.env.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
+const imageFolderDist = path.resolve(webpackSettings.output.path, './images')
+const projectRootPath = path.resolve('../../')
+const imageInfoFilePath = path.resolve(projectRootPath, './modules/Common/ImageContainer/imageInfo.json')
+const imageSourcePath = path.resolve(projectRootPath, './assets/images')
 
 // image auto resize
-
-gulp.task('watchImages', ['initProject'], () => {
-  return watch('./images/*.*', function(event) {
+function watchImageSources(done) {
+  watch('./images/*.*', function(event) {
     console.log(event.path)
     if (event.contents) {
       // sharpImage(path.relative(path.resolve('./'), event.path))
@@ -40,20 +25,22 @@ gulp.task('watchImages', ['initProject'], () => {
       removeImageInfo(path.relative(path.resolve('./'), event.path))
     }
   })
-})
-gulp.task('convertImages', ['initProject'], (callback) => {
+  done()
+}
+function convertImages(done) {
   // convert all images at the first-time gulp runs
-  fs.readdir(imageFolderSrc, (error, files) => {
+  fs.readdir(imageSourcePath, (error, files) => {
     let promises = files.map((file) => {
-      return sharpImage(path.resolve(imageFolderSrc, file))
+      return sharpImage(path.resolve(imageSourcePath, file))
     })
     Promise.all(promises)
     .then(() => {
-      callback()
+      done()
     })
   })
-})
-const targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
+}
+
+const targetDeviceWidth = IMAGE_RESIZE_CONFIG
 const sharpImage = (file) => {
   const filePath = path.parse(file)
   if (!filePath.name || !filePath.ext) {
@@ -78,7 +65,7 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
       aspect: metadata.height / metadata.width,
       // extention: imageExtention,
       lastModifed: lastModifed,
-      path: path.resolve(webpackConfig.output.publicPath, './images/' + imageFullName + imageExtention),
+      path: path.resolve(webpackSettings.output.publicPath, './images/' + imageFullName + imageExtention),
       siblings: [],
     }
     if (
@@ -95,7 +82,7 @@ const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed
         aspect: meta.aspect,
         // extention: imageExtention,
         path: path.resolve(
-          webpackConfig.output.publicPath,
+          webpackSettings.output.publicPath,
           './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention
         ),
       }
@@ -151,4 +138,9 @@ const removeImageInfo = (file) => {
     })
   })
   return writePromise
+}
+
+module.exports = {
+  watchImageSources,
+  convertImages,
 }

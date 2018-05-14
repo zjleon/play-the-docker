@@ -1,14 +1,21 @@
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
-import FlatButton from 'material-ui/FlatButton'
+import Button from '@material-ui/core/Button'
 // import ImageContainer from '../common/ImageContainer'
-import {Map} from 'immutable'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   requestSample,
 } from '../../configs/actionIndex'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+})
 
 // @pageWrapper
 @connect((state) => {
@@ -18,18 +25,13 @@ import {
   }, {
   uploadUniverse,
   })
+@withStyles(styles)
 class Home extends Component {
   render() {
     return <div style={styles.container}>
-      123
+      <Button className={classes.button}>Default</Button>
     </div>
   }
-}
-
-const styles = {
-  container: {
-    margin: 20,
-  },
 }
 
 export default Home

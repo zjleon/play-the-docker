@@ -7,7 +7,7 @@
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
-* ~~apply FLOW(in atom)~~
+* ~~apply FLOW(in atom)~~ use Typescript?
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
 * bdd and agile, user story creation
   * [bdd intro](https://en.wikipedia.org/wiki/Behavior-driven_development#cite_note-IntroToBDD_DanNorth-11)[epic and user story in agile](http://www.mountaingoatsoftware.com/agile/user-stories)
@@ -57,15 +57,14 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
+* upgrade to babel v7 when it ready
 * load all backend api when fontend server start
-* put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
-* code structure for real big code base project
-* ~~the folder structure of child project should be same as root project~~
-* env for client and server.
+* put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * case sensitive check plugin in webpack
-* **gulp script for build production code, script to run production code**
+* **shell script for build production code, script to run production code**
     * copy the common code folder into each execute app
-    * watch code and relaunch the express
+    * build code
+    * launch the express
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
@@ -77,11 +76,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~the script should be able to read different configs at different environment~~ use env secure server
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
-* change to material v1
 * move header into router, connect each component at root router, so no more repeat code
 * ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
-* smart redux action
-* pass file buffer to sharp in gulp task
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
@@ -105,6 +101,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
 * *hapi and backend container*
+* ~~pass file buffer to sharp in gulp task~~
+* ~~smart redux action~~
+* ~~change to material v1~~
+* ~~env for client and server.~~
+* ~~code structure for real big code base project~~
+* ~~the folder structure of child project should be same as root project~~
 * ~~different of font-size unit~~
 * ~~[ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)~~ Deprecated
 * ~~tap event support on web~~

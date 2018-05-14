@@ -1,7 +1,5 @@
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import React, { Component } from 'react'
 
-import FlatButton from 'material-ui/FlatButton'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -103,7 +101,7 @@ class Calibration extends Component {
   render() {
     console.log(this.props)
     return <div style={styles.container}>
-      <Card>
+      {/* <Card>
         <CardHeader
           title="Calibrate your phone"
         />
@@ -119,7 +117,7 @@ class Calibration extends Component {
         <CardActions>
           <FlatButton label="Finish" onClick={this.onClickButton.bind(this)} />
         </CardActions>
-      </Card>
+      </Card> */}
     </div>
   }
 }

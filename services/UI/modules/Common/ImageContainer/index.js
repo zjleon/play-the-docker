@@ -1,25 +1,18 @@
 import React, { Component } from 'react'
 
-import ImageInfo from '../dist/imageInfo.json'
+import {IMAGE_RESIZE_CONFIG} from '../../../configs/constants'
+import ImageInfo from './imageInfo.json'
 
-const getResolutionWidth = () => {
+const targetWidth = (function() {
   const availWidth = window.screen.availWidth * window.devicePixelRatio
-  let targetDeviceWidth
-  try {
-    targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
-  } catch (e) {
-    console.error('missed targetDeviceWidth config in process.env,', e)
-    targetDeviceWidth = []
-  }
-  return targetDeviceWidth.find((deviceWidth, index, deviceWidthArray) => {
+  return IMAGE_RESIZE_CONFIG.find((deviceWidth, index, deviceWidthArray) => {
     // get the most suitable resolution
-    // or return the lastest one when no match
+    // or return the lastest one when no one match
     return availWidth <= deviceWidth ||
       (index + 1) === deviceWidthArray.length
   })
-}
-
-const targetWidth = getResolutionWidth()
+})()
+console.log('targetWidth', targetWidth)
 
 class ImageContainer extends Component {
   state = {
