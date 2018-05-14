@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 // import ImageContainer from '../common/ImageContainer'
 import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
 import {
   requestSample,
 } from '../../configs/actionIndex'
@@ -18,6 +19,7 @@ const styles = theme => ({
 })
 
 // @pageWrapper
+@hot(module)
 @connect((state) => {
   return {
   home: state.get('home').toJS(),
@@ -29,7 +31,7 @@ class Home extends Component {
   render() {
     const {classes} = this.props
     return <div>
-      <Button className={classes.button}>Default</Button>
+      <Button className={classes.button}>Defau1lt</Button>
     </div>
   }
 }

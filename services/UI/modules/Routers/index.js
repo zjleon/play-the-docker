@@ -21,11 +21,10 @@ class RootRouter extends Component {
         const DynamicComponent = Loadable({
           loader: () => {
             // Hack for webpack dynamic import warning
-            const component = import(`../${route}/index.js`)
-            console.log('component', component)
-            if (NODE_ENV === 'development') {
-              return hot(component)
-            }
+            const component = import(`../${route}/index.js`).catch((error) => console.error(error))
+            // if (NODE_ENV === 'development') {
+            //   return hot(module)(component)
+            // }
             return component
           },
           loading: Loading,
