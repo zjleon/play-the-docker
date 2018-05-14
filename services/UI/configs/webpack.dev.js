@@ -61,6 +61,5 @@ const devSettings = {
 module.exports = merge.strategy(
   {
     'entry.main': 'prepend', // or 'replace', defaults to 'append'
-    'entry.vendor': 'prepend', // or 'replace', defaults to 'append'
   }
 )(commonWebpackConfig, devSettings)

@@ -15,7 +15,7 @@ exports.startDevServer = function(callback) {
   }
   server = new WebpackDevServer(compiler, webpackConfig.devServer)
   server.listen(PORT, "0.0.0.0", () => {
-    console.log('dev server started up at port' + process.env.PORT)
+    console.log('dev server started up at port' + PORT)
     callback()
   })
 }

@@ -31,14 +31,16 @@ function watchComponents(done) {
 function generateRouters(done) {
   const dirs = '\'' + getComponentsFromDirectory().join('\', \'') + '\''
   let stream = createWriteStream(routeFilePath)
-  if (done) {
-    stream.on('close', () => done())
-  }
+  stream.on('close', () => {
+    console.log('Router file updated')
+    if (done) {
+      done()
+    }
+  })
   stream.write(warningMessage)
   stream.write('export default [')
   stream.write(dirs + '')
   stream.end(']\n')
-  console.log('Router file updated')
 }
 
 module.exports = {

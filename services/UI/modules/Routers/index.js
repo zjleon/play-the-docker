@@ -6,7 +6,6 @@ import {
 
 import Loadable from 'react-loadable'
 import LoadingAnimation from '../Common/Loading'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {NODE_ENV} from '../../configs/constants'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
@@ -15,34 +14,36 @@ import { hot } from 'react-hot-loader'
 import routes from './routes'
 import store from '../../configs/store'
 
-console.log('NODE_ENV', NODE_ENV, __DEV__)
+console.log('NODE_ENV', NODE_ENV, process.env.__DEV__)
 
 function getRouters() {
   return <div>
     {routes.map((route) => {
-      return Loadable({
-        loader: () => {
-          const component = import(route)
-          if (NODE_ENV === 'development') {
-            return hot(component)
-          }
-          return component
-        },
-        loading: LoadingAnimation,
-      })
+      // return Loadable({
+      //   loader: () => {
+      //     // Hack for webpack dynamic import warning
+      //     const component = import(route + '')
+      //     if (NODE_ENV === 'development') {
+      //       return hot(component)
+      //     }
+      //     return component
+      //   },
+      //   loading: LoadingAnimation,
+      // })
+      return <span>123</span>
     })}
   </div>
 }
 
 class RootRouter extends Component {
   render() {
-    console.log('getRouters', getRouters)
+    console.log('getRouters', getRouters())
     return (
       <Provider store={store}>
-        <Router basename={pathPrefix} history={history}>
-          <MuiThemeProvider>
+        <Router
+          // basename={pathPrefix}
+          history={history}>
             {getRouters()}
-          </MuiThemeProvider>
         </Router>
       </Provider>
     )

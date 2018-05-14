@@ -1,7 +1,7 @@
 import {fromJS} from 'immutable'
 
 const store = {
-  home: {},
+  home: {a: 1},
 }
 
 export default fromJS(store)

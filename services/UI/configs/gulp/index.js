@@ -1,4 +1,10 @@
+const path = require('path')
 const gulp = require('gulp')
+
+require('dotenv')
+.config({
+  path: path.resolve(__dirname, '../../', '.env')
+})
 
 const {startDevServer} = require('./startServer')
 gulp.task('startDevServer', startDevServer)

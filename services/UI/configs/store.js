@@ -5,10 +5,9 @@ import initialStore from './initialStore'
 import rootReducer from './rootReducer'
 import rootSaga from './rootSaga'
 
-// import sagaMoniter from './sagamoniter'
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(
+let store = createStore(
   rootReducer,
   initialStore,
   composeEnhancers(applyMiddleware(sagaMiddleware))
