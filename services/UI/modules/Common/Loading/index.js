@@ -5,10 +5,10 @@ import { withStyles } from 'material-ui/styles'
 
 class Loading extends Component {
   render() {
-    const { classes } = props
+    const { classes } = this.props
     return (
     <div>
-      <CircularProgress className={classes.progress} size={50} />
+      <CircularProgress size={50} />
     </div>
     )
   }
