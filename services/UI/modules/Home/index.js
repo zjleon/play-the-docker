@@ -23,12 +23,12 @@ const styles = theme => ({
   home: state.get('home').toJS(),
   }
   }, {
-  uploadUniverse,
   })
 @withStyles(styles)
 class Home extends Component {
   render() {
-    return <div style={styles.container}>
+    const {classes} = this.props
+    return <div>
       <Button className={classes.button}>Default</Button>
     </div>
   }
