@@ -30,9 +30,9 @@ const styles = theme => ({
 class Home extends Component {
   render() {
     const {classes} = this.props
-    return <div>
+    return <React.Fragment>
       <Button className={classes.button}>Defau1lt</Button>
-    </div>
+    </React.Fragment>
   }
 }
 

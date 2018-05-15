@@ -16,24 +16,23 @@ console.log('NODE_ENV', NODE_ENV, process.env.__DEV__)
 @withRouter
 class RootRouter extends Component {
   render() {
-    return <div>
+    return <React.Fragment>
       {routes.map((route, index) => {
         const DynamicComponent = Loadable({
           loader: () => {
             // Hack for webpack dynamic import warning
             const component = import(`../${route}/index.js`).catch((error) => console.error(error))
-            // if (NODE_ENV === 'development') {
-            //   return hot(module)(component)
-            // }
             return component
           },
           loading: Loading,
         })
-        // console.log(new dynamicComponent())
-        return <DynamicComponent key={`router-${index}`} />
-        // return <span>123</span>
+        // return <DynamicComponent key={`router-${index}`} />
+        return React.createElement(
+          DynamicComponent,
+          {key: `router-${index}`}
+        )
       })}
-    </div>
+    </React.Fragment>
   }
 }
 

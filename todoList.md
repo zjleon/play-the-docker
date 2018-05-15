@@ -57,8 +57,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* apply tap event plugin
+* doc the pointer event usage, https://github.com/facebook/react/pull/12507
+* review the product build process
 * upgrade to babel v7 when it ready
+* make redux hot reload
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * case sensitive check plugin in webpack
@@ -69,7 +71,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
-  * [webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
   * [webpack build settings](https://webpack.js.org/guides/build-performance/)
   * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
@@ -89,7 +91,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
   * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
-  * use the SSR to render the basic html.
+  * use the SSR to render ~~the basic html~~ for the search engine only.
+    * stream rendering(v16)
     * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
     * [Code Splitting and Server-Side Rendering](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md#code-splitting-and-server-side-rendering)
     basic content in it so user can see some content without waiting,
@@ -101,7 +104,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
-* *hapi and backend container*
+* ~~hapi and backend container~~ use loopback
+* ~~apply react fragment~~
 * ~~pass file buffer to sharp in gulp task~~
 * ~~smart redux action~~
 * ~~change to material v1~~

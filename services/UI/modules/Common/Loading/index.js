@@ -7,9 +7,9 @@ class Loading extends Component {
   render() {
     const { classes } = this.props
     return (
-    <div>
-      <CircularProgress size={50} />
-    </div>
+      <React.Fragment>
+        <CircularProgress size={50} />
+      </React.Fragment>
     )
   }
 }
