@@ -57,6 +57,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
+* apply tap event plugin
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
@@ -144,6 +145,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **remove yarn.lock after yarn install and before android build**
 * **learn how the redux work in android**
 * **Change the android folder to adapt new folder structure**
+* remove lfs resources, use init script to install it before building app
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~
