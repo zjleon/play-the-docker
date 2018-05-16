@@ -58,11 +58,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## web
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
-* review the product build process
+* ~~review the product build process~~
+* doc the router pattern
 * deploy to AWS
 * upgrade to babel v7 when it ready
 * ~~make redux hot reload~~
-* gulp task for reducer and saga
+* ~~gulp task for reducer and saga~~
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * ~~case sensitive check plugin in webpack~~
@@ -71,7 +72,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     * build code
     * launch the express
 * **production optimize**:
-  * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+  * body parser,
+  * ~~[apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)~~
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
   * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
