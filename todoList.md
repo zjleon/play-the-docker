@@ -58,19 +58,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## web
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
-* ~~review the product build process~~
+* review the product build process, run docker container, stack
 * doc the router pattern
 * deploy to AWS
 * upgrade to babel v7 when it ready
-* ~~make redux hot reload~~
-* ~~gulp task for reducer and saga~~
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
-* ~~case sensitive check plugin in webpack~~
-* **shell script for build production code, script to run production code**
-    * copy the common code folder into each execute app
-    * build code
-    * launch the express
 * **production optimize**:
   * body parser,
   * ~~[apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)~~
@@ -108,6 +101,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~make redux hot reload~~
+* ~~gulp task for reducer and saga~~
+* ~~case sensitive check plugin in webpack~~
+* ~~shell script for build production code, script to run production code~~
+    * ~~copy the common code folder into each execute app~~
+    * ~~build code~~
+    * ~~launch the express~~
 * ~~hapi and backend container~~ use loopback
 * ~~apply react fragment~~
 * ~~pass file buffer to sharp in gulp task~~
