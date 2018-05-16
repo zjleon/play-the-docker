@@ -59,6 +59,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 ## web
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process
+* deploy to AWS
 * upgrade to babel v7 when it ready
 * ~~make redux hot reload~~
 * gulp task for reducer and saga
