@@ -60,11 +60,11 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process
 * upgrade to babel v7 when it ready
-* make redux hot reload
+* ~~make redux hot reload~~
 * gulp task for reducer and saga
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
-* case sensitive check plugin in webpack
+* ~~case sensitive check plugin in webpack~~
 * **shell script for build production code, script to run production code**
     * copy the common code folder into each execute app
     * build code
