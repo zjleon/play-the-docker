@@ -1,17 +1,25 @@
-const devConfig = require('./webpack.dev')
-let prodConfig = devConfig
+const webpack = require("webpack")
+const merge = require('webpack-merge')
+const commonWebpackConfig = require('./webpack.common')
+const CompressionPlugin = require('compression-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-prodConfig.watch = false
-prodConfig.watchOptions = {}
-
-prodConfig.devServer = {}
-
-prodConfig.devtool = 'source-map'
-
-prodConfig.entry = {
-  main: devConfig.entry.main.splice(3),
-  vendor: devConfig.entry.vendor.splice(3),
+const productionSettings = {
+  mode: 'production',
+  devtool: 'source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new UglifyJSPlugin(),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      // threshold: 10240,
+      minRatio: 0.8
+    }),
+  ]
 }
 
-
-module.exports = prodConfig
+module.exports = merge(commonWebpackConfig, productionSettings)
