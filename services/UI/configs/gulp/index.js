@@ -10,8 +10,9 @@ require('dotenv')
 const {createFoldersIfNotExist} = require('./initFolders')
 gulp.task('createFoldersIfNotExist', createFoldersIfNotExist)
 
-const {startDevServer} = require('./startServer')
+const {startDevServer, startProductionServer} = require('./startServer')
 gulp.task('startDevServer', startDevServer)
+gulp.task('startProductionServer', startProductionServer)
 
 const {watchComponents, generateRouters} = require('./watchComponentsAndGenerateRouters')
 gulp.task('watchComponents', watchComponents)
@@ -21,6 +22,9 @@ const {watchImageSources, convertImages} = require('./watchAssets')
 gulp.task('watchImageSources', watchImageSources)
 gulp.task('convertImages', convertImages)
 
+const {buildProduction} = require('./buildProduction')
+gulp.task('buildProduction', buildProduction)
+
 gulp.task('default', gulp.series(
   'createFoldersIfNotExist',
   'generateRouters',
@@ -28,4 +32,12 @@ gulp.task('default', gulp.series(
   'watchComponents',
   'watchImageSources',
   'startDevServer',
+))
+
+gulp.task('production', gulp.series(
+  'createFoldersIfNotExist',
+  'generateRouters',
+  'convertImages',
+  'buildProduction',
+  'startProductionServer',
 ))
