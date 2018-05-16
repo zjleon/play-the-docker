@@ -2,6 +2,7 @@ const webpack = require("webpack")
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fs = require('fs')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const packageJSON = require('../package.json')
 
 const srcPath = path.resolve(__dirname, '../')
@@ -111,10 +112,6 @@ module.exports = {
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin(envToClient),
-  //   new Dotenv({
-  //     path: path.resolve(__dirname, '../', '.env'), // Path to .env file (this is the default)
-  // // safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
-  //   })
+    new CaseSensitivePathsPlugin(),
   ],
-  // target: 'node'
 }

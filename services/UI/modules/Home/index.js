@@ -5,13 +5,11 @@ import {
 } from '../../configs/actionIndex'
 
 import Button from '@material-ui/core/Button'
-import ImageContainer from '../common/ImageContainer'
+import ImageContainer from '../Common/ImageContainer'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 import { withStyles } from '@material-ui/core/styles'
-
-console.log(updateUserInfo)
 
 const styles = theme => ({
   button: {

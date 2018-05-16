@@ -27,5 +27,5 @@ gulp.task('default', gulp.series(
   'convertImages',
   'watchComponents',
   'watchImageSources',
-  // 'startDevServer',
+  'startDevServer',
 ))

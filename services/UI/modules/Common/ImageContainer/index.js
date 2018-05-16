@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 
-// import {IMAGE_RESIZE_CONFIG} from '../../../configs/constants'
+import {IMAGE_RESIZE_CONFIG} from '../../../configs/constants'
 import ImageInfo from './imageInfo.json'
 
-// console.log(222, IMAGE_RESIZE_CONFIG)
-
-// const targetWidth = (function() {
-//   const availWidth = window.screen.availWidth * window.devicePixelRatio
-//   return [].find((deviceWidth, index, deviceWidthArray) => {
-//     // get the most suitable resolution
-//     // or return the lastest one when no one match
-//     return availWidth <= deviceWidth ||
-//       (index + 1) === deviceWidthArray.length
-//   })
-// })()
+const targetWidth = (function() {
+  const availWidth = window.screen.availWidth * window.devicePixelRatio
+  return IMAGE_RESIZE_CONFIG.find((deviceWidth, index, deviceWidthArray) => {
+    // get the most suitable resolution
+    // or return the lastest one when no one match
+    return availWidth <= deviceWidth ||
+      (index + 1) === deviceWidthArray.length
+  })
+})()
 
 // props:
 //    name: image name(without path)

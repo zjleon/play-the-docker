@@ -17,7 +17,6 @@ const imageSourcePath = path.resolve(projectRootPath, './assets/images')
 // image auto resize
 function watchImageSources(done) {
   watch('./images/*.*', function(event) {
-    console.log(event.path)
     if (event.contents) {
       // sharpImage(path.relative(path.resolve('./'), event.path))
       sharpImage(event.contents)
@@ -31,7 +30,6 @@ function convertImages(done) {
   // convert all images at the first-time gulp runs
   fs.readdir(imageSourcePath, (error, files) => {
     let promises = files.map((file) => {
-      console.log(222, file)
       return sharpImage(path.resolve(imageSourcePath, file))
     })
     Promise.all(promises)
