@@ -7,7 +7,7 @@
 * ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
-* ~~apply FLOW(in atom)~~
+* ~~apply FLOW(in atom)~~ use Typescript?
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
 * bdd and agile, user story creation
   * [bdd intro](https://en.wikipedia.org/wiki/Behavior-driven_development#cite_note-IntroToBDD_DanNorth-11)[epic and user story in agile](http://www.mountaingoatsoftware.com/agile/user-stories)
@@ -57,18 +57,23 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* put all express server instances under one gulp task, use ONE command to start all service, remove the docker dev
-* code structure for real big code base project
-* the folder structure of child project should be same as root project
-* env for client and server.
-* case sensitive check plugin in webpack
-* **gulp script for build production code, script to run production code**
+* doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
+* review the product build process
+* deploy to AWS
+* upgrade to babel v7 when it ready
+* ~~make redux hot reload~~
+* gulp task for reducer and saga
+* load all backend api when fontend server start
+* put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
+* ~~case sensitive check plugin in webpack~~
+* **shell script for build production code, script to run production code**
     * copy the common code folder into each execute app
-    * watch code and relaunch the express
+    * build code
+    * launch the express
 * **production optimize**:
   * [apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
-  * [webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
   * [webpack build settings](https://webpack.js.org/guides/build-performance/)
   * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
@@ -76,11 +81,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~the script should be able to read different configs at different environment~~ use env secure server
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
-* change to material v1
 * move header into router, connect each component at root router, so no more repeat code
 * ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
-* smart redux action
-* pass file buffer to sharp in gulp task
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
@@ -91,7 +93,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
   * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
-  * use the SSR to render the basic html.
+  * use the SSR to render ~~the basic html~~ for the search engine only.
+    * stream rendering(v16)
     * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
     * [Code Splitting and Server-Side Rendering](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md#code-splitting-and-server-side-rendering)
     basic content in it so user can see some content without waiting,
@@ -103,7 +106,14 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
-* *hapi and backend container*
+* ~~hapi and backend container~~ use loopback
+* ~~apply react fragment~~
+* ~~pass file buffer to sharp in gulp task~~
+* ~~smart redux action~~
+* ~~change to material v1~~
+* ~~env for client and server.~~
+* ~~code structure for real big code base project~~
+* ~~the folder structure of child project should be same as root project~~
 * ~~different of font-size unit~~
 * ~~[ignore click on touch devices](https://github.com/zilverline/react-tap-event-plugin#ignoring-ghost-clicks)~~ Deprecated
 * ~~tap event support on web~~
@@ -133,7 +143,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 
 ## backend:
 * install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
-* export the API to frontEnd
 * handle high concurrency in node
 * find a way to debug the code(start by gulp)
 
@@ -141,6 +150,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**
 * **learn how the redux work in android**
+* **Change the android folder to adapt new folder structure**
+* remove lfs resources, use init script to install it before building app
 * adb response for apk install on device, **buck** and gradle response for compile the code to apk
 * ~~gradle setup in container~~
 * ~~finish the apk build-install-start process~~

@@ -21,7 +21,7 @@ services:
       - backend
     labels:
       kompose.service.type: loadbalancer
-  phone:
+  UI:
     restart: always
     build:
       context: ../
@@ -41,27 +41,7 @@ services:
     links:
       - backend
     # command: env
-  tv:
-    restart: always
-    build:
-      context: ../
-      dockerfile: configs/docker.prod.web_static
-      args:
-        - PROJECT=tv
-    image: asia.gcr.io/pwc-mwc-app/tv:prod
-    ports:
-      - "8081"
-    links:
-      - backend
-    environment:
-      # the env(like link to other service) will be manage in project level(.env),
-      # expect NODE_ENV are managed in docker file,
-      # and DOCKER_ENV for link between client and microservices
-      - DOCKER_ENV=1
-      - NODE_ENV=production
-      - GET_HOSTS_FROM=dns
-    # command: env
-  backend:
+  API:
     restart: always
     ports:
       - "8070"

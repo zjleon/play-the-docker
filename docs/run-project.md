@@ -12,7 +12,7 @@ npm i
 config linter-eslint: 'enable fix error on save'
 config the flow-bin path in atom package 'linter-flow': ``./node_modules/.bin/flow``
 
-## config git
+## config git, use one of below option:
 1. username and email
 ```
 git config --global user.name "zjleon"

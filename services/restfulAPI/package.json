@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend service for android and web",
+  "scripts": {
+    "start": "better-npm-run dev:web_static",
+    "build_prod": "echo skip build for backend",
+    "start_prod": "better-npm-run prod:web_static",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "betterScripts": {
+    "dev:web_static": {
+      "command": "node ./entry.dev.js"
+    },
+    "dev:dirTree": {
+      "command": "node ./dirTree.dev.js"
+    },
+    "prod:web_static": {
+      "command": "node ./entry.dev.js"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-npm-run": "0.0.14",
+    "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+  }
+}
