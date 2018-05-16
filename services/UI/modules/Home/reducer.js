@@ -11,7 +11,7 @@ export default (
   switch (action.type) {
   case REQUEST_SAMPLE.SUCESS:
     // let newState = state.set('quaternion', action.quaternion)
-    console.log('111', action)
+    console.log('1121', action)
     return state
   default:
     return state

@@ -57,10 +57,11 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* doc the pointer event usage, https://github.com/facebook/react/pull/12507
+* doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process
 * upgrade to babel v7 when it ready
 * make redux hot reload
+* gulp task for reducer and saga
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * case sensitive check plugin in webpack

@@ -3,9 +3,9 @@ const gulp = require('gulp')
 
 const envPath = path.resolve(__dirname, '../../', `.env.${process.env.NODE_ENV}`)
 require('dotenv')
-.config({
-  path: envPath
-})
+  .config({
+    path: envPath
+  })
 
 const {createFoldersIfNotExist} = require('./initFolders')
 gulp.task('createFoldersIfNotExist', createFoldersIfNotExist)
@@ -27,5 +27,5 @@ gulp.task('default', gulp.series(
   'convertImages',
   'watchComponents',
   'watchImageSources',
-  'startDevServer',
+  // 'startDevServer',
 ))

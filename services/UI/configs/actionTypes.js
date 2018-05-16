@@ -10,3 +10,6 @@ function createRequestTypes(base) {
 }
 
 export const REQUEST_SAMPLE = createRequestTypes('REQUEST_SAMPLE')
+
+export const UPDATE_USER_INFO = 'CHANGE_USER_INFO'
+export const CLEAR_ALL = 'CLEAR_ALL'

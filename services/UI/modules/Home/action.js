@@ -1,6 +1,8 @@
 import {
   REQUEST_SAMPLE,
+  UPDATE_USER_INFO,
 } from '../../configs/actionTypes'
+
 import {
   sampleURL,
 } from '../../configs/url'
@@ -8,10 +10,16 @@ import {
 export function requestSample(payload) {
   return {
     type: REQUEST_SAMPLE.REQUEST,
-    url,
+    // url: sampleURL,
     // payload can be got from store
     // payload,
-    sucessAction: REQUEST_SAMPLE.SUCCESS,
-    failureAction: REQUEST_SAMPLE.FAILURE,
+    requestActions: REQUEST_SAMPLE,
+  }
+}
+
+export function updateUserInfo(updateObject) {
+  return {
+    type: UPDATE_USER_INFO,
+    updateObject,
   }
 }

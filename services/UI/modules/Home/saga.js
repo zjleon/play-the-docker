@@ -12,8 +12,10 @@ function* verifyDataSample() {
 
 function* requestSample(action) {
   console.log('requestSample', action)
-  // const {username, password} = yield select((state) => {return state.get('userInfo').toJS()})
-  yield* request(action)
+  const {name} = yield select((state) => {return state.get('userInfo').toJS()})
+  yield* request({
+
+  })
   // modify data belong to reducer
 }
 

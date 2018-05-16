@@ -1,7 +1,10 @@
 import {fromJS} from 'immutable'
 
 const store = {
-  home: {a: 1},
+  home: {name: ''},
+  userInfo: {
+    name: ''
+  }
 }
 
 export default fromJS(store)

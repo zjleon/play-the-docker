@@ -31,12 +31,13 @@ function convertImages(done) {
   // convert all images at the first-time gulp runs
   fs.readdir(imageSourcePath, (error, files) => {
     let promises = files.map((file) => {
+      console.log(222, file)
       return sharpImage(path.resolve(imageSourcePath, file))
     })
     Promise.all(promises)
-    .then(() => {
-      done()
-    })
+      .then(() => {
+        done()
+      })
   })
 }
 
@@ -57,64 +58,64 @@ try {
 }
 const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed) => {
   return imagePromise.metadata()
-  .then((metadata) => {
-    const imageFullName = imageName + imageExtention.replace('.', '_')
-    const meta = {
-      width: metadata.width,
-      height: metadata.height,
-      aspect: metadata.height / metadata.width,
-      // extention: imageExtention,
-      lastModifed: lastModifed,
-      path: path.resolve(webpackSettings.output.publicPath, './images/' + imageFullName + imageExtention),
-      siblings: [],
-    }
-    if (
-      imageInfo[imageFullName] &&
+    .then((metadata) => {
+      const imageFullName = imageName + imageExtention.replace('.', '_')
+      const meta = {
+        width: metadata.width,
+        height: metadata.height,
+        aspect: metadata.height / metadata.width,
+        // extention: imageExtention,
+        lastModifed: lastModifed,
+        path: path.resolve(webpackSettings.output.publicPath, './images/' + imageFullName + imageExtention),
+        siblings: [],
+      }
+      if (
+        imageInfo[imageFullName] &&
       moment(imageInfo[imageFullName].lastModifed).isSame(meta.lastModifed)
-    ) {
-      return Promise.resolve()
-    }
-    let targets = {}
-    for (let i = 0; i < targetDeviceWidth.length; i++) {
-      targets[imageFullName + '@' + targetDeviceWidth[i]] = {
+      ) {
+        return Promise.resolve()
+      }
+      let targets = {}
+      for (let i = 0; i < targetDeviceWidth.length; i++) {
+        targets[imageFullName + '@' + targetDeviceWidth[i]] = {
         // width: targetDeviceWidth[i],
         // height: parseInt(targetDeviceWidth[i] * meta.aspect, 10),
-        aspect: meta.aspect,
-        // extention: imageExtention,
-        path: path.resolve(
-          webpackSettings.output.publicPath,
-          './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention
-        ),
-      }
-      meta.siblings.push(imageFullName + '@' + targetDeviceWidth[i])
-    }
-    targets[imageFullName] = meta
-
-    let promises = []
-    for (let key in targets) {
-      if (targets.hasOwnProperty(key)) {
-        promises.push(
-          imagePromise.clone()
-          .resize(targets[key].width, targets[key].height)
-          .toFile(imageFolderDist + '/' + key + imageExtention)
-        )
-      }
-    }
-
-    promises.push(new Promise(function(resolve, reject) {
-      Object.assign(imageInfo, targets)
-      fs.writeFile(imageInfoFilePath, JSON.stringify(imageInfo, null, 2), function(err) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
+          aspect: meta.aspect,
+          // extention: imageExtention,
+          path: path.resolve(
+            webpackSettings.output.publicPath,
+            './images/' + imageFullName + '@' + targetDeviceWidth[i] + imageExtention
+          ),
         }
+        meta.siblings.push(imageFullName + '@' + targetDeviceWidth[i])
+      }
+      targets[imageFullName] = meta
+
+      let promises = []
+      for (let key in targets) {
+        if (targets.hasOwnProperty(key)) {
+          promises.push(
+            imagePromise.clone()
+              .resize(targets[key].width, targets[key].height)
+              .toFile(imageFolderDist + '/' + key + imageExtention)
+          )
+        }
+      }
+
+      promises.push(new Promise(function(resolve, reject) {
+        Object.assign(imageInfo, targets)
+        fs.writeFile(imageInfoFilePath, JSON.stringify(imageInfo, null, 2), function(err) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve()
+          }
+        })
+      }))
+      return Promise.all(promises).then(function() {
+        console.log(`saved image: ${imageFullName}`)
       })
-    }))
-    return Promise.all(promises).then(function() {
-      console.log(`saved image: ${imageFullName}`)
     })
-  })
 }
 const removeImageInfo = (file) => {
   const filePath = path.parse(file)
