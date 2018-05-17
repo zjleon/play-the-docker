@@ -14,36 +14,36 @@
     ]
   },
   "User": {
-    "dataSource": "postgres"
+    "dataSource": "mysql"
   },
   "AccessToken": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": false
   },
   "ACL": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": false
   },
   "Message": {
     "dataSource": null
   },
   "person": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": true
   },
   "CoffeeShop": {
-    "dataSource": "postgres",
+    "dataSource": "mysql",
     "public": true
   }
 }

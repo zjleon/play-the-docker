@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.dataSources.postgres.autoupdate('CoffeeShop', function(err) {
-    if (err) throw err;
+  app.dataSources.mysql.autoupdate('CoffeeShop', function(err) {
+    if (err) throw err
 
     app.models.CoffeeShop.create([{
       name: 'Bel Cafe',
@@ -12,9 +12,9 @@ module.exports = function(app) {
       name: 'Caffe Artigiano',
       city: 'Vancouver'
     }], function(err, coffeeShops) {
-      if (err) throw err;
+      if (err) throw err
 
-      console.log('Models created: \n', coffeeShops);
-    });
-  });
-};
+      console.log('Models created: \n', coffeeShops)
+    })
+  })
+}

@@ -59,8 +59,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 ## web
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
+  * git pull code, instead of copy
+  * config ssh or https for docker git
 * doc the router pattern
-* deploy to AWS
+* gulp task for reducer and saga, reducer, xxxReducer
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
@@ -99,8 +101,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * babel source map
 * applied 'react-native-web' https://github.com/necolas/react-native-web
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
-* doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~doc how to use async module(https://github.com/petehunt/webpack-howto)~~ now the code is split by route
 * ~~make redux hot reload~~
 * ~~gulp task for reducer and saga~~
 * ~~case sensitive check plugin in webpack~~
@@ -316,7 +318,8 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * web_static: generate error report and use tail command in atom shell package
 
 # github
-* decide which cloud to use as CI
+* ~~decide which cloud to use as CI~~ AWS
+* deploy to AWS
 * webhook on github
   * on client side, do all unit test before commit
   * on server side, trigger CI server when commit into master

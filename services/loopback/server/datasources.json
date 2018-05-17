@@ -6,11 +6,21 @@
   "postgres": {
     "host": "locahost",
     "port": 5432,
-    "url": "postgres://postgres:123456@localhost/test1",
+    "url": "postgres://postgres:admin@localhost/test1",
     "database": "test1",
-    "password": "123456",
+    "password": "admin",
     "name": "postgres",
     "user": "postgres",
     "connector": "postgresql"
+  },
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "mysql://root:Pwcwelcome1@localhost/test1",
+    "database": "test1",
+    "password": "Pwcwelcome1",
+    "name": "mysql",
+    "user": "root",
+    "connector": "mysql"
   }
 }
