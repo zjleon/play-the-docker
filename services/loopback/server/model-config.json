@@ -45,5 +45,13 @@
   "CoffeeShop": {
     "dataSource": "mysql",
     "public": true
+  },
+  "Review": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Reviewer": {
+    "dataSource": "postgres",
+    "public": true
   }
 }
