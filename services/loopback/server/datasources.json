@@ -7,7 +7,7 @@
     "host": "locahost",
     "port": 5432,
     "url": "postgres://postgres:admin@localhost/test1",
-    "database": "getting_started_intermediate",
+    "database": "test1",
     "password": "admin",
     "name": "postgres",
     "user": "postgres",
