@@ -63,7 +63,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc the router pattern
 * gulp task for reducer and saga, reducer, xxxReducer, get store name from 'xxx' or folder name
 * upgrade to babel v7 when it ready
-* load all backend api when fontend server start
+* load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * **production optimize**:
   * body parser,
@@ -88,7 +88,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
-  * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  * ~~[react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)~~
   * use the SSR to render ~~the basic html~~ for the search engine only.
     * stream rendering(v16)
     * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
@@ -260,7 +260,7 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # node environment
 ## prod:
-* *link instead of cp node modules.*yarn cache is enough for now
+* *link instead of cp node modules.* yarn cache is enough for now
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
@@ -296,7 +296,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~build base images -- without the source code, but with global package like gulp~~
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
-* ~~re-think the package.json file management~~src/project have project specify package, package under root only for atom eslint
+* ~~re-think the package.json file management~~ src/project have project specify package, package under root only for atom eslint
 * ~~avoid contaminate the origin file/folder~~
 * ~~include android image process~~
 * ~~use tini to make sure server stop as expect
