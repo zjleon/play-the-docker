@@ -17,6 +17,7 @@
   3. then developer can use bdd tool to create test case
   4. then developer can start to implement code to make the test case pass
 * Phantomjs
+* puppeteer
 
 # css or sass or html
 * doc down how to avoid reflow
@@ -60,7 +61,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
 * doc the router pattern
-* deploy to AWS
+* gulp task for reducer and saga, reducer, xxxReducer, get store name from 'xxx' or folder name
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
