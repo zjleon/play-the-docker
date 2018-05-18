@@ -143,11 +143,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~just use the webpack and setup an hapi server for production to serve all static files~~
 * ~~hash for js files and change it in html~~
 
-## backend:
-* install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)
-* handle high concurrency in node
-* find a way to debug the code(start by gulp)
-
 ## android
 * **many docker build process are similar to jenkins android build, search accordingly**
 * **remove yarn.lock after yarn install and before android build**
@@ -236,37 +231,36 @@ https://github.com/facebook/react-native/issues/7257~~
   * /support/v1*
   ``$ rm emulator*``
 
-# backend service
-* token with hot reload
-* restart dev server in gulp
-* nodejs debug tool
-* services share a common config list that define access auth to each data table, so service know which service should it talk to
-
 # CI server
-## prod:
-* ~~use config for develop and production env~~
-* ~~unit test~~, and do search about how to write unit test efficiently then doc it
-* build docker image then push it to private registry.
-* ~~use webpack to generate code then pack those code into image~~
-  * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
-  * ~~put db link into environment variable~~manage env in project level
+* build process:
+    1. get trigger by git hook
+    2. start image build
+    3. start deployment
 * generate documentation about:
   1. 'file hash -> build version' map
   2. ~~resource map(js, css map)~~
   3. release documentation(**what's that?**)
-## dev:
-* update code in app hub
+* build docker image then push it to private registry.
+* ~~use config for develop and production env~~
+* ~~use webpack to generate code then pack those code into image~~
+  * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
+  * ~~put db link into environment variable~~ manage env in project level
 
-# node environment
-## prod:
-* *link instead of cp node modules.*yarn cache is enough for now
+# backend
+* **the most important is get to know the micro-service architecture, use multi loopback as service**
+* **a config center that automatically discover service**
+* restart dev server in gulp
+* handle high concurrency in node
+* find a way to debug the code(start by gulp)
+* token with hot reload
+* nodejs debug tool
+* ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
+* *link instead of cp node modules.* yarn cache is enough for now
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 * error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
-
-## dev:
 * ~~install project dependencies via node script
 https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options~~
 * ~~a script to install package to particular project
@@ -276,23 +270,21 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker
-* container for building and runtime
-* sharable file and config between projects
 * vault service for env storage
 * **put the nginx endpoint in compose instead of .env**
+* webhook on github
 * use rolling update to update k8s deployment
-* ~~build multi containers.~~ ~~docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~
-* ~~faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files~~
-* *change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58*
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * **manage docker container in local using nodejs api**
   * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
   * node api: https://github.com/apocas/dockerode
   * python: https://docs.docker.com/engine/api/sdks/
-* **docker log:**
+* **docker log service:**
   * https://www.slideshare.net/raychaser/6-million-ways-to-log-in-docker-nyc-docker-meetup-12172014
   * https://github.com/veggiemonk/awesome-docker#monitoring--logging
+* ~~change yarn registry to cnpm: https://cnodejs.org/topic/581d96d5bb9452c9052e7b58~~ buy vpn
 * ~~build base images -- without the source code, but with global package like gulp~~
+* ~~decide which cloud to use as CI~~ AWS
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
 * ~~re-think the package.json file management~~src/project have project specify package, package under root only for atom eslint
@@ -301,6 +293,10 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~use tini to make sure server stop as expect
   https://github.com/krallin/tini/issues/45#issuecomment-236117771
   https://github.com/krallin/tini~~
+* ~~build multi containers. docker-compose already build those to configs_XXX, override the compose config with: https://docs.docker.com/compose/extends/#multiple-compose-files, add the codes and override it with volume in dev env~~
+* ~~container for building and runtime~~
+* ~~sharable file and config between projects~~ not so helpful
+* ~~faster remove folder http://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files~~
 
 ## prod:
 * ~~overide the dev yaml setting~~
@@ -315,11 +311,6 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * android: use adb logcat --filter in android studio to track run time error, but build error?
 * web_static: generate error report and use tail command in atom shell package
 
-# github
-* decide which cloud to use as CI
-* webhook on github
-  * on client side, do all unit test before commit
-  * on server side, trigger CI server when commit into master
 
 # ~~tree tool~~
 # ~~source map~~
