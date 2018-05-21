@@ -18,6 +18,7 @@
   4. then developer can start to implement code to make the test case pass
 * Phantomjs
 * link the eslint error message to code conventions in git github
+* puppeteer
 
 # css or sass or html
 * doc down how to avoid reflow
@@ -61,9 +62,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
 * doc the router pattern
-* deploy to AWS
+* gulp task for reducer and saga, reducer, xxxReducer, get store name from 'xxx' or folder name
 * upgrade to babel v7 when it ready
-* load all backend api when fontend server start
+* load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * **production optimize**:
   * body parser,
@@ -88,7 +89,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [navigator.serviceworker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
   * [serviceworker webpack plugin](https://github.com/NekR/offline-plugin)
   * [mobile web w3c](https://www.w3.org/TR/mobile-bp/#d0e128)
-  * [react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  * ~~[react component lazy load](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)~~
   * use the SSR to render ~~the basic html~~ for the search engine only.
     * stream rendering(v16)
     * [staticRouter](https://reacttraining.com/react-router/web/api/StaticRouter)
@@ -247,6 +248,7 @@ https://github.com/facebook/react-native/issues/7257~~
   * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
   * ~~put db link into environment variable~~ manage env in project level
 
+<<<<<<< HEAD
 # backend
 * **the most important is get to know the micro-service architecture, use multi loopback as service**
 * **a config center that automatically discover service**
@@ -256,6 +258,10 @@ https://github.com/facebook/react-native/issues/7257~~
 * token with hot reload
 * nodejs debug tool
 * ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
+=======
+# node environment
+## prod:
+>>>>>>> b3b6dcd9181299965e027aedec95c4bb6472d68c
 * *link instead of cp node modules.* yarn cache is enough for now
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
@@ -288,7 +294,7 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~decide which cloud to use as CI~~ AWS
 * ~~run the base image -- mount the source code, install dependencies, then run the webpack task~~
 * ~~create docker ignore for each build: put under config folder, then copy it in each docker file~~
-* ~~re-think the package.json file management~~src/project have project specify package, package under root only for atom eslint
+* ~~re-think the package.json file management~~ src/project have project specify package, package under root only for atom eslint
 * ~~avoid contaminate the origin file/folder~~
 * ~~include android image process~~
 * ~~use tini to make sure server stop as expect
