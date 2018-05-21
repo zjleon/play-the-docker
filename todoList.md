@@ -17,6 +17,7 @@
   3. then developer can use bdd tool to create test case
   4. then developer can start to implement code to make the test case pass
 * Phantomjs
+* link the eslint error message to code conventions in git github
 
 # css or sass or html
 * doc down how to avoid reflow
