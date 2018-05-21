@@ -1,7 +1,11 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
+<<<<<<< HEAD
   "port": 3000,
+=======
+  "port": 8180,
+>>>>>>> b3b6dcd9181299965e027aedec95c4bb6472d68c
   "remoting": {
     "context": false,
     "rest": {
