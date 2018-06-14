@@ -3,16 +3,12 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fs = require('fs')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const packageJSON = require('../package.json')
 
 const srcPath = path.resolve(__dirname, '../')
 const distPath = path.resolve(__dirname, '../dist')
 const publicPath = '/'
 
-const envToClient = {
-  IMAGE_RESIZE_CONFIG: process.env.IMAGE_RESIZE_CONFIG,
-  PROJECT_ID: process.env.PROJECT_ID,
-}
+const envToClient = dotenv.parse(fs.readFileSync(srcPath + '/.env.development'))
 
 const babelOptions = JSON.parse(fs.readFileSync('../.babelrc', 'utf8'))
 
@@ -86,11 +82,11 @@ module.exports = {
           },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              camelCase: 'dashes',
-              localIdentName: '[path][name]__[local]'
-            }
+            // options: {
+            //   modules: true,
+            //   camelCase: 'dashes',
+            //   localIdentName: '[path][name]__[local]'
+            // }
           },
           {
             loader: 'resolve-url-loader'
@@ -111,6 +107,7 @@ module.exports = {
       minify: true
     }),
     new webpack.NamedModulesPlugin(),
+    // this plugin will convert process.env.xxx to given string
     new webpack.EnvironmentPlugin(envToClient),
     new CaseSensitivePathsPlugin(),
   ],

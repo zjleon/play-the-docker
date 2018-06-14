@@ -58,6 +58,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
+* client server have a task that query the backend api regularly so it can pack the api endpoint into codes
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
 * doc the router pattern
