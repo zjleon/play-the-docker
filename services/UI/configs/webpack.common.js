@@ -8,6 +8,7 @@ const srcPath = path.resolve(__dirname, '../')
 const distPath = path.resolve(__dirname, '../dist')
 const publicPath = '/'
 
+const dotenv = require('dotenv')
 const envToClient = dotenv.parse(fs.readFileSync(srcPath + '/.env.development'))
 
 const babelOptions = JSON.parse(fs.readFileSync('../.babelrc', 'utf8'))
