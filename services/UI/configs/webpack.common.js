@@ -9,7 +9,7 @@ const distPath = path.resolve(__dirname, '../dist')
 const publicPath = '/'
 
 const dotenv = require('dotenv')
-const envToClient = dotenv.parse(fs.readFileSync(srcPath + '/.env.development'))
+const envToClient = dotenv.parse(fs.readFileSync(`${srcPath}/.env.${process.env.NODE_ENV ? process.env.NODE_ENV : 'development'}`))
 
 const babelOptions = JSON.parse(fs.readFileSync('../.babelrc', 'utf8'))
 
@@ -83,6 +83,7 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            // TODO: generate the class name in react
             // options: {
             //   modules: true,
             //   camelCase: 'dashes',
@@ -108,7 +109,7 @@ module.exports = {
       minify: true
     }),
     new webpack.NamedModulesPlugin(),
-    // this plugin will convert process.env.xxx to given string
+    // this plugin will convert process.env.xxx to related string
     new webpack.EnvironmentPlugin(envToClient),
     new CaseSensitivePathsPlugin(),
   ],

@@ -4,7 +4,7 @@ import RootRouter from './modules/Routers'
 import {
   Router,
 } from 'react-router'
-import history from './utils/history'
+import history from './shared/history'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 import store from './configs/store'

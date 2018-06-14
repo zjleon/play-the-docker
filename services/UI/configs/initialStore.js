@@ -3,7 +3,8 @@ import {fromJS} from 'immutable'
 const store = {
   home: {name: ''},
   userInfo: {
-    name: ''
+    name: '',
+    jwt: '',
   }
 }
 

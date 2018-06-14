@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import {IMAGE_RESIZE_CONFIG} from '../../../configs/constants'
 import ImageInfo from './imageInfo.json'
+import {envs} from '../../../configs/constants'
 
 const targetWidth = (function() {
   const availWidth = window.screen.availWidth * window.devicePixelRatio
-  return IMAGE_RESIZE_CONFIG.find((deviceWidth, index, deviceWidthArray) => {
+  return envs.IMAGE_RESIZE_CONFIG.find((deviceWidth, index, deviceWidthArray) => {
     // get the most suitable resolution
     // or return the lastest one when no one match
     return availWidth <= deviceWidth ||

@@ -7,7 +7,7 @@ const path = require('path')
 const moment = require('moment')
 const deepequal = require('deepequal')
 
-const {IMAGE_RESIZE_CONFIG} = require('../constants')
+const {envs} = require('../constants')
 const webpackSettings = process.env.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
 const imageFolderDist = path.resolve(webpackSettings.output.path, './images')
 const projectRootPath = path.resolve('../../')
@@ -39,7 +39,7 @@ function convertImages(done) {
   })
 }
 
-const targetDeviceWidth = IMAGE_RESIZE_CONFIG
+const targetDeviceWidth = envs.IMAGE_RESIZE_CONFIG
 const sharpImage = (file) => {
   const filePath = path.parse(file)
   if (!filePath.name || !filePath.ext) {

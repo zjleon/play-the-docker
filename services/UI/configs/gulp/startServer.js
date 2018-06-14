@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const {PORT} = require('../constants')
+const {envs} = require('../constants')
 
 exports.startDevServer = function(callback) {
   const webpack = require("webpack")
@@ -15,8 +15,8 @@ exports.startDevServer = function(callback) {
     server = null
   }
   server = new WebpackDevServer(compiler, webpackConfig.devServer)
-  server.listen(PORT, "0.0.0.0", () => {
-    console.log('dev server started up at port' + PORT)
+  server.listen(envs.PORT, "0.0.0.0", () => {
+    console.log('dev server started up at port' + envs.PORT)
     callback()
   })
 }
@@ -37,7 +37,7 @@ exports.startProductionServer = function(done) {
     res.sendFile(webpackConfig.output.path + '/index.html')
   })
 
-  app.listen(PORT, '0.0.0.0', function() {
-    console.log('express started in at port' + PORT)
+  app.listen(envs.PORT, '0.0.0.0', function() {
+    console.log('express started in at port' + envs.PORT)
   })
 }

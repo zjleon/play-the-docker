@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import ImageContainer from '../Common/ImageContainer'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
-import { hot } from 'react-hot-loader'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
@@ -26,7 +25,6 @@ const styles = theme => ({
 })
 
 // @pageWrapper
-@hot(module)
 @connect((state) => {
   return {
   userInfo: state.get('userInfo').toJS(),

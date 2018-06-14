@@ -7,31 +7,42 @@ import {
 
 import Loadable from 'react-loadable'
 import Loading from '../Common/Loading'
-import {NODE_ENV} from '../../configs/constants'
+import RedirectBaseOnAuthState from './subComponents/RedirectBaseOnAuthState'
 import { hot } from 'react-hot-loader'
 import routes from './routes'
 
-console.log('NODE_ENV', NODE_ENV, process.env.__DEV__)
-
+@hot(module)
 @withRouter
 class RootRouter extends Component {
   render() {
     return <React.Fragment>
-      {routes.map((route, index) => {
-        const DynamicComponent = Loadable({
-          loader: () => {
-            // Hack for webpack dynamic import warning
-            const component = import(`../${route}/index.js`).catch((error) => console.error(error))
-            return component
-          },
-          loading: Loading,
-        })
-        // return <DynamicComponent key={`router-${index}`} />
-        return React.createElement(
-          DynamicComponent,
-          {key: `router-${index}`}
-        )
-      })}
+      <Switch>
+        {routes.map((componentName, index) => {
+          let DynamicComponent
+          if (NODE_ENV === 'development') {
+            DynamicComponent = require(`../${componentName}/index.js`).default
+          } else {
+            DynamicComponent = Loadable({
+              loader: () => {
+                // Catch webpack dynamic import warning
+                const component = import(`../${componentName}/index.js`).catch((error) => console.error(error))
+                return component
+              },
+              loading: Loading,
+            })
+          }
+          return <Route
+            key={`router-${index}`}
+            path={`/${componentName}`}
+            render={props => {
+              return React.createElement(
+                DynamicComponent,
+                {key: `router-${index}`}
+              )
+            }}
+          />
+        })}
+      </Switch>
     </React.Fragment>
   }
 }

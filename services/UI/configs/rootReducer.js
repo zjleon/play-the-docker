@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable'
 import homeReducer from '../modules/Home/reducer'
-import userInfoReducer from '../utils/global/userInfoReducer'
+import userInfoReducer from '../shared/global/userInfoReducer'
 
 const rootReducer = combineReducers({
   home: homeReducer,

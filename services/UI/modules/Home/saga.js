@@ -3,7 +3,7 @@ import {all, put, takeEvery, takeLatest} from 'redux-saga/effects'
 import {
   REQUEST_SAMPLE,
 } from '../../configs/actionTypes'
-import {request} from '../../utils/request/restfulSaga'
+import {request} from '../../shared/request/restfulSaga'
 
 // TODO: verify the user name and password
 function* verifyDataSample() {
