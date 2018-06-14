@@ -6,5 +6,14 @@ const envs = {
   PROJECT_ID: process.env.PROJECT_ID,
   IMAGE_RESIZE_CONFIG: JSON.parse(process.env.IMAGE_RESIZE_CONFIG),
 }
+// TODO: this should come from loopback swagger file
 
-module.exports = envs
+const urls = {
+  sampleURL: '/api/sample',
+}
+
+
+module.exports = {
+  envs,
+  urls
+}

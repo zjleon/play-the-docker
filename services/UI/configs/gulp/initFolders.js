@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 
 const projectRootPath = path.resolve('../../')
-console.log(process.env.NODE_ENV)
 const webpackSettings = process.env.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
 const outputPath = webpackSettings.output.path
 const imageFolderDist = path.resolve(outputPath, './images')

@@ -4,13 +4,13 @@ import {
 } from '../../configs/actionTypes'
 
 import {
-  sampleURL,
-} from '../../configs/url'
+  urls,
+} from '../../configs/constants'
 
 export function requestSample(payload) {
   return {
     type: REQUEST_SAMPLE.REQUEST,
-    // url: sampleURL,
+    // url: urls.sampleURL,
     // payload can be got from store
     // payload,
     requestActions: REQUEST_SAMPLE,

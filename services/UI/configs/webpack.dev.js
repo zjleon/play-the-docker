@@ -5,7 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 const {
-  PORT,
+  envs,
 } = require('./constants')
 
 const devSettings = {
@@ -13,7 +13,7 @@ const devSettings = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + PORT,
+      'webpack-dev-server/client?http://localhost:' + envs.PORT,
       'webpack/hot/only-dev-server',
     ],
   },
