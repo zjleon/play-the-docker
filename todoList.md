@@ -69,7 +69,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * **production optimize**:
   * body parser,
-  * ~~[apply gzip in webpack build process](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)~~
+  * [apply gzip in webpack build process](https://webpack.js.org/plugins/compression-webpack-plugin/)
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
   * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)

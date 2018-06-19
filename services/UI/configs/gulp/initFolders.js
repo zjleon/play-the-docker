@@ -21,4 +21,23 @@ function createFoldersIfNotExist(callback) {
   }
 }
 
-module.exports = {createFoldersIfNotExist}
+function clearBuildFolder(callback) {
+  function rmDir(dirPath) {
+    let files
+    try { files = fs.readdirSync(dirPath) } catch (e) { return }
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        let filePath = dirPath + '/' + files[i]
+        if (fs.statSync(filePath).isFile()) {fs.unlinkSync(filePath)} else {rmDir(filePath)}
+      }
+    }
+    fs.rmdirSync(dirPath)
+  }
+  rmDir(path.resolve(projectRootPath, outputPath))
+  callback()
+}
+
+module.exports = {
+  createFoldersIfNotExist,
+  clearBuildFolder
+}
