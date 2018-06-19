@@ -8,7 +8,7 @@ const moment = require('moment')
 const deepequal = require('deepequal')
 
 const {envs} = require('../constants')
-const webpackSettings = process.env.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
+const webpackSettings = envs.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
 const imageFolderDist = path.resolve(webpackSettings.output.path, './images')
 const projectRootPath = path.resolve('../../')
 const imageInfoFilePath = path.resolve(projectRootPath, './modules/Common/ImageContainer/imageInfo.json')

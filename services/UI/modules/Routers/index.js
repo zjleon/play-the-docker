@@ -25,7 +25,7 @@ class RootRouter extends Component {
             DynamicComponent = Loadable({
               loader: () => {
                 // Catch webpack dynamic import warning
-                const component = import(`../${componentName}/index.js`).catch((error) => console.error(error))
+                const component = import(`../${componentName}/index.js`).catch((error) => console.error('DynamicComponent', error))
                 return component
               },
               loading: Loading,

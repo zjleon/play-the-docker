@@ -7,8 +7,9 @@ require('dotenv')
     path: envPath
   })
 
-const {createFoldersIfNotExist} = require('./initFolders')
+const {createFoldersIfNotExist, clearBuildFolder} = require('./initFolders')
 gulp.task('createFoldersIfNotExist', createFoldersIfNotExist)
+gulp.task('clearBuildFolder', clearBuildFolder)
 
 const {startDevServer, startProductionServer} = require('./startServer')
 gulp.task('startDevServer', startDevServer)
@@ -35,6 +36,7 @@ gulp.task('default', gulp.series(
 ))
 
 gulp.task('production', gulp.series(
+  'clearBuildFolder',
   'createFoldersIfNotExist',
   'generateRouters',
   'convertImages',

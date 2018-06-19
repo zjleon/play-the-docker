@@ -26,11 +26,12 @@ exports.startProductionServer = function(done) {
   const webpackConfig = require("../webpack.prod")
 
   let app = express()
-  app.get('*.js', function(req, res, next) {
-    req.url = req.url + '.gz'
-    res.set('Content-Encoding', 'gzip')
-    next()
-  })
+  // XXX: the pre gzip has conflict with dynamic router
+  // app.get('*.js', function(req, res, next) {
+  //   req.url = req.url + '.gz'
+  //   res.set('Content-Encoding', 'gzip')
+  //   next()
+  // })
   app.use(express.static(webpackConfig.output.path))
 
   app.get('*', function(req, res, next) {
