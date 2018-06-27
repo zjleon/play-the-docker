@@ -35,9 +35,10 @@ class RootRouter extends Component {
             key={`router-${index}`}
             path={`/${componentName}`}
             render={props => {
+              const newProps = Object.assign({key: `router-${index}`}, props)
               return React.createElement(
                 DynamicComponent,
-                {key: `router-${index}`}
+                newProps
               )
             }}
           />
