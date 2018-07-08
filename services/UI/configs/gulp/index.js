@@ -19,6 +19,10 @@ const {watchComponents, generateRouters} = require('./watchComponentsAndGenerate
 gulp.task('watchComponents', watchComponents)
 gulp.task('generateRouters', generateRouters)
 
+const {watchActions, generateActions} = require('./watchActions')
+gulp.task('watchActions', watchActions)
+gulp.task('generateActions', generateActions)
+
 const {watchImageSources, convertImages} = require('./watchAssets')
 gulp.task('watchImageSources', watchImageSources)
 gulp.task('convertImages', convertImages)
@@ -28,9 +32,11 @@ gulp.task('buildProduction', buildProduction)
 
 gulp.task('default', gulp.series(
   'createFoldersIfNotExist',
+  'generateActions',
   'generateRouters',
   'convertImages',
   'watchComponents',
+  'watchActions',
   'watchImageSources',
   'startDevServer',
 ))

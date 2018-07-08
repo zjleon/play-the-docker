@@ -17,6 +17,7 @@ export function requestSample(payload) {
   }
 }
 
+
 export function updateUserInfo(updateObject) {
   return {
     type: UPDATE_USER_INFO,
