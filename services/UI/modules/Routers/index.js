@@ -8,7 +8,7 @@ import {
 import Loadable from 'react-loadable'
 import Loading from '../Common/Loading'
 import RedirectBaseOnAuthState from './subComponents/RedirectBaseOnAuthState'
-import RouteChanged from './subComponents/RouteChanged'
+// import RouteChanged from './subComponents/RouteChanged'
 import { hot } from 'react-hot-loader'
 import routes from './routes'
 
@@ -18,7 +18,7 @@ export default class RootRouter extends Component {
   render() {
     return <React.Fragment>
       <RedirectBaseOnAuthState />
-      <RouteChanged />
+      {/* <RouteChanged /> */}
       <Switch>
         {routes.map((componentName, index) => {
           let DynamicComponent
