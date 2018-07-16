@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import {
-  requestSample,
-  updateUserInfo,
-} from '../../configs/actionIndex'
 
 import Button from '@material-ui/core/Button'
 import ImageContainer from '../Common/ImageContainer'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
+// import {
+//   requestSample,
+//   updateUserInfo,
+// } from '../../configs/actionIndex'
+
 
 const styles = theme => ({
   button: {
@@ -30,19 +31,19 @@ const styles = theme => ({
   userInfo: state.get('userInfo').toJS(),
   }
   }, {
-  updateUserInfo,
-  requestSample,
+  // updateUserInfo,
+  // requestSample,
   })
 @withStyles(styles)
 class Home extends Component {
   onClickSampleRequest() {
-    this.props.requestSample()
+    // this.props.requestSample()
   }
 
   handleChange = name => event => {
-    this.props.updateUserInfo({
-      [name]: event.target.value,
-    })
+    // this.props.updateUserInfo({
+    //   [name]: event.target.value,
+    // })
   };
 
   render() {

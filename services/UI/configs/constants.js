@@ -9,7 +9,9 @@ const envs = {
 // TODO: this should come from loopback swagger file
 
 const urls = {
-  sampleURL: '/api/sample',
+  sample: '/api/sample',
+  unAuthenticatePage: '/',
+  authenticatedPage: '/auth'
 }
 
 
