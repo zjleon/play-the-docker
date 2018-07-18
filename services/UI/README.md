@@ -4,8 +4,9 @@
 ``./redux/reducers/index.js`` is the entry for all the reducers
 
 # env config
-``.env.development`` is where the local env setting with and without docker lives
-``.env.production`` is where the production env setting lives(in docker)
+``.env.development`` is where the local variables setting lives
+``.env.production`` is where the production variables setting lives(in docker)
+the gulp task will load different env files according to the npm command that start it
 
 # (recommanded) install eslint in your editor
 
