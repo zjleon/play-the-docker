@@ -4,8 +4,8 @@
 ``./redux/reducers/index.js`` is the entry for all the reducers
 
 # env config
-``development.env`` is where the local env setting with and without docker lives
-``production.env`` is where the production env setting lives(in docker)
+``.env.development`` is where the local env setting with and without docker lives
+``.env.production`` is where the production env setting lives(in docker)
 
 # (recommanded) install eslint in your editor
 
@@ -57,3 +57,11 @@ usage:
 <ImageContainer
   name={'test.jpg'} />
 ```
+
+# actions, reducers will be import by gulp tasks automatically
+Any file creation that path match pattern modules/moduleName/action(s).js or shared/namedAction(s).js will be added to ``configs/gulpGenerated/actions``, same for reducers
+
+## Action type pattern
+Actions should live in the actions.js file of related business modules or shared folder
+
+## Reducer pattern
