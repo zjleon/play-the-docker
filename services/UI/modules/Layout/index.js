@@ -7,7 +7,6 @@ export default (ChildComponent) => {
   return class Layout extends Component {
     shouldLayoutRender() {
       const {location} = history
-      console.log(history)
       const exclusiveList = [
         'Authentication'
       ]
@@ -15,7 +14,6 @@ export default (ChildComponent) => {
     }
 
     render() {
-      console.log('render PageWrapper')
       return this.shouldLayoutRender() ?
         <ChildComponent />
         :
