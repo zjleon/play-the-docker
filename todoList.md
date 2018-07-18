@@ -59,12 +59,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* ~~add https://github.com/supasate/connected-react-router~~ use own solution
 * client server have a task that query the backend api regularly so it can pack the api endpoint into codes
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
-* doc the router pattern
-* gulp task for reducer and saga, reducer, xxxReducer, get store name from 'xxx' or folder name
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
@@ -81,7 +78,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * doc how to use non-style component
 * doc how to use shouldComponentUpdate, control the render of inner componenet
 * move header into router, connect each component at root router, so no more repeat code
-* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
@@ -105,6 +101,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~gulp task for reducer, xxxReducer, get store name from 'xxx' or folder name~~
+* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
+* ~~doc the router pattern~~
+* ~~add https://github.com/supasate/connected-react-router~~ use own solution
 * ~~make redux hot reload~~
 * ~~gulp task for reducer and saga~~
 * ~~case sensitive check plugin in webpack~~
