@@ -59,12 +59,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* ~~add https://github.com/supasate/connected-react-router~~ use own solution
+* sync state with local storage by saga
 * client server have a task that query the backend api regularly so it can pack the api endpoint into codes
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
-* doc the router pattern
-* gulp task for reducer and saga, reducer, xxxReducer, get store name from 'xxx' or folder name
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
@@ -79,9 +77,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * ~~the script should be able to read different configs at different environment~~ use env secure server
 * doc how to use non-style component
-* doc how to use shouldComponentUpdate, control the render of inner componenet
-* move header into router, connect each component at root router, so no more repeat code
-* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
@@ -99,12 +94,18 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     basic content in it so user can see some content without waiting,
     but how to handle the js render after the initial render
     * read cookie to know which page to be render(is auth?)
-* [d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
-* babel source map
 * applied 'react-native-web' https://github.com/necolas/react-native-web
 * unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
+* *[d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)*
+* *doc how to use shouldComponentUpdate, control the render of inner componenet*
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~babel source map~~
+* ~~move header into router, connect each component at root router, so no more repeat code~~
+* ~~gulp task for reducer, xxxReducer, get store name from 'xxx' or folder name~~
+* ~~[the router push in saga](https://github.com/jfairbank/redux-saga-router)~~ use common history object
+* ~~doc the router pattern~~
+* ~~add https://github.com/supasate/connected-react-router~~ use own solution
 * ~~make redux hot reload~~
 * ~~gulp task for reducer and saga~~
 * ~~case sensitive check plugin in webpack~~
