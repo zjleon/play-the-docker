@@ -34,12 +34,6 @@ const styles = theme => ({
   })
 @withStyles(styles)
 export default class Authentication extends Component {
-  // constructor() {
-  //   super()
-  //
-  //   this.onClickLogin = () => {this.onClickLogin()}
-  // }
-
   onClickLogin = () => {
     this.props.updateUserInfo({'jwt': 'auth'})
     this.props.history.push(urls.authenticatedPage)
@@ -50,7 +44,6 @@ export default class Authentication extends Component {
   };
 
   render() {
-    console.log(this.props)
     const {classes, userInfo} = this.props
     return <React.Fragment>
       <TextField
