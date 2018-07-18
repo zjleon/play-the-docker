@@ -2,7 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 
 import createSagaMiddleware from 'redux-saga'
 import initialStore from './initialStore'
-import rootReducer from './rootReducer'
+import rootReducer from './gulpGenerated/reducers'
 import rootSaga from './rootSaga'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -15,8 +15,8 @@ let store = createStore(
 let sagaTask = sagaMiddleware.run(rootSaga)
 
 if (module.hot) {
-  module.hot.accept('./rootReducer.js', (module) => {
-    store.replaceReducer(require('./rootReducer.js').default)
+  module.hot.accept('./gulpGenerated/reducers.js', (module) => {
+    store.replaceReducer(require('./gulpGenerated/reducers.js').default)
   })
   module.hot.accept('./rootSaga.js', (module) => {
     const getNewSagas = require('./rootSaga.js').default
