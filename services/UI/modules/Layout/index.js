@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import Header from './Header'
+import Header from './subComponents/Header'
+import SingleButtonModal from './subComponents/SingleButtonModal'
 import history from '../../shared/history'
 
 export default (ChildComponent) => {
@@ -10,7 +11,7 @@ export default (ChildComponent) => {
       const exclusiveList = [
         'Authentication'
       ]
-      return exclusiveList.find((item) => location.pathname.indexOf(item))
+      return exclusiveList.find((item) => location.pathname.indexOf(item) > -1)
     }
 
     render() {
@@ -20,6 +21,7 @@ export default (ChildComponent) => {
         <div>
           <Header />
           <ChildComponent />
+          <SingleButtonModal />
         </div>
     }
   }

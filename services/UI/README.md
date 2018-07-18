@@ -71,6 +71,7 @@ and the match part can be got from ``this.props.match`` in root modules componen
 ## Action type pattern
 * Any file creation that path match pattern modules/moduleName/action(s).js or shared/namedAction(s).js will be added to ``configs/gulpGenerated/actions``
 * Actions should live in the actions.js file of related business modules or shared folder
+* It recommend to require actions from ``configs/gulpGenerated/actions`` instead of ``./actions``, especially when require action not below to current module
 
 ## Reducer pattern
 * rootReducer will import all reducers, match pattern is same as action, ``configs/gulpGenerated/reducers``

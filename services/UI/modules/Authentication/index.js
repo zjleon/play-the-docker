@@ -24,7 +24,6 @@ const styles = theme => ({
   },
 })
 
-// @pageWrapper
 @connect((state) => {
   return {
   userInfo: state.get('authentication').toJS(),
