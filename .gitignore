@@ -55,3 +55,4 @@ haste-map-react-native-packager-*
 package-lock.json
 imageInfo.json
 services/UI/configs/gulpGenerated/*.*
+routes.js
