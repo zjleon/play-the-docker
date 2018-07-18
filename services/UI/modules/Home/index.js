@@ -4,13 +4,10 @@ import Button from '@material-ui/core/Button'
 import ImageContainer from '../Shared/ImageContainer'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
+import {
+  setModalVisibility,
+} from '../../configs/gulpGenerated/actions'
 import { withStyles } from '@material-ui/core/styles'
-
-// import {
-//   requestSample,
-//   updateUserInfo,
-// } from '../../configs/actionIndex'
-
 
 const styles = theme => ({
   button: {
@@ -26,18 +23,24 @@ const styles = theme => ({
   },
 })
 
-// @pageWrapper
 @connect((state) => {
   return {
   }
   }, {
+  setModalVisibility
   })
 @withStyles(styles)
 class Home extends Component {
+  onClickImage = () => {
+    this.props.setModalVisibility(true, 'hello world! \n nice to meet you die')
+  }
+
   render() {
     const {classes} = this.props
     return <React.Fragment>
-      <ImageContainer name="test_jpg"/>
+      <ImageContainer
+        onClick={this.onClickImage}
+        name="test_jpg"/>
     </React.Fragment>
   }
 }
