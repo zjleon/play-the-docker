@@ -10,8 +10,9 @@ const envs = {
 
 const urls = {
   sample: '/api/sample',
-  unAuthenticatePage: '/',
-  authenticatedPage: '/auth'
+  unAuthenticatePage: '/Authentication',
+  authenticatedPage: '/Home',
+  home: '/Home',
 }
 
 

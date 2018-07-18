@@ -99,8 +99,9 @@ class Calibration extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(1111, this.props)
     return <div style={styles.container}>
+      <button onClick={this.onClickButton.bind(this)} />
       {/* <Card>
         <CardHeader
           title="Calibrate your phone"

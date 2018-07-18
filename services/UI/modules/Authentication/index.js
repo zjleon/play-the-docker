@@ -4,13 +4,11 @@ import Button from '@material-ui/core/Button'
 import ImageContainer from '../Shared/ImageContainer'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
+import {
+  updateUserInfo,
+} from '../../configs/gulpGenerated/actions'
+import {urls} from '../../configs/constants'
 import { withStyles } from '@material-ui/core/styles'
-
-// import {
-//   requestSample,
-//   updateUserInfo,
-// } from '../../configs/actionIndex'
-
 
 const styles = theme => ({
   button: {
@@ -29,29 +27,32 @@ const styles = theme => ({
 // @pageWrapper
 @connect((state) => {
   return {
-  userInfo: state.get('userInfo').toJS(),
+  userInfo: state.get('authentication').toJS(),
   }
   }, {
-  // updateUserInfo,
-  // requestSample,
+  updateUserInfo,
   })
 @withStyles(styles)
-class Home extends Component {
-  onClickSampleRequest() {
-    // this.props.requestSample()
+export default class Authentication extends Component {
+  // constructor() {
+  //   super()
+  //
+  //   this.onClickLogin = () => {this.onClickLogin()}
+  // }
+
+  onClickLogin = () => {
+    this.props.updateUserInfo({'jwt': 'auth'})
+    this.props.history.push(urls.authenticatedPage)
   }
 
   handleChange = name => event => {
-    // this.props.updateUserInfo({
-    //   [name]: event.target.value,
-    // })
+    this.props.updateUserInfo({[name]: event.target.value})
   };
 
   render() {
     console.log(this.props)
     const {classes, userInfo} = this.props
     return <React.Fragment>
-      <ImageContainer name="test_jpg"/>
       <TextField
         required
         id="name"
@@ -61,9 +62,7 @@ class Home extends Component {
         onChange={this.handleChange('name')}
         margin="normal"
       />
-      <Button className={classes.button} onClick={this.onClickSampleRequest}>Defau1lt</Button>
+      <Button className={classes.button} onClick={this.onClickLogin}>Login</Button>
     </React.Fragment>
   }
 }
-
-export default Home

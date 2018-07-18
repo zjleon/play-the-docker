@@ -16,7 +16,7 @@ const {
 @withRouter
 @connect((state) => {
   return {
-  jwt: state.getIn(['userInfo', 'jwt']),
+  jwt: state.getIn(['authentication', 'jwt']),
   }
   }, null)
 export default class RedirectBaseOnAuthState extends Component {

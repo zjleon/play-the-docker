@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require("webpack")
 const merge = require('webpack-merge')
 const commonWebpackConfig = require('./webpack.common')
@@ -7,6 +8,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const {
   envs,
 } = require('./constants')
+const gulpGeneratedPath = path.resolve(__dirname, './gulpGenerated')
+const gulpTasksPath = path.resolve(__dirname, './gulp')
+const routeFilePath = path.resolve(__dirname, '../modules/Routers/routes.js')
 
 const devSettings = {
   mode: 'development',
@@ -50,11 +54,17 @@ const devSettings = {
     },
   },
   watch: true,
-  // watchOptions: {
-  //   ignored: ['/node_modules/', distPath],
-  //   poll: 1000,
-  //   aggregateTimeout: 500,
-  // },
+  watchOptions: {
+    ignored: [
+      'node_modules',
+      commonWebpackConfig.output.distPath,
+      gulpGeneratedPath,
+      gulpTasksPath,
+      routeFilePath,
+    ],
+    poll: 1000,
+    aggregateTimeout: 500,
+  },
   devtool: 'eval',
 }
 
