@@ -2,7 +2,7 @@
 
 import {
   REQUEST_SAMPLE,
-} from '../../configs/actionTypes'
+} from './action'
 
 export default (
   state,

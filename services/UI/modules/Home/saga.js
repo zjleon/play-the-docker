@@ -2,7 +2,7 @@ import {all, put, takeEvery, takeLatest} from 'redux-saga/effects'
 
 import {
   REQUEST_SAMPLE,
-} from '../../configs/actionTypes'
+} from './action'
 import {request} from '../../shared/request/restfulSaga'
 
 // TODO: verify the user name and password
@@ -21,6 +21,6 @@ function* requestSample(action) {
 
 export default function* homeSaga() {
   yield all([
-    takeEvery(REQUEST_SAMPLE.REQUEST, requestSample),
+    takeEvery(REQUEST_SAMPLE.START, requestSample),
   ])
 }
