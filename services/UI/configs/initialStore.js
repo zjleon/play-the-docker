@@ -2,9 +2,13 @@ import {fromJS} from 'immutable'
 
 const store = {
   home: {name: ''},
-  // globalUI: {
-  //   showPageWrapper: false,
-  // },
+  layout: {
+    singleButtonModal: {
+      visible: false,
+      title: '',
+      content: '',
+    },
+  },
   authentication: {
     name: '',
     jwt: '',
