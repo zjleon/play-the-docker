@@ -4,7 +4,6 @@
 * [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)
 
 ## eslint and autofix and unit test
-* ~~set on atom, export the package list.~~
 * how to write unit test quickly
 * static the unit test coverage by tool
 * ~~apply FLOW(in atom)~~ use Typescript?
@@ -19,6 +18,7 @@
 * Phantomjs
 * link the eslint error message to code conventions in git github
 * puppeteer
+* ~~set on atom, export the package list.~~
 
 # css or sass or html
 * doc down how to avoid reflow
@@ -76,7 +76,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * ~~the script should be able to read different configs at different environment~~ use env secure server
-* doc how to use non-style component
+* doc how to use non-style component(pure component)
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
