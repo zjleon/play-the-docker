@@ -27,10 +27,10 @@ const devSettings = {
       exclude: ['node_modules'],
     }),
     // new NpmInstallPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'static',
+    //   openAnalyzer: false,
+    // }),
   ],
   devServer: {
     hot: true,
