@@ -1,56 +1,83 @@
-version: "2"
+version: "3.7"
 
 services:
-  nginx:
-    restart: always
-    build:
-      context: ../
-      dockerfile: configs/docker.prod.nginx
-    image: asia.gcr.io/pwc-mwc-app/nginx:prod
+  # nginx:
+  #   restart: always
+  #   build:
+  #     context: ../
+  #     dockerfile: configs/docker.prod.nginx
+  #   image: asia.gcr.io/pwc-mwc-app/nginx:prod
+  #   ports:
+  #     - "80:3000"
+  #   links:
+  #     - phone
+  #     - tv
+  #     - backend
+  #   environment:
+  #     - GET_HOSTS_FROM=dns
+  #   depends_on:
+  #     - phone
+  #     - tv
+  #     - backend
+  #   labels:
+  #     kompose.service.type: loadbalancer
+  # UI:
+  #   restart: always
+  #   build:
+  #     context: ../
+  #     dockerfile: configs/docker.prod.web_static
+  #     args:
+  #       - PROJECT=UI
+  #   image: UI
+  #   ports:
+  #     - "8080"
+  #   environment:
+  #     # the env(like link to other service) will be manage in project level(.env),
+  #     # expect NODE_ENV are managed in docker file,
+  #     # and DOCKER_ENV for link between client and microservices
+  #     - DOCKER_ENV=1
+  #     - NODE_ENV=production
+  #     - GET_HOSTS_FROM=dns
+  #   links:
+  #     - backend
+  #   # command: env
+  loopback:
     ports:
-      - "80:3000"
-    links:
-      - phone
-      - tv
-      - backend
-    environment:
-      - GET_HOSTS_FROM=dns
-    depends_on:
-      - phone
-      - tv
-      - backend
-    labels:
-      kompose.service.type: loadbalancer
-  UI:
-    restart: always
+      - "8090"
     build:
       context: ../
       dockerfile: configs/docker.prod.web_static
       args:
-        - PROJECT=phone
-    image: asia.gcr.io/pwc-mwc-app/phone:prod
-    ports:
-      - "8080"
+        - PROJECT=loopback
     environment:
-      # the env(like link to other service) will be manage in project level(.env),
-      # expect NODE_ENV are managed in docker file,
-      # and DOCKER_ENV for link between client and microservices
-      - DOCKER_ENV=1
-      - NODE_ENV=production
       - GET_HOSTS_FROM=dns
-    links:
+    image: loopback
+    networks:
       - backend
-    # command: env
-  API:
-    restart: always
+  mongo:
+    networks:
+      - backend
+    deploy:
+      restart_policy:
+        condition: on-failure
     ports:
-      - "8070"
-    build:
-      context: ../
-      dockerfile: configs/docker.prod.web_static
-      args:
-        - PROJECT=backend
+      - "27017:27017"
     environment:
-      - GET_HOSTS_FROM=dns
-    image: asia.gcr.io/pwc-mwc-app/backend:prod
-    # command: env
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    image: mongo
+    volumes:
+      - "/var/tmp:/data/db"
+  mongo-express:
+    networks:
+      - backend
+    image: mongo-express
+    ports:
+      - "8100:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+networks:
+  frontend:
+  backend:
