@@ -6,9 +6,11 @@ const webpackSettings = process.env.NODE_ENV === 'development' ? require('../web
 const outputPath = webpackSettings.output.path
 const imageFolderDist = path.resolve(outputPath, './images')
 const imageSourcePath = path.resolve(projectRootPath, './assets/images')
+const configPath = path.resolve(projectRootPath, './configs/gulpGenerated')
 
 function createFoldersIfNotExist(callback) {
-  // create distination directory
+  // create destination directory
+  fs.mkdirSync(configPath)
   try {
     fs.mkdirSync(imageFolderDist)
   } catch (e) {
