@@ -106,22 +106,9 @@ kompose -f configs/compose.prod.yml convert
 kubectl create -f phone-deployment.yaml -f tv-deployment.yaml
 ```
 
-
-# docker-compose helper
-## 1. build docker images
-``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml build``
-for production build:
-``docker-compose -f configs/compose.prod.yml build``
-## 2. start all services
-``docker-compose -f configs/compose.prod.yml -f configs/compose.dev.yml up``
-for production build:
-``docker-compose -f configs/compose.prod.yml up``
-## 3. check the logs of web_static
-``docker-compose -f configs/compose.prod.yml logs web_static``
-## 4. check status:
-``docker-compose -f configs/compose.prod.yml ps``
-## 4. restart nginx service:
-``docker-compose -f configs/compose.prod.yml restart nginx``
+# docker stack helper
+## 1. build and run all services
+``docker stack deploy -c ./configs/compose.prod.yml site``
 ## 1. clear non-used images and containers to free space
 install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
 or:
