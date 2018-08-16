@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.3"
 
 services:
   # nginx:
@@ -46,10 +46,10 @@ services:
       - "8090:8090"
     build:
       context: ../
-      dockerfile: configs/docker.prod.web_static
+      dockerfile: configs/docker.prod.nodejs
       args:
-        - SERVICE_NAME=loopback
-    # image: loopback
+        SERVICE_NAME: loopback
+    image: loopback
     networks:
       - backend
   mongo:

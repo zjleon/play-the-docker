@@ -80,44 +80,26 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 * to install the apk to device, uninstall it first
 * [maven repository](https://mvnrepository.com/repos)
 
-# web container build helper:
-## development environment:
+# web service helper:
+### run all services at once
+1. build all web services(may need to install docker-compose):
+``docker-compose -f configs/compose.web.yml build``
+2. run them
+``docker stack deploy -c ./configs/compose.web.yml web``
+
+### test single container
+1. build
 ```
-docker build -t ui-service -f configs/docker.prod.UI --build-arg PROJECT=UI .
+docker build -t ui-service -f configs/docker.prod.nodejs --build-arg SERVICE_NAME=UI .
 docker build -t nginx -f configs/docker.prod.nginx .
 ```
-* run image(**all docker parameter must add before image tag**):
+2. run image(**all docker parameter must add before image tag**):
 ```
 docker run -it -p 8080:8080 ui-service
 docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ```
 
-## production environment:
-1. test in local: check docker-compose helper
-1. push image:
+# Clear non-used images and containers to free disk space
 ```
-/bin/bash ./scripts/gcloud.push_images.sh
+docker system prune
 ```
-1. deploy to kubernete:
-```
-kompose -f configs/compose.prod.yml up
-// or
-kompose -f configs/compose.prod.yml convert
-kubectl create -f phone-deployment.yaml -f tv-deployment.yaml
-```
-
-# docker stack helper
-## 1. build and run all services
-``docker stack deploy -c ./configs/compose.prod.yml site``
-## 1. clear non-used images and containers to free space
-install this tool: https://github.com/zzrotdesign/docker-clean#homebrew-install
-or:
-```
-# Delete all stopped containers
-docker ps -q -f status=exited | xargs docker rm
-# Delete all dangling (unused) images
-docker images -q -f dangling=true | xargs docker rmi
-```
-
-# remove docker on mac:
-`` sudo ./scripts/docker.uninstall.sh``

@@ -59,6 +59,7 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
+* use multistage build, the frontend only need nginx(or node alphine+express) and the static files
 * sync state with local storage by saga
 * client server have a task that query the backend api regularly so it can pack the api endpoint into codes
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
@@ -251,7 +252,6 @@ https://github.com/facebook/react-native/issues/7257~~
   * ~~``webpack --config configs/webpack.prod.web_static.js -p`` to pack for product env~~
   * ~~put db link into environment variable~~ manage env in project level
 
-<<<<<<< HEAD
 # backend
 * **the most important is get to know the micro-service architecture, use multi loopback as service**
 * **a config center that automatically discover service**
@@ -261,10 +261,6 @@ https://github.com/facebook/react-native/issues/7257~~
 * token with hot reload
 * nodejs debug tool
 * ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
-=======
-# node environment
-## prod:
->>>>>>> b3b6dcd9181299965e027aedec95c4bb6472d68c
 * *link instead of cp node modules.* yarn cache is enough for now
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
