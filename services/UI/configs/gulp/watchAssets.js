@@ -11,7 +11,7 @@ const {envs} = require('../constants')
 const webpackSettings = envs.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
 const imageFolderDist = path.resolve(webpackSettings.output.path, './images')
 const projectRootPath = path.resolve('../../')
-const imageInfoFilePath = path.resolve(projectRootPath, './modules/Shared/ImageContainer/imageInfo.json')
+const imageInfoFilePath = path.resolve(projectRootPath, './configs/gulpGenerated/imageInfo.json')
 const imageSourcePath = path.resolve(projectRootPath, './assets/images')
 
 // image auto resize

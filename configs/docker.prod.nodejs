@@ -1,0 +1,15 @@
+FROM node
+EXPOSE 8080
+
+# install tini
+COPY ./resources/tini /tini
+RUN chmod +x /tini
+
+# define variables, can be replace in build command
+ARG SERVICE_NAME=UI
+
+WORKDIR /app
+COPY ./services/${SERVICE_NAME} .
+#RUN chmod +x /app && npm i
+
+CMD ["/tini", "--", "npm", "run", "production"]
