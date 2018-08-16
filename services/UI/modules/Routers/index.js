@@ -9,7 +9,7 @@ import Loadable from 'react-loadable'
 import Loading from '../Shared/Loading'
 import RedirectBaseOnAuthState from './subComponents/RedirectBaseOnAuthState'
 import { hot } from 'react-hot-loader'
-import routes from './routes'
+import routes from '../../configs/gulpGenerated/routes'
 
 @Layout
 @hot(module)

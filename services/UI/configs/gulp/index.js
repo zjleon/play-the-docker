@@ -31,6 +31,7 @@ const {buildProduction} = require('./buildProduction')
 gulp.task('buildProduction', buildProduction)
 
 gulp.task('default', gulp.series(
+  'clearBuildFolder',
   'createFoldersIfNotExist',
   'generateReduxFiles',
   'generateRouters',

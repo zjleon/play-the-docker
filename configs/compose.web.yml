@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.3"
 
 services:
   # nginx:
@@ -27,12 +27,12 @@ services:
   #     context: ../
   #     dockerfile: configs/docker.prod.web_static
   #     args:
-  #       - PROJECT=UI
+  #       - SERVICE_NAME=UI
   #   image: UI
   #   ports:
   #     - "8080"
   #   environment:
-  #     # the env(like link to other service) will be manage in project level(.env),
+  #     # the env(like link to other service) will be manage in SERVICE_NAME level(.env),
   #     # expect NODE_ENV are managed in docker file,
   #     # and DOCKER_ENV for link between client and microservices
   #     - DOCKER_ENV=1
@@ -43,14 +43,12 @@ services:
   #   # command: env
   loopback:
     ports:
-      - "8090"
+      - "8090:8090"
     build:
       context: ../
-      dockerfile: configs/docker.prod.web_static
+      dockerfile: configs/docker.prod.nodejs
       args:
-        - PROJECT=loopback
-    environment:
-      - GET_HOSTS_FROM=dns
+        SERVICE_NAME: loopback
     image: loopback
     networks:
       - backend

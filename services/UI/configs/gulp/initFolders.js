@@ -36,6 +36,7 @@ function clearBuildFolder(callback) {
     fs.rmdirSync(dirPath)
   }
   rmDir(path.resolve(projectRootPath, outputPath))
+  rmDir(path.resolve(projectRootPath, configPath))
   callback()
 }
 
