@@ -14,36 +14,25 @@
     ]
   },
   "User": {
-    "dataSource": "postgres"
+    "dataSource": "webDB"
   },
   "AccessToken": {
-    "dataSource": "postgres",
+    "dataSource": "webDB",
     "public": false
   },
   "ACL": {
-    "dataSource": "postgres",
+    "dataSource": "webDB",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "postgres",
+    "dataSource": "webDB",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "postgres",
+    "dataSource": "webDB",
     "public": false
-  },
-  "Message": {
-    "dataSource": null
-  },
-  "person": {
-    "dataSource": "postgres",
-    "public": true
-  },
-  "CoffeeShop": {
-    "dataSource": "postgres",
-    "public": true
   }
 }
