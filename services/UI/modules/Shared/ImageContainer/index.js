@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ImageInfo from './imageInfo.json'
+import ImageInfo from '../../../configs/gulpGenerated/imageInfo.json'
 import {envs} from '../../../configs/constants'
 
 const targetWidth = (function() {

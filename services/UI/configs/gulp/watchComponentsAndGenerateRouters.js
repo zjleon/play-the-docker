@@ -3,7 +3,7 @@ const {readdirSync, createWriteStream, watch} = require('fs')
 
 const projectRoot = resolve(__dirname, '../../')
 const modulePath = resolve(projectRoot, './modules')
-const routeFilePath = resolve(modulePath, './Routers/routes.js')
+const routeFilePath = resolve(projectRoot, './configs/gulpGenerated/routes.js')
 const exculdedModuleNames = [
   'Layout',
   'Routers',

@@ -1,16 +1,12 @@
 {
-  "db": {
-    "name": "db",
-    "connector": "memory"
-  },
-  "postgres": {
-    "host": "locahost",
-    "port": 5432,
-    "url": "postgres://postgres:123456@localhost/test1",
-    "database": "test1",
-    "password": "123456",
-    "name": "postgres",
-    "user": "postgres",
-    "connector": "postgresql"
+  "webDB": {
+    "name": "webDB",
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "admin",
+    "user": "${WEB_DB_USER}",
+    "password": "${WEB_DB_PASSWORD}",
+    "connector": "loopback-connector-mongodb",
+    "useNewUrlParser": true
   }
 }

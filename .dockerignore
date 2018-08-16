@@ -6,12 +6,10 @@ docs
 **/.git
 dist
 **/.gradle
-resources/android-packages
 *.lock
 .env
-package-lock.json
+**/package-lock.json
+**/gulpGenerated
 
 # temparary ignore
 src/android
-resources/android
-resources/lfs
