@@ -1,7 +1,7 @@
 {
   "webDB": {
     "name": "webDB",
-    "host": "127.0.0.1",
+    "host": "${WEB_DB_HOST}",
     "port": 27017,
     "database": "admin",
     "user": "${WEB_DB_USER}",
