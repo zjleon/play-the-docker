@@ -2,11 +2,11 @@
   "webDB": {
     "name": "webDB",
     "host": "${WEB_DB_HOST}",
-    "port": 27017,
-    "database": "admin",
-    "user": "${WEB_DB_USER}",
+    "port": 5432,
+    "database": "webDB",
+    "user": "postgres",
     "password": "${WEB_DB_PASSWORD}",
-    "connector": "loopback-connector-mongodb",
+    "connector": "loopback-connector-postgresql",
     "useNewUrlParser": true
   }
 }

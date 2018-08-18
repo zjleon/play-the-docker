@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "webDB"
+    "dataSource": "webDB",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "webDB",
@@ -34,5 +35,10 @@
   "Role": {
     "dataSource": "webDB",
     "public": false
+  },
+  "vip": {
+    "dataSource": "webDB",
+    "public": true,
+    "options": {}
   }
 }

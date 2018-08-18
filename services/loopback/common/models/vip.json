@@ -1,0 +1,19 @@
+{
+  "name": "vip",
+  "base": "User",
+  "idInjection": true,
+  "properties": {},
+  "restrictResetPasswordTokenScope": true,
+  "emailVerificationRequired": true,
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "accessType": "READ",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}
