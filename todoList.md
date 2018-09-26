@@ -56,9 +56,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * ~~if destination server unavailable, redirect to another one~~ set 404 default page
 
 ## web
-* use multistage build, the frontend only need nginx(or node alphine+express) and the static files
+* use multistage build, the frontend only need nginx(or node alpine+express) and the static files
 * sync state with local storage by saga
-* client server have a task that query the backend api regularly so it can pack the api endpoint into codes
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
 * review the product build process, run docker container, stack
 * upgrade to babel v7 when it ready
@@ -66,12 +65,12 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * **production optimize**:
   * body parser,
-  * [apply gzip in webpack build process](https://webpack.js.org/plugins/compression-webpack-plugin/)
+  * ~~[apply gzip in webpack build process](https://webpack.js.org/plugins/compression-webpack-plugin/)~~ use runtime gzip instead
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
   * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
   * [express production settings](https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression)
   * [webpack build settings](https://webpack.js.org/guides/build-performance/)
-  * [react router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  * ~~[split code base on route](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)~~
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * ~~the script should be able to read different configs at different environment~~ use env secure server
 * doc how to use non-style component(pure component)
@@ -272,16 +271,16 @@ https://nodejs.org/api/child_process.html#child_process_child_process_execsync_c
 http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
-# docker
-* vault service for env storage
+# docker and AWS
+* play AWS cloud formation
+* vault service for env storage or aws sercurity management
 * **put the nginx endpoint in compose instead of .env**
 * webhook on github
-* use rolling update to update k8s deployment
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
-* **manage docker container in local using nodejs api**
-  * sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container
-  * node api: https://github.com/apocas/dockerode
-  * python: https://docs.docker.com/engine/api/sdks/
+* ~~manage docker container in local using nodejs api~~ use the healthcheck and replica control instead
+  * ~~sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container~~
+  * ~~node api: https://github.com/apocas/dockerode~~
+  * ~~python: https://docs.docker.com/engine/api/sdks/~~
 * **docker log service:**
   * https://www.slideshare.net/raychaser/6-million-ways-to-log-in-docker-nyc-docker-meetup-12172014
   * https://github.com/veggiemonk/awesome-docker#monitoring--logging

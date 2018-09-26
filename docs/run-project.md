@@ -1,4 +1,8 @@
 # first-time setup:
+
+## Setup for linux only:
+https://stackoverflow.com/questions/22475849/node-js-error-enospc/32600959#32600959
+
 ## install and config atom
 ```
 // export packages and settings
@@ -81,30 +85,18 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 * [maven repository](https://mvnrepository.com/repos)
 
 # web service helper:
-### run all services at once
+
+## docker
+### run postgres container(development mode)
+``docker run -d --rm -v DBVolume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=example -e POSTGRES_DB=webDB -e PGDATA=/var/lib/postgresql/data/pgdata -p 5432:5432 postgres``
+
+### run all services at once(production mode)
 1. build all web services(may need to install docker-compose):
-``docker-compose -f configs/compose.web.yml build``
+``docker-compose -f configs/compose.web.yml -f configs/compose.web.local.yml build``
 2. run them
-``docker-compose -f configs/compose.web.yml up``
+``docker-compose -f configs/compose.web.yml -f configs/compose.web.local.yml up``
 
-### test single container
-1. build
-```
-docker build -t ui-service -f configs/docker.prod.nodejs --build-arg SERVICE_NAME=UI .
-docker build -t nginx -f configs/docker.prod.nginx .
-```
-2. run image(**all docker parameter must add before image tag**):
-```
-docker run -it -p 8080:8080 ui-service
-docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
-```
-
-# Clear non-used images and containers to free disk space
-```
-docker system prune
-```
-
-# aws deployment
+## AWS
 ## Preparation on your local
 1. install aws cli:
 ``pip install awscli --upgrade --user``
