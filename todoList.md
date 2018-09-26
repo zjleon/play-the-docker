@@ -1,8 +1,5 @@
 # fill in readme
 
-## the interactive game:
-* [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)
-
 ## eslint and autofix and unit test
 * how to write unit test quickly
 * static the unit test coverage by tool
@@ -254,19 +251,19 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # backend
 * **the most important is get to know the micro-service architecture, use multi loopback as service**
-* **a config center that automatically discover service**
 * restart dev server in gulp
 * handle high concurrency in node
 * find a way to debug the code(start by gulp)
 * token with hot reload
-* nodejs debug tool
-* ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
-* *link instead of cp node modules.* yarn cache is enough for now
+* nodejs debug tool, add it into documentation
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 * error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
+* ~~*link instead of cp node modules.* yarn cache is enough for now~~ simply run npm i via fast vpn
+* ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
+* ~~a config center that automatically discover service~~ use AWS service discovery
 * ~~install project dependencies via node script
 https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options~~
 * ~~a script to install package to particular project
@@ -323,3 +320,6 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 # ~~docker image watch issue~~solved in 1.13
 ~~https://github.com/brikis98/docker-osx-dev
 https://github.com/rnplay/react-native-packager-docker/issues/1~~
+
+## the interactive game:
+* [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)

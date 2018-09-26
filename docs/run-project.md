@@ -85,7 +85,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 1. build all web services(may need to install docker-compose):
 ``docker-compose -f configs/compose.web.yml build``
 2. run them
-``docker stack deploy -c ./configs/compose.web.yml web``
+``docker-compose -f configs/compose.web.yml up``
 
 ### test single container
 1. build
@@ -103,3 +103,33 @@ docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
 ```
 docker system prune
 ```
+
+# aws deployment
+## Preparation on your local
+1. install aws cli:
+``pip install awscli --upgrade --user``
+2. config aws cli IAM:
+``aws configure``
+3. install aws ecs cli(**remember to set the cli permission**):
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html
+
+## Setup network and cluster in AWS
+1. create cluster:
+``aws ecs create-cluster --cluster-name web-cluster``
+2. create task definition from docker file:
+``ecs-cli compose -p web -f ./configs/compose.web.yml --ecs-params ./configs/ecs.task.definition.params.yml create --launch-type FARGATE -c web-cluster --create-log-groups``
+3. VPC in cloud console
+4. create namespace for service discovery:
+``aws servicediscovery create-private-dns-namespace --name service-discovery-namespace --vpc vpc-029a32644eaca0dba --region us-east-2``
+5. create service for service discovery:
+``aws servicediscovery create-service --name web-service-discovery-service --dns-config 'NamespaceId="ns-npp246z3pebsa7wz",DnsRecords=[{Type="A",TTL="300"}]' --health-check-custom-config FailureThreshold=1 --region us-east-2``
+
+## Deploy container via service
+1. create a service for deployment:
+``aws ecs create-service --cli-input-json file://configs/ecs.web.service.deployment.json --region us-east-2``
+*Update service after creating new task definition:
+``aws ecs update-service --cluster web-cluster --service web-service-deployment --task-definition web``*
+2. get public ip:
+1. go into the cluster via cloud console
+2. click the task
+3. check the public ip assign via fargate
