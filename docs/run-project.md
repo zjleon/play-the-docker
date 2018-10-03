@@ -87,7 +87,7 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 # web service helper:
 
 ## docker
-### run postgres container(development mode)
+### run postgres container on local
 ``docker run -d --rm -v DBVolume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=example -e POSTGRES_DB=webDB -e PGDATA=/var/lib/postgresql/data/pgdata -p 5432:5432 postgres``
 
 ### run all services at once(production mode)

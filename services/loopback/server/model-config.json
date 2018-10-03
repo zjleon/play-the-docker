@@ -19,7 +19,14 @@
   },
   "AccessToken": {
     "dataSource": "webDB",
-    "public": false
+    "public": false,
+    "relations": {
+      "vip": {
+        "type": "belongsTo",
+        "model": "Vip",
+        "foreignKey": "vipId"
+      }
+    }
   },
   "ACL": {
     "dataSource": "webDB",
@@ -36,9 +43,17 @@
     "dataSource": "webDB",
     "public": false
   },
-  "vip": {
+  "Vip": {
     "dataSource": "webDB",
     "public": true,
     "options": {}
+  },
+  "Donator": {
+    "dataSource": "webDB",
+    "public": false
+  },
+  "Collection": {
+    "dataSource": "webDB",
+    "public": true
   }
 }

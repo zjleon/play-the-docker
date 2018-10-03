@@ -1,5 +1,5 @@
 {
-  "name": "vip",
+  "name": "Vip",
   "base": "User",
   "idInjection": true,
   "properties": {},
