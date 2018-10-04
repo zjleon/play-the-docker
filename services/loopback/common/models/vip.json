@@ -6,7 +6,16 @@
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": true,
   "validations": [],
-  "relations": {},
+  "relations": {
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": "vipId",
+      "options": {
+        "disableInclude": true
+      }
+    }
+  },
   "acls": [
     {
       "principalType": "ROLE",

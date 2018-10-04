@@ -59,12 +59,10 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * use multistage build, the frontend only need nginx(or node alpine+express) and the static files
 * sync state with local storage by saga
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
-* review the product build process, run docker container, stack
 * upgrade to babel v7 when it ready
 * load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
-* put all express server instances under one shell script, use ONE command to start all service, ~~remove the docker dev~~
 * **production optimize**:
-  * body parser,
+  * ~~body parser~~
   * ~~[apply gzip in webpack build process](https://webpack.js.org/plugins/compression-webpack-plugin/)~~ use runtime gzip instead
   * [apply server push](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/)
   * ~~[webpack bundle size plugin](https://www.npmjs.com/package/webpack-bundle-analyzer)~~
@@ -73,7 +71,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * ~~[split code base on route](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)~~
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * ~~the script should be able to read different configs at different environment~~ use env secure server
-* doc how to use non-style component(pure component)
 * the media query
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
 * why reselect?
@@ -97,6 +94,9 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * *[d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)*
 * *doc how to use shouldComponentUpdate, control the render of inner componenet*
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~put all express server instances under one shell script, use ONE command to start all service, remove the docker dev~~
+* ~~doc how to use non-style component(pure component)~~
+* ~~review the product build process, run docker container, stack~~
 * ~~babel source map~~
 * ~~move header into router, connect each component at root router, so no more repeat code~~
 * ~~gulp task for reducer, xxxReducer, get store name from 'xxx' or folder name~~
@@ -250,16 +250,16 @@ https://github.com/facebook/react-native/issues/7257~~
 
 # backend
 * **the most important is get to know the micro-service architecture, use multi loopback as service**
-* restart dev server in gulp
-* handle high concurrency in node
-* find a way to debug the code(start by gulp)
+* ~~handle high concurrency in node~~ learn the aws auto scale
 * token with hot reload
-* nodejs debug tool, add it into documentation
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 * error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
+* ~~find a way to debug the code(start by gulp)~~
+* ~~nodejs debug tool, add it into documentation~~
+* ~~restart dev server in gulp~~
 * ~~*link instead of cp node modules.* yarn cache is enough for now~~ simply run npm i via fast vpn
 * ~~install [strongloop](https://docs.strongloop.com/display/SLC/Debugging+applications)~~
 * ~~a config center that automatically discover service~~ use AWS service discovery

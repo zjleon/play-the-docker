@@ -6,11 +6,14 @@ module.exports = function(app) {
     if (err) throw console.error(err)
     let Vip = app.models.Vip
     Vip.create([{
+      username: 'foobar',
       email: 'foo@bar.com',
-      password: 'foobar'
+      password: 'foobar',
+      emailVerified: true
     }, {
       email: 'john@doe.com',
-      password: 'johndoe'
+      password: 'johndoe',
+      emailverified: true
     }], () => {
       console.log('create vip success')
     })

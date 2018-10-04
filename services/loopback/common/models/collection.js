@@ -58,6 +58,9 @@ module.exports = function(Collection) {
         ) {
           const modelName = relations[relationName].model
           app.models[modelName].findOrCreate(
+            {
+              where: {name: data[relationName].name}
+            },
             data[relationName],
             (err, instance, created) => {
               if (err) {
@@ -79,34 +82,4 @@ module.exports = function(Collection) {
       return true
     }
   })
-  // Collection.create = function(context, unused, next) {
-  //   // find out the object attribute in request
-  //   const args = context.args
-  //   let relatedObjects = Object.keys(args).reduce((accumulator, key) => {
-  //     if (typeof args[key] === 'object') {
-  //       accumulator.push(key)
-  //     }
-  //   }, [])
-  //   console.log('relatedObjects', relatedObjects, Collection)
-  //
-  //   next()
-  // }
-  // Collection.remoteMethod('create', {
-  //   accepts: {arg: 'collection', type: 'object'},
-  //   returns: {arg: 'result', type: 'string'}
-  // })
-
-  // Collection.beforeRemote('create', async function(context, instance) {
-  //   console.log('beforeRemote', context.req)
-  //   const donator = context.args.data.donator
-  //   app.models.Donator.updateOrCreate(donator, (donatorErr, donatorRes) => {
-  //     if (donatorErr) {
-  //       throw console.error(donatorErr)
-  //     }
-  //     console.log('donator', donatorRes)
-  //     // context.args.donatorId = donatorRes.id
-  //     // context.req.body
-  //     // app.models.Collection.create()
-  //   })
-  // })
 }

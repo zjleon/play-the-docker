@@ -26,6 +26,7 @@ git config --global user.email zjleon2010@gmail.com
 
 ## config chrome:
 1. install [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+2. install [nodejs inspector](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj?hl=en-US)
 
 ## add flow type for new packages
 1. run ``npm run flow-typed-search packageName`` to check if package has flow type support, or
