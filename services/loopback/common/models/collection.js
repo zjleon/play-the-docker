@@ -7,7 +7,7 @@ module.exports = function(Collection) {
   // Collection.disableRemoteMethodByName("create") // disables POST /Collections
 
   Collection.disableRemoteMethodByName("prototype.updateAttributes") // disables PATCH /Collections/{id}
-  Collection.disableRemoteMethodByName("findById") // disables GET /Collections/{id}
+  // Collection.disableRemoteMethodByName("findById") // disables GET /Collections/{id}
   // Collection.disableRemoteMethodByName("exists") // disables HEAD /Collections/{id}
   // Collection.disableRemoteMethodByName("replaceById") // disables PUT /Collections/{id}
   Collection.disableRemoteMethodByName("deleteById") // disables DELETE /Collections/{id}
@@ -37,6 +37,7 @@ module.exports = function(Collection) {
   // Collection.disableRemoteMethodByName("setPassword") // disables POST /Collections/reset-password
   Collection.disableRemoteMethodByName("update") // disables POST /Collections/update
   // Collection.disableRemoteMethodByName("upsertWithWhere") // disables POST /Collections/upsertWithWhere
+  // Collection.disableRemoteMethodByName("prototype.__get__donator")
 
   // Overide default create method
   Collection.on('dataSourceAttached', function(obj) {
@@ -57,6 +58,7 @@ module.exports = function(Collection) {
             && relations[relationName]
         ) {
           const modelName = relations[relationName].model
+          console.log(11, JSON.stringify(relations))
           app.models[modelName].findOrCreate(
             {
               where: {name: data[relationName].name}
