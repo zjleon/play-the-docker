@@ -11,12 +11,12 @@ const publicPath = '/'
 const dotenv = require('dotenv')
 const envToClient = dotenv.parse(fs.readFileSync(`${srcPath}/.env.${process.env.NODE_ENV ? process.env.NODE_ENV : 'development'}`))
 
-const babelOptions = JSON.parse(fs.readFileSync('../.babelrc', 'utf8'))
+const babelOptions = require('./babel.config.js')
 
 module.exports = {
   entry: {
     main: [
-      'babel-polyfill',
+      '@babel/polyfill',
       srcPath + '/index.js',
     ],
   },
@@ -52,12 +52,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: [/node_modules/, path.resolve(srcPath, './configs')],
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babelOptions,
-          },
-        ],
+        use: {
+          loader: 'babel-loader',
+          options: babelOptions,
+        },
       },
       {
         test: /\.html$/,
