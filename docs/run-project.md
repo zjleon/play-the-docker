@@ -1,4 +1,8 @@
 # first-time setup:
+
+## Setup for linux only:
+https://stackoverflow.com/questions/22475849/node-js-error-enospc/32600959#32600959
+
 ## install and config atom
 ```
 // export packages and settings
@@ -22,6 +26,7 @@ git config --global user.email zjleon2010@gmail.com
 
 ## config chrome:
 1. install [redux-devtools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+2. install [nodejs inspector](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj?hl=en-US)
 
 ## add flow type for new packages
 1. run ``npm run flow-typed-search packageName`` to check if package has flow type support, or
@@ -81,25 +86,43 @@ docker run --privileged -it -v $(pwd)/src/android:/app -v /Volumes/VirtualBox:/v
 * [maven repository](https://mvnrepository.com/repos)
 
 # web service helper:
-### run all services at once
+
+## docker
+### run postgres container on local
+``docker run -d --rm -v DBVolume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=example -e POSTGRES_DB=webDB -e PGDATA=/var/lib/postgresql/data/pgdata -p 5432:5432 postgres``
+
+### run all services at once(production mode)
 1. build all web services(may need to install docker-compose):
-``docker-compose -f configs/compose.web.yml build``
+``docker-compose -f configs/compose.web.yml -f configs/compose.web.local.yml build``
 2. run them
-``docker stack deploy -c ./configs/compose.web.yml web``
+``docker-compose -f configs/compose.web.yml -f configs/compose.web.local.yml up``
 
-### test single container
-1. build
-```
-docker build -t ui-service -f configs/docker.prod.nodejs --build-arg SERVICE_NAME=UI .
-docker build -t nginx -f configs/docker.prod.nginx .
-```
-2. run image(**all docker parameter must add before image tag**):
-```
-docker run -it -p 8080:8080 ui-service
-docker run -it -p 3000:3000 -v $(pwd)/configs:/etc/nginx nginx
-```
+## AWS
+## Preparation on your local
+1. install aws cli:
+``pip install awscli --upgrade --user``
+2. config aws cli IAM:
+``aws configure``
+3. install aws ecs cli(**remember to set the cli permission**):
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html
 
-# Clear non-used images and containers to free disk space
-```
-docker system prune
-```
+## Setup network and cluster in AWS
+1. create cluster:
+``aws ecs create-cluster --cluster-name web-cluster``
+2. create task definition from docker file:
+``ecs-cli compose -p web -f ./configs/compose.web.yml --ecs-params ./configs/ecs.task.definition.params.yml create --launch-type FARGATE -c web-cluster --create-log-groups``
+3. VPC in cloud console
+4. create namespace for service discovery:
+``aws servicediscovery create-private-dns-namespace --name service-discovery-namespace --vpc vpc-029a32644eaca0dba --region us-east-2``
+5. create service for service discovery:
+``aws servicediscovery create-service --name web-service-discovery-service --dns-config 'NamespaceId="ns-npp246z3pebsa7wz",DnsRecords=[{Type="A",TTL="300"}]' --health-check-custom-config FailureThreshold=1 --region us-east-2``
+
+## Deploy container via service
+1. create a service for deployment:
+``aws ecs create-service --cli-input-json file://configs/ecs.web.service.deployment.json --region us-east-2``
+*Update service after creating new task definition:
+``aws ecs update-service --cluster web-cluster --service web-service-deployment --task-definition web``*
+2. get public ip:
+1. go into the cluster via cloud console
+2. click the task
+3. check the public ip assign via fargate

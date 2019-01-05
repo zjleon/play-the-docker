@@ -1,0 +1,33 @@
+{
+  "name": "Donator",
+  "base": "PersistedModel",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "String",
+      "default": "anonymous",
+      "required": true,
+      "id": true
+    },
+    "age": {
+      "type": "String",
+      "default": "unknown"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "collection": {
+      "type": "hasMany",
+      "model": "Collection",
+      "foreignKey": "donatorName"
+    },
+    "vip": {
+      "type": "hasOne",
+      "model": "Vip"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

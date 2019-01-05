@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  postgres:
+    logging:
+      driver: json-file
+  loopback:
+    environment:
+      WEB_DB_HOST: postgres
+    logging:
+      driver: json-file

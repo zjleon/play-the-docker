@@ -1,0 +1,20 @@
+{
+    "cluster": "web-cluster",
+    "serviceName": "web-service-deployment",
+    "taskDefinition": "web",
+    "serviceRegistries": [
+       {
+          "registryArn": "arn:aws:servicediscovery:us-east-2:084192888802:service/srv-oquvvqcvmsysfctb"
+       }
+    ],
+    "launchType": "FARGATE",
+    "platformVersion": "1.1.0",
+    "networkConfiguration": {
+       "awsvpcConfiguration": {
+          "assignPublicIp": "ENABLED",
+          "securityGroups": [ "sg-0aa7c0eca0b5bc9af" ],
+          "subnets": [ "subnet-0c828d87d7213a2f4", "subnet-0e4c63eed9296f72c"  ]
+       }
+    },
+    "desiredCount": 1
+}

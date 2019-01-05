@@ -1,0 +1,26 @@
+{
+  "name": "seed_poker_server",
+  "version": "1.0.0",
+  "description": "seed poker server",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development PORT=3000 MAX_PLAYER=7 node index.js",
+    "production": "NODE_ENV=production node index.js",
+    "test": "MAX_PLAYER=7 node node_modules/mocha/bin/mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-ws": "^4.0.0",
+    "immutable": "^4.0.0-rc.12",
+    "pubsub-js": "^1.7.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "should": "^13.2.3",
+    "should-immutable": "^1.0.2",
+    "sinon": "^7.2.2"
+  }
+}

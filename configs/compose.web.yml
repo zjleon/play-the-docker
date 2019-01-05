@@ -1,24 +1,10 @@
-version: "3.3"
+version: "3"
 
 services:
-  loopback:
-    restart: always
-    ports:
-      - "8090:8090"
-    build:
-      context: ../
-      dockerfile: configs/docker.prod.nodejs
-      args:
-        SERVICE_NAME: loopback
-    image: loopback
-    environment:
-      WEB_DB_HOST: postgres
-      WEB_DB_PASSWORD: example
-    networks:
-      - backend
   postgres:
     image: postgres
-    restart: always
+    ports:
+      - '5432:5432'
     environment:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: webDB
@@ -26,18 +12,48 @@ services:
     networks:
       - backend
     volumes:
-      - "webDB:/var/lib/postgresql/data"
-  adminer:
-    image: adminer
-    restart: always
+      - "DBVolume:/var/lib/postgresql/data"
+    # config aws cloud watch
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: web
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: postgres
+  loopback:
+    ports:
+      - "8090:8090"
+    build:
+      context: ../
+      dockerfile: configs/docker.prod.nodejs
+      args:
+        SERVICE_NAME: loopback
+    image: zjleon/loopback
+    environment:
+      WEB_DB_HOST: web-service-discovery-service.service-discovery-namespace
+      WEB_DB_PASSWORD: example
     networks:
       - backend
-    ports:
-      - "8100:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+    # config aws cloud watch
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: web
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: loopback
 
 volumes:
-  webDB:
-    external: true
+  DBVolume:
 
 networks:
   frontend:

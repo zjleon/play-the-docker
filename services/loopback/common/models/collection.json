@@ -1,0 +1,39 @@
+{
+  "name": "Collection",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "itemName": {
+      "type": "String",
+      "required": true
+    },
+    "artist": {
+      "type": "String",
+      "default": "anonymous"
+    },
+    "createdDate": {
+      "type": "String",
+      "default": "unknown"
+    },
+    "storedDate": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "donatorName": {
+      "type": "String"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "donator": {
+      "type": "belongsTo",
+      "model": "Donator",
+      "foreignKey": "donatorName"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

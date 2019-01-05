@@ -1,4 +1,3 @@
-let async = require('async')
 module.exports = function(app) {
   // data sources
   let webDB = app.dataSources.webDB // 'name' of your mongo connector, you can find it in datasource.json
