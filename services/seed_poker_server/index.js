@@ -18,6 +18,9 @@ app.get('/getMessageTypes', (req, res) => {
 
 // allowcate player number and seat
 app.ws('/game', function(ws, req) {
+  ws.on('open', function(msg) {
+    console.log('111', msg)
+  })
   ws.on('message', function(msg) {
     // ws.send(msg)
     console.log('msg', msg)

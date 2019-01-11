@@ -25,10 +25,7 @@ export default Vue.extend({
     HelloWorld,
   },
   methods: {
-    ...mapActions(['getMessageTypes']),
-  },
-  created() {
-    this.getMessageTypes();
+    // ...mapActions(['getMessageTypes']),
   },
 });
 </script>

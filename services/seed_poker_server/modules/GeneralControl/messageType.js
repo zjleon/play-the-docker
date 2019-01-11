@@ -59,6 +59,11 @@ const EventManager = new (function() {
   }
 })
 
+const GAME_STATE_NOT_START = 'game not start'
+const GAME_STATE_WAITING_FOR = 'waiting for other player'
+const GAME_STATE_MAKE_DECISION = 'please make decision'
+const GAME_STATE_END = 'game is end'
+
 module.exports = {
   messageToType,
   typeToMessage,
