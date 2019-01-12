@@ -5,3 +5,4 @@ import store from '../store';
 axios(endpoint + '/getMessageTypes').then((response): void => {
   store.dispatch('setMessageTypes', response.data);
 });
+

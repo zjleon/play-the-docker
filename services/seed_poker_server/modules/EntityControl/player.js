@@ -79,16 +79,19 @@ exports.toNextPlayer = function() {
 }
 
 exports.playerGetCard = function(card) {
-  players = players.updateIn([exports.getCurrentPlayer().id, 'cards'], cards => cards.push(card))
+  const playerId = exports.getCurrentPlayer().id
+  players = players.updateIn([playerId, 'cards'], cards => cards.push(card))
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
-exports.playerDropCard = function(playerID, card) {
-  players = players.updateIn([playerID, 'cards'], cards => {
+exports.playerDropCard = function(playerId, card) {
+  players = players.updateIn([playerId, 'cards'], cards => {
     const cardIndex = cards.findKey(holdingCard => card.id === holdingCard.id)
     return cards.delete(cardIndex)
   })
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
 exports.recordDecision = function(decision) {

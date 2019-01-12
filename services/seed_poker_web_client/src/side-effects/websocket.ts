@@ -4,8 +4,7 @@ import store from '../store';
 
 const WSConnection = new w3cwebsocket(wsEndpoint + '/game', 'echo-protocol');
 WSConnection.onmessage = (e): void => {
-  console.log('Received: \'' + JSON.stringify(e.data) + '\'');
-  store.dispatch('wsGetMessage', e.data);
+  store.dispatch('wsGetMessage', JSON.parse(e.data));
 };
 
 WSConnection.onerror = (): void => {
@@ -13,9 +12,11 @@ WSConnection.onerror = (): void => {
 };
 
 WSConnection.onclose = (): void => {
-  store.dispatch('wsClosed');
+  store.dispatch('setWSState', false);
 };
 
 WSConnection.onopen = (): void => {
-  store.dispatch('wsConnected');
+  store.dispatch('setWSState', true);
 };
+
+export default WSConnection;

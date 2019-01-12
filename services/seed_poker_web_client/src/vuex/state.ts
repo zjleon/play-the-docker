@@ -1,6 +1,6 @@
 const state = {
   messageTypes: null,
-  gameState: '',
+  currentRound: 1,
   player: {},
   card: {},
   chat: [],

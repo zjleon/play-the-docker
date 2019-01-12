@@ -11,24 +11,24 @@ exports.toNextRound = function() {
   // TODO: add more logic to detect if the game can process to next round
   if (currentRound <= 4) {
     currentRound += 1
-    EventManager.publish(typeToMessage.GAME_ROUND, currentRound)
-  }
-  switch (currentRound) {
-  case 2:
-    housePlayerSeatNumber = PlayerControl.getCurrentPlayer().seatNumber
-    for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
-      PlayerControl.playerGetCard(CardControl.deal())
-      PlayerControl.toNextPlayer()
+    switch (currentRound) {
+    case 2:
+      housePlayerSeatNumber = PlayerControl.getCurrentPlayer().seatNumber
+      for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+        PlayerControl.playerGetCard(CardControl.deal())
+        PlayerControl.toNextPlayer()
+      }
+      CardControl.addSeedCard()
+      setTimeout(function() {
+        exports.toNextRound()
+      }, intervalBetweenRounds)
+      break
+    case 3:
+      askPlayerToMakeDecision()
+      break
+    default:
     }
-    CardControl.addSeedCard()
-    setTimeout(function() {
-      exports.toNextRound()
-    }, intervalBetweenRounds)
-    break
-  case 3:
-    askPlayerToMakeDecision()
-    break
-  default:
+    EventManager.publish(typeToMessage.GAME_ROUND, currentRound)
   }
 }
 
