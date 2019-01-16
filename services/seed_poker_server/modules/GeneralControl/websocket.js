@@ -1,5 +1,6 @@
 const PlayerControl = require('../EntityControl/player')
-const {typeToMessage, EventManager} = require('../GeneralControl/messageType')
+const {typeToMessage} = require('../../configs/constants')
+const EventManager = require('../GeneralControl/eventManager')
 
 let connections = {
   monitor: {},

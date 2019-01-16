@@ -2,14 +2,14 @@ const express = require('express')
 const app = express()
 const expressWs = require('express-ws')(app)
 const port = process.env.PORT
-const {typeToMessage} = require('./modules/GeneralControl/messageType')
+const {typeToMessage} = require('./configs/constants')
 const {wsHandler} = require('./modules/GeneralControl/websocket')
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/getMessageTypes', (req, res) => {

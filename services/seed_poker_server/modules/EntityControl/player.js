@@ -1,6 +1,7 @@
 const uuidv4 = require('uuid/v4')
 const {Map, Set, List} = require('immutable')
-const {typeToMessage, EventManager} = require('../GeneralControl/messageType')
+const {typeToMessage} = require('../../configs/constants')
+const EventManager = require('../GeneralControl/eventManager')
 
 const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
 exports.maximamPlayer = maximamPlayer

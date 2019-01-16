@@ -1,7 +1,8 @@
 const PlayerControl = require('../EntityControl/player')
 const CardControl = require('../EntityControl/card')
 const {Map, Set, List} = require('immutable')
-const {typeToMessage, EventManager} = require('../GeneralControl/messageType')
+const {typeToMessage} = require('../../configs/constants')
+const EventManager = require('../GeneralControl/eventManager')
 const intervalBetweenRounds = 10000
 
 let currentRound

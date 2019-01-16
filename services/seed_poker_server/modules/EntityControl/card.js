@@ -1,5 +1,6 @@
 const {Map, List} = require('immutable')
-const {typeToMessage, EventManager} = require('../GeneralControl/messageType')
+const {typeToMessage} = require('../../configs/constants')
+const EventManager = require('../GeneralControl/eventManager')
 
 const IN_PLAYER = 'inPlayer'
 const IN_STACK = 'inStack'

@@ -19,11 +19,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/index.js",
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
-      ]
+      "name": "seed poker server1",
+      "cwd": "${workspaceFolder}/services/seed_poker_server",
+      // node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js
+      "program": "${workspaceFolder}/services/seed_poker_server/node_modules/gulp/bin/gulp.js",
+      "args": ["--gulpfile", "configs/gulp/index.js"],
+      "env": {
+        "NODE_ENV":"development",
+      }
     },
   ]
 }

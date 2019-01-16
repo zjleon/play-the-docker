@@ -6,21 +6,11 @@ const webpackSettings = process.env.NODE_ENV === 'development' ? require('../web
 const outputPath = webpackSettings.output.path
 const imageFolderDist = path.resolve(outputPath, './images')
 const imageSourcePath = path.resolve(projectRootPath, './assets/images')
-const configPath = path.resolve(projectRootPath, './configs/gulpGenerated')
 
 function createFoldersIfNotExist(callback) {
   // create destination directory
-  fs.mkdirSync(configPath)
-  try {
-    fs.mkdirSync(imageFolderDist)
-  } catch (e) {
-    if (e.code === 'ENOENT') {
-      fs.mkdirSync(outputPath)
-      fs.mkdirSync(imageFolderDist)
-    }
-  } finally {
-    callback()
-  }
+  fs.mkdirSync(outputPath)
+  callback()
 }
 
 function clearBuildFolder(callback) {
@@ -36,7 +26,6 @@ function clearBuildFolder(callback) {
     fs.rmdirSync(dirPath)
   }
   rmDir(path.resolve(projectRootPath, outputPath))
-  rmDir(path.resolve(projectRootPath, configPath))
   callback()
 }
 
