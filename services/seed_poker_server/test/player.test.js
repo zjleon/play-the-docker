@@ -28,3 +28,18 @@ describe('Players', function() {
     players[newPlayer.id].should.have.property('seatNumber', 1)
   })
 })
+
+describe('Player service should', function() {
+  beforeEach(function() {
+    PlayerControl.clear()
+  })
+  afterEach(function() {
+    PlayerControl.clear()
+  })
+
+  it('be able to give the number of remaining seats', function() {
+    PlayerControl.join()
+    let seats = PlayerControl.getRemaingSeats()
+    seats.should.have.lengthOf(6)
+  })
+})

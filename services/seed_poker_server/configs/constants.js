@@ -1,23 +1,61 @@
-// some of those envs will be undefined in browser side,
-// check the exported env in webpack.common.js
-const envs = {
-  NODE_ENV: process.env.NODE_ENV,
-  PORT: process.env.PORT,
-  PROJECT_ID: process.env.PROJECT_ID,
-  IMAGE_RESIZE_CONFIG: JSON.parse(process.env.IMAGE_RESIZE_CONFIG),
+const typeToMessage = {
+  // server to monitor and player(AI)
+  GAME_ROUND: 'gameRound',
+  GAME_STATE: [
+    {
+      DEFAULT: 'Game not start',
+      JOINT: 'You have joint the game, waiting for other players',
+    },
+    {
+      DEFAULT: 'Check your card, next round will start soon',
+    },
+    {
+      DEFAULT: 'Waiting for other player',
+      MAKE_DECISION: 'Please make decision',
+    },
+    {
+      DEFAULT: 'Game ends',
+    }
+  ],
+  TO_NEXT_PLAYER: 'toNextPlayer',
+  ERROR: 'error',
+  // server to monitor
+  PLAYERS_STATE: 'playersState',
+  CARDS_STATE: 'cardsState',
+  // ABANDOM_ZONE_STATE: 'abandomZoneState',
+  // SEED_CARD_ZONE_STATE: 'seedCardZoneState',
+  // DEALER_STACK_STATE: 'dealerStackState',
+  // server to player(AI)
+  PLAYER_STATE: 'playerState',
+  NEED_TO_MAKE_DECISION: 'needToMakeDecision',
+  HOLDING_CARD: 'holdingCard',
+  RECEIVE_CARD: 'receiveCard',
+  // player(AI) to server
+  REPLACE_CARD: 'replaceCard',
+  DROP_CARD: 'dropCard',
+  ADD_SEED_CARD: 'addSeedCard',
+  JOIN_GAME: 'joinGame',
+  ADD_AI: 'addAI',
+  // GET_REMAINING_SEATS: 'getRemainingSeats',
+  // monitor to server,
+  MONITOR_JOIN: 'monitorJoin',
 }
-// TODO: this should come from loopback swagger file
 
-const urls = {
-  sample: '/api/sample',
-  unAuthenticatePage: '/Authentication',
-  authenticatedPage: '/Home',
-  home: '/Home',
-  game: '/game',
-}
+const messageToType = Object.keys(typeToMessage)
+  .reduce(
+    (accumulator, type) => {
+      accumulator[typeToMessage[type]] = type
+      return accumulator
+    },
+    {}
+  )
 
+// const GAME_STATE_NOT_START = 'game not start'
+// const GAME_STATE_WAITING_FOR = 'waiting for other player'
+// const GAME_STATE_MAKE_DECISION = 'please make decision'
+// const GAME_STATE_END = 'game is end'
 
 module.exports = {
-  envs,
-  urls
+  messageToType,
+  typeToMessage,
 }

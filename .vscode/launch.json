@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "seed poker AI",
+      "cwd": "${workspaceFolder}/services/seed_poker_AI",
+      "program": "${workspaceFolder}/services/seed_poker_AI/node_modules/gulp/bin/gulp.js",
+      "args": ["--gulpfile", "configs/gulp/index.js"],
+      "env": {
+        "NODE_ENV":"development",
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "seed poker server",
+      "cwd": "${workspaceFolder}/services/seed_poker_server",
+      // node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js
+      "program": "${workspaceFolder}/services/seed_poker_server/node_modules/gulp/bin/gulp.js",
+      "args": ["--gulpfile", "configs/gulp/index.js"],
+      "env": {
+        "NODE_ENV":"development",
+      }
+    },
+  ]
+}

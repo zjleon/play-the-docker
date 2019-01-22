@@ -1,6 +1,7 @@
 const uuidv4 = require('uuid/v4')
 const {Map, Set, List} = require('immutable')
-const {typeToMessage, EventManager} = require('../GeneralControl/messageType')
+const {typeToMessage} = require('../../configs/constants')
+const EventManager = require('../GeneralControl/eventManager')
 
 const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
 exports.maximamPlayer = maximamPlayer
@@ -62,6 +63,10 @@ exports.getPlayers = function() {
   return players.toJS()
 }
 
+exports.getRemaingSeats = function() {
+  return availableSeats.toJS()
+}
+
 exports.getCurrentPlayer = function() {
   const result = players.find((player) => {
     return player.get ? player.get('seatNumber') === currentPlayerSeatNumber : false
@@ -79,16 +84,19 @@ exports.toNextPlayer = function() {
 }
 
 exports.playerGetCard = function(card) {
-  players = players.updateIn([exports.getCurrentPlayer().id, 'cards'], cards => cards.push(card))
+  const playerId = exports.getCurrentPlayer().id
+  players = players.updateIn([playerId, 'cards'], cards => cards.push(card))
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
-exports.playerDropCard = function(playerID, card) {
-  players = players.updateIn([playerID, 'cards'], cards => {
+exports.playerDropCard = function(playerId, card) {
+  players = players.updateIn([playerId, 'cards'], cards => {
     const cardIndex = cards.findKey(holdingCard => card.id === holdingCard.id)
     return cards.delete(cardIndex)
   })
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
 exports.recordDecision = function(decision) {
