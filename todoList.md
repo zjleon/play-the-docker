@@ -21,9 +21,7 @@
 * collection: painting info
 
 ## eslint and autofix and unit test
-* how to write unit test quickly
 * static the unit test coverage by tool
-* ~~apply FLOW(in atom)~~ use Typescript?
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
 * bdd and agile, user story creation
   * [bdd intro](https://en.wikipedia.org/wiki/Behavior-driven_development#cite_note-IntroToBDD_DanNorth-11)[epic and user story in agile](http://www.mountaingoatsoftware.com/agile/user-stories)
@@ -33,9 +31,11 @@
   3. then developer can use bdd tool to create test case
   4. then developer can start to implement code to make the test case pass
 * Phantomjs
-* link the eslint error message to code conventions in git github
+* link the eslint error message to code conventions in github
 * puppeteer
 * ~~set on atom, export the package list.~~
+* ~~apply FLOW(in atom) use Typescript?~~ applied typescript
+* ~~how to write unit test quickly~~ write bdd instead
 
 # css or sass or html
 * doc down how to avoid reflow
@@ -79,7 +79,6 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
 * use multistage build, the frontend only need nginx(or node alpine+express) and the static files
 * sync state with local storage by saga
 * doc the pointer event usage, https://github.com/facebook/react/pull/12507, and the 300ms delay will be solved by browser
-* upgrade to babel v7 when it ready
 * load all backend api when fontend server start, https://github.com/swagger-api/swagger-js
 * **production optimize**:
   * ~~body parser~~
@@ -91,9 +90,8 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
   * ~~[split code base on route](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)~~
 * production environment security setup http://expressjs.com/zh-cn/advanced/best-practice-security.html
 * ~~the script should be able to read different configs at different environment~~ use env secure server
-* the media query
+* the media query and dynamic bundle resoure with webpack
 * the [rxjs](https://github.com/Reactive-Extensions/RxJS) can use with complicated data interaction
-* why reselect?
 * Progressive Web App:
   * github: lighthouse,
   * [PWA course](https://www.youtube.com/watch?v=17kGWJOuL-A&list=PLNYkxOF6rcIAdnzEsWkg0KpMn2WJwMBmN)
@@ -109,11 +107,13 @@ http://taligarsiel.com/Projects/howbrowserswork1.htm
     but how to handle the js render after the initial render
     * read cookie to know which page to be render(is auth?)
 * applied 'react-native-web' https://github.com/necolas/react-native-web
-* unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)
 * doc how to use async module(https://github.com/petehunt/webpack-howto)
+* *why reselect?*
 * *[d3 with react](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)*
 * *doc how to use shouldComponentUpdate, control the render of inner componenet*
 * *auto install missing packages:https://github.com/webpack-contrib/npm-install-webpack-plugin*
+* ~~unit test process, include UI test -- make sure app stable after small UI changes. Issue: support traditional non-js-render web(https://github.com/b00giZm/docker-compose-nodejs-examples/tree/master/03-express-gulp-watch)~~
+* ~~upgrade to babel v7 when it ready~~ done
 * ~~put all express server instances under one shell script, use ONE command to start all service, remove the docker dev~~
 * ~~doc how to use non-style component(pure component)~~
 * ~~review the product build process, run docker container, stack~~
@@ -271,12 +271,12 @@ https://github.com/facebook/react-native/issues/7257~~
 # backend
 * **the most important is get to know the micro-service architecture, use multi loopback as service**
 * ~~handle high concurrency in node~~ learn the aws auto scale
-* token with hot reload
 * fix private npm module login issue:
 https://docs.npmjs.com/private-modules/docker-and-private-modules
 * similarly, fix clone code from private repo
 * performance measure
 * error, debug info logging, Profiling: https://www.npmjs.com/package/winston, can it record the request only when error happens?
+* *token with hot reload*
 * ~~find a way to debug the code(start by gulp)~~
 * ~~nodejs debug tool, add it into documentation~~
 * ~~restart dev server in gulp~~
@@ -292,10 +292,8 @@ http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/~~
 * ~~compile the nodejs code with webpack~~
 
 # docker and AWS
-* play AWS cloud formation
-* vault service for env storage or aws sercurity management
+* ~~play AWS cloud formation~~
 * **put the nginx endpoint in compose instead of .env**
-* webhook on github
 * generate the docker ignore file base on project, for web, ignore android resources, but how to leverage the compose
 * ~~manage docker container in local using nodejs api~~ use the healthcheck and replica control instead
   * ~~sdk: https://docs.docker.com/engine/api/v1.27/#tag/Container~~

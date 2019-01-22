@@ -1,5 +1,3 @@
-// const path = require('path')
-// const fs = require('fs')
 const gulp = require('gulp')
 const gls = require('gulp-live-server')
 

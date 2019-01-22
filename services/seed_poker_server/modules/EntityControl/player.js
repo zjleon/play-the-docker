@@ -63,6 +63,10 @@ exports.getPlayers = function() {
   return players.toJS()
 }
 
+exports.getRemaingSeats = function() {
+  return availableSeats.toJS()
+}
+
 exports.getCurrentPlayer = function() {
   const result = players.find((player) => {
     return player.get ? player.get('seatNumber') === currentPlayerSeatNumber : false

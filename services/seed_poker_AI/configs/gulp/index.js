@@ -13,6 +13,12 @@ const {createFoldersIfNotExist, clearBuildFolder} = require('./initFolders')
 gulp.task('createFoldersIfNotExist', createFoldersIfNotExist)
 gulp.task('clearBuildFolder', clearBuildFolder)
 
+const {getMessageTypes} = require('./metaData')
+gulp.task('getMessageTypes', getMessageTypes)
+
+const {runTests} = require('./test')
+gulp.task('runTests', runTests)
+
 const {startDevServer, startProductionServer} = require('./startServer')
 gulp.task('startDevServer', startDevServer)
 // gulp.task('startProductionServer', startProductionServer)
@@ -21,6 +27,7 @@ gulp.task('startDevServer', startDevServer)
 gulp.task('default', gulp.series(
   'clearBuildFolder',
   'createFoldersIfNotExist',
+  'getMessageTypes',
   'startDevServer',
 ))
 
@@ -29,4 +36,12 @@ gulp.task('production', gulp.series(
   'createFoldersIfNotExist',
   // 'buildProduction',
   // 'startProductionServer',
+))
+
+
+gulp.task('test', gulp.series(
+  'clearBuildFolder',
+  'createFoldersIfNotExist',
+  'getMessageTypes',
+  'runTests',
 ))

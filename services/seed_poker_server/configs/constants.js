@@ -1,5 +1,5 @@
 const typeToMessage = {
-  // server to monitor and player
+  // server to monitor and player(AI)
   GAME_ROUND: 'gameRound',
   GAME_STATE: [
     {
@@ -25,17 +25,18 @@ const typeToMessage = {
   // ABANDOM_ZONE_STATE: 'abandomZoneState',
   // SEED_CARD_ZONE_STATE: 'seedCardZoneState',
   // DEALER_STACK_STATE: 'dealerStackState',
-  // server to player
+  // server to player(AI)
   PLAYER_STATE: 'playerState',
   NEED_TO_MAKE_DECISION: 'needToMakeDecision',
   HOLDING_CARD: 'holdingCard',
   RECEIVE_CARD: 'receiveCard',
-  // player to server
+  // player(AI) to server
   REPLACE_CARD: 'replaceCard',
   DROP_CARD: 'dropCard',
   ADD_SEED_CARD: 'addSeedCard',
   JOIN_GAME: 'joinGame',
   ADD_AI: 'addAI',
+  // GET_REMAINING_SEATS: 'getRemainingSeats',
   // monitor to server,
   MONITOR_JOIN: 'monitorJoin',
 }

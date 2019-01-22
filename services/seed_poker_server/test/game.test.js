@@ -26,6 +26,7 @@ describe('When game in round', function() {
       //
     })
     it('should start with random player', function() {
+      this.retries(3)
       let isRandom = false
       let lastHouse
       for (let i = 0; i < PlayerControl.maximamPlayer - 1; i++) {
@@ -34,7 +35,9 @@ describe('When game in round', function() {
         }
         PlayerControl.join()
         const player = PlayerControl.getCurrentPlayer()
-        if (lastHouse && player.seatNumber !== lastHouse.seatNumber) {
+        if (
+          lastHouse && player.seatNumber !== lastHouse.seatNumber
+        ) {
           isRandom = true
         }
         lastHouse = player
