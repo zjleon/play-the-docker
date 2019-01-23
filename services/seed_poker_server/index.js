@@ -1,3 +1,5 @@
+const babelConfigs = require('./configs/babel.config')
+require('@babel/register')(babelConfigs)
 const express = require('express')
 const app = express()
 const expressWs = require('express-ws')(app)
@@ -5,6 +7,7 @@ const port = process.env.PORT
 const {typeToMessage} = require('./configs/constants')
 const {wsHandler} = require('./modules/GeneralControl/websocket')
 const PlayerControl = require('./modules/EntityControl/player')
+require('./modules/GeneralControl/logger.ts')
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -22,7 +25,6 @@ app.get('/getRemainingSeats', (req, res) => {
   res.type('json')
   res.send(PlayerControl.getRemaingSeats())
 })
-// allowcate player number and seat
 app.ws('/game', function(ws, req) {
   wsHandler(ws, req)
 })

@@ -1,14 +1,27 @@
-const gulp = require('gulp')
-const gls = require('gulp-live-server')
+import {resolve} from 'path'
+import { spawn } from 'child_process'
 
-exports.startDevServer = function(callback) {
-  let server = gls('../../index.js', undefined, Math.round(Math.random() * 500 + 35729))
-  server.start()
+const indexScript = resolve(__dirname, '../../index.js')
 
-  gulp.watch('../../**/*.js', function() {
-    server.start.bind(server)()
+export function startDevServer(done) {
+  const childProcess = spawn('node', [indexScript], {
+    env: process.env,
+    cwd: resolve(__dirname, '../../')
+  })
+
+  childProcess.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`)
+  })
+
+  childProcess.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`)
+  })
+
+  childProcess.on('close', (code) => {
+    console.log(`child process exited with code ${code}`)
+    done()
   })
 }
 
-exports.startProductionServer = function(done) {
+export function startProductionServer(done) {
 }

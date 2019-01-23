@@ -1,12 +1,10 @@
 const should = require('should')
 const path = require('path')
 const babelConfigs = require('../configs/babel.config')
-require('@babel/register')({
-  ...babelConfigs,
-  extensions: [".es6", ".es", ".jsx", ".js", ".ts"],
-})
+require('@babel/register')(babelConfigs)
 
-const AI = require('../modules/AI.ts').default
+const AIControl = require('../modules/AIControl.ts').default
+const {querySeats} = require('../modules/utils')
 
 const envPath = path.resolve(__dirname, '../', `.env.${process.env.NODE_ENV}`)
 require('dotenv')
@@ -15,18 +13,35 @@ require('dotenv')
   })
 
 describe('AI control', function() {
-  before(function() {
-    //
-  })
-  after(function() {
-    //
-  })
   describe(', before game begin.', function() {
-    it('should fill the game with AI identical to the remaining seats', function(done) {
+    beforeEach(function() {
       //
     })
-    it('should team up AI in size of 2', function() {
+    after(function() {
       //
+    })
+    it('should fill the game with AI identical to the remaining seats', function() {
+      return AIControl.fillInAI().then(() => {
+        AIControl.getAIs().length.should.equal(7)
+        AIControl.AIGetout()
+      })
+    })
+    it('should team up AI in size of 2', function() {
+      return AIControl.fillInAI().then(() => {
+        const AIs = AIControl.getAIs()
+        const pairedAmount = AIs.reduce((accumulator, AIInstance, index, array) => {
+          const expectedTeammateIndex = index < 3 ? index + 3 : index - 3
+          if (
+            AIInstance.teammate === array[expectedTeammateIndex].id
+          ) {
+            return accumulator + 1
+          }
+          return accumulator
+        }, 0)
+        pairedAmount.should.equal(6)
+        AIs[6].teammate.should.notExist
+        AIControl.AIGetout()
+      })
     })
   })
 

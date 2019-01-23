@@ -4,7 +4,6 @@ import {client} from 'websocket'
 
 function querySeats() {
   return axios(process.env.HTTP_ENDPOINT + '/getRemainingSeats').then(response => {
-    console.log(11, response.data)
     return response.data
   })
 }
@@ -37,7 +36,7 @@ const EventManager = new (function() {
   }
 })
 
-export default {
+export {
   querySeats,
   EventManager,
 }

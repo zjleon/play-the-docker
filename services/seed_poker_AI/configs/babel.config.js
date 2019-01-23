@@ -31,7 +31,8 @@ const plugins = [
   // "@babel/plugin-syntax-import-meta",
   ["@babel/plugin-proposal-class-properties", { "loose": false }],
   // "@babel/plugin-proposal-json-strings"
-
 ]
 
-module.exports = { presets, plugins }
+const extensions = [".es6", ".es", ".jsx", ".js", ".ts"]
+
+module.exports = { presets, plugins, extensions }

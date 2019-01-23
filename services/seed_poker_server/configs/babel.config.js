@@ -34,4 +34,6 @@ const plugins = [
 
 ]
 
-module.exports = { presets, plugins }
+const extensions = [".es6", ".es", ".jsx", ".js", ".ts"]
+
+module.exports = { presets, plugins, extensions }
