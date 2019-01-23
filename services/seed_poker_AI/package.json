@@ -30,7 +30,6 @@
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "dotenv": "^6.0.0",
     "gulp": "^4.0.0",
-    "gulp-live-server": "0.0.31",
     "gulp-watch": "^5.0.1",
     "mocha": "^5.2.0",
     "should": "^13.2.3",

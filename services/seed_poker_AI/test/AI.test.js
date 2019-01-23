@@ -1,10 +1,7 @@
 const should = require('should')
 const path = require('path')
 const babelConfigs = require('../configs/babel.config')
-require('@babel/register')({
-  ...babelConfigs,
-  extensions: [".es6", ".es", ".jsx", ".js", ".ts"],
-})
+require('@babel/register')(babelConfigs)
 
 const AI = require('../modules/AI.ts').default
 
@@ -20,18 +17,21 @@ describe('AI', function() {
     robot = new AI()
   })
   after(function() {
-    //
+    robot.leave()
   })
-  it.only('should be able to join the game', function() {
+  it('should be able to join the game', function() {
     robot.ready.then(function() {
       setTimeout(() => {
-        should(robot.info).be.object
-        should(robot.info.id).be.string
+        should(robot.id).be.string
         done()
       }, 500)
     })
       .catch(error => {
         done(error)
       })
+  })
+  it('can show its card to teammate', function() {
+  })
+  it('can\'t show card to AI who is not its teammate', function() {
   })
 })
