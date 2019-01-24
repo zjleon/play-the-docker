@@ -45,35 +45,35 @@ describe('AI control', function() {
     })
   })
 
-  describe(', at round 2.', function() {
-    let myPossibilities
-    let teammatePossibilities
-    it(`
-      according to cards its knows(including teammate's card if it in team),
-      find out all the remaining cards
-      `, function() {
-      //
-    })
-    it(`
-      if it's holding card that less than 4,
-      and the next card may be a high number card,
-      add seed card
-      `, function() {
-      //
-    })
-    it(`
-      if teammate is holding card that less than 4,
-      and the next card may be a high number card,
-      add seed card
-    `, function() {
-      //
-    })
-    it(`
-      In other situation, choose to replace card
-    `, function() {
-      //
-    })
-  })
+  // describe(', at round 2.', function() {
+  //   let myPossibilities
+  //   let teammatePossibilities
+  //   // it(`
+  //   //   according to cards its knows(including teammate's card if it in team),
+  //   //   find out all the remaining cards
+  //   //   `, function() {
+  //   //   //
+  //   // })
+  //   // it(`
+  //   //   if it's holding card that less than 4,
+  //   //   and the next card may be a high number card,
+  //   //   add seed card
+  //   //   `, function() {
+  //   //   //
+  //   // })
+  //   // it(`
+  //   //   if teammate is holding card that less than 4,
+  //   //   and the next card may be a high number card,
+  //   //   add seed card
+  //   // `, function() {
+  //   //   //
+  //   // })
+  //   // it(`
+  //   //   In other situation, choose to replace card
+  //   // `, function() {
+  //   //   //
+  //   // })
+  // })
 
   describe(', at round 4. AI should be able to', function() {
     let playersHaveLeft

@@ -8,18 +8,19 @@ let connections = {
 }
 
 // listen to events and send message to client
-
-// send message to monitor
-EventManager.subscribe(typeToMessage.GAME_ROUND, function(currentRound) {
+function broadcast(data) {
   const response = {
     message: typeToMessage.GAME_ROUND,
-    data: currentRound,
+    data,
   }
   const allConnections = Object.assign({}, connections.monitor, connections.players)
   Object.keys(allConnections).forEach(function(connectionId) {
     allConnections[connectionId].send(JSON.stringify(response))
   })
-})
+}
+// send message to all clients
+EventManager.subscribe(typeToMessage.GAME_ROUND, broadcast)
+EventManager.subscribe(typeToMessage.CARDS_STATE, broadcast)
 EventManager.subscribe(typeToMessage.PLAYERS_STATE, function(players) {
   // console.log(typeToMessage.PLAYERS_STATE, players)
   //
@@ -32,6 +33,7 @@ EventManager.subscribe(typeToMessage.PLAYER_STATE, function(player) {
   }
   connections.players[player.id].send(JSON.stringify(response))
 })
+EventManager.subscribe(typeToMessage.CARDS_STATE, broadcast)
 
 // handle messages from client
 function receiveMessage(ws, message, data) {
