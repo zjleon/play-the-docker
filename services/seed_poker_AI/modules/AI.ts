@@ -2,17 +2,13 @@ import {client, connection} from 'websocket'
 import {messageTypes} from '../configs/constants'
 import {EventManager} from './utils'
 import replaceOrAdd from './logic/replaceOrAdd'
-
-interface card {
-  id: string,
-  number: number,
-  state: string,
-}
+import dropCard from './logic/drop'
+import {card, record} from '../configs/declaration'
 interface AIInterface {
   id: string
   name: string
   seatNumber: number
-  decisions: object[]
+  decisions: record[]
   cards: card[]
 }
 
@@ -23,12 +19,12 @@ export default class AI {
   public name: string = ''
   public id: string = ''
   private seatNumber: number
-  private decisions: object[]
+  private decisions: record[]
   private cards: card[]
   private knownCards: card[]
   public teammate: {
     id: string,
-    card: card,
+    card?: card,
   }
 
   constructor() {
@@ -56,10 +52,10 @@ export default class AI {
         } else if(this.gameRound === -1) {
           reject('connection failed')
         } else{
-          setTimeout(stateCheck, 100)
+          setTimeout(stateCheck, 50)
         }
       }
-      let timer = setTimeout(stateCheck, 100)
+      let timer = setTimeout(stateCheck, 50)
     })
 
     this.ready = Promise.all([connectionPromise, jointGamePromise])
@@ -74,9 +70,6 @@ export default class AI {
     if(type !== 'utf8'){return null}
     const {message, data} : {message: string, data: any} = JSON.parse(utf8Data)
     switch(message) {
-      case messageTypes.PLAYER_STATE:
-        Object.assign(this, data)
-      break
       case messageTypes.GAME_ROUND:
         this.gameRound = data
       break
@@ -103,14 +96,14 @@ export default class AI {
 
   leave():void {
     this.connection.close()
-    if (this.teammate.id) {
+    if (this.teammate && this.teammate.id) {
       EventManager.unsubscribe(this.teammate.id + '-card')
     }
   }
 
-  addTeammate(playerId: string): void {
-    this.teammate.id = playerId
-    EventManager.subscribe(playerId + '-card', (card: card) => {
+  addTeammate(teammateId: string): void {
+    this.teammate = {id: teammateId}
+    EventManager.subscribe(teammateId + '-card', (card: card) => {
       this.teammate.card = card
     })
   }
@@ -121,31 +114,37 @@ export default class AI {
     if (this.cards.length === 1) {
       EventManager.publish(this.id + '-card', this.cards[0])
     }
+    if (
+      this.cards.length === 2 &&
+      this.decisions.length === 1 &&
+      this.decisions[0].name === messageTypes.REPLACE_CARD
+    ) {
+      this.decide()
+    }
   }
 
   decide() {
+    let lagerNumberCard: card, lowerNumberCard: any
+    if(
+      this.cards.length === 2
+    ) {
+      lagerNumberCard = this.cards[0]
+      lowerNumberCard = this.cards[1]
+    } else {
+      lagerNumberCard = this.cards[0]
+    }
     let knownConditions = {
       publicCards: this.knownCards,
       maximamNumber: this.knownCards.length,
-      myCard: this.cards[0],
-      teammateCard: this.teammate.card,
+      myCard: lagerNumberCard,
+      myLowerNumberCard: lowerNumberCard,
+      teammateCard: this.teammate && this.teammate.card,
     }
 
     switch(this.gameRound) {
       case 3:
-        const {decision} = replaceOrAdd(knownConditions)
-        this.send(decision)
+        const {decision, card} = lowerNumberCard ? dropCard(knownConditions) : replaceOrAdd(knownConditions)
+        this.send(decision, card ? card.id : null)
     }
   }
-
-  // dropCard(cardId: string):void {
-  //   const cardIndex = this.cards.findIndex((card) => {
-  //     return card.id === cardId
-  //   })
-  //   console.log('dropCard', cardIndex);
-  //   this.cards.splice(cardIndex, 1)
-  //   EventManager.publish(this.id + '-getCard', this.cards[0])
-  // }
-
-
 }

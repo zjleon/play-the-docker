@@ -1,7 +1,7 @@
 import {EventManager, querySeats} from './utils'
 import AI from './AI'
 
-class AIControl {
+export default class AIControl {
   // private HTTPEndpoint: string
   private AIs: AI[] = []
 
@@ -11,6 +11,7 @@ class AIControl {
 
   async fillInAI(): Promise<void> {
     const seats = await querySeats();
+
     let p = [];
     for (let i = 0; i < seats.length; i++) {
       const AIInstance = new AI();
@@ -21,11 +22,12 @@ class AIControl {
     return Promise.all(p)
     .then(() => {
       const teamAmount = Math.floor(seats.length / 2)
+
       for(let i = 0; i<teamAmount ; i++) {
         const AI1 = this.AIs[i]
         const AI2 = this.AIs[teamAmount + i]
-        AI1.addTeammate(AI2.id)
-        AI2.addTeammate(AI1.id)
+        AI1.addTeammate.call(AI1, AI2.id)
+        AI2.addTeammate.call(AI2, AI1.id)
       }
     });
   }
@@ -41,5 +43,3 @@ class AIControl {
     this.AIs = []
   }
 }
-
-export default new AIControl()

@@ -1,4 +1,5 @@
 const PlayerControl = require('../EntityControl/player')
+const Dealer = require('../GeneralControl/dealer')
 const {typeToMessage} = require('../../configs/constants')
 const EventManager = require('../GeneralControl/eventManager')
 
@@ -8,9 +9,9 @@ let connections = {
 }
 
 // listen to events and send message to client
-function broadcast(data) {
+function broadcast(messageType, data) {
   const response = {
-    message: typeToMessage.GAME_ROUND,
+    message: typeToMessage[messageType],
     data,
   }
   const allConnections = Object.assign({}, connections.monitor, connections.players)
@@ -18,13 +19,12 @@ function broadcast(data) {
     allConnections[connectionId].send(JSON.stringify(response))
   })
 }
-// send message to all clients
-EventManager.subscribe(typeToMessage.GAME_ROUND, broadcast)
-EventManager.subscribe(typeToMessage.CARDS_STATE, broadcast)
-EventManager.subscribe(typeToMessage.PLAYERS_STATE, function(players) {
-  // console.log(typeToMessage.PLAYERS_STATE, players)
-  //
-})
+// send message to all clients, all monitors
+EventManager.subscribe(typeToMessage.GAME_ROUND, data => broadcast('GAME_ROUND', data))
+// player or AI need to get the stack card number
+EventManager.subscribe(typeToMessage.CARDS_STATE, data => broadcast('CARDS_STATE', data))
+// send message to monitor
+// EventManager.subscribe(typeToMessage.PLAYERS_STATE, data => broadcast('PLAYERS_STATE', data))
 // send message to particular player
 EventManager.subscribe(typeToMessage.PLAYER_STATE, function(player) {
   const response = {
@@ -33,7 +33,13 @@ EventManager.subscribe(typeToMessage.PLAYER_STATE, function(player) {
   }
   connections.players[player.id].send(JSON.stringify(response))
 })
-EventManager.subscribe(typeToMessage.CARDS_STATE, broadcast)
+EventManager.subscribe(typeToMessage.NEED_TO_MAKE_DECISION, function(player) {
+  const response = {
+    message: typeToMessage.NEED_TO_MAKE_DECISION,
+  }
+  connections.players[player.id].send(JSON.stringify(response))
+})
+
 
 // handle messages from client
 function receiveMessage(ws, message, data) {
@@ -53,8 +59,14 @@ function receiveMessage(ws, message, data) {
     }
     ws.send(JSON.stringify(response))
     break
-  case typeToMessage.DECISION:
-
+  case typeToMessage.REPLACE_CARD:
+    Dealer.playerReplaceCard(ws.playerId)
+    break
+  case typeToMessage.DROP_CARD:
+    Dealer.playerReplaceCard(ws.playerId, data)
+    break
+  case typeToMessage.ADD_SEED_CARD:
+    Dealer.playerAddSeedCard(ws.playerId)
     break
   default:
   }
@@ -69,6 +81,9 @@ exports.wsHandler = function(ws, req) {
     if (ws.playerId) {
       PlayerControl.leave(ws.playerId)
       delete connections.players[ws.playerId]
+      if (!Object.keys(connections.players).length) {
+        Dealer.resetGame()
+      }
     } else {
       // delete monitor connection
     }
