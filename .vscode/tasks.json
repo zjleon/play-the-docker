@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "seed_poker_server",
+            "type": "process",
+            "group": "build",
+            "command": "npm",
+            "args": ["start"],
+            // "isBackground": true,
+            "options": {
+              "cwd": "${workspaceFolder}/services/seed_poker_server",
+              "env": {"NODE_ENV":"development",}
+            },
+            "presentation": {
+                // "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "seed_poker_AI",
+            "type": "process",
+            "group": "build",
+            "command": "npm",
+            "args": ["start"],
+            // "isBackground": true,
+            "options": {
+              "cwd": "${workspaceFolder}/services/seed_poker_AI",
+              "env": {"NODE_ENV":"development",}
+            },
+            "presentation": {
+                // "reveal": "always",
+                "panel": "new"
+            }
+        },
+    ]
+}

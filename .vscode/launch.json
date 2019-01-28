@@ -6,26 +6,27 @@
   "configurations": [
     {
       "type": "node",
-      "request": "launch",
+      "request": "attach",
       "name": "seed poker AI",
       "cwd": "${workspaceFolder}/services/seed_poker_AI",
-      "program": "${workspaceFolder}/services/seed_poker_AI/node_modules/gulp/bin/gulp.js",
-      "args": ["--gulpfile", "configs/gulp/index.js"],
-      "env": {
-        "NODE_ENV":"development",
-      }
+      "address": "localhost",
+      "port": 25851,
+      "preLaunchTask": "seed_poker_AI"
     },
     {
       "type": "node",
-      "request": "launch",
+      "request": "attach",
       "name": "seed poker server",
       "cwd": "${workspaceFolder}/services/seed_poker_server",
-      // node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js
-      "program": "${workspaceFolder}/services/seed_poker_server/node_modules/gulp/bin/gulp.js",
-      "args": ["--gulpfile", "configs/gulp/index.js"],
-      "env": {
-        "NODE_ENV":"development",
-      }
+      "address": "localhost",
+      "port": 25850,
+      "preLaunchTask": "seed_poker_server"
     },
+  ],
+  "compounds": [
+    {
+      "name": "seed_poker",
+      "configurations": ["seed poker server", "seed poker AI"]
+    }
   ]
 }

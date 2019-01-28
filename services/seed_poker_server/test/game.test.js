@@ -22,9 +22,6 @@ describe('When game in round', function() {
       Dealer.getCurrentRound().should.equal(2)
       clock.tick(10000)
     })
-    it('should start countdown when first player joint and go to round 2 if countdown finished', function() {
-      //
-    })
     it('should start with random player', function() {
       this.retries(3)
       let isRandom = false
@@ -82,9 +79,6 @@ describe('When game in round', function() {
     })
   })
   describe('3,', function() {
-    // it('dealer ask each player make decision', function() {
-    //   clock.tick(10000)
-    // })
     describe('all players made choice', function() {
       let clock
       beforeEach(function() {
@@ -191,6 +185,44 @@ describe('When game in round', function() {
         CardControl.getSeedCards().length.should.equal(3)
         CardControl.getAbandomCards().length.should.equal(1)
       })
+    })
+  })
+  describe('4,', function() {
+    let clock
+    let players = []
+    before(function() {
+      clock = sinon.useFakeTimers()
+      Dealer.resetGame()
+      for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+        players.push(PlayerControl.join())
+      }
+      clock.tick(10001)
+      players.forEach((player) => {
+        Dealer.playerAddSeedCard(player.id)
+        clock.tick(3001)
+      })
+      clock.tick(10001)
+    })
+    after(function() {
+      clock.restore()
+      Dealer.resetGame()
+      players = []
+    })
+    let playerState = {}
+    it('part of the players choose to stay, the others choose to give up', function() {
+      // reocrd decision in playerState
+    })
+    it(`
+      For the remaining players,
+      start from the player on the house's right side,
+      player reveal his card one by one, until the house
+    `, function() {
+      // check the playerState
+    })
+    it(`
+      the largest seed card goes to the player who holds the smallest card
+    `, function() {
+      // check the seed card holder
     })
   })
 })

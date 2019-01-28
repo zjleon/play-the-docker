@@ -6,6 +6,7 @@ const IN_PLAYER = 'inPlayer'
 const IN_STACK = 'inStack'
 const ABANDOMED = 'abandomed'
 const SEED_CARD = 'seedCard'
+const REVEAL = 'revealed'
 const cardEntity = Map({
   id: null,
   number: null,
