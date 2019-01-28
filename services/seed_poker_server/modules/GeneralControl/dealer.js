@@ -4,12 +4,12 @@ const {Map, Set, List} = require('immutable')
 const {typeToMessage} = require('../../configs/constants')
 const EventManager = require('../GeneralControl/eventManager')
 const intervalBetweenRounds = 10000
+let timer = []
 
 let currentRound
 let housePlayerSeatNumber
-let decisions
+
 exports.toNextRound = function() {
-  // TODO: add more logic to detect if the game can process to next round
   if (currentRound <= 4) {
     currentRound += 1
     switch (currentRound) {
@@ -20,12 +20,18 @@ exports.toNextRound = function() {
         PlayerControl.toNextPlayer()
       }
       CardControl.addSeedCard()
-      setTimeout(function() {
-        exports.toNextRound()
-      }, intervalBetweenRounds)
+      timer.push(
+        setTimeout(function() {
+          exports.toNextRound()
+        }, intervalBetweenRounds)
+      )
       break
     case 3:
-      askPlayerToMakeDecision()
+      timer.push(
+        setTimeout(function() {
+          askPlayerToMakeDecision()
+        }, 100)
+      )
       break
     default:
     }
@@ -34,11 +40,10 @@ exports.toNextRound = function() {
 }
 
 exports.resetGame = function() {
+  timer.forEach(t => clearTimeout(t))
   currentRound = 1
-  housePlayerId = null
   PlayerControl.clear()
   CardControl.reset()
-  decisions = List()
 }
 exports.resetGame()
 
@@ -48,7 +53,12 @@ exports.getCurrentRound = function() {
 
 EventManager.subscribe(typeToMessage.PLAYERS_STATE, function(data) {
   if (currentRound === 1 && data.length === PlayerControl.maximamPlayer) {
-    exports.toNextRound()
+    // make sure all ws connections are ready
+    timer.push(
+      setTimeout(() => {
+        exports.toNextRound()
+      }, 50)
+    )
   }
 })
 
@@ -58,25 +68,30 @@ function askPlayerToMakeDecision() {
 
 exports.playerReplaceCard = function(playerID, droppedCardId) {
   if (droppedCardId) {
+    PlayerControl.recordDecision(playerID, typeToMessage.DROP_CARD)
     PlayerControl.playerDropCard(playerID, droppedCardId)
     CardControl.moveToAbandomZone(droppedCardId)
-    PlayerControl.recordDecision(playerID, typeToMessage.DROP_CARD)
-    PlayerControl.toNextPlayer()
+    setTimeout(() => PlayerControl.toNextPlayer(), 3000)
+    return
   }
-  PlayerControl.playerGetCard(CardControl.deal())
   PlayerControl.recordDecision(playerID, typeToMessage.REPLACE_CARD)
+  PlayerControl.playerGetCard(CardControl.deal())
 }
 
 exports.playerAddSeedCard = function(playerID) {
-  CardControl.addSeedCard()
   PlayerControl.recordDecision(playerID, typeToMessage.ADD_SEED_CARD)
-  PlayerControl.toNextPlayer()
+  CardControl.addSeedCard()
+  setTimeout(() => PlayerControl.toNextPlayer(), 3000)
 }
 
 EventManager.subscribe(typeToMessage.TO_NEXT_PLAYER, function(nextPlayerSeat) {
   if (currentRound === 3) {
     if ( nextPlayerSeat === housePlayerSeatNumber) {
-      exports.toNextRound()
+      timer.push(
+        setTimeout(function() {
+          exports.toNextRound()
+        }, intervalBetweenRounds)
+      )
     } else {
       askPlayerToMakeDecision()
     }

@@ -33,7 +33,6 @@ exports.reset = function() {
     })
   )
 }
-exports.reset()
 
 exports.addSeedCard = function() {
   const remainedCards = cards.filter(card => card.get('state') === IN_STACK)

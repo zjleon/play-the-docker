@@ -15,9 +15,9 @@ const playerEntity = Map({
   hasGivenUp: false,
 })
 
-let players = Map({length: 0})
-let availableSeats = Set((new Array(maximamPlayer)).fill(1).map((item, index) => index + 1))
-let currentPlayerSeatNumber = null
+let players
+let availableSeats
+let currentPlayerSeatNumber
 
 exports.join = function() {
   // TODO: only allow join in prepare phase,
@@ -64,7 +64,7 @@ exports.getPlayers = function() {
 }
 
 exports.getRemaingSeats = function() {
-  return availableSeats.toJS()
+  return availableSeats.toSeq().toJS()
 }
 
 exports.getCurrentPlayer = function() {
@@ -85,7 +85,8 @@ exports.toNextPlayer = function() {
 
 exports.playerGetCard = function(card) {
   const playerId = exports.getCurrentPlayer().id
-  players = players.updateIn([playerId, 'cards'], cards => cards.push(card))
+  players = players.updateIn([playerId, 'cards'], cards => cards.push(card).sort((card1, card2) => card2 - card1))
+
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
   EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
@@ -99,15 +100,16 @@ exports.playerDropCard = function(playerId, card) {
   EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
-exports.recordDecision = function(decision) {
-  currentPlayer = exports.getCurrentPlayer()
-  players = players.updateIn([currentPlayer.id, 'decisions'], decisions => {
+exports.recordDecision = function(playerId, decision) {
+  // currentPlayer = exports.getCurrentPlayer()
+  players = players.updateIn([playerId, 'decisions'], decisions => {
     const record = {
-      decision,
+      name: decision,
       time: Date.now(),
     }
     return decisions.push(record)
   })
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
 exports.giveUp = function() {
