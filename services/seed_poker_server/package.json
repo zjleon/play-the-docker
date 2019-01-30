@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js",
     "production": "NODE_ENV=production node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js production",
-    "test": "MAX_PLAYER=7 node node_modules/mocha/bin/mocha"
+    "test": "NODE_ENV=development node node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",

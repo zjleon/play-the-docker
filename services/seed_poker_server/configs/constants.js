@@ -18,6 +18,7 @@ const typeToMessage = {
     }
   ],
   TO_NEXT_PLAYER: 'toNextPlayer',
+  TO_PREVIOUS_PLAYER: 'toPreviousPlayer',
   ERROR: 'error',
   // server to monitor
   PLAYERS_STATE: 'playersState',
@@ -34,6 +35,8 @@ const typeToMessage = {
   REPLACE_CARD: 'replaceCard',
   DROP_CARD: 'dropCard',
   ADD_SEED_CARD: 'addSeedCard',
+  STAY: 'stay',
+  GIVE_UP: 'giveUp',
   JOIN_GAME: 'joinGame',
   ADD_AI: 'addAI',
   // GET_REMAINING_SEATS: 'getRemainingSeats',
