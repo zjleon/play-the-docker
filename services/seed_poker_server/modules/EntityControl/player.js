@@ -2,6 +2,7 @@ const uuidv4 = require('uuid/v4')
 const {Map, Set, List} = require('immutable')
 const {typeToMessage} = require('../../configs/constants')
 const EventManager = require('../GeneralControl/eventManager')
+const CardControl = require('./card')
 
 const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
 exports.maximamPlayer = maximamPlayer
@@ -63,6 +64,18 @@ exports.getPlayers = function() {
   return players.toJS()
 }
 
+exports.getPlayer = function(playerId) {
+  return players.get(playerId).toJS()
+}
+
+exports.getAvailablePlayers = function() {
+  return players.filter((player) => player.get && !player.get('hasGivenUp')).toJS()
+}
+
+exports.getPlayerBySeatNumber = function(seatNumber) {
+  return players.find((player) => player.seatNumber === seatNumber).toJS()
+}
+
 exports.getRemaingSeats = function() {
   return availableSeats.toSeq().toJS()
 }
@@ -83,10 +96,17 @@ exports.toNextPlayer = function() {
   EventManager.publish(typeToMessage.TO_NEXT_PLAYER, currentPlayerSeatNumber)
 }
 
-exports.playerGetCard = function(card) {
-  const playerId = exports.getCurrentPlayer().id
-  players = players.updateIn([playerId, 'cards'], cards => cards.push(card).sort((card1, card2) => card2 - card1))
+exports.toPreviousPlayer = function() {
+  if (currentPlayerSeatNumber - 1 < 1) {
+    currentPlayerSeatNumber = maximamPlayer
+  } else {
+    currentPlayerSeatNumber = currentPlayerSeatNumber - 1
+  }
+  EventManager.publish(typeToMessage.TO_PREVIOUS_PLAYER, currentPlayerSeatNumber)
+}
 
+exports.playerGetCard = function(playerId, card) {
+  players = players.updateIn([playerId, 'cards'], cards => cards.push(card).sort((card1, card2) => card2 - card1))
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
   EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
@@ -101,7 +121,6 @@ exports.playerDropCard = function(playerId, card) {
 }
 
 exports.recordDecision = function(playerId, decision) {
-  // currentPlayer = exports.getCurrentPlayer()
   players = players.updateIn([playerId, 'decisions'], decisions => {
     const record = {
       name: decision,
@@ -109,9 +128,20 @@ exports.recordDecision = function(playerId, decision) {
     }
     return decisions.push(record)
   })
+}
+
+exports.giveUp = function(playerId) {
+  players = players.setIn([playerId, 'hasGivenUp'], true)
+  EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
   EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 
-exports.giveUp = function() {
+exports.revealCard = function(playerId) {
+  const player = players.get(playerId)
+  if (player.get('hasGivenUp')) return
+  const newCardState = CardControl.revealCard(player.getIn(['cards', 0, 'id']))
+  players = players.setIn([playerId, 'cards', 0], newCardState)
 
+  EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }

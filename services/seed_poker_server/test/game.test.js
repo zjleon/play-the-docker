@@ -1,8 +1,16 @@
+const path = require('path')
+const envPath = path.resolve(__dirname, '../', `.env.${process.env.NODE_ENV}`)
+require('dotenv')
+  .config({
+    path: envPath
+  })
 const sinon = require('sinon')
 const should = require('should')
 const Dealer = require('../modules/GeneralControl/dealer')
 const PlayerControl = require('../modules/EntityControl/player')
 const CardControl = require('../modules/EntityControl/card')
+const roundInterval = parseInt(process.env.ROUND_INTERVAL, 10)
+const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
 
 describe('When game in round', function() {
   describe('1,', function() {
@@ -16,20 +24,17 @@ describe('When game in round', function() {
       Dealer.resetGame()
     })
     it('should go to round 2 if seat is full', function() {
-      for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+      for (let i = 0; i < maximamPlayer; i++) {
         PlayerControl.join()
       }
       Dealer.getCurrentRound().should.equal(2)
-      clock.tick(10000)
-    })
-    it('should start countdown when first player joint and go to round 2 if countdown finished', function() {
-      //
+      clock.tick(roundInterval)
     })
     it('should start with random player', function() {
       this.retries(3)
       let isRandom = false
       let lastHouse
-      for (let i = 0; i < PlayerControl.maximamPlayer - 1; i++) {
+      for (let i = 0; i < maximamPlayer - 1; i++) {
         if (isRandom) {
           break
         }
@@ -47,7 +52,7 @@ describe('When game in round', function() {
     it('dealer should have number of card = player number * 2 + 1', function() {
       //
       const dealerCards = CardControl.getDealerCards()
-      dealerCards.length.should.equal(PlayerControl.maximamPlayer * 2 + 1)
+      dealerCards.length.should.equal(maximamPlayer * 2 + 1)
     })
   })
   describe('2,', function() {
@@ -55,7 +60,7 @@ describe('When game in round', function() {
     beforeEach(function() {
       clock = sinon.useFakeTimers()
       Dealer.resetGame()
-      for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+      for (let i = 0; i < maximamPlayer; i++) {
         PlayerControl.join()
       }
     })
@@ -70,27 +75,24 @@ describe('When game in round', function() {
       })
       should(playerWhoDontHaveCard).not.exist
       const playerHoldCards = CardControl.getCards().filter(card => card.state === 'inPlayer')
-      playerHoldCards.length.should.equal(PlayerControl.maximamPlayer)
+      playerHoldCards.length.should.equal(maximamPlayer)
     })
     it('there is one seed card', function() {
       const seedCards = CardControl.getSeedCards()
       seedCards.length.should.equal(1)
     })
     it('start countdown at the end of this turn, after countdown, goes into round 3', function() {
-      clock.tick(10000)
+      clock.tick(roundInterval)
       Dealer.getCurrentRound().should.equal(3)
     })
   })
   describe('3,', function() {
-    // it('dealer ask each player make decision', function() {
-    //   clock.tick(10000)
-    // })
     describe('all players made choice', function() {
       let clock
       beforeEach(function() {
         clock = sinon.useFakeTimers()
         Dealer.resetGame()
-        for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+        for (let i = 0; i < maximamPlayer; i++) {
           PlayerControl.join()
         }
         clock.tick(10001)
@@ -118,7 +120,7 @@ describe('When game in round', function() {
       beforeEach(function() {
         clock = sinon.useFakeTimers()
         Dealer.resetGame()
-        for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+        for (let i = 0; i < maximamPlayer; i++) {
           PlayerControl.join()
         }
         clock.tick(10001)
@@ -161,10 +163,10 @@ describe('When game in round', function() {
       beforeEach(function() {
         clock = sinon.useFakeTimers()
         Dealer.resetGame()
-        for (let i = 0; i < PlayerControl.maximamPlayer; i++) {
+        for (let i = 0; i < maximamPlayer; i++) {
           PlayerControl.join()
         }
-        clock.tick(10001)
+        clock.tick(roundInterval)
       })
       afterEach(function() {
         clock.restore()
@@ -191,6 +193,107 @@ describe('When game in round', function() {
         CardControl.getSeedCards().length.should.equal(3)
         CardControl.getAbandomCards().length.should.equal(1)
       })
+    })
+  })
+  describe('4 or 5,', function() {
+    let clock
+    let players = []
+    let seedCards
+    before(function() {
+      clock = sinon.useFakeTimers()
+      Dealer.resetGame()
+      for (let i = 0; i < maximamPlayer; i++) {
+        players.push(PlayerControl.join())
+      }
+      clock.tick(roundInterval)
+
+      players.forEach((player) => {
+        Dealer.playerAddSeedCard(player.id)
+        clock.tick(3000)
+      })
+      clock.tick(roundInterval)
+      seedCards = CardControl.getSeedCards()
+    })
+    after(function() {
+      clock.restore()
+      Dealer.resetGame()
+      players = []
+    })
+    it.only(`
+      part of the players choose to stay,
+      the others choose to give up
+    `, function() {
+      Dealer.getCurrentRound().should.equal(4)
+
+      players.forEach((player, index) => {
+        if (index < 4) {
+          Dealer.playerGiveUp(player.id)
+        } else {
+          Dealer.playerStay(player.id)
+        }
+      })
+      players.forEach((player, index) => {
+        const decisions = PlayerControl.getPlayer(player.id).decisions
+        if (index < 4) {
+          should(decisions.find(decision => decision.name === 'giveUp')).exist
+        } else {
+          should(decisions.find(decision => decision.name === 'stay')).exist
+        }
+      })
+    })
+    it.only(`
+      For the remaining players,
+      start from the player on the house's right,
+      player reveal his card one by one, until the house
+    `, function() {
+      // check the playerState
+      clock.tick(roundInterval)
+      Dealer.getCurrentRound().should.equal(5)
+      clock.tick(500 * maximamPlayer)
+
+      players.forEach((player, index) => {
+        const state = PlayerControl.getPlayer(player.id).cards[0].state
+        if (index < 4) {
+          state.should.equal('inPlayer')
+        } else {
+          state.should.equal('inPlayerAndRevealed')
+        }
+      })
+    })
+    it.only(`
+      the largest seed card goes to the player who holds the smallest card
+    `, function() {
+      let cardMapping = {}
+      const seedCardsString = seedCards.map(card => card.number).join(' ')
+      players.forEach((player, index) => {
+        const cards = PlayerControl.getPlayer(player.id).cards
+        let holdingCorrectCards = false
+        if (index < 4) {
+          cards.length.should.equal(1)
+        } else {
+          cards.length.should.equal(2)
+          const match1 = new RegExp('\\b' + cards[0].number + '\\b').test(seedCardsString)
+          const match2 = new RegExp('\\b' + cards[1].number + '\\b').test(seedCardsString)
+          if (
+            match1 &&
+            !match2
+          ) {
+            cardMapping[cards[0].number] = cards[1].number
+            holdingCorrectCards = true
+          }
+          if (
+            !match1 &&
+            match2
+          ) {
+            cardMapping[cards[1].number] = cards[0].number
+            holdingCorrectCards = true
+          }
+          holdingCorrectCards.should.equal(true)
+        }
+      })
+      should(cardMapping[seedCards[0].number]).below(cardMapping[seedCards[1].number])
+      should(cardMapping[seedCards[0].number]).below(cardMapping[seedCards[2].number])
+      should(cardMapping[seedCards[1].number]).below(cardMapping[seedCards[2].number])
     })
   })
 })
