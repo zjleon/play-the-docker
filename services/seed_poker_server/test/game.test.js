@@ -10,6 +10,7 @@ const Dealer = require('../modules/GeneralControl/dealer')
 const PlayerControl = require('../modules/EntityControl/player')
 const CardControl = require('../modules/EntityControl/card')
 const roundInterval = parseInt(process.env.ROUND_INTERVAL, 10)
+const actionInterval = parseInt(process.env.ACTION_INTERVAL, 10)
 const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
 
 describe('When game in round', function() {
@@ -27,8 +28,8 @@ describe('When game in round', function() {
       for (let i = 0; i < maximamPlayer; i++) {
         PlayerControl.join()
       }
-      Dealer.getCurrentRound().should.equal(2)
       clock.tick(roundInterval)
+      Dealer.getCurrentRound().should.equal(2)
     })
     it('should start with random player', function() {
       this.retries(3)
@@ -63,12 +64,14 @@ describe('When game in round', function() {
       for (let i = 0; i < maximamPlayer; i++) {
         PlayerControl.join()
       }
+      clock.tick(roundInterval)
     })
     afterEach(function() {
       clock.restore()
       Dealer.resetGame()
     })
     it('each player should have exactly one card', function() {
+      Dealer.getCurrentRound().should.equal(2)
       const players = PlayerControl.getPlayers()
       const playerWhoDontHaveCard = Object.keys(players).find(playerID => {
         return players[playerID].cards && players[playerID].cards.length !== 1
@@ -87,7 +90,7 @@ describe('When game in round', function() {
     })
   })
   describe('3,', function() {
-    describe('all players made choice', function() {
+    describe('after all players made their choices', function() {
       let clock
       beforeEach(function() {
         clock = sinon.useFakeTimers()
@@ -95,22 +98,23 @@ describe('When game in round', function() {
         for (let i = 0; i < maximamPlayer; i++) {
           PlayerControl.join()
         }
-        clock.tick(10001)
+        clock.tick(roundInterval)
+        clock.tick(roundInterval)
+        for (let i = 0; i < maximamPlayer; i++) {
+          let player = PlayerControl.getCurrentPlayer()
+          Dealer.playerAddSeedCard(player.id)
+          clock.tick(actionInterval)
+        }
       })
       afterEach(function() {
         clock.restore()
         Dealer.resetGame()
       })
       it('game should move to round 4', function() {
-        for (let i = 0; i < 7; i++) {
-          Dealer.playerAddSeedCard()
-        }
+        clock.tick(roundInterval)
         Dealer.getCurrentRound().should.equal(4)
       })
       it('there should be no card in stack', function() {
-        for (let i = 0; i < 7; i++) {
-          Dealer.playerAddSeedCard()
-        }
         const cardInStack = CardControl.getCards().find(card => card.state === 'inStack')
         should(cardInStack).not.exist
       })
@@ -123,26 +127,31 @@ describe('When game in round', function() {
         for (let i = 0; i < maximamPlayer; i++) {
           PlayerControl.join()
         }
-        clock.tick(10001)
+        clock.tick(roundInterval)
+        clock.tick(roundInterval)
+        Dealer.getCurrentRound().should.equal(3)
       })
       afterEach(function() {
         clock.restore()
         Dealer.resetGame()
       })
       it('should get a new card, and have related record', function() {
-        Dealer.playerReplaceCard()
-        const currentPlayer = PlayerControl.getCurrentPlayer()
-        currentPlayer.cards.length.should.equal(2)
+        let currentPlayer = PlayerControl.getCurrentPlayer()
+        Dealer.playerReplaceCard(currentPlayer.id)
+        currentPlayer = PlayerControl.getCurrentPlayer()
         currentPlayer.decisions.length.should.equal(1)
+        currentPlayer.cards.length.should.equal(2)
       })
-      it('player should not act until last player decide which card to drop', function() {
+      it('game should not move on until previous player decide which card to drop', function() {
         const lastPlayer = PlayerControl.getCurrentPlayer()
         Dealer.playerReplaceCard(lastPlayer.id)
+        clock.tick(10000)
         let currentPlayer = PlayerControl.getCurrentPlayer()
         lastPlayer.id.should.equal(currentPlayer.id)
 
         const cardToDrop = currentPlayer.cards[1]
         Dealer.playerReplaceCard(currentPlayer.id, cardToDrop.id)
+        clock.tick(actionInterval)
         currentPlayer = PlayerControl.getCurrentPlayer()
         should.notEqual(lastPlayer.id, currentPlayer.id)
       })
@@ -195,7 +204,7 @@ describe('When game in round', function() {
       })
     })
   })
-  describe('4 or 5,', function() {
+  describe('4', function() {
     let clock
     let players = []
     let seedCards
@@ -206,12 +215,15 @@ describe('When game in round', function() {
         players.push(PlayerControl.join())
       }
       clock.tick(roundInterval)
-
-      players.forEach((player) => {
-        Dealer.playerAddSeedCard(player.id)
-        clock.tick(3000)
-      })
       clock.tick(roundInterval)
+
+      for (let i = 0; i < maximamPlayer; i++) {
+        let player = PlayerControl.getCurrentPlayer()
+        Dealer.playerAddSeedCard(player.id)
+        clock.tick(actionInterval)
+      }
+      clock.tick(roundInterval)
+      Dealer.getCurrentRound().should.equal(4)
       seedCards = CardControl.getSeedCards()
     })
     after(function() {
@@ -219,7 +231,7 @@ describe('When game in round', function() {
       Dealer.resetGame()
       players = []
     })
-    it.only(`
+    it(`
       part of the players choose to stay,
       the others choose to give up
     `, function() {
@@ -241,59 +253,159 @@ describe('When game in round', function() {
         }
       })
     })
-    it.only(`
+  })
+  describe('5', function() {
+    let clock
+    let players = []
+    let givenUpPlayers = []
+    let stayedPlayers = []
+    let seedCards
+    before(function() {
+      clock = sinon.useFakeTimers()
+      Dealer.resetGame()
+      for (let i = 0; i < maximamPlayer; i++) {
+        players.push(PlayerControl.join())
+      }
+      clock.tick(roundInterval)
+      clock.tick(roundInterval)
+
+      for (let i = 0; i < maximamPlayer; i++) {
+        let player = PlayerControl.getCurrentPlayer()
+        Dealer.playerAddSeedCard(player.id)
+        clock.tick(actionInterval)
+      }
+      clock.tick(roundInterval)
+      seedCards = CardControl.getSeedCards()
+      for (let i = 0; i < maximamPlayer; i++) {
+        let player = PlayerControl.getCurrentPlayer()
+        if (i < 4) {
+          Dealer.playerGiveUp(player.id)
+          givenUpPlayers.push(player.id)
+        } else {
+          Dealer.playerStay(player.id)
+          stayedPlayers.push(player.id)
+        }
+        clock.tick(actionInterval)
+      }
+      clock.tick(roundInterval)
+      Dealer.getCurrentRound().should.equal(5)
+    })
+    after(function() {
+      clock.restore()
+      Dealer.resetGame()
+      players = []
+      givenUpPlayers = []
+      stayedPlayers = []
+    })
+    it(`
       For the remaining players,
       start from the player on the house's right,
       player reveal his card one by one, until the house
     `, function() {
       // check the playerState
-      clock.tick(roundInterval)
-      Dealer.getCurrentRound().should.equal(5)
       clock.tick(500 * maximamPlayer)
 
-      players.forEach((player, index) => {
-        const state = PlayerControl.getPlayer(player.id).cards[0].state
-        if (index < 4) {
-          state.should.equal('inPlayer')
-        } else {
-          state.should.equal('inPlayerAndRevealed')
-        }
+      givenUpPlayers.forEach((playerId) => {
+        const state = PlayerControl.getPlayer(playerId).cards[0].state
+        state.should.equal('inPlayer')
+      })
+      stayedPlayers.forEach((playerId) => {
+        const state = PlayerControl.getPlayer(playerId).cards[0].state
+        state.should.equal('inPlayerAndRevealed')
       })
     })
-    it.only(`
+    it(`
       the largest seed card goes to the player who holds the smallest card
     `, function() {
       let cardMapping = {}
       const seedCardsString = seedCards.map(card => card.number).join(' ')
-      players.forEach((player, index) => {
-        const cards = PlayerControl.getPlayer(player.id).cards
+      givenUpPlayers.forEach((playerId) => {
+        const cards = PlayerControl.getPlayer(playerId).cards
+        cards.length.should.equal(1)
+      })
+      stayedPlayers.forEach((playerId) => {
+        const cards = PlayerControl.getPlayer(playerId).cards
+        cards.length.should.equal(2)
+        const match1 = new RegExp('\\b' + cards[0].number + '\\b').test(seedCardsString)
+        const match2 = new RegExp('\\b' + cards[1].number + '\\b').test(seedCardsString)
         let holdingCorrectCards = false
-        if (index < 4) {
-          cards.length.should.equal(1)
-        } else {
-          cards.length.should.equal(2)
-          const match1 = new RegExp('\\b' + cards[0].number + '\\b').test(seedCardsString)
-          const match2 = new RegExp('\\b' + cards[1].number + '\\b').test(seedCardsString)
-          if (
-            match1 &&
-            !match2
-          ) {
-            cardMapping[cards[0].number] = cards[1].number
-            holdingCorrectCards = true
-          }
-          if (
-            !match1 &&
-            match2
-          ) {
-            cardMapping[cards[1].number] = cards[0].number
-            holdingCorrectCards = true
-          }
-          holdingCorrectCards.should.equal(true)
+        if (match1 && !match2) {
+          cardMapping[cards[0].number] = cards[1].number
+          holdingCorrectCards = true
         }
+        if (!match1 && match2) {
+          cardMapping[cards[1].number] = cards[0].number
+          holdingCorrectCards = true
+        }
+        holdingCorrectCards.should.equal(true)
       })
       should(cardMapping[seedCards[0].number]).below(cardMapping[seedCards[1].number])
       should(cardMapping[seedCards[0].number]).below(cardMapping[seedCards[2].number])
       should(cardMapping[seedCards[1].number]).below(cardMapping[seedCards[2].number])
+    })
+  })
+  describe('6,', function() {
+    let clock
+    let players = []
+    let stayedPlayers = []
+    let seedCards
+    before(function() {
+      clock = sinon.useFakeTimers()
+      Dealer.resetGame()
+      for (let i = 0; i < maximamPlayer; i++) {
+        players.push(PlayerControl.join())
+      }
+      clock.tick(roundInterval)
+      clock.tick(roundInterval)
+
+      for (let i = 0; i < maximamPlayer; i++) {
+        let player = PlayerControl.getCurrentPlayer()
+        Dealer.playerAddSeedCard(player.id)
+        clock.tick(actionInterval)
+      }
+      clock.tick(roundInterval)
+      seedCards = CardControl.getSeedCards()
+      for (let i = 0; i < maximamPlayer; i++) {
+        let player = PlayerControl.getCurrentPlayer()
+        Dealer.playerStay(player.id)
+        stayedPlayers.push(player.id)
+        clock.tick(actionInterval)
+      }
+      clock.tick(roundInterval)
+      clock.tick(500 * maximamPlayer)
+      clock.tick(roundInterval)
+      Dealer.getCurrentRound().should.equal(6)
+    })
+    after(function() {
+      clock.restore()
+      Dealer.resetGame()
+      players = []
+      stayedPlayers = []
+    })
+    it(`
+      only one winner,
+      the winner holds the largest number
+    `, function() {
+      let remainningPlayers = PlayerControl.getAvailablePlayers()
+      delete remainningPlayers.length
+      let cardPlayerMapping = {}
+      let playerCards = Object.keys(remainningPlayers).map((playerId) => {
+        const cardNumber = remainningPlayers[playerId].cards[0].number
+        cardPlayerMapping[cardNumber] = playerId
+        return cardNumber
+      })
+      playerCards.sort((card1, card2) => card1 - card2)
+      const finalNumbers = seedCards
+        .map((card, index) => {
+          const sum = card.number + playerCards[index]
+          cardPlayerMapping[sum] = cardPlayerMapping[playerCards[index]]
+          return sum
+        })
+        .sort((card1, card2) => card2 - card1)
+      const winner = Dealer.getTheWinner()
+      if (finalNumbers[0] !== finalNumbers[1]) {
+        winner.playerId.should.equal(cardPlayerMapping[finalNumbers[0]])
+      }
     })
   })
 })

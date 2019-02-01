@@ -19,6 +19,7 @@ const typeToMessage = {
   ],
   TO_NEXT_PLAYER: 'toNextPlayer',
   TO_PREVIOUS_PLAYER: 'toPreviousPlayer',
+  WINNER: 'winner',
   ERROR: 'error',
   // server to monitor
   PLAYERS_STATE: 'playersState',

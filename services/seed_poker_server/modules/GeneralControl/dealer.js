@@ -3,7 +3,8 @@ const CardControl = require('../EntityControl/card')
 const {Map, Set, List} = require('immutable')
 const {typeToMessage} = require('../../configs/constants')
 const EventManager = require('../GeneralControl/eventManager')
-const ROUND_INTERVAL = process.env.ROUND_INTERVAL
+const roundInterval = parseInt(process.env.ROUND_INTERVAL, 10)
+const actionInterval = parseInt(process.env.ACTION_INTERVAL, 10)
 let timer = []
 
 let currentRound
@@ -24,7 +25,7 @@ exports.toNextRound = function() {
     timer.push(
       setTimeout(function() {
         exports.toNextRound()
-      }, ROUND_INTERVAL)
+      }, roundInterval)
     )
     break
   case 3:
@@ -32,11 +33,14 @@ exports.toNextRound = function() {
     timer.push(
       setTimeout(function() {
         askPlayerToMakeDecision()
-      }, 100)
+      }, 10)
     )
     break
   case 5:
-    askPlayerToRevealCard()
+    revealPlayerCard()
+    break
+  case 6:
+    exports.getTheWinner()
     break
   default:
   }
@@ -62,7 +66,7 @@ EventManager.subscribe(typeToMessage.PLAYERS_STATE, function(data) {
     timer.push(
       setTimeout(() => {
         exports.toNextRound()
-      }, 50)
+      }, roundInterval)
     )
   }
 })
@@ -76,7 +80,7 @@ exports.playerReplaceCard = function(playerId, droppedCardId) {
     PlayerControl.recordDecision(playerId, typeToMessage.DROP_CARD)
     PlayerControl.playerDropCard(playerId, droppedCardId)
     CardControl.moveToAbandomZone(droppedCardId)
-    setTimeout(() => PlayerControl.toNextPlayer(), 3000)
+    setTimeout(() => PlayerControl.toNextPlayer(), actionInterval)
     return
   }
   PlayerControl.recordDecision(playerId, typeToMessage.REPLACE_CARD)
@@ -87,7 +91,7 @@ exports.playerAddSeedCard = function(playerId) {
   PlayerControl.recordDecision(playerId, typeToMessage.ADD_SEED_CARD)
   CardControl.addSeedCard()
   EventManager.publish(typeToMessage.PLAYER_STATE, PlayerControl.getPlayer(playerId))
-  setTimeout(() => PlayerControl.toNextPlayer(), 3000)
+  setTimeout(() => PlayerControl.toNextPlayer(), actionInterval)
 }
 
 exports.playerStay = function(playerId) {
@@ -102,7 +106,7 @@ exports.playerGiveUp = function(playerId) {
   PlayerControl.toNextPlayer()
 }
 
-function askPlayerToRevealCard() {
+function revealPlayerCard() {
   const playerId = PlayerControl.getCurrentPlayer().id
   PlayerControl.revealCard(playerId)
   PlayerControl.toPreviousPlayer()
@@ -114,7 +118,6 @@ function distributeSeedCards() {
   let playerCards = Object.keys(availablePlayers).reduce((accumulator, playerId) => {
     const card = availablePlayers[playerId].cards[0]
     accumulator.order.push(card.number)
-    // accumulator.order.sort()
     accumulator.mapping[card.number] = playerId
     return accumulator
   }, {
@@ -122,12 +125,45 @@ function distributeSeedCards() {
     mapping: {},
   })
   playerCards.order.sort((card1, card2) => card1 - card2)
-
   const pariedCards = CardControl.moveSeedCardToPlayer(playerCards)
   // move card to player
   Object.keys(pariedCards).forEach((playerId) => {
     PlayerControl.playerGetCard(playerId, pariedCards[playerId])
   })
+  timer.push(
+    setTimeout(function() {
+      exports.toNextRound()
+    }, roundInterval)
+  )
+}
+
+exports.getTheWinner = function() {
+  let players = PlayerControl.getAvailablePlayers()
+  delete players.length
+  const winner = Object.keys(players).reduce((accumulator, playerId) => {
+    const playerTotalNumber = players[playerId].cards.reduce((totalNumber, card) => totalNumber + card.number, 0)
+    if (accumulator.number <= playerTotalNumber) {
+      const distanceFromHouse = (
+        players[playerId].seatNumber < housePlayerSeatNumber ?
+          players[playerId].seatNumber + housePlayerSeatNumber
+          :
+          players[playerId].seatNumber
+      ) - housePlayerSeatNumber
+      // if there are quivalent numbers,
+      // the player closer to the right side of the house win
+      if (
+        accumulator.number === playerTotalNumber &&
+        accumulator.distanceFromHouse &&
+        accumulator.distanceFromHouse < distanceFromHouse
+      ) return accumulator
+      accumulator.playerId = players[playerId].id
+      accumulator.number = playerTotalNumber
+      accumulator.distanceFromHouse = distanceFromHouse
+    }
+    return accumulator
+  }, {playerId: '', number: 0, distanceFromHouse: 0})
+  EventManager.publish(typeToMessage.WINNER, winner)
+  return winner
 }
 
 EventManager.subscribe(typeToMessage.TO_NEXT_PLAYER, function(nextPlayerSeat) {
@@ -136,7 +172,7 @@ EventManager.subscribe(typeToMessage.TO_NEXT_PLAYER, function(nextPlayerSeat) {
       timer.push(
         setTimeout(function() {
           exports.toNextRound()
-        }, ROUND_INTERVAL)
+        }, roundInterval)
       )
     } else {
       askPlayerToMakeDecision()
@@ -146,12 +182,15 @@ EventManager.subscribe(typeToMessage.TO_NEXT_PLAYER, function(nextPlayerSeat) {
 EventManager.subscribe(typeToMessage.TO_PREVIOUS_PLAYER, function(previousPlayerSeat) {
   if (currentRound === 5) {
     if ( previousPlayerSeat === housePlayerSeatNumber) {
-      // distribute the seed cards
-      distributeSeedCards()
+      timer.push(
+        setTimeout(function() {
+          distributeSeedCards()
+        }, 500)
+      )
     } else {
       timer.push(
         setTimeout(function() {
-          askPlayerToRevealCard()
+          revealPlayerCard()
         }, 500)
       )
     }
