@@ -23,8 +23,10 @@ function broadcast(messageType, data) {
 EventManager.subscribe(typeToMessage.GAME_ROUND, data => broadcast('GAME_ROUND', data))
 // player or AI need to get the stack card number
 EventManager.subscribe(typeToMessage.CARDS_STATE, data => broadcast('CARDS_STATE', data))
+EventManager.subscribe(typeToMessage.WINNER, data => broadcast('WINNER', data))
 // send message to monitor
 // EventManager.subscribe(typeToMessage.PLAYERS_STATE, data => broadcast('PLAYERS_STATE', data))
+// EventManager.subscribe(typeToMessage.TO_PREVIOUS_PLAYER, data => broadcast('TO_PREVIOUS_PLAYER', data))
 // send message to particular player
 EventManager.subscribe(typeToMessage.PLAYER_STATE, function(player) {
   const response = {
