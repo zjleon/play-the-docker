@@ -14,6 +14,7 @@ function broadcast(messageType, data) {
     message: typeToMessage[messageType],
     data,
   }
+  console.log('broadcast', messageType, data)
   const allConnections = Object.assign({}, connections.monitor, connections.players)
   Object.keys(allConnections).forEach(function(connectionId) {
     allConnections[connectionId].send(JSON.stringify(response))
@@ -27,6 +28,16 @@ EventManager.subscribe(typeToMessage.WINNER, data => broadcast('WINNER', data))
 // send message to monitor
 // EventManager.subscribe(typeToMessage.PLAYERS_STATE, data => broadcast('PLAYERS_STATE', data))
 // EventManager.subscribe(typeToMessage.TO_PREVIOUS_PLAYER, data => broadcast('TO_PREVIOUS_PLAYER', data))
+// send message to all player
+EventManager.subscribe(typeToMessage.PLAYER_GIVEN_UP, function(playerId) {
+  const response = {
+    message: typeToMessage.PLAYER_STATE,
+    data: playerId,
+  }
+  Object.keys(connections.players).forEach(function(connectionId) {
+    connections.players[connectionId].send(JSON.stringify(response))
+  })
+})
 // send message to particular player
 EventManager.subscribe(typeToMessage.PLAYER_STATE, function(player) {
   const response = {
@@ -70,6 +81,12 @@ function receiveMessage(ws, message, data) {
   case typeToMessage.ADD_SEED_CARD:
     Dealer.playerAddSeedCard(ws.playerId)
     break
+  case typeToMessage.STAY:
+    Dealer.playerStay(ws.playerId)
+    break
+  case typeToMessage.GIVE_UP:
+    Dealer.playerGiveUp(ws.playerId)
+    break
   default:
   }
 }
@@ -77,6 +94,7 @@ function receiveMessage(ws, message, data) {
 exports.wsHandler = function(ws, req) {
   ws.on('message', function(jsonObject) {
     const {message, data} = JSON.parse(jsonObject)
+    console.log('message', message, data)
     receiveMessage(ws, message, data)
   })
   ws.on('close', function() {

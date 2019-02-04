@@ -6,22 +6,48 @@
   "configurations": [
     {
       "type": "node",
-      "request": "attach",
-      "name": "seed poker AI",
-      "cwd": "${workspaceFolder}/services/seed_poker_AI",
-      "address": "localhost",
-      "port": 25851,
-      "preLaunchTask": "seed_poker_AI"
+      "request": "launch",
+      "name": "seed poker server",
+      "cwd": "${workspaceFolder}/services/seed_poker_server",
+      "program": "${workspaceFolder}/services/seed_poker_server/node_modules/gulp/bin/gulp.js",
+      "args": [
+        "--gulpfile",
+        "configs/gulp/index.js",
+      ],
+      "autoAttachChildProcesses": true,
+      "env": {"NODE_ENV": "development"}
     },
     {
       "type": "node",
-      "request": "attach",
-      "name": "seed poker server",
-      "cwd": "${workspaceFolder}/services/seed_poker_server",
-      "address": "localhost",
-      "port": 25850,
-      "preLaunchTask": "seed_poker_server"
+      "request": "launch",
+      "name": "seed poker AI",
+      "cwd": "${workspaceFolder}/services/seed_poker_AI",
+      "program": "${workspaceFolder}/services/seed_poker_AI/node_modules/gulp/bin/gulp.js",
+      "args": [
+        "--gulpfile",
+        "configs/gulp/index.js",
+      ],
+      "autoAttachChildProcesses": true,
+      "env": {"NODE_ENV": "development"}
     },
+    // {
+    //   "type": "node",
+    //   "request": "attach",
+    //   "name": "seed poker AI",
+    //   "cwd": "${workspaceFolder}/services/seed_poker_AI",
+    //   "address": "localhost",
+    //   "port": 25851,
+    //   "preLaunchTask": "seed_poker_AI"
+    // },
+    // {
+    //   "type": "node",
+    //   "request": "attach",
+    //   "name": "seed poker server",
+    //   "cwd": "${workspaceFolder}/services/seed_poker_server",
+    //   "address": "localhost",
+    //   "port": 25850,
+    //   // "preLaunchTask": "seed_poker_server"
+    // },
   ],
   "compounds": [
     {

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=development node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js",
     "production": "NODE_ENV=production node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js production",
-    "test1": "NODE_ENV=development node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js test",
-    "test": "NODE_ENV=development node node_modules/mocha/bin/mocha"
+    "test": "NODE_ENV=development node node_modules/gulp/bin/gulp.js --gulpfile configs/gulp/index.js test",
+    "test1": "NODE_ENV=development node node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",

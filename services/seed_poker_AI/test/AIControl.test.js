@@ -12,6 +12,10 @@ require('dotenv')
     path: envPath
   })
 
+const roundInterval = parseInt(process.env.ROUND_INTERVAL, 10)
+const actionInterval = parseInt(process.env.ACTION_INTERVAL, 10)
+const maximamPlayer = parseInt(process.env.MAX_PLAYER, 10)
+
 describe('AI control', function() {
   describe(', before game begin.', function() {
     let AIManager
@@ -48,6 +52,7 @@ describe('AI control', function() {
   })
   describe(', at round 2.', function() {
     let AIManager
+    this.timeout(60000)
     beforeEach(function() {
       AIManager = new AIControl()
     })
@@ -63,33 +68,77 @@ describe('AI control', function() {
           })
           AIManager.AIGetout()
           done()
-        }, 500)
+        }, roundInterval + 100)
       })
     })
   })
   describe(', at round 3.', function() {
     let AIManager
-    let clock
     this.timeout(60000)
     beforeEach(function() {
       AIManager = new AIControl()
-      // clock = sinon.useFakeTimers()
     })
     afterEach(function() {
       AIManager = null
-      // clock.restore()
     })
-    it('One AI should have made decision', function(done) {
+    it('AIs should have decided add seed card or replace card', function(done) {
       AIManager.fillInAI().then(() => {
         setTimeout(() => {
           AIManager.getAIs().forEach(AI => {
+            const decisions = AI.decisions
             AI.gameRound.should.equal(3)
-            AI.decisions.length.should.aboveOrEqual(1)
+            if (decisions[0].name === 'addSeedCard') {
+              decisions.length.should.equal(1)
+              return
+            }
+            if (decisions[0].name === 'replaceCard') {
+              decisions.length.should.equal(2)
+              decisions[1].name.should.equal('dropCard')
+              return
+            }
+            throw new Error('unknown circumstance')
           })
           AIManager.AIGetout()
           done()
-        }, 35000)
+        }, roundInterval * 2 + actionInterval * maximamPlayer + 100)
       })
+    })
+  })
+  describe('the winner', function() {
+    let AIManager
+    this.timeout(180000)
+    beforeEach(function() {
+      AIManager = new AIControl()
+    })
+    afterEach(function() {
+      AIManager = null
+    })
+    //
+    it.only(`
+      should have the same id, card number with one of the AI,
+      other AIs should have smaller card
+    `, function(done) {
+      AIManager.fillInAI().then(() => {
+        setTimeout(() => {
+          let winnerExist = false
+          AIManager.getAIs().forEach(AIInstance => {
+            should(AIInstance.winner).have.keys('playerId', 'number', 'distanceFromHouse')
+            const totalNumber = AIInstance.cards.reduce((accumulator, card) => accumulator + card.number, 0)
+            if (AIInstance.winner.playerId === AIInstance.id) {
+              AIInstance.winner.number.should.equal(totalNumber)
+              winnerExist = true
+            } else {
+              AIInstance.winner.number.should.aboveOrEqual(totalNumber)
+            }
+          })
+          winnerExist.should.equal(true)
+          AIManager.AIGetout()
+          done()
+        }, roundInterval * 6 + actionInterval * maximamPlayer)
+      })
+        .catch(error => {
+          done(error)
+        })
     })
   })
 })

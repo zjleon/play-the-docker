@@ -10,11 +10,11 @@ export function startDevServer(done) {
   })
 
   childProcess.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
+    console.log(`${data}`)
   })
 
   childProcess.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`)
+    console.log(`${data}`)
   })
 
   childProcess.on('close', (code) => {
