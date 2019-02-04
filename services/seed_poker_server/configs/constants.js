@@ -30,8 +30,9 @@ const typeToMessage = {
   // server to player(AI)
   PLAYER_STATE: 'playerState',
   NEED_TO_MAKE_DECISION: 'needToMakeDecision',
-  HOLDING_CARD: 'holdingCard',
-  RECEIVE_CARD: 'receiveCard',
+  PLAYER_GIVEN_UP: 'playerGivenUp',
+  // HOLDING_CARD: 'holdingCard',
+  // RECEIVE_CARD: 'receiveCard',
   // player(AI) to server
   REPLACE_CARD: 'replaceCard',
   DROP_CARD: 'dropCard',

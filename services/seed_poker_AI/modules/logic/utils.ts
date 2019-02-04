@@ -23,3 +23,17 @@ export function getKnownCards(knownConditions: conditions): card[] {
   knownConditions.myLowerNumberCard ? result.push(knownConditions.myLowerNumberCard): null
   return result
 }
+export function getUnKnownCards(knownConditions: conditions): card[] {
+  let result = knownConditions.publicCards.filter(card => card.state === 'inPlayer' || card.state === 'inStack')
+  let index = result.findIndex((card) => card.number === knownConditions.myCard.number)
+  result.splice(index, 1)
+  if (knownConditions.teammateCard) {
+    index = result.findIndex((card) => card.number === knownConditions.teammateCard.number)
+    result.splice(index, 1)
+  }
+  if (knownConditions.myLowerNumberCard) {
+    index = result.findIndex((card) => card.number === knownConditions.myLowerNumberCard.number)
+    result.splice(index, 1)
+  }
+  return result
+}

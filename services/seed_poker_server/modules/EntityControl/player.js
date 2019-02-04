@@ -133,6 +133,7 @@ exports.recordDecision = function(playerId, decision) {
 exports.giveUp = function(playerId) {
   players = players.setIn([playerId, 'hasGivenUp'], true)
   EventManager.publish(typeToMessage.PLAYERS_STATE, players.toJS())
+  EventManager.publish(typeToMessage.PLAYER_GIVEN_UP, playerId)
   EventManager.publish(typeToMessage.PLAYER_STATE, players.get(playerId).toJS())
 }
 

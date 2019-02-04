@@ -9,6 +9,7 @@ export interface conditions {
   myCard: card,
   myLowerNumberCard?: card,
   teammateCard: card,
+  givenUpPlayers?: string[],
 }
 export interface decision {
   decision: string,

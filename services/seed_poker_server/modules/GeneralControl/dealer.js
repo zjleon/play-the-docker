@@ -95,12 +95,14 @@ exports.playerAddSeedCard = function(playerId) {
 }
 
 exports.playerStay = function(playerId) {
+  console.log('playerStay', playerId)
   PlayerControl.recordDecision(playerId, typeToMessage.STAY)
   EventManager.publish(typeToMessage.PLAYER_STATE, PlayerControl.getPlayer(playerId))
   PlayerControl.toNextPlayer()
 }
 
 exports.playerGiveUp = function(playerId) {
+  console.log('playerGiveUp', playerId)
   PlayerControl.recordDecision(playerId, typeToMessage.GIVE_UP)
   PlayerControl.giveUp(playerId)
   PlayerControl.toNextPlayer()
@@ -175,6 +177,7 @@ EventManager.subscribe(typeToMessage.TO_NEXT_PLAYER, function(nextPlayerSeat) {
         }, roundInterval)
       )
     } else {
+      console.log('TO_NEXT_PLAYER', currentRound)
       askPlayerToMakeDecision()
     }
   }

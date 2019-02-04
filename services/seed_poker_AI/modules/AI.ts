@@ -3,13 +3,15 @@ import {messageTypes} from '../configs/constants'
 import {EventManager} from './utils'
 import replaceOrAdd from './logic/replaceOrAdd'
 import dropCard from './logic/drop'
-import {card, record} from '../configs/declaration'
+import quitOrStay from './logic/quitOrStay'
+import {card, record, conditions, decision} from '../configs/declaration'
 interface AIInterface {
   id: string
   name: string
   seatNumber: number
   decisions: record[]
   cards: card[]
+  hasGivenUp: boolean
 }
 
 export default class AI {
@@ -20,12 +22,15 @@ export default class AI {
   public id: string = ''
   private seatNumber: number
   private decisions: record[]
+  private hasGivenUp: boolean
   private cards: card[]
   private knownCards: card[]
   public teammate: {
     id: string,
     card?: card,
   }
+  public givenUpPlayers: string[] = []
+  public winner: string
 
   constructor() {
     let c = new client()
@@ -82,6 +87,12 @@ export default class AI {
       case messageTypes.NEED_TO_MAKE_DECISION:
         this.decide()
       break
+      case messageTypes.PLAYER_GIVEN_UP:
+        this.givenUpPlayers.push(data)
+      break
+      case messageTypes.WINNER:
+        this.winner = data
+      break
       default:
     }
   }
@@ -133,18 +144,24 @@ export default class AI {
     } else {
       lagerNumberCard = this.cards[0]
     }
-    let knownConditions = {
+    let knownConditions: conditions = {
       publicCards: this.knownCards,
       maximamNumber: this.knownCards.length,
       myCard: lagerNumberCard,
       myLowerNumberCard: lowerNumberCard,
       teammateCard: this.teammate && this.teammate.card,
+      givenUpPlayers: this.givenUpPlayers,
     }
 
+    let result: decision
     switch(this.gameRound) {
       case 3:
-        const {decision, card} = lowerNumberCard ? dropCard(knownConditions) : replaceOrAdd(knownConditions)
-        this.send(decision, card ? card.id : null)
+        result = lowerNumberCard ? dropCard(knownConditions) : replaceOrAdd(knownConditions)
+        break
+      case 4:
+        result = quitOrStay(knownConditions)
+        break
     }
+    this.send(result.decision, result.card ? result.card.id : null)
   }
 }
