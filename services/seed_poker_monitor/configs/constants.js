@@ -5,6 +5,8 @@ const envs = {
   PORT: process.env.PORT,
   PROJECT_ID: process.env.PROJECT_ID,
   IMAGE_RESIZE_CONFIG: JSON.parse(process.env.IMAGE_RESIZE_CONFIG),
+  WS_ENDPOINT: process.env.WS_ENDPOINT,
+  HTTP_ENDPOINT: process.env.HTTP_ENDPOINT,
 }
 // TODO: this should come from loopback swagger file
 

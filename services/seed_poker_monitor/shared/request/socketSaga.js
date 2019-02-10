@@ -1,13 +1,16 @@
 import { END, eventChannel } from 'redux-saga'
+import {envs, urls} from '../../configs/constants'
 import {call, put, take, takeEvery} from 'redux-saga/effects'
 
 const W3CWebSocket = require('websocket').w3cwebsocket
-const endpoint = '/game'
-const socketConnection = new W3CWebSocket(endpoint, 'echo-protocol')
+const endpoint = envs.WS_ENDPOINT + urls.game
+let socketConnection
 
 // an enclosure of socket, start by saga, then emmite changes to saga when changes on socket happens
 const socketEventChannel = () => {
   return eventChannel(emmiter => {
+    socketConnection = new W3CWebSocket(endpoint, 'echo-protocol')
+
     socketConnection.onmessage = function(event) {
       console.log("socket Received: '" + JSON.stringify(event.data) + "'")
       emmiter({
@@ -40,6 +43,7 @@ const socketEventChannel = () => {
     return () => {
       console.log('echo-protocol Client Closed')
       socketConnection.close()
+      socketConnection = null
     }
   })
 }

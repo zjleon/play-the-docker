@@ -23,11 +23,11 @@ const styles = theme => ({
 
 @connect((state) => {
   return {
-  singleButtonModal: state.getIn(['layout', 'singleButtonModal']).toJS(),
+    singleButtonModal: state.getIn(['layout', 'singleButtonModal']).toJS(),
   }
-  }, {
+}, {
   setModalVisibility
-  })
+})
 @withStyles(styles)
 export default class SingleButtonModal extends Component {
   handleClickOpen = () => {

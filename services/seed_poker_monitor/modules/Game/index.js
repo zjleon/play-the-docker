@@ -3,27 +3,22 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 import ImageContainer from '../Shared/ImageContainer'
 import TextField from '@material-ui/core/TextField'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 import { connect } from 'react-redux'
 import {
   setModalVisibility,
 } from '../../configs/gulpGenerated/actions'
 import { withStyles } from '@material-ui/core/styles'
+import Dealer from './subComponents/Dealer'
 // import {
 //   senderSaga,
 //   receiverSaga,
 // } from '../../shared/request/socketSaga'
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+  gameTable: {
+    backgroundColor: blueGrey[200],
+    height: '100vh',
   },
 })
 
@@ -42,10 +37,8 @@ class Game extends Component {
 
   render() {
     const {classes} = this.props
-    return <div>
-      <div>
-        pokers
-      </div>
+    return <div className={classes.gameTable}>
+      <Dealer />
     </div>
   }
 }
