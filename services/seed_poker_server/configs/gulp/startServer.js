@@ -4,7 +4,7 @@ import { spawn } from 'child_process'
 const indexScript = resolve(__dirname, '../../index.js')
 
 export function startDevServer(done) {
-  const childProcess = spawn('node', [`--inspect-brk=${process.env.DEBUG_PORT}`, indexScript], {
+  const childProcess = spawn('node', [`--inspect=${process.env.DEBUG_PORT}`, indexScript], {
     env: process.env,
     cwd: resolve(__dirname, '../../')
   })
@@ -19,7 +19,7 @@ export function startDevServer(done) {
 
   childProcess.on('close', (code) => {
     console.log(`child process exited with code ${code}`)
-    done()
+    done(code)
   })
 }
 

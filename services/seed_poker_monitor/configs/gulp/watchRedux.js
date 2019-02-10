@@ -60,7 +60,7 @@ function generateReduxFiles(done) {
   // write the action file
   const actionPromise = new Promise((res, rej) => {
     const actions = reduxFilesInModules.actions.concat(reduxFilesInShared.actions).join('')
-    let stream = createWriteStream(destinationPath + '/actions.js')
+    const stream = createWriteStream(destinationPath + '/actions.js')
     stream.on('close', () => {
       console.log('actions updated')
       res()
@@ -74,7 +74,7 @@ function generateReduxFiles(done) {
   // write the reducer file
   const reducerPromise = new Promise((res, rej) => {
     const reducers = reduxFilesInModules.reducers.concat(reduxFilesInShared.reducers)
-    stream = createWriteStream(destinationPath + '/reducers.js')
+    const stream = createWriteStream(destinationPath + '/reducers.js')
     stream.on('close', () => {
       console.log('reducers updated')
       res()

@@ -20,6 +20,19 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "seed poker monitor",
+      "cwd": "${workspaceFolder}/services/seed_poker_monitor",
+      "program": "${workspaceFolder}/services/seed_poker_monitor/node_modules/gulp/bin/gulp.js",
+      "args": [
+        "--gulpfile",
+        "configs/gulp/index.js",
+      ],
+      // "autoAttachChildProcesses": true,
+      "env": {"NODE_ENV": "development"}
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "seed poker AI",
       "cwd": "${workspaceFolder}/services/seed_poker_AI",
       "program": "${workspaceFolder}/services/seed_poker_AI/node_modules/gulp/bin/gulp.js",

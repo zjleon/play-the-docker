@@ -8,10 +8,13 @@ import history from './shared/history'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 import store from './configs/store'
+import {envs} from './configs/constants'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 // injectTapEventPlugin()
+
+document.title = envs.PROJECT_ID
 
 render(
   <Provider store={store}>

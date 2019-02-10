@@ -21,8 +21,8 @@ class ImageContainer extends Component {
     src: '',
     aspect: 0,
   }
-
-  componentWillMount() {
+  constructor() {
+    super()
     // props.useOriginal = true, load the original image
     const imageName = this.props.name.replace('.', '_')
     let imageInfo = this.props.useOriginal ?
@@ -41,6 +41,26 @@ class ImageContainer extends Component {
     }
     image.src = src
   }
+
+  // componentWillMount() {
+  //   // props.useOriginal = true, load the original image
+  //   const imageName = this.props.name.replace('.', '_')
+  //   let imageInfo = this.props.useOriginal ?
+  //     ImageInfo[imageName] :
+  //     ImageInfo[imageName + '@' + targetWidth]
+  //   if (!imageInfo) {
+  //     console.error(`${imageName} or ${imageName}@${targetWidth} is not exist`)
+  //     imageInfo = {}
+  //   }
+  //   this.setState({aspect: imageInfo.aspect})
+  //   const src = imageInfo.path
+  //   let image = new Image()
+  //   // TODO: handle the image load error
+  //   image.onload = () => {
+  //     this.setState({src})
+  //   }
+  //   image.src = src
+  // }
 
   render() {
     const {src, style, ...props} = this.props

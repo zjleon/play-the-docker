@@ -1,25 +1,3 @@
-# fill in readme
-
-# demo
-## feature
-* access controll(visitor, user, vip)
-  * visitor can view painting's text information
-  * user can can view the painting's text and image information
-  * vip can view text, image, and donator info
-* donator painting:
-  * visitor, user, vip can donate painting
-  * visitor must become user before donating
-  * after donation, user become vip
-  * after donation, vip is still vip
-  * in order to donate, must upload image, fill in information about the painting
-
-## schema
-* vip: user's account and password
-* donator:
-  * one on one mapping to user, indicate whether user has donated any painting
-  * has many relationship with collection
-* collection: painting info
-
 ## eslint and autofix and unit test
 * static the unit test coverage by tool
 * when bdd test fail, give the related business logic(link to JIRA task, fetch the JIRA description)
@@ -340,3 +318,25 @@ https://github.com/rnplay/react-native-packager-docker/issues/1~~
 
 ## the interactive game:
 * [device orientation](https://w3c.github.io/deviceorientation/spec-source-orientation.html#deviceorientation)
+
+# fill in readme
+
+# demo
+## feature
+* access controll(visitor, user, vip)
+  * visitor can view painting's text information
+  * user can can view the painting's text and image information
+  * vip can view text, image, and donator info
+* donator painting:
+  * visitor, user, vip can donate painting
+  * visitor must become user before donating
+  * after donation, user become vip
+  * after donation, vip is still vip
+  * in order to donate, must upload image, fill in information about the painting
+
+## schema
+* vip: user's account and password
+* donator:
+  * one on one mapping to user, indicate whether user has donated any painting
+  * has many relationship with collection
+* collection: painting info
