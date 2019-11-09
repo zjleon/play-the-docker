@@ -11,8 +11,7 @@ import {
 import { withStyles } from '@material-ui/core/styles'
 import Dealer from './subComponents/Dealer'
 // import {
-//   senderSaga,
-//   receiverSaga,
+//   initWebsocketSaga,
 // } from '../../shared/request/socketSaga'
 
 const styles = theme => ({
@@ -24,6 +23,9 @@ const styles = theme => ({
 
 @connect((state) => {
   return {
+    players: state.getIn(['game', 'players']),
+    cards: state.getIn(['game', 'cards']),
+    round: state.getIn(['game', 'round']),
   }
 }, {
   setModalVisibility,

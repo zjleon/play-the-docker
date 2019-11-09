@@ -26,7 +26,7 @@ export default (ChildComponent) => {
           <CssBaseline />
           {/* <Header /> */}
           <ChildComponent />
-          <SingleButtonModal />
+          {/* <SingleButtonModal /> */}
         </div>
     }
   }

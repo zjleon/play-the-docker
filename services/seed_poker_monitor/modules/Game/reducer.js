@@ -3,16 +3,23 @@
 import {
   CONNECT_WS,
 } from './action'
+import {messageTypes} from '../../configs/constants'
 
 export default (
   state,
   action
 ) => {
+  let newState
   switch (action.type) {
-  case CONNECT_WS.SUCESS:
-    // let newState = state.set('quaternion', action.quaternion)
-    console.log('1121', action)
-    return state
+  case messageTypes.PLAYERS_STATE:
+    newState = state.set('players', action.value)
+    return newState
+  case messageTypes.GAME_ROUND:
+    newState = state.set('round', action.value)
+    return newState
+  case messageTypes.CARDS_STATE:
+    newState = state.set('cards', action.value)
+    return newState
   default:
     return state
   }
