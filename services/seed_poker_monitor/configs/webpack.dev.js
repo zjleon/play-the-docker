@@ -5,9 +5,6 @@ const commonWebpackConfig = require('./webpack.common')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
-const {
-  envs,
-} = require('./constants')
 const gulpGeneratedPath = path.resolve(__dirname, './gulpGenerated')
 const gulpTasksPath = path.resolve(__dirname, './gulp')
 const routeFilePath = path.resolve(__dirname, '../modules/Routers/routes.js')
@@ -17,7 +14,7 @@ const devSettings = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:' + envs.PORT,
+      'webpack-dev-server/client?http://localhost:' + process.env.PORT,
       'webpack/hot/only-dev-server',
     ],
   },

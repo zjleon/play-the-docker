@@ -1,3 +1,5 @@
+const messageTypes = require('./gulpGenerated/metaData').default
+
 // some of those envs will be undefined in browser side,
 // check the exported env in webpack.common.js
 const envs = {
@@ -8,8 +10,8 @@ const envs = {
   WS_ENDPOINT: process.env.WS_ENDPOINT,
   HTTP_ENDPOINT: process.env.HTTP_ENDPOINT,
 }
-// TODO: this should come from loopback swagger file
 
+// TODO: this should come from loopback swagger file
 const urls = {
   sample: '/api/sample',
   unAuthenticatePage: '/Authentication',
@@ -18,8 +20,8 @@ const urls = {
   game: '/game',
 }
 
-
 module.exports = {
   envs,
-  urls
+  urls,
+  messageTypes,
 }

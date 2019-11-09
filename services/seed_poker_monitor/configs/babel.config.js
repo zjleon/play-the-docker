@@ -7,7 +7,6 @@ const presets = [
         firefox: "60",
         chrome: "67",
         safari: "11.1",
-        esmodules: true,
       },
       useBuiltIns: "usage",
     },
@@ -19,6 +18,7 @@ const plugins = [
   // "@babel/plugin-proposal-function-bind",
 
   "@babel/plugin-proposal-export-default-from",
+  // "@babel/plugin-transform-regenerator",
   // "@babel/plugin-proposal-logical-assignment-operators",
   // ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
   // ["@babel/plugin-proposal-pipeline-operator", { "proposal": "minimal" }],

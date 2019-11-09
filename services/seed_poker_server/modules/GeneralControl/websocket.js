@@ -1,10 +1,12 @@
 const PlayerControl = require('../EntityControl/player')
+const CardControl = require('../EntityControl/card')
+const MonitorControl = require('../EntityControl/monitor')
 const Dealer = require('../GeneralControl/dealer')
 const {typeToMessage} = require('../../configs/constants')
 const EventManager = require('../GeneralControl/eventManager')
 
 let connections = {
-  monitor: {},
+  monitors: {},
   players: {},
 }
 
@@ -14,8 +16,7 @@ function broadcast(messageType, data) {
     message: typeToMessage[messageType],
     data,
   }
-  console.log('broadcast', messageType, data)
-  const allConnections = Object.assign({}, connections.monitor, connections.players)
+  const allConnections = Object.assign({}, connections.monitors, connections.players)
   Object.keys(allConnections).forEach(function(connectionId) {
     allConnections[connectionId].send(JSON.stringify(response))
   })
@@ -56,19 +57,20 @@ EventManager.subscribe(typeToMessage.NEED_TO_MAKE_DECISION, function(player) {
 
 // handle messages from client
 function receiveMessage(ws, message, data) {
+  let response
   switch (message) {
   case typeToMessage.JOIN_GAME:
     const player = PlayerControl.join()
     ws.playerId = player.id
     connections.players[player.id] = ws
-    let response = {
+    response = {
       message: typeToMessage.PLAYER_STATE,
       data: player,
     }
     ws.send(JSON.stringify(response))
     response = {
       message: typeToMessage.GAME_ROUND,
-      data: 1,
+      data: Dealer.getCurrentRound(),
     }
     ws.send(JSON.stringify(response))
     break
@@ -87,6 +89,26 @@ function receiveMessage(ws, message, data) {
   case typeToMessage.GIVE_UP:
     Dealer.playerGiveUp(ws.playerId)
     break
+  case typeToMessage.MONITOR_JOIN:
+    const monitor = MonitorControl.join()
+    ws.monitorId = monitor.id
+    connections.monitors[monitor.id] = ws
+    response = {
+      message: typeToMessage.PLAYERS_STATE,
+      data: PlayerControl.getPlayers(),
+    }
+    ws.send(JSON.stringify(response))
+    response = {
+      message: typeToMessage.GAME_ROUND,
+      data: Dealer.getCurrentRound(),
+    }
+    ws.send(JSON.stringify(response))
+    response = {
+      message: typeToMessage.CARDS_STATE,
+      data: CardControl.getCards(),
+    }
+    ws.send(JSON.stringify(response))
+    break
   default:
   }
 }
@@ -94,7 +116,6 @@ function receiveMessage(ws, message, data) {
 exports.wsHandler = function(ws, req) {
   ws.on('message', function(jsonObject) {
     const {message, data} = JSON.parse(jsonObject)
-    console.log('message', message, data)
     receiveMessage(ws, message, data)
   })
   ws.on('close', function() {
@@ -104,8 +125,11 @@ exports.wsHandler = function(ws, req) {
       if (!Object.keys(connections.players).length) {
         Dealer.resetGame()
       }
+    } else if (ws.monitorId) {
+      MonitorControl.leave(ws.monitorId)
+      delete connections.monitors[ws.monitorId]
     } else {
-      // delete monitor connection
+      console.error('unknown connection disconnected')
     }
   })
 }

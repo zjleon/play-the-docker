@@ -26,7 +26,15 @@ function watchImageSources(done) {
   })
   done()
 }
+let imageInfo
 function convertImages(done) {
+  // if below code put outside this function,
+  // it will be executed before the clean task run(when this js file load into node)
+  try {
+    imageInfo = JSON.parse(fs.readFileSync(imageInfoFilePath, 'utf8'))
+  } catch (e) {
+    imageInfo = {}
+  }
   // convert all images at the first-time gulp runs
   fs.readdir(imageSourcePath, (error, files) => {
     let promises = files.map((file) => {
@@ -47,12 +55,6 @@ const sharpImage = (file) => {
   }
   const originFileStat = fs.statSync(file)
   return toTargetResolution(sharp(file), filePath.name, filePath.ext, originFileStat.ctime)
-}
-let imageInfo
-try {
-  imageInfo = JSON.parse(fs.readFileSync(imageInfoFilePath, 'utf8'))
-} catch (e) {
-  imageInfo = {}
 }
 const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed) => {
   return imagePromise.metadata()

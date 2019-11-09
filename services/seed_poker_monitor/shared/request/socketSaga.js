@@ -1,21 +1,22 @@
 import { END, eventChannel } from 'redux-saga'
-import {envs, urls} from '../../configs/constants'
-import {call, put, take, takeEvery} from 'redux-saga/effects'
+import {envs, urls, messageTypes} from '../../configs/constants'
+import {call, put, take, takeEvery, all} from 'redux-saga/effects'
 
 const W3CWebSocket = require('websocket').w3cwebsocket
 const endpoint = envs.WS_ENDPOINT + urls.game
 let socketConnection
 
 // an enclosure of socket, start by saga, then emmite changes to saga when changes on socket happens
-const socketEventChannel = () => {
+const socketEventChannel = (ws) => {
   return eventChannel(emmiter => {
-    socketConnection = new W3CWebSocket(endpoint, 'echo-protocol')
+    // socketConnection = new W3CWebSocket(endpoint, 'echo-protocol')
 
-    socketConnection.onmessage = function(event) {
-      console.log("socket Received: '" + JSON.stringify(event.data) + "'")
+    socketConnection.onmessage = function(trunk) {
+      console.log(`socket Received: ${trunk.data}`)
+      const {message, data} = JSON.parse(trunk.data)
       emmiter({
-        type: 'messageReceived',
-        value: event.data,
+        type: message,
+        value: data,
       })
     }
 
@@ -29,10 +30,11 @@ const socketEventChannel = () => {
 
     socketConnection.onopen = function() {
       console.log('socket connection established successfully')
-      emmiter({
-        type: 'open',
-        value: null,
-      })
+      // emmiter({
+      //   type: 'open',
+      //   value: null,
+      // })
+      socketConnection.send(JSON.stringify({message: messageTypes.MONITOR_JOIN}))
     }
 
     socketConnection.onclose = function() {
@@ -48,41 +50,22 @@ const socketEventChannel = () => {
   })
 }
 
-function* receiverSaga() {
+function* initWebsocketSaga() {
+  socketConnection = new W3CWebSocket(endpoint, 'echo-protocol')
   const channel = yield call(socketEventChannel)
   try {
     while (true) { // eslint-disable-line
-      // take(END) will cause the saga to terminate by jumping to the finally block
-      let message = yield take(channel)
-      console.log('message', message)
-      if (message.type === 'open') {
-        yield put({
-          type: 'SOCKET_OPEN',
-        })
-      } else if (message.type === 'messageReceived') {
-        yield put({
-          type: 'SOCKET_MESSAGE_ARRIVED',
-          message: message.value,
-        })
-      } else {
-        // when error happens
-        yield put({
-          type: 'SOCKET_ERROR',
-          error: message.value,
-        })
-      }
+      let action = yield take(channel)
+      yield put(action)
     }
   } finally {
-    yield put({
-      type: 'SOCKET_CLOSED',
-      // message: message.value,
-    })
-    socketConnection.close()
+    // emmiter(END) in ``socketConnection.onclose`` will cause this finally block executed
+    yield put({type: 'SOCKET_CLOSED'})
   }
 }
 
 function* senderSaga() {
-  yield takeEvery('SOCKET_SEND_MESSSGE', socketSender)
+  yield takeEvery('WS_SEND', socketSender)
 }
 
 function socketSender(action) {
@@ -101,7 +84,9 @@ function socketSender(action) {
   }
 }
 
-export {
-  senderSaga,
-  receiverSaga,
+export default function* socketSaga() {
+  yield all([
+    senderSaga(),
+    initWebsocketSaga(),
+  ])
 }

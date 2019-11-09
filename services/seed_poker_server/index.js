@@ -14,11 +14,9 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
-console.log('port', port)
 // app.get('/', (req, res) => res.send(404, 'No such link'))
 app.get('/getMessageTypes', (req, res) => {
   res.type('json')
-  console.log(11, req)
   res.send(JSON.stringify(typeToMessage))
 })
 // for AI service

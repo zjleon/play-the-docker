@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga'
 import initialStore from './initialStore'
 import rootReducer from './gulpGenerated/reducers'
 import rootSaga from './rootSaga'
+import socketSaga from '../shared/request/socketSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

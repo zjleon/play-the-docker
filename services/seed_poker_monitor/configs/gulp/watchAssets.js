@@ -7,8 +7,7 @@ const path = require('path')
 const moment = require('moment')
 const deepequal = require('deepequal')
 
-const {envs} = require('../constants')
-const webpackSettings = envs.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
+const webpackSettings = process.env.NODE_ENV === 'development' ? require('../webpack.dev') : require('../webpack.prod')
 const imageFolderDist = path.resolve(webpackSettings.output.path, './images')
 const projectRootPath = path.resolve('../../')
 const imageInfoFilePath = path.resolve(projectRootPath, './configs/gulpGenerated/imageInfo.json')
@@ -26,7 +25,15 @@ function watchImageSources(done) {
   })
   done()
 }
+let imageInfo
 function convertImages(done) {
+  // if below code put outside this function,
+  // it will be executed before the clean task run(when this js file load into node)
+  try {
+    imageInfo = JSON.parse(fs.readFileSync(imageInfoFilePath, 'utf8'))
+  } catch (e) {
+    imageInfo = {}
+  }
   // convert all images at the first-time gulp runs
   fs.readdir(imageSourcePath, (error, files) => {
     let promises = files.map((file) => {
@@ -39,7 +46,7 @@ function convertImages(done) {
   })
 }
 
-const targetDeviceWidth = envs.IMAGE_RESIZE_CONFIG
+const targetDeviceWidth = JSON.parse(process.env.IMAGE_RESIZE_CONFIG)
 const sharpImage = (file) => {
   const filePath = path.parse(file)
   if (!filePath.name || !filePath.ext) {
@@ -47,12 +54,6 @@ const sharpImage = (file) => {
   }
   const originFileStat = fs.statSync(file)
   return toTargetResolution(sharp(file), filePath.name, filePath.ext, originFileStat.ctime)
-}
-let imageInfo
-try {
-  imageInfo = JSON.parse(fs.readFileSync(imageInfoFilePath, 'utf8'))
-} catch (e) {
-  imageInfo = {}
 }
 const toTargetResolution = (imagePromise, imageName, imageExtention, lastModifed) => {
   return imagePromise.metadata()
